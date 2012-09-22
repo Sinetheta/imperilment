@@ -1,0 +1,8 @@
+
+= show_for @<%= singular_table_name %> do |s|
+<% for attribute in attributes -%>
+  = s.<%= attribute.reference? ? :association : :attribute %> :<%= attribute.name %>
+<% end -%>
+
+= link_to t(:edit), edit_<%= singular_table_name %>_path(@<%= singular_table_name %>), class: 'btn' if can? :edit, @<%= singular_table_name %>
+= link_to t(:back), <%= index_helper %>_path, class: 'btn' if can? :index, :<%= plural_table_name %>

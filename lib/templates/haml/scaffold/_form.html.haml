@@ -1,0 +1,3 @@
+<%- attributes.each do |attribute| -%>
+= f.<%= attribute.reference? ? :association : :input %> :<%= attribute.name %>
+<%- end -%>

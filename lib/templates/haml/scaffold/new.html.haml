@@ -1,0 +1,10 @@
+%h1= t(:new_model, model: <%= class_name %>.model_name.human)
+= simple_form_for @<%= singular_table_name %>, class: 'form-horizontal' do |f|
+  = f.error_notification
+
+  .form-inputs
+    = render 'form', f: f
+
+  .form-actions
+    = f.submit class: 'btn btn-primary'
+    = link_to t(:back), <%= index_helper %>_path, class: 'btn' if can? :index, :<%= plural_table_name %>

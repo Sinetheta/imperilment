@@ -1,0 +1,11 @@
+.navbar.navbar-fixed-top
+  .navbar-inner
+    .container
+      %a.btn.btn-navbar{data: {toggle: 'collapse', target: '.nav-collapse'}}
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.brand(href="/")= app_name
+      .nav-colapse
+        = render_navigation expand_all: true, renderer: :bootstrap
+      = render 'layouts/nav_user'

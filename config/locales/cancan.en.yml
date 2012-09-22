@@ -1,0 +1,5 @@
+en:
+  unauthorized:
+    header: Access Denied
+    access:
+      all: "Not authorized to %{action} %{subject}."

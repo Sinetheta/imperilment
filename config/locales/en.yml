@@ -1,0 +1,16 @@
+
+en:
+  destroy: delete
+  show: view
+  edit: edit
+  back: back
+  confirm_destroy: Are you sure?
+  index_model: Listing %{model}
+  new_model: New %{model}
+  editing_model: Editing %{model}
+  model_create_successful: "%{model} was successfully created."
+  model_update_successful: "%{model} was successfully updated."
+  flash:
+    header:
+      notice: Notice
+      alert:  Error

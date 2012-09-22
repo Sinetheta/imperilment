@@ -1,0 +1,21 @@
+.pull-right.btn-group
+  - if current_user
+    %a.btn.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
+      = icon :user
+      = current_user.email
+      %span.caret
+    %ul.dropdown-menu
+      -if Devise.mappings[:user].registerable?
+        %li
+          = link_to edit_user_registration_path do
+            = icon :cog
+            Preferences
+        %li.divider
+      %li
+        = link_to destroy_user_session_path, method: :delete do
+          = icon :off
+          Sign out
+  - else
+    %a.btn{href: new_user_session_path}
+      = icon :user
+      Log in
