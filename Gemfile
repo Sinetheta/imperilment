@@ -46,6 +46,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails', :require => false
   gem 'rb-inotify', '~> 0.8.8'
+  gem 'simplecov', :require => false
+  gem 'simplecov-rcov', :require => false
 end
 
 group :production do

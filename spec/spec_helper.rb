@@ -4,7 +4,21 @@ require 'spork'
 #require 'spork/ext/ruby-debug'
 
 Spork.prefork do
-  # This file is copied to spec/ when you run 'rails generate rspec:install'
+  unless ENV['DRB']
+    require 'simplecov'
+    require 'simplecov-rcov'
+
+    class SimpleCov::Formatter::MergedFormatter
+      def format(result)
+        SimpleCov::Formatter::HTMLFormatter.new.format(result)
+        SimpleCov::Formatter::RcovFormatter.new.format(result)
+      end
+    end
+
+    SimpleCov.formatter = SimpleCov::Formatter::MergedFormatter
+    SimpleCov.start 'rails'
+  end
+
   ENV["RAILS_ENV"] ||= 'test'
   require File.expand_path("../../config/environment", __FILE__)
   require 'rspec/rails'
@@ -45,6 +59,12 @@ Spork.prefork do
 end
 
 Spork.each_run do
-  # This code will be run each time you run your specs.
+  ActiveRecord::Schema.verbose = false
+  load "#{Rails.root.to_s}/db/schema.rb"
+
+  if ENV['DRB']
+    require 'simplecov'
+    SimpleCov.start 'rails'
+  end
 
 end
