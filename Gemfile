@@ -4,6 +4,7 @@ gem 'rails', '3.2.9'
 
 gem 'devise'
 gem 'omniauth-openid'
+gem 'rolify'
 gem 'cancan', github: 'ryanb/cancan', branch: '2.0'
 
 gem 'haml-rails'
