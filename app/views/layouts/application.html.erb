@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang='<%= I18n.locale.to_s %>'>
+  <head>
+    <meta charset="utf-8">
+    <title><%= content_for?(:title) ? yield(:title) : "Imperilment!" %></title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name: "description", content: "">
+
+    <%= stylesheet_link_tag :application, media: :all %>
+    <%= javascript_include_tag :application %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <%= render 'layouts/nav' %>
+    <div class='container'>
+      <div class='flash'>
+        <%= flash_notice :notice, :success %>
+        <%= flash_notice :alert,  :error %>
+      </div>
+      <div class='breadcrumbs'>
+        <%= render_breadcrumbs %>
+      </div>
+      <div class='content'>
+        <%= content_for?(:content) ? yield(:content) : yield %>
+      </div>
+      <hr>
+      <footer>
+        <p>&copy; <%= Time.now.year %> FreeRunning Technologies</p>
+      </footer>
+    </div>
+  </body>
+</html>
