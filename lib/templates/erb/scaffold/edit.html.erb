@@ -1,0 +1,6 @@
+<h1><%%= t(:editing_model, model: <%= class_name %>.model_name.human) %></h1>
+
+<%%= render 'form' %>
+
+<%%= link_to t(:show), @<%= singular_table_name %>, class: 'btn' %>
+<%%= link_to t(:back), <%= index_helper %>_path, class: 'btn' %>

@@ -1,0 +1,5 @@
+<h1><%%= t(:new_model, model: <%= class_name %>.model_name.human) %></h1>
+
+<%%= render 'form' %>
+
+<%%= link_to t(:back), <%= index_helper %>_path, class: 'btn' %>
