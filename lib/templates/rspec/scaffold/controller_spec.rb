@@ -21,6 +21,14 @@ require 'spec_helper'
 <% module_namespacing do -%>
 describe <%= controller_class_name %>Controller do
 
+  # stub cancan's current_ability.
+  # Any ability logic should be tested against the Ability class.
+  let(:ability) { Object.new.tap {|o| o.extend CanCan::Ability } }
+  before(:each) do
+    ability.can [:create, :read, :update, :destroy], :<%= table_name.pluralize %>
+    controller.stub(current_ability: ability)
+  end
+
   # This should return the minimal set of attributes required to create a valid
   # <%= class_name %>. As you add validations to <%= class_name %>, be sure to
   # update the return value of this method accordingly.
@@ -92,6 +100,7 @@ describe <%= controller_class_name %>Controller do
       it "assigns a newly created but unsaved <%= ns_file_name %> as @<%= ns_file_name %>" do
         # Trigger the behavior that occurs when invalid params are submitted
         <%= class_name %>.any_instance.stub(:save).and_return(false)
+        <%= class_name %>.any_instance.stub(:errors).and_return(double(:errors, empty?: false))
         post :create, {:<%= ns_file_name %> => {}}, valid_session
         assigns(:<%= ns_file_name %>).should be_a_new(<%= class_name %>)
       end
@@ -99,6 +108,7 @@ describe <%= controller_class_name %>Controller do
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         <%= class_name %>.any_instance.stub(:save).and_return(false)
+        <%= class_name %>.any_instance.stub(:errors).and_return(double(:errors, empty?: false))
         post :create, {:<%= ns_file_name %> => {}}, valid_session
         response.should render_template("new")
       end
@@ -111,9 +121,10 @@ describe <%= controller_class_name %>Controller do
         <%= file_name %> = <%= class_name %>.create! valid_attributes
         # Assuming there are no other <%= table_name %> in the database, this
         # specifies that the <%= class_name %> created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        <%= class_name %>.any_instance.should_receive(:update_attributes).with(<%= formatted_hash(example_params_for_update) %>)
+        # receives the :attributes= message with whatever params are submitted
+        # in the request, and then :save.
+        <%= class_name %>.any_instance.should_receive(:attributes=).with(<%= formatted_hash(example_params_for_update) %>)
+        <%= class_name %>.any_instance.should_receive(:save).and_return(false)
         put :update, {:id => <%= file_name %>.to_param, :<%= ns_file_name %> => <%= formatted_hash(example_params_for_update) %>}, valid_session
       end
 
@@ -135,6 +146,7 @@ describe <%= controller_class_name %>Controller do
         <%= file_name %> = <%= class_name %>.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         <%= class_name %>.any_instance.stub(:save).and_return(false)
+        <%= class_name %>.any_instance.stub(:errors).and_return(double(:errors, empty?: false))
         put :update, {:id => <%= file_name %>.to_param, :<%= ns_file_name %> => <%= formatted_hash(example_invalid_attributes) %>}, valid_session
         assigns(:<%= ns_file_name %>).should eq(<%= file_name %>)
       end
@@ -143,6 +155,7 @@ describe <%= controller_class_name %>Controller do
         <%= file_name %> = <%= class_name %>.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         <%= class_name %>.any_instance.stub(:save).and_return(false)
+        <%= class_name %>.any_instance.stub(:errors).and_return(double(:errors, empty?: false))
         put :update, {:id => <%= file_name %>.to_param, :<%= ns_file_name %> => <%= formatted_hash(example_invalid_attributes) %>}, valid_session
         response.should render_template("edit")
       end
