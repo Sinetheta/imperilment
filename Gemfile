@@ -5,6 +5,7 @@ gem 'rails', '3.2.8'
 gem 'sqlite3'
 
 gem 'devise'
+gem 'omniauth-openid'
 gem 'cancan', github: 'ryanb/cancan', branch: '2.0'
 
 gem 'haml-rails'
