@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.8'
+gem 'rails', '3.2.9'
 
 gem 'sqlite3'
 
@@ -19,7 +19,7 @@ gem 'simple-navigation-bootstrap'
 gem 'sass'
 
 group :test do
-  gem 'mocha', require: false
+  gem 'mocha', '~> 0.12.0', require: false
 end
 
 group :assets do
