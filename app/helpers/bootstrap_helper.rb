@@ -17,12 +17,4 @@ module BootstrapHelper
     block ||= proc{}
     content_tag(:div, content_tag(:div, class: 'bar', style: ("width: %.2f%%" % percentage), &block), class: 'progress progress-success')
   end
-
-  # overrides simple_form_for to provide add form-horizontal ONLY if no other
-  # html class is specified.
-  def simple_form_for record, options={}, &block
-    options[:html] ||= {}
-    options[:html][:class] ||= 'form-horizontal'
-    super record, options, &block
-  end
 end
