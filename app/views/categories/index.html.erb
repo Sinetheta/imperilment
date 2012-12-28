@@ -1,0 +1,25 @@
+<h1><%= t(:index_model, model: Category.model_name.human) %></h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= Category.human_attribute_name("name") %></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @categories.each do |category| %>
+      <tr>
+        <td><%= category.name %></td>
+        <td>
+          <%= link_to t(:show), category, class: 'btn' %>
+          <%= link_to t(:edit), edit_category_path(category), class: 'btn' %>
+          <%= link_to t(:destroy), category, method: :delete, class: 'btn btn-danger', data: {confirm: t(:confirm_destroy)} %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t(:new_model, model: Category.model_name.human), new_category_path, class: 'btn' %>
