@@ -2,8 +2,6 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.2.9'
 
-gem 'sqlite3'
-
 gem 'devise'
 gem 'omniauth-openid'
 gem 'cancan', github: 'ryanb/cancan', branch: '2.0'
@@ -50,8 +48,10 @@ group :development, :test do
   gem 'rb-inotify', '~> 0.8.8'
   gem 'simplecov', :require => false
   gem 'simplecov-rcov', :require => false
+  gem 'sqlite3'
 end
 
 group :production do
+  gem 'pg'
   gem 'exception_notification'
 end
