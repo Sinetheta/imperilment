@@ -1,0 +1,6 @@
+<h1><%= t(:editing_model, model: Answer.model_name.human) %></h1>
+
+<%= render 'form' %>
+
+<%= link_to t(:show), [@game, @answer], class: 'btn' %>
+<%= link_to t(:back), [@game, :answers], class: 'btn' %>

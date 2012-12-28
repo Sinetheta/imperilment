@@ -1,0 +1,11 @@
+<%= show_for @answer do |s| %>
+  <%= s.association :game %>
+  <%= s.association :category %>
+  <%= s.attribute :correct_question %>
+  <%= s.attribute :answer %>
+  <%= s.attribute :amount %>
+  <%= s.attribute :start_date %>
+<% end %>
+
+<%= link_to t(:edit), [:edit, @game, @answer], class: 'btn' %>
+<%= link_to t(:back), [@game, :answers], class: 'btn' %>

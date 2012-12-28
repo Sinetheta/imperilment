@@ -1,0 +1,31 @@
+<h1><%= t(:index_model, model: Answer.model_name.human) %></h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= Answer.human_attribute_name("start_date") %></th>
+      <th><%= Answer.human_attribute_name("category") %></th>
+      <th><%= Answer.human_attribute_name("answer") %></th>
+      <th><%= Answer.human_attribute_name("amount") %></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @answers.each do |answer| %>
+      <tr>
+        <td><%= l answer.start_date.to_date %></td>
+        <td><%= answer.category.try(:name) %></td>
+        <td><%= answer.answer %></td>
+        <td><%= answer.amount %></td>
+        <td>
+          <%= link_to t(:show), [@game, answer], class: 'btn' %>
+          <%= link_to t(:edit), [:edit, @game, answer], class: 'btn' %>
+          <%= link_to t(:destroy), [@game, answer], method: :delete, class: 'btn btn-danger', data: {confirm: t(:confirm_destroy)} %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t(:new_model, model: Answer.model_name.human), [:new, @game, :answer], class: 'btn' %>

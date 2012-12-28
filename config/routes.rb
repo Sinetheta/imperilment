@@ -1,13 +1,10 @@
 Imperilment::Application.routes.draw do
-  resources :categories
-
-
-  resources :games
-
-
-  get "landing/show"
-
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+
+  resources :categories
+  resources :games do
+    resources :answers
+  end
 
   root :to => 'landing#show'
 end

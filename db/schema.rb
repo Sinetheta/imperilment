@@ -11,7 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121228000111) do
+ActiveRecord::Schema.define(:version => 20121228001329) do
+
+  create_table "answers", :force => true do |t|
+    t.integer  "game_id"
+    t.integer  "category_id"
+    t.text     "correct_question"
+    t.text     "answer"
+    t.integer  "amount"
+    t.datetime "start_date"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "answers", ["category_id"], :name => "index_answers_on_category_id"
+  add_index "answers", ["game_id"], :name => "index_answers_on_game_id"
 
   create_table "categories", :force => true do |t|
     t.string   "name"
