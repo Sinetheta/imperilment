@@ -39,6 +39,9 @@ group :development do
   gem 'spork'
   gem 'guard-spork'
   gem 'guard-rspec'
+end
+
+group :development, :production do
   gem 'thin'
 end
 
