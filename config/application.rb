@@ -70,5 +70,8 @@ module Imperilment
     config.assets.version = '1.0'
 
     config.assets.paths << "#{Rails.root}/app/assets/fonts"
+
+    # for heroku
+    config.assets.initialize_on_precompile = false
   end
 end
