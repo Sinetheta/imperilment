@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<%= link_to t(:show), @question, class: 'btn' %>
-<%= link_to t(:back), [@game, @answet, Question], class: 'btn' %>
+<%= link_to t(:show), [@game, @answer, @question], class: 'btn' %>
+<%= link_to t(:back), [@game, @answer, Question], class: 'btn' %>
