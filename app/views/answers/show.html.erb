@@ -1,11 +1,15 @@
-<%= show_for @answer do |s| %>
-  <%= s.association :game %>
-  <%= s.association :category %>
-  <%= s.attribute :correct_question %>
-  <%= s.attribute :answer %>
-  <%= s.attribute :amount %>
-  <%= s.attribute :start_date %>
-<% end %>
+<div style='float: right'>
+  <%= link_to 'Prev', [@answer.prev.game, @answer.prev], class: 'btn' if @answer.prev %>
+  <%= link_to 'Next', [@answer.next.game, @answer.next], class: 'btn' if @answer.next %>
+</div>
 
-<%= link_to t(:edit), [:edit, @game, @answer], class: 'btn' %>
-<%= link_to t(:back), [@game, :answers], class: 'btn' %>
+<h1><%= @answer.start_date.to_date %></h1>
+
+<div class='question-container'>
+  <div class='answer'><%= @answer.answer %></div>
+  <div class='category'><%= @answer.category.name %></div>
+  <div class='dollar-value'>$<%= @answer.amount %></div>
+  <div style='clear: both;'></div>
+</div>
+
+<%= link_to t(:edit), [:edit, @game, @answer], class: 'btn' if can?(:edit, @answer) %>

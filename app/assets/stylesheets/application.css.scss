@@ -61,7 +61,8 @@ footer {
     float: right;
     width: 430px;
     border-left: solid white 10px;
-    padding: 100px;
+    padding: 120px 100px;
+    min-height: 60px;
     @include fancy-font;
   }
 }
