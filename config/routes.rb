@@ -3,7 +3,9 @@ Imperilment::Application.routes.draw do
 
   resources :categories
   resources :games do
-    resources :answers
+    resources :answers do
+      resources :questions
+    end
   end
 
   root :to => 'landing#show'

@@ -1,0 +1,33 @@
+<h1><%= t(:index_model, model: Question.model_name.human) %></h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= Question.human_attribute_name("user") %></th>
+      <th><%= Question.human_attribute_name("answer") %></th>
+      <th><%= Question.human_attribute_name("reponse") %></th>
+      <th><%= Question.human_attribute_name("correct") %></th>
+      <th><%= Question.human_attribute_name("amount") %></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @questions.each do |question| %>
+      <tr>
+        <td><%= question.user %></td>
+        <td><%= question.answer %></td>
+        <td><%= question.reponse %></td>
+        <td><%= question.correct %></td>
+        <td><%= question.amount %></td>
+        <td>
+          <%= link_to t(:show), question, class: 'btn' %>
+          <%= link_to t(:edit), [:edit, @game, @answer, question], class: 'btn' %>
+          <%= link_to t(:destroy), question, method: :delete, class: 'btn btn-danger', data: {confirm: t(:confirm_destroy)} %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t(:new_model, model: Question.model_name.human), new_game_answer_question_path, class: 'btn' %>
