@@ -4,7 +4,7 @@ class GamesController < ApplicationController
   respond_to :html, :json
 
   def index
-    @games = @games.page(params[:page])
+    @games = @games.page(params[:page]).order('ended_at DESC')
     respond_with @games
   end
 
