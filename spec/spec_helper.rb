@@ -20,6 +20,11 @@ Spork.prefork do
   end
 
   ENV["RAILS_ENV"] ||= 'test'
+
+  # As per https://github.com/sporkrb/spork/wiki/Spork.trap_method-Jujitsu
+  require 'rails/application'
+  Spork.trap_method(Rails::Application::RoutesReloader, :reload!)
+
   require File.expand_path("../../config/environment", __FILE__)
   require 'rspec/rails'
   require 'rspec/autorun'
@@ -29,8 +34,8 @@ Spork.prefork do
   # in spec/support/ and its subdirectories.
   Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
-    OmniAuth.config.test_mode = true
-    OmniAuth.config.add_mock(:google)
+  OmniAuth.config.test_mode = true
+  OmniAuth.config.add_mock(:google)
 
   RSpec.configure do |config|
     # ## Mock Framework
@@ -41,6 +46,9 @@ Spork.prefork do
     # config.mock_with :flexmock
     # config.mock_with :rr
 
+    # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
+    config.fixture_path = "#{::Rails.root}/spec/fixtures"
+
     # If you're not using ActiveRecord, or you'd prefer not to run each of your
     # examples within a transaction, remove the following line or assign false
     # instead of true.
@@ -50,6 +58,9 @@ Spork.prefork do
     # automatically. This will be the default behavior in future versions of
     # rspec-rails.
     config.infer_base_class_for_anonymous_controllers = false
+
+    # Helpers for controllers.
+    config.extend ControllerMacros, type: :controller
 
     config.include FactoryGirl::Syntax::Methods
     config.include Devise::TestHelpers, type: :controller

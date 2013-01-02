@@ -1,9 +1,9 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  enable_authorization unless: :devise_controller?
+  check_authorization unless: :devise_controller?
 
-  rescue_from CanCan::Unauthorized do |exception|
+  rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
       message = exception.message
       format.html { render inline: %{<div class="alert alert-error alert-block"><h4>#{t('unauthorized.header')}</h4>#{message}</h1>}, layout: 'application' }

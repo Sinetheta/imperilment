@@ -2,11 +2,11 @@
 
 FactoryGirl.define do
   factory :answer do
-    game nil
-    category nil
-    correct_question "MyText"
-    answer "MyText"
-    amount 1
+    game
+    category
+    correct_question "What is a test?"
+    answer "This type of code is used to ensure correct behaviour."
+    amount 100
     start_date "2012-12-27 16:13:29"
   end
 end

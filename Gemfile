@@ -5,7 +5,7 @@ gem 'rails', '3.2.9'
 gem 'devise'
 gem 'omniauth-openid'
 gem 'rolify'
-gem 'cancan', github: 'ryanb/cancan', branch: '2.0'
+gem 'cancan'
 
 gem 'haml-rails'
 gem 'simple_form'
@@ -33,7 +33,7 @@ end
 
 group :development do
   gem 'quiet_assets'
-  gem 'letter_opener'#, github: 'jhawthorn/letter_opener'
+  gem 'letter_opener'
 
   gem 'guard-bundler'
   gem 'guard-livereload'
