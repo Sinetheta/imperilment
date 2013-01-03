@@ -29,14 +29,14 @@ class QuestionsController < ApplicationController
     if @question.save
       flash.notice = t :model_create_successful, model: Question.model_name.human
     end
-    respond_with @game, @answer, @question
+    respond_with @game, @answer, @question, location: root_path
   end
 
   def update
     if @question.update_attributes(params[:question])
       flash.notice = t :model_update_successful, model: Question.model_name.human
     end
-    respond_with @game, @answer, @question
+    respond_with @game, @answer, @question, location: root_path
   end
 
   def destroy

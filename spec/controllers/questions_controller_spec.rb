@@ -80,7 +80,7 @@ describe QuestionsController do
 
       it "redirects to the created question" do
         post :create, default_params
-        response.should redirect_to [game, answer, Question.last]
+        response.should redirect_to root_path
       end
     end
 
@@ -117,7 +117,7 @@ describe QuestionsController do
 
       it "redirects to the question" do
         put :update, default_params.merge(id: question.to_param)
-        response.should redirect_to [game, answer, question]
+        response.should redirect_to root_path
       end
     end
 
