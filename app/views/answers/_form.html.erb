@@ -2,11 +2,22 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :category %>
-    <%= f.input :correct_question %>
-    <%= f.input :answer %>
-    <%= f.input :amount %>
-    <%= f.input :start_date %>
+    <%= f.association :category, input_html: {class: 'input-xlarge'} %>
+    <%= f.input :correct_question, input_html: {class: 'input-block-level', rows: 5} %>
+    <%= f.input :answer, input_html: {class: 'input-block-level', rows: 5} %>
+
+    <%= f.input :amount do %>
+      <div class='input-prepend'>
+        <span class='add-on'><%= t(:currency_symbol) %></span>
+        <%= f.text_field :amount %>
+      </div>
+    <% end %>
+    <%= f.input :start_date do %>
+      <div class='input-prepend'>
+        <span class='add-on'><i class='icon-calendar'></i></span>
+        <%= f.text_field :start_date, value: l(f.object.start_date, format: :short), class: 'datepicker' %>
+      </div>
+    <% end %>
   </div>
 
   <div class="form-actions">

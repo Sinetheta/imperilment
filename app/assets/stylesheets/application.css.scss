@@ -1,5 +1,9 @@
 @import 'bootstrap';
+
+@import 'bootstrap-datepicker';
 @import 'bootstrap-responsive';
+
+@import 'font-awesome';
 
 @font-face {
   font-family: korinna;
@@ -37,6 +41,7 @@ footer {
 
 .question-container {
   background-color: #229;
+  margin-bottom: 20px;
 
   .category {
     float: left;
@@ -64,6 +69,12 @@ footer {
     padding: 120px 100px;
     min-height: 60px;
     @include fancy-font;
+  }
+}
+
+form {
+  input.datepicker {
+    margin-top: 0;
   }
 }
 

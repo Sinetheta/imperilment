@@ -1,3 +1,5 @@
+<h2><%= t :your_response %></h2>
+
 <%= simple_form_for [@game, @answer, @question] do |f| %>
   <%= f.error_notification %>
   <p>
@@ -9,6 +11,10 @@
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, class: 'btn btn-primary' %>
+    <%= f.button :submit, value: submit_text, class: 'btn btn-primary' %>
+
+    <div class='pull-right'>
+      <%= link_to t(:back), [@game, @answer], class: 'btn' %>
+    </div>
   </div>
 <% end %>

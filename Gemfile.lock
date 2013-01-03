@@ -35,6 +35,8 @@ GEM
       coderay (>= 1.0.0)
       erubis (>= 2.7.0)
     binding_of_caller (0.6.8)
+    bootstrap-datepicker-rails (0.6.34)
+      railties (>= 3.0)
     bootstrap-sass (2.2.2.0)
       sass (~> 3.2)
     builder (3.0.4)
@@ -76,6 +78,9 @@ GEM
     faraday_middleware (0.9.0)
       faraday (>= 0.7.4, < 0.9)
     ffi (1.2.0)
+    font-awesome-sass-rails (2.0.0.0)
+      railties (>= 3.1.1)
+      sass-rails (>= 3.1.1)
     guard (1.6.1)
       listen (>= 0.6.0)
       lumberjack (>= 1.0.2)
@@ -258,12 +263,14 @@ PLATFORMS
 DEPENDENCIES
   better_errors
   binding_of_caller
+  bootstrap-datepicker-rails
   bootstrap-sass
   cancan
   coffee-rails
   devise
   exception_notification
   factory_girl_rails
+  font-awesome-sass-rails
   guard-bundler
   guard-livereload
   guard-rspec

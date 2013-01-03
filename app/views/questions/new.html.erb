@@ -1,5 +1,1 @@
-<h1><%= t(:new_model, model: Question.model_name.human) %></h1>
-
-<%= render 'form' %>
-
-<%= link_to t(:back), [@game, @answer, Question], class: 'btn' %>
+<%= render partial: 'form', locals: {submit_text: t(:respond).values.sample} %>

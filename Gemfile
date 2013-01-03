@@ -26,7 +26,11 @@ group :assets do
   gem 'coffee-rails'
 
   gem 'jquery-rails'
+
   gem 'bootstrap-sass'
+  gem 'bootstrap-datepicker-rails'
+
+  gem 'font-awesome-sass-rails'
 
   gem 'uglifier'
 end

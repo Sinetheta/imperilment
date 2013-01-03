@@ -5,3 +5,5 @@
 //= require bootstrap-dropdown
 //= require bootstrap-modal
 //= require bootstrap-transition
+//= require bootstrap-datepicker
+//= require_tree .

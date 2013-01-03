@@ -12,15 +12,19 @@
   <div style='clear: both;'></div>
 </div>
 
-<% action = :new; question = :question %>
-<% if @answer.question_for(current_user) %>
-  <% action = :edit %>
-  <% question = @answer.question_for(current_user) %>
-<% end %>
-<%= link_to "Your Response", [action, @game, @answer, question], class: 'btn btn-primary' %>
+<div class='well'>
+  <% action = :new; question = :question %>
+  <% if @answer.question_for(current_user) %>
+    <% action = :edit %>
+    <% question = @answer.question_for(current_user) %>
+  <% end %>
+  <%= link_to "Your Response", [action, @game, @answer, question], class: 'btn btn-primary' %>
 
-<% if @answer.questions.unchecked.count > 0 && can?(:check, @answer) %>
-  <%= link_to t(:check_model, model: Question.model_name.human(count: :many)), check_game_answer_path, class: 'btn btn-info' %>
-<% end %>
-<%= link_to t(:edit), [:edit, @game, @answer], class: 'btn' if can?(:edit, @answer) %>
-<%= link_to t(:back), [@game, :answers], class: 'btn' %>
+  <% if @answer.questions.unchecked.count > 0 && can?(:check, @answer) %>
+    <%= link_to t(:check_model, model: Question.model_name.human(count: :many)), check_game_answer_path, class: 'btn btn-info' %>
+  <% end %>
+  <div class='pull-right'>
+    <%= link_to t(:edit), [:edit, @game, @answer], class: 'btn' if can?(:edit, @answer) %>
+    <%= link_to t(:back), [@game, :answers], class: 'btn' %>
+  </div>
+</div>

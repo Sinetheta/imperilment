@@ -4,14 +4,25 @@ en:
   show: View
   edit: Edit
   back: Back
+  response: Response
   confirm_destroy: Are you sure?
   nothing_to_check: 'Nothing to check...'
+  currency_symbol: $
 
   index_model: Listing %{model}
   new_model: New %{model}
   check_model: Check %{model}
   checking_model: Checking %{model}
   editing_model: Editing %{model}
+  update_model: Update %{model}
+  respond:
+    boom: Boom!
+    zap: Zap!
+    huzzah: Huzzah!
+    yippee: Yippee!
+    pow: Pow!
+    kablam: Ka-blam!
+    say_what: Say What!?
 
   model_create_successful: "%{model} was successfully created."
   model_update_successful: "%{model} was successfully updated."
@@ -30,3 +41,7 @@ en:
     attributes:
       answer:
         unchecked_questions: 'Unchecked Questions'
+
+  time:
+    formats:
+      short: '%Y-%m-%d'
