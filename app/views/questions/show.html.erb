@@ -1,6 +1,6 @@
 <%= show_for @question do |s| %>
-  <%= s.association :user %>
-  <%= s.association :answer %>
+  <%= s.association :user, using: :email %>
+  <%= s.association :answer, using: :answer %>
   <%= s.attribute(:reponse) if @question.answer.closed? || @question.user == current_user %>
   <%= s.attribute :correct %>
   <%= s.attribute :amount %>

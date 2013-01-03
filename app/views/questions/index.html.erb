@@ -15,8 +15,8 @@
   <tbody>
     <% @questions.each do |question| %>
       <tr>
-        <td><%= question.user %></td>
-        <td><%= question.answer %></td>
+        <td><%= question.user.email %></td>
+        <td><%= question.answer.answer %></td>
         <td><%= (question.answer.closed? || question.user == current_user) ? question.reponse : t(:response_hidden) %></td>
         <td><%= question.correct %></td>
         <td><%= question.amount %></td>
