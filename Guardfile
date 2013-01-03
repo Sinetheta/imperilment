@@ -7,7 +7,7 @@ guard 'bundler' do
   # watch(/^.+\.gemspec/)
 end
 
-guard 'livereload' do
+guard 'livereload', :port => 50094 do
   watch(%r{app/views/.+\.(erb|haml|slim)$})
   watch(%r{app/helpers/.+\.rb})
   watch(%r{public/.+\.(css|js|html)})
@@ -16,7 +16,7 @@ guard 'livereload' do
   watch(%r{(app|vendor)/assets/\w+/(.+\.(css|js|html)).*})  { |m| "/assets/#{m[2]}" }
 end
 
-guard 'rspec', :version => 2 do
+guard 'rspec', :cli => "--drb --drb-port 50091", :version => 2 do
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
   watch('spec/spec_helper.rb')  { "spec" }
@@ -38,7 +38,7 @@ guard 'rspec', :version => 2 do
 end
 
 
-guard 'spork', :cucumber_env => { 'RAILS_ENV' => 'test' }, :rspec_env => { 'RAILS_ENV' => 'test' } do
+guard 'spork', :cucumber_env => { 'RAILS_ENV' => 'test' }, :rspec_env => { 'RAILS_ENV' => 'test' }, :rspec_port => 50091 do
   watch('config/application.rb')
   watch('config/environment.rb')
   watch('config/environments/test.rb')
