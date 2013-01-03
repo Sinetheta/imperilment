@@ -1,15 +1,29 @@
 @import 'bootstrap';
+@import 'font-awesome';
 
 @import 'bootstrap-datepicker';
 @import 'bootstrap-responsive';
-
-@import 'font-awesome';
 
 @font-face {
   font-family: korinna;
   src: font-url("scakorinnabold.ttf") format('truetype');
   font-weight: bold;
   font-style: normal;
+}
+
+.nav-pills > .active > a > [class^="icon-"],
+.nav-pills > .active > a > [class*=" icon-"],
+.nav-list > .active > a > [class^="icon-"],
+.nav-list > .active > a > [class*=" icon-"],
+.navbar-inverse .nav > .active > a > [class^="icon-"],
+.navbar-inverse .nav > .active > a > [class*=" icon-"],
+.dropdown-menu > li > a:hover > [class^="icon-"],
+.dropdown-menu > li > a:hover > [class*=" icon-"],
+.dropdown-menu > .active > a > [class^="icon-"],
+.dropdown-menu > .active > a > [class*=" icon-"],
+.dropdown-submenu:hover > a > [class^="icon-"],
+.dropdown-submenu:hover > a > [class*=" icon-"] {
+  background-image: none;
 }
 
 /* padding for fixed nav */

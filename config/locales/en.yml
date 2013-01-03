@@ -35,10 +35,15 @@ en:
 
   activerecord:
     models:
+      answer:
+        one: 'Answer'
+        other: 'Answers'
       question:
         one: 'Question'
         other: 'Questions'
     attributes:
+      game:
+        ended_at: 'Ends On'
       answer:
         unchecked_questions: 'Unchecked Questions'
 
