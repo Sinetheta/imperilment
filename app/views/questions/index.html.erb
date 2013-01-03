@@ -5,7 +5,7 @@
     <tr>
       <th><%= Question.human_attribute_name("user") %></th>
       <th><%= Question.human_attribute_name("answer") %></th>
-      <th><%= Question.human_attribute_name("reponse") %></th>
+      <th><%= Question.human_attribute_name("response") %></th>
       <th><%= Question.human_attribute_name("correct") %></th>
       <th><%= Question.human_attribute_name("amount") %></th>
       <th></th>
@@ -17,7 +17,7 @@
       <tr>
         <td><%= question.user.email %></td>
         <td><%= question.answer.answer %></td>
-        <td><%= (question.answer.closed? || question.user == current_user) ? question.reponse : t(:response_hidden) %></td>
+        <td><%= (question.answer.closed? || question.user == current_user) ? question.response : t(:response_hidden) %></td>
         <td><%= question.correct %></td>
         <td><%= question.amount %></td>
         <td>

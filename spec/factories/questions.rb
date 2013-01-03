@@ -4,8 +4,8 @@ FactoryGirl.define do
   factory :question do
     user
     answer
-    reponse "What is a question?"
-    correct false
+    response "What is a question?"
+    correct nil
     amount 200
   end
 end

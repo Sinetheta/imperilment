@@ -49,7 +49,11 @@ describe Answer do
     end
 
     context 'when the user has provided a question' do
-      let!(:question) { create :question, user: user, answer: first, correct: true }
+      let!(:question) { create :question, user: user, answer: first, correct: nil }
+      before(:each) do
+        question.correct = true
+        question.save!
+      end
       it { should be_true }
     end
   end
