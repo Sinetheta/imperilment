@@ -24,6 +24,9 @@ class QuestionsController < ApplicationController
   end
 
   def create
+    # Can't set your answer to correct unless you're an admin.
+    params[:question].except(:correct) unless current_user.has_role?(:admin)
+
     @question.user = current_user
 
     if @question.save

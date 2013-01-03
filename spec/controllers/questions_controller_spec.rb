@@ -19,7 +19,7 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe QuestionsController do
-  authorize
+  authorize_and_login
 
   # Additional params sent with each request
   # Convenient for nested controllers.
@@ -31,6 +31,7 @@ describe QuestionsController do
 
   let(:answer) { question.answer }
   let(:game) { answer.game }
+  let(:user) { create :admin }
 
   describe "GET index" do
     it "assigns all questions as @questions" do
