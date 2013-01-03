@@ -21,6 +21,7 @@ class Answer < ActiveRecord::Base
   end
 
   def question_for(user)
+    return nil unless user
     questions.where(user_id: user.id).first
   end
 
