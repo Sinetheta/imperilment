@@ -18,9 +18,11 @@
     <% action = :edit %>
     <% question = @answer.question_for(current_user) %>
   <% end %>
-  <%= link_to "Your Response", [action, @game, @answer, question], class: 'btn btn-primary' %>
+  <% unless @answer.closed? && @answer.checked_question_for(current_user) != nil %>
+    <%= link_to "Your Response", [action, @game, @answer, question], class: 'btn btn-primary' %>
+  <% end %>
 
-  <% if @answer.questions.unchecked.count > 0 && can?(:check, @answer) %>
+  <% if @answer.questions.unchecked.count > 0 && can?(:check, @answer) && @answer.closed? %>
     <%= link_to t(:check_model, model: Question.model_name.human(count: :many)), check_game_answer_path, class: 'btn btn-info' %>
   <% end %>
   <div class='pull-right'>

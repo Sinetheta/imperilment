@@ -25,6 +25,11 @@ class Answer < ActiveRecord::Base
     questions.where(user_id: user.id).first
   end
 
+  def checked_question_for(user)
+    question = question_for(user)
+    question.nil? ? nil : question.correct
+  end
+
   def closed?
     !(correct_question.nil? || correct_question.empty?)
   end
