@@ -130,4 +130,30 @@ describe AnswersController do
     end
   end
 
+  describe 'GET check' do
+    let(:question) { create :question, answer: answer, correct: nil }
+
+    before(:each) { get :check, default_params.merge(id: answer.to_param) }
+
+    it 'should assign the unchecked questions to @questions' do
+      assigns(:questions).should =~ [question]
+    end
+  end
+
+  describe 'PUT update_all' do
+    let(:question) { create :question, answer: answer, correct: nil }
+    subject { Question.where(id: question.id).first }
+
+    before(:each) { put :update_all, default_params.merge(id: answer.to_param, answer: question_attributes) }
+
+    context 'when the question is marked correct' do
+      let(:question_attributes) { {questions: {question.id => true}} }
+      its(:correct) { should be_true }
+    end
+
+    context 'when the question is marked incorrect' do
+      let(:question_attributes) { {} }
+      its(:correct) { should be_false }
+    end
+  end
 end

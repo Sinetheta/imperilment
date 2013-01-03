@@ -1,17 +1,32 @@
 
 en:
-  destroy: delete
-  show: view
-  edit: edit
-  back: back
+  destroy: Delete
+  show: View
+  edit: Edit
+  back: Back
   confirm_destroy: Are you sure?
+  nothing_to_check: 'Nothing to check...'
+
   index_model: Listing %{model}
   new_model: New %{model}
+  check_model: Check %{model}
+  checking_model: Checking %{model}
   editing_model: Editing %{model}
+
   model_create_successful: "%{model} was successfully created."
   model_update_successful: "%{model} was successfully updated."
   flash:
     header:
       notice: Notice
       alert:  Error
+
   reponse_hidden: "Response Hidden"
+
+  activerecord:
+    models:
+      question:
+        one: 'Question'
+        other: 'Questions'
+    attributes:
+      answer:
+        unchecked_questions: 'Unchecked Questions'

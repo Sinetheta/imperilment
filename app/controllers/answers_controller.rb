@@ -39,4 +39,22 @@ class AnswersController < ApplicationController
     @answer.destroy
     respond_with @answer, location: @game
   end
+
+  def check
+    @questions = @answer.questions.unchecked
+    respond_with @game, @answer, @questions
+  end
+
+  def update_all
+    # Mark all unchecked questions as incorrect.
+    questions = @answer.questions.unchecked.update_all(correct: false)
+
+    # Any questions that appear in here are correct.
+    unless params[:answer].blank?
+      right_questions = params[:answer][:questions].keys
+      questions = @answer.questions.update_all({correct: true}, {id: right_questions})
+    end
+
+    respond_with @game, @answer
+  end
 end

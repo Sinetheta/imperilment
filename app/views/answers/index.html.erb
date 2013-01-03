@@ -7,6 +7,9 @@
       <th><%= Answer.human_attribute_name("category") %></th>
       <th><%= Answer.human_attribute_name("answer") %></th>
       <th><%= Answer.human_attribute_name("amount") %></th>
+      <% if can? :check, Answer %>
+        <th></th>
+      <% end %>
       <th></th>
     </tr>
   </thead>
@@ -18,6 +21,14 @@
         <td><%= answer.category.try(:name) %></td>
         <td><%= answer.answer %></td>
         <td><%= answer.amount %></td>
+        <% if can? :check, answer %>
+          <% unchecked_questions = answer.questions.unchecked.count %>
+          <td>
+            <%= content_tag :span, class: "badge #{unchecked_questions == 0 ? '' : 'badge-important'}" do %>
+              <%= unchecked_questions %>
+            <% end %>
+          </td>
+        <% end %>
         <td>
           <%= link_to t(:show), [@game, answer], class: 'btn' %>
           <%= link_to t(:edit), [:edit, @game, answer], class: 'btn' %>
