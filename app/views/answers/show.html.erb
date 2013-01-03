@@ -12,4 +12,11 @@
   <div style='clear: both;'></div>
 </div>
 
+<% action = :new; question = :question %>
+<% if @answer.question_for(current_user) %>
+  <% action = :edit %>
+  <% question = @answer.question_for(current_user) %>
+<% end %>
+<%= link_to "Your Response", [action, @game, @answer, question], class: 'btn btn-primary' %>
+
 <%= link_to t(:edit), [:edit, @game, @answer], class: 'btn' if can?(:edit, @answer) %>

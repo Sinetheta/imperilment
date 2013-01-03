@@ -48,6 +48,7 @@ describe QuestionsController do
 
   describe "GET new" do
     it "assigns a new question as @question" do
+      controller.stub(:current_user) { build_stubbed :user }
       get :new, default_params
       assigns(:question).should be_a_new(Question)
     end

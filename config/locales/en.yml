@@ -14,3 +14,4 @@ en:
     header:
       notice: Notice
       alert:  Error
+  reponse_hidden: "Response Hidden"

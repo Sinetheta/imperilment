@@ -38,4 +38,23 @@ describe Answer do
       end
     end
   end
+
+  describe '.closed' do
+    subject { first.closed? }
+
+    context "when correct_question is nil" do
+      before { first.correct_question = nil }
+      it { should be_false }
+    end
+
+    context "when correct_question is the empty string" do
+      before { first.correct_question = "" }
+      it { should be_false }
+    end
+
+    context "when correct_question is some text" do
+      before { first.correct_question = "Question" }
+      it { should be_true }
+    end
+  end
 end

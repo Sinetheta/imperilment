@@ -19,4 +19,12 @@ class Answer < ActiveRecord::Base
   def next
     Answer.where('updated_at > ?', updated_at).order('updated_at ASC').limit(1).first
   end
+
+  def question_for(user)
+    questions.where(user_id: user.id).first
+  end
+
+  def closed?
+    !(correct_question.nil? || correct_question.empty?)
+  end
 end

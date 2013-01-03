@@ -1,9 +1,11 @@
 <%= simple_form_for [@game, @answer, @question] do |f| %>
   <%= f.error_notification %>
+  <p>
+    <%= @answer.answer %>
+  </p>
 
   <div class="form-inputs">
     <%= f.input :reponse %>
-    <%= f.input :amount %>
   </div>
 
   <div class="form-actions">
