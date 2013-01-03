@@ -5,7 +5,9 @@ class Ability
     if user && user.has_role?(:admin)
       can :manage, :all
     else
-      # FIXME -- add normal permissions.
+      can :read, Game
+      can :read, Answer
+      can :manage, Question, :user_id => user.id
     end
   end
 end
