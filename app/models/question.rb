@@ -17,7 +17,7 @@ class Question < ActiveRecord::Base
 
   def unchecked_response
     if response_changed?
-      errors.add(:response, "can't be updated once it has been checked!") unless correct.nil?
+      errors.add(:response, "can't be updated once it has been checked!") unless correct.nil? || new_record?
     end
   end
 end
