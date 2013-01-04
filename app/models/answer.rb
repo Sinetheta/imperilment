@@ -9,15 +9,15 @@ class Answer < ActiveRecord::Base
   validates :game, presence: true
 
   def self.most_recent
-    self.where('start_date <= ?', DateTime.now).order('start_date DESC').limit(1).first
+    self.where('start_date <= ?', DateTime.now).order('start_date DESC').first
   end
 
   def prev
-    Answer.where('updated_at < ?', updated_at).order('updated_at DESC').limit(1).first
+    Answer.where('updated_at < ?', updated_at).order('updated_at DESC').first
   end
 
   def next
-    Answer.where('updated_at > ?', updated_at).order('updated_at ASC').limit(1).first
+    Answer.where('updated_at > ?', updated_at).order('updated_at ASC').first
   end
 
   def question_for(user)
