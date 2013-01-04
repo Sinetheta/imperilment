@@ -34,6 +34,30 @@ describe QuestionsController do
   let(:user) { create :admin }
 
   describe "GET index" do
+    context 'when the user is not an admin' do
+      let(:user) { create :user }
+
+      context 'when the user does not have a checked question' do
+        it "assigns an empty list to @questions" do
+          get :index, default_params
+          assigns(:questions).should =~ Question.none
+        end
+      end
+
+      context 'when the user has a checked question' do
+        before(:each) do
+          question.user = user
+          question.correct = true
+          question.save!
+        end
+
+        it "assigns an empty list to @questions" do
+          get :index, default_params
+          assigns(:questions).should =~ [question]
+        end
+      end
+    end
+
     it "assigns all questions as @questions" do
       get :index, default_params
       assigns(:questions).should =~ [question]
@@ -112,12 +136,12 @@ describe QuestionsController do
       end
 
       it "assigns the requested question as @question" do
-        put :update, default_params.merge(id: question.to_param)
+        put :update, default_params.merge(id: question.to_param, question: {})
         assigns(:question).should eq(question)
       end
 
       it "redirects to the question" do
-        put :update, default_params.merge(id: question.to_param)
+        put :update, default_params.merge(id: question.to_param, question: {})
         response.should redirect_to root_path
       end
     end

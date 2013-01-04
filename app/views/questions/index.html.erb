@@ -1,35 +1,44 @@
-<h1><%= t(:index_model, model: Question.model_name.human) %></h1>
+<h1><%= Question.model_name.human(count: :many) %></h1>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th><%= Question.human_attribute_name("user") %></th>
-      <th><%= Question.human_attribute_name("answer") %></th>
-      <th><%= Question.human_attribute_name("response") %></th>
-      <th><%= Question.human_attribute_name("correct") %></th>
-      <th><%= Question.human_attribute_name("amount") %></th>
-      <th></th>
-    </tr>
-  </thead>
+<% unless @questions.empty? %>
+  <p><strong><%= Answer.human_attribute_name(:answer) %>:</strong> <%= @answer.answer %></p>
+  <p><strong><%= Answer.human_attribute_name(:correct_question) %>:</strong> <%= @answer.correct_question %></p>
 
-  <tbody>
-    <% @questions.each do |question| %>
+  <table class="table">
+    <thead>
       <tr>
-        <td><%= question.user.email %></td>
-        <td><%= question.answer.answer %></td>
-        <td><%= (question.answer.closed? || question.user == current_user) ? question.response : t(:response_hidden) %></td>
-        <td><%= question.correct %></td>
-        <td><%= question.amount %></td>
-        <td>
-          <%= link_to t(:show), [@game, @answer, question], class: 'btn' %>
-        </td>
+        <th><%= Question.human_attribute_name("user") %></th>
+        <th><%= Question.human_attribute_name("response") %></th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<% if question = @answer.question_for(current_user) %>
-  <%= link_to t(:edit_model, model: Question.model_name.human), [:edit, @game, @answer, question], class: 'btn' %>
-<% else %>
-  <%= link_to t(:new_model, model: Question.model_name.human), new_game_answer_question_path, class: 'btn' %>
+    <tbody>
+      <% @questions.each do |question| %>
+        <tr class='<%= question.checked? ? (question.correct? ? 'success' : 'error') : '' %>'>
+          <td><%= question.user.email %></td>
+          <td><%= question.response %></td>
+          <td>
+            <% if can? :check, question %>
+              <span class='btn-group pull-right actions <%= question.checked? ? 'hide' : 'show' %>'>
+                <%= link_to [@game, @answer, question], class: 'btn btn-small btn-success', data: {correct: true} do %>
+                  <i class='icon-thumbs-up'></i>
+                <% end %>
+                <%= link_to [@game, @answer, question], class: 'btn btn-small btn-danger', data: {correct: false} do %>
+                  <i class='icon-thumbs-down'></i>
+                <% end %>
+              </span>
+              <span class='pull-right checked  <%= question.checked? ? 'show' : 'hide' %>'>
+                <%= link_to [@game, @answer, question], class: 'btn btn-small btn-info', data: {correct: nil} do %>
+                  <i class='icon-undo'></i>
+                <% end %>
+              </span>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 <% end %>
+
+<%= link_to t(:back), [@game, @answer], class: 'btn' %>

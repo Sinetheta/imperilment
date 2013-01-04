@@ -6,6 +6,13 @@ class QuestionsController < ApplicationController
   respond_to :html, :json
 
   def index
+    unless current_user.has_role?(:admin)
+      question = @answer.question_for(current_user)
+      if question.nil? || !question.checked?
+        @questions = @questions.none
+      end
+    end
+
     @questions = @questions.page(params[:page])
     respond_with @game, @answer, @questions
   end
@@ -36,8 +43,9 @@ class QuestionsController < ApplicationController
   end
 
   def update
+    params[:question][:correct] = nil if params[:question][:correct] == 'null'
     if @question.update_attributes(params[:question])
-      flash.notice = t :model_update_successful, model: Question.model_name.human
+      flash.notice = t :model_update_successful, model: Question.model_name.human if request.format == :html
     end
     respond_with @game, @answer, @question, location: root_path
   end

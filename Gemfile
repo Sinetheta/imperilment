@@ -7,7 +7,8 @@ gem 'omniauth-openid'
 gem 'rolify'
 gem 'cancan'
 
-gem 'haml-rails'
+gem 'squeel'
+
 gem 'simple_form'
 gem 'show_for'
 
@@ -15,7 +16,7 @@ gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 gem 'simple-navigation-bootstrap'
 
-gem 'sass'
+gem 'irbtools'
 
 group :test do
   gem 'mocha', '~> 0.12.0', require: false

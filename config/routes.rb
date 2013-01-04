@@ -4,10 +4,6 @@ Imperilment::Application.routes.draw do
   resources :categories
   resources :games do
     resources :answers do
-      member do
-        get :check
-        put :update_all
-      end
       resources :questions
     end
   end

@@ -7,7 +7,9 @@ class Ability
     else
       if user
         can :manage, Question, :user_id => user.id
+        cannot :check, Question
       end
+      can :read, Question
       can :read, Game
       can :read, Answer
     end

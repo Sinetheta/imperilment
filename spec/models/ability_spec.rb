@@ -13,6 +13,7 @@ describe Ability do
   end
 
   context 'when user is not an administrator' do
+    it { should be_able_to :read, Question }
     it { should be_able_to :read, Game }
     it { should be_able_to :read, Answer }
 
@@ -26,6 +27,8 @@ describe Ability do
         let(:question) { build_stubbed :question }
         it { should_not be_able_to :manage, question }
       end
+
+      it { should_not be_able_to :check, Question }
     end
   end
 end

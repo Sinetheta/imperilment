@@ -7,6 +7,13 @@ class Question < ActiveRecord::Base
   validate :unchecked_response
 
   scope :unchecked, where(correct: nil)
+  scope :checked, where{correct != nil}
+
+  scope :none, where('1 = 0')
+
+  def checked?
+    !correct.nil?
+  end
 
   def unchecked_response
     if response_changed?

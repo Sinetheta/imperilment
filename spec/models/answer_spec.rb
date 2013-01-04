@@ -39,26 +39,6 @@ describe Answer do
     end
   end
 
-  describe '.checked_question_for' do
-    let(:user) { create :user }
-
-    subject { first.checked_question_for(user) }
-
-    context 'when the user has not provided a question' do
-      it { should be_nil }
-    end
-
-    context 'when the user has provided a question' do
-      let!(:question) { create :question, user: user, answer: first, correct: nil }
-      before(:each) do
-        question.correct = true
-        question.save!
-      end
-      it { should be_true }
-    end
-  end
-
-
   describe '.closed' do
     subject { first.closed? }
 
