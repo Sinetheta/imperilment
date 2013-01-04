@@ -6,9 +6,15 @@
 <h1><%= @answer.start_date.to_date %></h1>
 
 <div class='question-container'>
-  <div class='answer'><%= @answer.answer %></div>
-  <div class='category'><%= @answer.category.name %></div>
-  <div class='dollar-value'>$<%= @answer.amount %></div>
+  <div class='area-answer'>
+    <div class='answer'><p><%= @answer.answer %></p></div>
+  </div>
+  <div class="area">
+    <div class='category'><p><%= @answer.category.name %></p></div>
+  </div>
+  <div class="area">
+    <div class='dollar-value'><p>$<%= @answer.amount %></p></div>
+  </div>
   <div style='clear: both;'></div>
 </div>
 
