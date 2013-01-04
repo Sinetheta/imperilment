@@ -21,9 +21,63 @@ describe AnswersController do
   end
 
   describe "GET show" do
-    it "assigns the requested answer as @answer" do
-      get :show, default_params.merge(id: answer.to_param)
-      assigns(:answer).should eq(answer)
+    context "when answer has an amount" do
+      it "assigns the requested answer as @answer" do
+        get :show, default_params.merge(id: answer.to_param)
+        assigns(:answer).should eq(answer)
+      end
+    end
+
+    context "when answer does not have an amount" do
+      let!(:answer) { create :answer, amount: nil }
+
+      context "when current user has a question assigned" do
+        it "assigns the requested answer as @answer" do
+          get :show, default_params.merge(id: answer.to_param)
+          assigns(:answer).should eq(answer)
+        end
+      end
+
+      context "when the current user does nto have a question assigned" do
+        it "redirects to the final round" do
+          get :show, default_params.merge(id: answer.to_param)
+          response.should redirect_to([:final, game, answer])
+        end
+      end
+    end
+  end
+
+  describe "GET final" do
+    context "when the user has an question" do
+      before { Answer.any_instance.stub(:question_for) { build :question } }
+
+      it "redirects to the show page" do
+        get :final, default_params.merge(id: answer.to_param)
+        response.should redirect_to([game, answer])
+      end
+    end
+
+    context "when the user does not have a question" do
+      it "assigns @answer" do
+        get :final, default_params.merge(id: answer.to_param)
+        assigns(:answer).should eq(answer)
+      end
+
+      before { Game.any_instance.stub(:score) { 1000 } }
+
+      context "when wager is valid" do
+        it "creates a question" do
+          get :final, default_params.merge(id: answer.to_param, wager: 600)
+          assigns(:question).should be_a(Question)
+        end
+      end
+
+      context" when wager is not valid" do
+        it "flashes an error" do
+          get :final, default_params.merge(id: answer.to_param, wager: 1600)
+          flash.alert.should_not be_nil
+        end
+      end
     end
   end
 

@@ -10,7 +10,32 @@ class AnswersController < ApplicationController
   end
 
   def show
-    respond_with @game, @answer
+    if @answer.amount.nil? && @answer.question_for(current_user).nil?
+      redirect_to [:final, @game, @answer]
+    else
+      respond_with @game, @answer
+    end
+  end
+
+  def final
+    if @answer.question_for(current_user)
+      redirect_to [@game, @answer]
+    else
+      if params[:wager]
+        if params[:wager].to_i <= 0 || params[:wager].to_i >= @game.score(current_user)
+          flash.alert = "Your wager must be between $0 and $#{@game.score(current_user)}"
+          respond_with @game, @answer
+        else
+          @question = Question.new
+          @question.user = current_user
+          @question.amount = params[:wager]
+          @question.answer = @answer
+          @question.save!
+          redirect_to [@game, @answer]
+        end
+      end
+
+    end
   end
 
   def new

@@ -1,8 +1,4 @@
-<div style='float: right'>
-  <%= link_to 'Prev', [@answer.prev.game, @answer.prev], class: 'btn' if @answer.prev %>
-  <%= link_to 'Next', [@answer.next.game, @answer.next], class: 'btn' if @answer.next %>
-</div>
-
+<%= render :partial => 'nav' %>
 <h1><%= @answer.start_date.to_date %></h1>
 
 <div class='question-container'>
@@ -12,9 +8,11 @@
   <div class="area">
     <div class='category'><p><%= @answer.category.name %></p></div>
   </div>
-  <div class="area">
-    <div class='dollar-value'><p>$<%= @answer.amount %></p></div>
-  </div>
+  <% if @answer.amount %>
+    <div class="area">
+      <div class='dollar-value'><p>$<%= @answer.amount %></p></div>
+    </div>
+  <% end %>
   <div style='clear: both;'></div>
 </div>
 

@@ -6,6 +6,9 @@ Imperilment::Application.routes.draw do
     match '/leader_board' => 'leader_boards#index', as: :leader_board
     resources :answers do
       resources :questions
+      member do
+        get 'final'
+      end
     end
   end
 
