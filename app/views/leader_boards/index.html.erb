@@ -1,0 +1,23 @@
+<h1><%= t :leader_board %></h1>
+
+<table class='table'>
+  <thead>
+    <tr>
+      <th><%= t :overall_total %></th>
+      <th><%= User.human_attribute_name(:email) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @scores.each_with_index do |score, idx| %>
+      <tr class="<%= rank_class(idx) %>">
+        <td>
+          <% if idx == 0 %>
+            <%= icon 'trophy' %>
+          <% end %>
+          <%= "#{t :currency_symbol} #{score[:score]}" %>
+        </td>
+        <td><%= score[:user].email %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

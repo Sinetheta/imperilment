@@ -7,6 +7,7 @@ en:
   correct: Correct
   wrong: Wrong
   response: Response
+  leader_board: Leader Board
   confirm_destroy: Are you sure?
   nothing_to_check: 'Nothing to check...'
   currency_symbol: $

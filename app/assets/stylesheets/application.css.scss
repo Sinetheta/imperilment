@@ -4,6 +4,10 @@
 @import 'bootstrap-datepicker';
 @import 'bootstrap-responsive';
 
+$goldBackground: #ebca3d;
+$silverBackground: #d6dae3;
+$bronzeBackground: #e8a87a;
+
 @font-face {
   font-family: korinna;
   src: font-url("scakorinnabold.ttf") format('truetype');
@@ -128,3 +132,16 @@ form {
   }
 }
 
+.table tbody tr {
+  &.gold td {
+    background-color: $goldBackground;
+  }
+
+  &.silver td {
+    background-color: $silverBackground;
+  }
+
+  &.bronze td {
+    background-color: $bronzeBackground;
+  }
+}
