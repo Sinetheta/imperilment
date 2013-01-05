@@ -21,5 +21,14 @@ describe Game do
         game.score(user).should == 400
       end
     end
+
+    context "when the answer is a final round answer" do
+      let(:answer) { create :answer, game: game, amount: nil }
+      let!(:correct_response) { create :question, answer: answer, user: user, correct: true, amount: 100 }
+
+      it "uses the result from the question instead" do
+        game.score(user).should == 100
+      end
+    end
   end
 end
