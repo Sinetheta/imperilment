@@ -22,7 +22,7 @@ class AnswersController < ApplicationController
       redirect_to [@game, @answer]
     else
       if params[:wager]
-        if params[:wager].to_i <= 0 || params[:wager].to_i >= @game.score(current_user)
+        if params[:wager].to_i < 0 || params[:wager].to_i > @game.score(current_user)
           flash.alert = "Your wager must be between $0 and $#{@game.score(current_user)}"
           respond_with @game, @answer
         else
