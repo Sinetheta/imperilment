@@ -20,4 +20,12 @@ class Question < ActiveRecord::Base
       errors.add(:response, "can't be updated once it has been checked!") unless correct.nil? || new_record?
     end
   end
+
+  def value
+    if answer.amount
+      correct? ? answer.amount : 0
+    else
+      correct? ? amount : -amount
+    end
+  end
 end

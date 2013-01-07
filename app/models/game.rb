@@ -4,8 +4,8 @@ class Game < ActiveRecord::Base
   has_many :answers
 
   def score(user)
-    Question.joins(:answer => :game).where(user_id: user.id, 'games.id' => self.id, correct: true).sum do |question|
-      question.answer.amount || question.amount
+    Question.joins(:answer => :game).where(user_id: user.id, 'games.id' => self.id).sum do |question|
+      question.value
     end
   end
 end

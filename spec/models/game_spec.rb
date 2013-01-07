@@ -14,20 +14,13 @@ describe Game do
     end
 
     context "when there are results" do
-      let!(:correct_response) { create :question, answer: answer, user: user, correct: true }
-      let!(:incorrect_response) { create :question, answer: answer, user: user, correct: false }
-
-      it "is the sum of all correct responses" do
-        game.score(user).should == 400
+      before do
+        2.times { create :question, answer: answer, user: user }
+        Question.any_instance.stub(:value) { 200 }
       end
-    end
 
-    context "when the answer is a final round answer" do
-      let(:answer) { create :answer, game: game, amount: nil }
-      let!(:correct_response) { create :question, answer: answer, user: user, correct: true, amount: 100 }
-
-      it "uses the result from the question instead" do
-        game.score(user).should == 100
+      it "is the sum of all values" do
+        game.score(user).should == 400
       end
     end
   end
