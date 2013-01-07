@@ -8,16 +8,18 @@
     </tr>
   </thead>
   <tbody>
-    <% @scores.each_with_index do |score, idx| %>
-      <tr class="<%= rank_class(idx) %>">
-        <td>
-          <% if idx == 0 %>
-            <%= icon 'trophy' %>
-          <% end %>
-          <%= "#{t :currency_symbol} #{score[:score]}" %>
-        </td>
-        <td><%= score[:user].email %></td>
-      </tr>
+    <% @scores.each_with_index do |(_, scores), idx| %>
+      <% scores.each do |score| %>
+        <tr class="<%= rank_class(idx) %>">
+          <td>
+            <% if idx == 0 %>
+              <%= icon 'trophy' %>
+            <% end %>
+            <%= "#{t :currency_symbol} #{score[:score]}" %>
+          </td>
+          <td><%= score[:user].email %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

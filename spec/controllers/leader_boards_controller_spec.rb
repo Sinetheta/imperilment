@@ -16,7 +16,7 @@ describe LeaderBoardsController do
     end
 
     it 'should assign the scores to @scores' do
-      assigns(:scores).should =~ [{'user' => user, 'score' => 0}]
+      assigns(:scores).should == {0 => [{'user' => user, 'score' => 0}]}
     end
   end
 end
