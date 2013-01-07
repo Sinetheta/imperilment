@@ -6,6 +6,7 @@ en:
   correct: Correct
   wrong: Wrong
   response: Response
+  breakdown: Breakdown
   leader_board: Leader Board
   confirm_destroy: Are you sure?
   nothing_to_check: 'Nothing to check...'

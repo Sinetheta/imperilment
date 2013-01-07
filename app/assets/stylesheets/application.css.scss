@@ -132,16 +132,77 @@ form {
   }
 }
 
-.table tbody tr {
-  &.gold td {
-    background-color: $goldBackground;
+.table {
+  tbody td.score, thead th.score {
+    width: 100px;
+    text-align: right;
+
+    i {
+      float: left;
+    }
   }
 
-  &.silver td {
-    background-color: $silverBackground;
+  tbody > tr {
+    &.gold > td {
+      background-color: $goldBackground;
+    }
+
+    &.silver > td {
+      background-color: $silverBackground;
+    }
+
+    &.bronze > td {
+      background-color: $bronzeBackground;
+    }
+  }
+}
+
+table.breakdown {
+  border: 1px solid $grayLight;
+  border-collapse: separate;
+  background-color: $white;
+  @include border-radius(4px);
+
+  thead tr {
+    th {
+      border-left: 1px solid $grayLighter;
+      background-color: $grayLight;
+      padding: 2px;
+      text-align: center;
+
+      &:first-child {
+        @include border-top-left-radius(2px);
+        border-left: none;
+      }
+
+      &:last-child {
+        @include border-top-right-radius(2px);
+      }
+    }
   }
 
-  &.bronze td {
-    background-color: $bronzeBackground;
+  tbody tr {
+    td {
+      border-left: 1px solid $grayLighter;
+      padding: 2px;
+      width: 16px;
+      text-align: center;
+
+      &:first-child {
+        border-left: none;
+      }
+
+      & > i.icon-ok {
+        color: $green;
+      }
+
+      & > i.icon-remove {
+        color: $red;
+      }
+
+      & > i.icon-minus {
+        color: $grayLight;
+      }
+    }
   }
 }

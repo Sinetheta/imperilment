@@ -8,4 +8,12 @@ class Game < ActiveRecord::Base
       question.value
     end
   end
+
+  def started_on
+    answers.order(:start_date).pluck(:start_date).first
+  end
+
+  def date_range
+    (started_on..ended_at)
+  end
 end

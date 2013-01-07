@@ -11,21 +11,44 @@
 <table class='table'>
   <thead>
     <tr>
-      <th><%= t :overall_total %></th>
+      <th class='score'><%= t :overall_total %></th>
       <th><%= User.human_attribute_name(:email) %></th>
+      <% unless @game.answers.empty? %>
+        <th><%= t :breakdown %></th>
+      <% end %>
     </tr>
   </thead>
   <tbody>
     <% @scores.each_with_index do |(_, scores), idx| %>
       <% scores.each do |score| %>
         <tr class="<%= rank_class(idx) %>">
-          <td>
+          <td class='score'>
             <% if idx == 0 %>
               <%= icon 'trophy' %>
             <% end %>
             <%= "#{t :currency_symbol} #{score[:score]}" %>
           </td>
           <td><%= score[:user].email %></td>
+          <% unless @game.answers.empty? %>
+            <td>
+              <table class='breakdown'>
+                <thead>
+                  <tr>
+                    <% @game.date_range.count.times do %>
+                      <th></th>
+                    <% end %>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <% @game.date_range.each do |date| %>
+                      <td><%= breakdown_icon(@game, score[:user], date) %></td>
+                    <% end %>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          <% end %>
         </tr>
       <% end %>
     <% end %>

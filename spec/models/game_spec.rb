@@ -24,4 +24,25 @@ describe Game do
       end
     end
   end
+
+  describe '.started_on' do
+    let!(:answer) { create :answer, game: game, start_date: date }
+    let(:date) { Date.parse('1984-09-10') }
+
+    subject { game.started_on }
+    it { should == date }
+  end
+
+  describe '.date_range' do
+    let!(:answer) { create :answer, game: game, start_date: date }
+    let(:date) { Date.parse('1984-09-10') }
+
+    before(:each) do
+      game.ended_at = date + 1.day
+      game.save!
+    end
+
+    subject { game.date_range }
+    it { should == (date..(date + 1.day)) }
+  end
 end
