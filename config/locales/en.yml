@@ -1,4 +1,3 @@
-
 en:
   destroy: Delete
   show: View
@@ -19,6 +18,8 @@ en:
   checking_model: Checking %{model}
   editing_model: Editing %{model}
   update_model: Update %{model}
+  previous_model: Previous %{model}
+
   respond:
     boom: Boom!
     zap: Zap!
@@ -28,29 +29,33 @@ en:
     kablam: Ka-blam!
     say_what: Say What!?
 
-  model_create_successful: "%{model} was successfully created."
-  model_update_successful: "%{model} was successfully updated."
+  model_create_successful: '%{model} was successfully created.'
+  model_update_successful: '%{model} was successfully updated.'
   flash:
     header:
       notice: Notice
       alert:  Error
 
-  reponse_hidden: "Response Hidden"
+  reponse_hidden: Response Hidden
 
   activerecord:
     models:
       answer:
-        one: 'Answer'
-        other: 'Answers'
+        one: Answer
+        other: Answers
+      game:
+        one: Game
+        other: Games
       question:
-        one: 'Question'
-        other: 'Questions'
+        one: Question
+        other: Questions
     attributes:
       game:
-        ended_at: 'Ends On'
+        ended_at: Ends On
       answer:
-        unchecked_questions: 'Unchecked Questions'
+        unchecked_questions: Unchecked Questions
 
   time:
     formats:
       short: '%Y-%m-%d'
+      long: '%B %d, %Y'

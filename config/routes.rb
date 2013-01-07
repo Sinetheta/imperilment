@@ -3,7 +3,6 @@ Imperilment::Application.routes.draw do
 
   resources :categories
   resources :games do
-    match '/leader_board' => 'leader_boards#index', as: :leader_board
     resources :answers do
       resources :questions
       member do
@@ -11,6 +10,8 @@ Imperilment::Application.routes.draw do
       end
     end
   end
+
+  match '/leader_board(/:game_id)' => 'leader_boards#index', as: :leader_board
 
   root :to => 'landing#show'
 end

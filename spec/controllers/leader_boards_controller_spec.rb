@@ -3,13 +3,11 @@ require 'spec_helper'
 describe LeaderBoardsController do
   authorize_and_login
 
-  let(:game) { create :game }
+  let!(:game) { create :game }
   let(:user) { create :user }
 
   describe 'GET index' do
-    before(:each) do
-      get :index, game_id: game
-    end
+    before(:each) { get :index }
 
     it 'should assign the game to @game' do
       assigns(:game).should == game

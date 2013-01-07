@@ -4,6 +4,9 @@ $ ->
       'format': 'yyyy-mm-dd',
       'autoclose': true
 
+  $(document).on 'change', '.dropdown-nav select', ->
+    window.location = $(this).find('option:selected').data('path')
+
   $(document).on 'click', 'a[data-correct]', ->
     container = $(this).parents('tr')
     correct = $(this).data('correct')
