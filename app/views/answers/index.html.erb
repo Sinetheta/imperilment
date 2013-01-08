@@ -17,7 +17,7 @@
   <tbody>
     <% @answers.each do |answer| %>
       <tr>
-        <td><%= l answer.start_date.to_date %></td>
+        <td><%= l answer.start_date %></td>
         <td><%= answer.category.try(:name) %></td>
         <td><%= answer.answer %></td>
         <td><%= answer.amount %></td>
