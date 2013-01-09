@@ -31,3 +31,25 @@ $ ->
         container.find('span.actions').fadeOut ->
           container.find('span.checked').fadeIn()
     false
+
+  $(document).on 'click', 'a[data-lock]', ->
+    container = $(this).parents('tr')
+    lock = $(this).data('lock')
+
+    request = $.ajax
+      url: $(this).attr('href')
+      type: 'PUT'
+      dataType: 'JSON'
+      data: "game[locked]=#{lock}"
+      headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')}
+
+    request.done (msg)->
+      if lock
+        container.addClass('info')
+        container.find('span.lock').fadeOut ->
+          container.find('span.unlock').fadeIn()
+      else
+        container.removeClass('info')
+        container.find('span.unlock').fadeOut ->
+          container.find('span.lock').fadeIn()
+    false

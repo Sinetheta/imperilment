@@ -1,5 +1,5 @@
 class Game < ActiveRecord::Base
-  attr_accessible :ended_at
+  attr_accessible :ended_at, :locked
 
   has_many :answers
 

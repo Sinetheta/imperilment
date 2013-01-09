@@ -5,18 +5,35 @@
     <tr>
       <th><%= Game.human_attribute_name("ended_at") %></th>
       <th></th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @games.each do |game| %>
-      <tr>
+      <tr class='<%= game.locked? ? 'info' : '' %>'>
         <td><%= l game.ended_at, format: :long %></td>
         <td>
-          <%= link_to Answer.model_name.human(count: :many), game_answers_path(game), class: 'btn' %>
-          <%= link_to t(:show), game, class: 'btn' %>
-          <%= link_to t(:edit), edit_game_path(game), class: 'btn' %>
-          <%= link_to t(:destroy), game, method: :delete, class: 'btn btn-danger', data: {confirm: t(:confirm_destroy)} %>
+          <%= link_to Answer.model_name.human(count: :many), game_answers_path(game), class: 'btn btn-small' %>
+          <%= link_to t(:show), game, class: 'btn btn-small' %>
+          <%= link_to t(:edit), edit_game_path(game), class: 'btn btn-small' %>
+          <%= link_to t(:destroy), game, method: :delete, class: 'btn btn-small btn-danger', data: {confirm: t(:confirm_destroy)} %>
+        </td>
+        <td>
+          <% if can? :manage, game %>
+            <span class='pull-right lock <%= game.locked? ? 'hide' : 'show' %>'>
+              <%= link_to [game], class: 'btn btn-small btn-info', data: {lock: true} do %>
+                <i class='icon-lock'></i>
+                <span><%= t :lock %></span>
+              <% end %>
+            </span>
+            <span class='pull-right unlock  <%= game.locked? ? 'show' : 'hide' %>'>
+              <%= link_to [game], class: 'btn btn-small btn-warning', data: {lock: false} do %>
+                <i class='icon-unlock'></i>
+                <span><%= t :unlock %></span>
+              <% end %>
+            </span>
+          <% end %>
         </td>
       </tr>
     <% end %>

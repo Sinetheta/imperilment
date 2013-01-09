@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130107221607) do
+ActiveRecord::Schema.define(:version => 20130109165025) do
 
   create_table "answers", :force => true do |t|
     t.integer  "game_id"
@@ -35,8 +35,9 @@ ActiveRecord::Schema.define(:version => 20130107221607) do
 
   create_table "games", :force => true do |t|
     t.date     "ended_at"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "locked",     :default => false
   end
 
   create_table "questions", :force => true do |t|

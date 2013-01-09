@@ -56,6 +56,29 @@ footer {
   color: white;
 }
 
+.home-area {
+  width: 80%;
+  height: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 14px;
+  background-color: #229;
+  position: relative;
+
+  h1, p {
+    @include fancy-font;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 30px;
+  }
+
+  h1 {
+    padding-top: 80px;
+    line-height: 70px;
+    font-size: 64px;
+  }
+}
+
 .question-container {
   margin-bottom: 20px;
 

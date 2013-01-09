@@ -9,15 +9,24 @@ class Answer < ActiveRecord::Base
   validates :game, presence: true
 
   def self.most_recent
-    self.where('start_date <= ?', DateTime.now).order('start_date DESC').first
+    self.joins{game}.where{ |a|
+      (a.start_date <= DateTime.now) &
+      (a.game.locked == false)
+    }.order(:start_date).reverse_order.first
   end
 
   def prev
-    Answer.where('updated_at < ?', updated_at).order('updated_at DESC').first
+    Answer.joins{game}.where{ |a|
+      (a.updated_at < updated_at) &
+      (a.game.locked == false)
+    }.order(:updated_at).reverse_order.first
   end
 
   def next
-    Answer.where('updated_at > ?', updated_at).order('updated_at ASC').first
+    Answer.joins{game}.where{ |a|
+      (a.updated_at > updated_at) &
+      (a.game.locked == false)
+    }.order(:updated_at).first
   end
 
   def question_for(user)

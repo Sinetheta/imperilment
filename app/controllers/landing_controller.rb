@@ -3,6 +3,10 @@ class LandingController < ApplicationController
 
   def show
     answer = Answer.most_recent
-    redirect_to game_answer_path(answer.game, answer)
+    if answer
+      redirect_to game_answer_path(answer.game, answer)
+    else
+      render :show
+    end
   end
 end

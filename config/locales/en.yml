@@ -5,12 +5,16 @@ en:
   back: Back
   correct: Correct
   wrong: Wrong
+  lock: Lock
+  unlock: Unlock
   response: Response
   breakdown: Breakdown
+
   leader_board: Leader Board
   confirm_destroy: Are you sure?
   nothing_to_check: 'Nothing to check...'
   currency_symbol: $
+  no_answers: 'There are currently no questions to answer. Check back later!'
 
   index_model: Listing %{model}
   new_model: New %{model}
