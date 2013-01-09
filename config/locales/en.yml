@@ -60,7 +60,7 @@ en:
       answer:
         unchecked_questions: Unchecked Questions
 
-  time:
+  date:
     formats:
       short: '%Y-%m-%d'
       long: '%B %d, %Y'

@@ -15,7 +15,7 @@ describe ApplicationHelper do
     end
 
     context 'when the date is not nil' do
-      let(:date) { DateTime.parse('1964-03-30') }
+      let(:date) { Date.parse('1964-03-30') }
       it { should == '1964-03-30' }
     end
   end
