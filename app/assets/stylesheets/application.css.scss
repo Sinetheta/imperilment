@@ -209,8 +209,9 @@ table.breakdown {
 
   thead tr {
     th {
-      border-left: 1px solid $grayLighter;
-      background-color: $grayLight;
+      @include buttonBackground($grayLighter, $grayLight);
+      border-left: 1px solid $grayLight;
+      border-bottom: 1px solid $grayLight;
       padding: 2px;
       text-align: center;
 
@@ -226,10 +227,12 @@ table.breakdown {
   }
 
   tbody tr {
+
     td {
-      border-left: 1px solid $grayLighter;
+      border-left: 1px solid $grayLight;
       padding: 2px;
       width: 16px;
+      line-height: 12px;
       text-align: center;
 
       &:first-child {
