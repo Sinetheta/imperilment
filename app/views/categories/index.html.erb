@@ -13,9 +13,17 @@
       <tr>
         <td><%= category.name %></td>
         <td>
-          <%= link_to t(:show), category, class: 'btn' %>
-          <%= link_to t(:edit), edit_category_path(category), class: 'btn' %>
-          <%= link_to t(:destroy), category, method: :delete, class: 'btn btn-danger', data: {confirm: t(:confirm_destroy)} %>
+          <div class='btn-group pull-right'>
+            <%= link_to category, class: 'btn btn-small' do %>
+              <%= icon 'eye-open' %>
+            <% end %>
+            <%= link_to [:edit, category], class: 'btn btn-small' do %>
+              <%= icon 'pencil' %>
+            <% end %>
+            <%= link_to category, method: :delete, class: 'btn btn-danger btn-small', data: {confirm: t(:confirm_destroy)} do %>
+              <%= icon 'trash' %>
+            <% end %>
+          </div>
         </td>
       </tr>
     <% end %>

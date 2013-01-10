@@ -1,4 +1,6 @@
 en:
+  day: Day
+  week_starting: Week starting
   destroy: Delete
   show: View
   edit: Edit

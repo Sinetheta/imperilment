@@ -155,6 +155,21 @@ form {
   }
 }
 
+.badge {
+  @include border-radius(16px);
+  width: 14px;
+  height: 14px;
+  padding: 4px;
+  text-align: center;
+
+  &.badge-danger {
+    @include buttonBackground($btnDangerBackground, $btnDangerBackgroundHighlight);
+    background-color: #a90329;
+    border: 1px solid;
+    border-color: #bd362f #bd362f #802420;
+  }
+}
+
 .table {
   tbody td.score, thead th.score {
     width: 100px;
@@ -165,7 +180,13 @@ form {
     }
   }
 
+  tbody td.badge-column, thead th.badge-column {
+    width: 3px;
+    border: none;
+  }
+
   tbody > tr {
+
     &.gold > td {
       background-color: $goldBackground;
     }

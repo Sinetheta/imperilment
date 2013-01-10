@@ -1,15 +1,14 @@
-<h1><%= t(:index_model, model: Answer.model_name.human) %></h1>
+<h1><%= Answer.model_name.human(count: :many) %></h1>
+
+<h4><%= t :week_starting %> <%= l @game.started_on, format: :long %></h4>
 
 <table class="table">
   <thead>
     <tr>
-      <th><%= Answer.human_attribute_name("start_date") %></th>
-      <th><%= Answer.human_attribute_name("category") %></th>
+      <th class='badge-column'></th>
+      <th><%= t :day %></th>
       <th><%= Answer.human_attribute_name("answer") %></th>
       <th><%= Answer.human_attribute_name("amount") %></th>
-      <% if can? :check, Answer %>
-        <th></th>
-      <% end %>
       <th></th>
     </tr>
   </thead>
@@ -17,22 +16,34 @@
   <tbody>
     <% @answers.each do |answer| %>
       <tr>
-        <td><%= l answer.start_date %></td>
-        <td><%= answer.category.try(:name) %></td>
-        <td><%= answer.answer %></td>
-        <td><%= answer.amount %></td>
-        <% if can? :check, answer %>
-          <% unchecked_questions = answer.questions.unchecked.count %>
-          <td>
-            <%= content_tag :span, class: "badge #{unchecked_questions == 0 ? '' : 'badge-important'}" do %>
-              <%= unchecked_questions %>
+        <td class='badge-column'>
+          <% if can? :check, answer %>
+            <% unchecked_questions = answer.questions.unchecked.count %>
+            <% if unchecked_questions > 0 %>
+              <%= link_to [@game, answer, :questions], class: 'badge badge-danger' do %>
+                <%= unchecked_questions %>
+              <% end %>
             <% end %>
-          </td>
-        <% end %>
+          <% end %>
+        </td>
+        <td><%= answer.start_date.strftime('%a') %></td>
         <td>
-          <%= link_to t(:show), [@game, answer], class: 'btn' %>
-          <%= link_to t(:edit), [:edit, @game, answer], class: 'btn' %>
-          <%= link_to t(:destroy), [@game, answer], method: :delete, class: 'btn btn-danger', data: {confirm: t(:confirm_destroy)} %>
+          <p><strong><%= answer.category.try(:name) %></strong></p>
+          <p><%= answer.answer %></p>
+        </td>
+        <td><%= number_to_currency answer.amount, precision: 0, unit: t(:currency_symbol) %></td>
+        <td>
+          <div class='btn-group'>
+            <%= link_to [@game, answer], class: 'btn btn-small' do %>
+              <%= icon 'eye-open' %>
+            <% end %>
+            <%= link_to [:edit, @game, answer], class: 'btn btn-small' do %>
+              <%= icon 'pencil' %>
+            <% end %>
+            <%= link_to [@game, answer], method: :delete, class: 'btn btn-danger btn-small', data: {confirm: t(:confirm_destroy)} do %>
+              <%= icon 'trash' %>
+            <% end %>
+          </div>
         </td>
       </tr>
     <% end %>
