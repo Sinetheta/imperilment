@@ -55,4 +55,41 @@ describe Question do
       end
     end
   end
+
+  describe '.in_range?' do
+    let(:game) { stub_model Game }
+    let(:answer) { stub_model Answer }
+    let(:question) { build :question, answer: answer, amount: nil }
+
+    context 'when the amount is nil' do
+      it 'should persist the question' do
+        question.save.should be_true
+      end
+    end
+
+    context 'when the amount is not nil' do
+      before(:each) do
+        answer.stub(:game) { game }
+        game.stub(:score) { 200 }
+
+        question.amount = amount
+      end
+
+      context 'and outside the range' do
+        let(:amount) { -100 }
+
+        it 'should not persist the question' do
+          question.save.should be_false
+        end
+      end
+
+      context 'and within the range' do
+        let(:amount) { 100 }
+
+        it 'should persist the question' do
+          question.save.should be_true
+        end
+      end
+    end
+  end
 end

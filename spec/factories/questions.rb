@@ -6,6 +6,6 @@ FactoryGirl.define do
     answer
     response "What is a question?"
     correct nil
-    amount 200
+    amount 0
   end
 end

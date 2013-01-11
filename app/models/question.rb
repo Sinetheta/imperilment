@@ -4,7 +4,7 @@ class Question < ActiveRecord::Base
 
   attr_accessible :amount, :correct, :response
 
-  validate :unchecked_response
+  validate :unchecked_response, :in_range?
 
   scope :unchecked, where(correct: nil)
   scope :checked, where{correct != nil}
@@ -28,6 +28,12 @@ class Question < ActiveRecord::Base
       correct? ? answer.amount : 0
     else
       correct? ? amount : -amount
+    end
+  end
+
+  def in_range?
+    unless amount.nil? || amount.between?(0, answer.game.score(user))
+      errors.add(:amount, "is not within the acceptable range. Nice try!")
     end
   end
 end
