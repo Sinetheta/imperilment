@@ -1,54 +1,39 @@
 <div class='dropdown-nav pull-right'>
-  <span><%= t :previous_model, model: Game.model_name.human(count: :many) %>:</span>
+  <span><%= t :weekly_results %>:</span>
   <select>
+    <option><%= t :pick_a_week %></option>
     <% Game.order(:ended_at).each do |game| %>
-      <%= content_tag :option, l(game.ended_at, format: :long), value: game.id, data: {path: leader_board_path(game)}, selected: game.id == @game.id %>
+      <%= content_tag :option, l(game.ended_at, format: :long), value: game.id, data: {path: leader_board_path(game)} %>
     <% end %>
   </select>
 </div>
 <h1><%= t :leader_board %></h1>
+<p><%= t '.info' %></p>
 
 <table class='table'>
   <thead>
     <tr>
       <th class='score'><%= t :overall_total %></th>
       <th><%= User.human_attribute_name(:email) %></th>
-      <% unless @game.answers.empty? %>
-        <th><%= t :breakdown %></th>
-      <% end %>
+      <th><%= t :finishes %></th>
     </tr>
   </thead>
   <tbody>
-    <% @scores.each_with_index do |(_, scores), idx| %>
-      <% scores.each do |score| %>
-        <tr class="<%= rank_class(idx) %>">
+    <% @users.each do |(_, users)| %>
+      <% users.each do |user| %>
+        <tr>
           <td class='score'>
-            <% if idx == 0 %>
-              <%= icon 'trophy' %>
-            <% end %>
-            <%= "#{t :currency_symbol} #{score[:score]}" %>
+            <%= "#{t :currency_symbol} #{user.overall_score}" %>
           </td>
-          <td><%= score[:user].email %></td>
-          <% unless @game.answers.empty? %>
-            <td>
-              <table class='breakdown'>
-                <thead>
-                  <tr>
-                    <% @game.date_range.count.times do %>
-                      <th></th>
-                    <% end %>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <% @game.date_range.each do |date| %>
-                      <td><%= breakdown_icon(@game, score[:user], date) %></td>
-                    <% end %>
-                  </tr>
-                </tbody>
-              </table>
-            </td>
-          <% end %>
+          <td><%= user.email %></td>
+          <td class='finishes'>
+            <i class='icon-trophy gold'></i>
+            <span><%= user.first %></span>
+            <i class='icon-trophy silver'></i>
+            <span><%= user.second %></span>
+            <i class='icon-trophy bronze'></i>
+            <span><%= user.third %></span>
+          </td>
         </tr>
       <% end %>
     <% end %>

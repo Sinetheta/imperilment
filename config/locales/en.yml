@@ -12,6 +12,13 @@ en:
   response: Response
   breakdown: Breakdown
 
+  pick_a_week: Pick a Week
+  overall_results: Overall Results
+  overall_total: Overall Total
+  weekly_total: Weekly Total
+  weekly_results: Weekly Results
+  finishes: Finishes
+
   leader_board: Leader Board
   confirm_destroy: Are you sure?
   nothing_to_check: 'Nothing to check...'
@@ -44,6 +51,10 @@ en:
       alert:  Error
 
   reponse_hidden: Response Hidden
+
+  leader_boards:
+    index:
+      info: 'These are the overall results to date for all finished games. The current week is not taken into account.'
 
   activerecord:
     models:

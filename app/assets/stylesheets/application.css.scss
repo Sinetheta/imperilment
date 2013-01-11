@@ -186,6 +186,9 @@ form {
   }
 
   tbody > tr {
+    & > td.finishes > span {
+      margin-right: 16px;
+    }
 
     &.gold > td {
       background-color: $goldBackground;
@@ -251,5 +254,19 @@ table.breakdown {
         color: $grayLight;
       }
     }
+  }
+}
+
+i {
+  &.gold {
+    color: $goldBackground;
+  }
+
+  &.silver {
+    color: $silverBackground;
+  }
+
+  &.bronze {
+    color: $bronzeBackground;
   }
 }

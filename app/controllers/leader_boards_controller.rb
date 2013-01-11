@@ -1,15 +1,19 @@
 class LeaderBoardsController < ApplicationController
-  before_filter :load_most_recent_game
+  before_filter :load_most_recent_game, except: [:index]
 
   load_and_authorize_resource :game
 
   respond_to :html
 
   def index
-    @scores = User.all.map{|u| {user: u, score: @game.score(u)}}
-    @scores = @scores.sort_by{|a| -a[:score]}
-    @scores = @scores.group_by{|a| a[:score]}
-    respond_with @game
+    @games = Game.locked
+    @users = User.with_overall_score
+    respond_with @users, @games
+  end
+
+  def show
+    @users = User.grouped_and_sorted_by_score(@game)
+    respond_with @users, @game
   end
 
   protected

@@ -3,6 +3,8 @@ class Game < ActiveRecord::Base
 
   has_many :answers
 
+  scope :locked, where(locked: true)
+
   def score(user)
     Question.joins(:answer => :game).where(user_id: user.id, 'games.id' => self.id).sum do |question|
       question.correct_question.blank? ? 0 : question.value
