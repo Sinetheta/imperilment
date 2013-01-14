@@ -19,8 +19,20 @@ describe Game do
         Question.any_instance.stub(:value) { 200 }
       end
 
-      it "is the sum of all values" do
-        game.score(user).should == 400
+      context "when answer has a correct_question" do
+        before { Question.any_instance.stub(:correct_question) { "Correct!" } }
+
+        it "is the sum of all values" do
+          game.score(user).should == 400
+        end
+      end
+
+      context "when answer does not have a correct_question" do
+        before { Question.any_instance.stub(:correct_question) { nil } }
+
+        it "does not include any results" do
+          game.score(user).should == 0
+        end
       end
     end
   end

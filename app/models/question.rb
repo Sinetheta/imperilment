@@ -11,6 +11,8 @@ class Question < ActiveRecord::Base
 
   scope :none, where('1 = 0')
 
+  delegate :correct_question, to: :answer
+
   def checked?
     !correct.nil?
   end
