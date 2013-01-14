@@ -5,7 +5,7 @@ class Game < ActiveRecord::Base
 
   def score(user)
     Question.joins(:answer => :game).where(user_id: user.id, 'games.id' => self.id).sum do |question|
-      question.correct_question.nil? ? 0 : question.value
+      question.correct_question.blank? ? 0 : question.value
     end
   end
 

@@ -28,7 +28,7 @@ describe Game do
       end
 
       context "when answer does not have a correct_question" do
-        before { Question.any_instance.stub(:correct_question) { nil } }
+        before { Question.any_instance.stub(:correct_question) { "" } }
 
         it "does not include any results" do
           game.score(user).should == 0
