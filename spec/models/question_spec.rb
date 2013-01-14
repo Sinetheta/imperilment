@@ -39,6 +39,11 @@ describe Question do
         let(:correct) { false }
         it { should == (-amount) }
       end
+
+      context "when not correct or incorrect" do
+        let(:correct) { nil }
+        it { should == 0 }
+      end
     end
 
     context "when question is not a wager" do

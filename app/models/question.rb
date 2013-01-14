@@ -27,7 +27,14 @@ class Question < ActiveRecord::Base
     if answer.amount
       correct? ? answer.amount : 0
     else
-      correct? ? amount : -amount
+      case correct
+      when true
+        amount
+      when false
+        -amount
+      else
+        0
+      end
     end
   end
 
