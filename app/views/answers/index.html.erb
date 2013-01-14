@@ -1,6 +1,8 @@
 <h1><%= Answer.model_name.human(count: :many) %></h1>
 
-<h4><%= t :week_starting %> <%= l @game.started_on, format: :long %></h4>
+<% if @game.started_on %>
+  <h4><%= t :week_starting %> <%= l @game.started_on, format: :long %></h4>
+<% end %>
 
 <table class="table">
   <thead>
