@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
     end
 
     results.sort_by do |user|
-      [-user.overall_score, -user.first, -user.second, -user.third]
+      [-user.first, -user.second, -user.third, -user.overall_score]
     end.group_by do |user|
       user.overall_score
     end
