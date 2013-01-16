@@ -1,19 +1,22 @@
 <%= render :partial => 'nav' %>
 <h1><%= @answer.start_date %></h1>
 
-<div class='question-container'>
-  <div class='area-answer'>
-    <div class='answer'><p><%= @answer.answer %></p></div>
-  </div>
-  <div class="area">
-    <div class='category'><p><%= @answer.category.name %></p></div>
-  </div>
-  <% if @answer.amount %>
+<div class='question-container row'>
+  <div class='span4'>
     <div class="area">
-      <div class='dollar-value'><p>$<%= @answer.amount %></p></div>
+      <div class='category'><p><%= @answer.category.name %></p></div>
     </div>
-  <% end %>
-  <div style='clear: both;'></div>
+    <% if @answer.amount %>
+      <div class="area">
+        <div class='dollar-value'><p>$<%= @answer.amount %></p></div>
+      </div>
+    <% end %>
+  </div>
+  <div class='span8'>
+    <div class='area-answer'>
+      <div class='answer'><p><%= @answer.answer %></p></div>
+    </div>
+  </div>
 </div>
 
 <div class='well'>

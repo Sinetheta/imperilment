@@ -83,23 +83,20 @@ footer {
   margin-bottom: 20px;
 
   .area {
-    width: 260px;
     height: 200px;
-    margin: 13px;
+    margin-bottom: 20px;
     border-radius: 14px;
-    float: left;
     background-color: #229;
-    position: relative;
 
     & > div {
-      position: absolute;
-      width: 210px;
-      height: 150px;
       display: table;
-      left: 25px;
-      top: 25px;
+      vertical-align: middle;
+      height: 100%;
+      width: 100%;
 
       p {
+        height: 100%;
+        padding: 0 25px;
         display: table-cell;
         vertical-align: middle;
         text-align: center;
@@ -120,23 +117,21 @@ footer {
   }
 
   .area-answer {
-    width: 580px;
     height: 420px;
-    margin: 20px;
     border-radius: 14px;
     float: right;
     background-color: #229;
     position: relative;
 
     & > div {
-      position: absolute;
-      width: 500px;
-      height: 340px;
       display: table;
-      top: 40px;
-      left: 40px;
+      vertical-align: middle;
+      height: 100%;
+      width: 100%;
 
       p {
+        height: 100%;
+        padding: 0 45px;
         display: table-cell;
         vertical-align: middle;
         text-align: center;

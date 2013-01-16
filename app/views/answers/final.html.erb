@@ -1,10 +1,12 @@
 <%= render :partial => 'nav' %>
 <h1>Final Round</h1>
-<div class='question-container'>
-  <div class="area">
-    <div class='category'><p><%= @answer.category.name %></p></div>
+<div class='question-container row'>
+  <div class='span4'>
+    <div class="area">
+      <div class='category'><p><%= @answer.category.name %></p></div>
+    </div>
   </div>
-  <div style="float: left">
+  <div class='span8'>
     <h3>You may wager up to $<%= @game.score(current_user) %></h3>
     <form method='get'>
       <div class="input-prepend">
@@ -14,5 +16,4 @@
       <input type='submit' class='btn btn-primary'/>
     </form>
   </div>
-  <div style='clear: both;'></div>
 </div>
