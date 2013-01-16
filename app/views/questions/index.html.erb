@@ -22,15 +22,15 @@
             <% if can? :check, question %>
               <span class='btn-group pull-right actions <%= question.checked? ? 'hide' : 'show' %>'>
                 <%= link_to [@game, @answer, question], class: 'btn btn-small btn-success', data: {correct: true} do %>
-                  <i class='icon-thumbs-up'></i>
+                  <%= icon 'thumbs-up' %>
                 <% end %>
                 <%= link_to [@game, @answer, question], class: 'btn btn-small btn-danger', data: {correct: false} do %>
-                  <i class='icon-thumbs-down'></i>
+                  <%= icon 'thumbs-down' %>
                 <% end %>
               </span>
               <span class='pull-right checked  <%= question.checked? ? 'show' : 'hide' %>'>
                 <%= link_to [@game, @answer, question], class: 'btn btn-small btn-info', data: {correct: nil} do %>
-                  <i class='icon-undo'></i>
+                  <%= icon 'undo' %>
                 <% end %>
               </span>
             <% end %>

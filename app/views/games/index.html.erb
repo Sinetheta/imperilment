@@ -31,13 +31,13 @@
           <% if can? :manage, game %>
             <span class='pull-right lock <%= game.locked? ? 'hide' : 'show' %>'>
               <%= link_to [game], class: 'btn btn-small btn-info', data: {lock: true} do %>
-                <i class='icon-lock'></i>
+                <%= icon 'lock' %>
                 <span><%= t :lock %></span>
               <% end %>
             </span>
             <span class='pull-right unlock  <%= game.locked? ? 'show' : 'hide' %>'>
               <%= link_to [game], class: 'btn btn-small btn-warning', data: {lock: false} do %>
-                <i class='icon-unlock'></i>
+                <%= icon 'unlock' %>
                 <span><%= t :unlock %></span>
               <% end %>
             </span>

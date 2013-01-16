@@ -14,7 +14,7 @@
     <% end %>
     <%= f.input :start_date do %>
       <div class='input-prepend'>
-        <span class='add-on'><i class='icon-calendar'></i></span>
+        <span class='add-on'><%= icon 'calendar' %></span>
         <%= f.text_field :start_date, value: d(f.object.start_date), class: 'datepicker' %>
       </div>
     <% end %>

@@ -4,7 +4,7 @@
   <div class="form-inputs">
     <%= f.input :ended_at do %>
       <div class='input-prepend'>
-        <span class='add-on'><i class='icon-calendar'></i></span>
+        <span class='add-on'><%= icon 'calendar' %></span>
         <%= f.text_field :ended_at, value: d(f.object.ended_at), class: 'datepicker' %>
       </div>
     <% end %>
