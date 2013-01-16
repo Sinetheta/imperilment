@@ -14,7 +14,6 @@ gem 'show_for'
 
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
-gem 'simple-navigation-bootstrap'
 
 gem 'irbtools'
 

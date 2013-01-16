@@ -230,10 +230,6 @@ GEM
     show_for (0.2.5)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
-    simple-navigation (3.9.0)
-      activesupport (>= 2.3.2)
-    simple-navigation-bootstrap (0.0.4)
-      simple-navigation (>= 3.7.0)
     simple_form (2.0.4)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
@@ -325,7 +321,6 @@ DEPENDENCIES
   rspec-rails
   sass-rails
   show_for
-  simple-navigation-bootstrap
   simple_form
   simplecov
   simplecov-rcov

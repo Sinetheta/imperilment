@@ -1,4 +1,5 @@
 en:
+  home: Home
   day: Day
   week_starting: Week starting
   destroy: Delete
@@ -64,6 +65,9 @@ en:
       game:
         one: Game
         other: Games
+      category:
+        one: Category
+        other: Categories
       question:
         one: Question
         other: Questions
