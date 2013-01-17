@@ -1,0 +1,234 @@
+.nav-pills > .active > a > [class^="icon-"],
+.nav-pills > .active > a > [class*=" icon-"],
+.nav-list > .active > a > [class^="icon-"],
+.nav-list > .active > a > [class*=" icon-"],
+.navbar-inverse .nav > .active > a > [class^="icon-"],
+.navbar-inverse .nav > .active > a > [class*=" icon-"],
+.dropdown-menu > li > a:hover > [class^="icon-"],
+.dropdown-menu > li > a:hover > [class*=" icon-"],
+.dropdown-menu > .active > a > [class^="icon-"],
+.dropdown-menu > .active > a > [class*=" icon-"],
+.dropdown-submenu:hover > a > [class^="icon-"],
+.dropdown-submenu:hover > a > [class*=" icon-"] {
+  background-image: none;
+}
+
+/* padding for fixed nav */
+body{
+  padding-top: 68px;
+}
+
+footer {
+  p {
+    color: #aaa;
+  }
+}
+
+.home-area {
+  width: 80%;
+  height: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 14px;
+  background-color: #229;
+  position: relative;
+
+  h1, p {
+    @include fancy-font;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 30px;
+  }
+
+  h1 {
+    padding-top: 80px;
+    line-height: 70px;
+    font-size: 64px;
+  }
+}
+
+.question-container {
+  margin-bottom: 20px;
+
+  .area {
+    height: 200px;
+    margin-bottom: 20px;
+    border-radius: 14px;
+    background-color: #229;
+
+    & > div {
+      display: table;
+      vertical-align: middle;
+      height: 100%;
+      width: 100%;
+
+      p {
+        height: 100%;
+        padding: 0 25px;
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+      }
+    }
+
+    .category {
+      @include fancy-font;
+    }
+
+    .dollar-value {
+      @include fancy-font;
+      font-size: 64px;
+      line-height: 72px;
+      color: #ff8;
+    }
+
+  }
+
+  .area-answer {
+    height: 420px;
+    border-radius: 14px;
+    float: right;
+    background-color: #229;
+    position: relative;
+
+    & > div {
+      display: table;
+      vertical-align: middle;
+      height: 100%;
+      width: 100%;
+
+      p {
+        height: 100%;
+        padding: 0 45px;
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+      }
+    }
+  }
+
+  .answer {
+    @include fancy-font;
+  }
+}
+
+form {
+  input.datepicker {
+    margin-top: 0;
+  }
+}
+
+.badge {
+  @include border-radius(16px);
+  width: 14px;
+  height: 14px;
+  padding: 4px;
+  text-align: center;
+
+  &.badge-danger {
+    @include buttonBackground($btnDangerBackground, $btnDangerBackgroundHighlight);
+    background-color: #a90329;
+    border: 1px solid;
+    border-color: #bd362f #bd362f #802420;
+  }
+}
+
+.table {
+  tbody td.score, thead th.score {
+    width: 100px;
+    text-align: right;
+
+    i {
+      float: left;
+    }
+  }
+
+  tbody td.badge-column, thead th.badge-column {
+    width: 3px;
+    border: none;
+  }
+
+  tbody > tr {
+    & > td.finishes > span {
+      margin-right: 16px;
+    }
+
+    &.gold > td {
+      background-color: $goldBackground;
+    }
+
+    &.silver > td {
+      background-color: $silverBackground;
+    }
+
+    &.bronze > td {
+      background-color: $bronzeBackground;
+    }
+  }
+}
+
+table.breakdown {
+  border: 1px solid $grayLight;
+  border-collapse: separate;
+  background-color: $white;
+  @include border-radius(4px);
+
+  thead tr {
+    th {
+      @include buttonBackground($grayLighter, $grayLight);
+      border-left: 1px solid $grayLight;
+      border-bottom: 1px solid $grayLight;
+      padding: 2px;
+      text-align: center;
+
+      &:first-child {
+        @include border-top-left-radius(2px);
+        border-left: none;
+      }
+
+      &:last-child {
+        @include border-top-right-radius(2px);
+      }
+    }
+  }
+
+  tbody tr {
+    td {
+      border-left: 1px solid $grayLight;
+      padding: 2px;
+      width: 16px;
+      line-height: 12px;
+      text-align: center;
+
+      &:first-child {
+        border-left: none;
+      }
+
+      & > i.icon-ok {
+        color: $green;
+      }
+
+      & > i.icon-remove {
+        color: $red;
+      }
+
+      & > i.icon-minus {
+        color: $grayLight;
+      }
+    }
+  }
+}
+
+i {
+  &.gold {
+    color: $goldBackground;
+  }
+
+  &.silver {
+    color: $silverBackground;
+  }
+
+  &.bronze {
+    color: $bronzeBackground;
+  }
+}

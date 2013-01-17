@@ -1,0 +1,59 @@
+/* Landscape tablet and down */
+@media (max-width: 980px){
+  body{
+    padding-top: 0;
+  }
+}
+
+/* Landscape phones and down */
+@media (max-width: 480px) {
+  .answer-date {
+    font-size: 24px;
+    line-height: 26px;
+  }
+
+  .question-container {
+    margin-bottom: 20px;
+
+    .area {
+      height: 100px;
+      margin-bottom: 10px;
+
+      .category {
+        font-size: 24px;
+        line-height: 24px;
+      }
+
+      .dollar-value {
+        font-size: 36px;
+      }
+    }
+
+    .area-answer {
+      width: 100%;
+      height: auto;
+      overflow: hidden;
+
+      & > div {
+        p {
+          padding: 48px 24px;
+        }
+      }
+
+      .answer {
+        font-size: 18px;
+        line-height: 22px;
+      }
+    }
+  }
+
+  form {
+    .form-actions {
+      padding: 8px;
+    }
+  }
+
+  .well {
+    padding: 8px;
+  }
+}
