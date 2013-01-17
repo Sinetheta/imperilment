@@ -16,7 +16,7 @@
     <tbody>
       <% @questions.each do |question| %>
         <tr class='<%= question.checked? ? (question.correct? ? 'success' : 'error') : '' %>'>
-          <td class='email'><%= question.user.email %></td>
+          <td class='email'><%= question.user.identifier %></td>
           <td><%= question.response %></td>
           <td class='hidden-phone'>
             <% if can? :check, question %>

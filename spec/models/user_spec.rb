@@ -62,6 +62,23 @@ describe User do
     end
   end
 
+  describe '.identifier' do
+    let(:user) { create :user, first_name: name, email: email }
+    let(:email) { 'alex.t@imperilment.com' }
+
+    subject { user.identifier }
+
+    context 'when the first_name is blank' do
+      let(:name) { nil }
+      it { should == email }
+    end
+
+    context 'when the first_name is not blank' do
+      let(:name) { 'Alex' }
+      it { should == name }
+    end
+  end
+
   describe '#with_overall_score' do
     let(:game) { stub_model Game }
     let!(:user) { create :user }
@@ -90,15 +107,27 @@ describe User do
   end
 
   describe '#find_for_open_id' do
-    let(:result) { User.find_for_open_id(AccessToken.new({ "email" => email })) }
+    let(:result) { User.find_for_open_id(AccessToken.new({ "email" => email, "first_name" => name })) }
+    let(:name) { 'Art' }
 
     context "when user exists" do
       subject { result }
 
-      let!(:user) { create :user }
+      let!(:user) { create :user, first_name: first_name }
       let(:email) { user.email }
+      let(:first_name) { 'Merv' }
 
-      subject { should == user }
+      context "when the user's first_name is blank" do
+        let(:first_name) { nil }
+        its(:first_name) { should == name }
+      end
+
+      context "when the user's first_name is not blank" do
+        subject { ->{result} }
+        it { should_not change(user, :first_name) }
+      end
+
+      it { should == user }
     end
 
     context "when user does not exist" do

@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
     :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name
 
   # Extra fields for leader board stuffs.
   attr_writer :overall_score, :first, :second, :third
@@ -27,6 +27,10 @@ class User < ActiveRecord::Base
     when 2
       self.third += 1
     end
+  end
+
+  def identifier
+    first_name.blank? ? email : first_name
   end
 
   def self.with_overall_score
@@ -60,10 +64,15 @@ class User < ActiveRecord::Base
 
   def self.find_for_open_id(access_token, signed_in_resource=nil)
     data = access_token.info
-    if user = User.where(:email => data["email"]).first
+    if user = User.where(email: data["email"]).first
+      # TODO: Once all current users have first_name, we can pull this out.
+      if user.first_name.blank?
+        user.first_name = data["first_name"]
+        user.save!
+      end
       user
     else
-      User.create!(:email => data["email"], :password => Devise.friendly_token[0,20])
+      User.create!(email: data["email"], first_name: data["first_name"], password: Devise.friendly_token[0,20])
     end
   end
 end
