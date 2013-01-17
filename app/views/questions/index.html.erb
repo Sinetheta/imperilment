@@ -9,16 +9,16 @@
       <tr>
         <th><%= Question.human_attribute_name("user") %></th>
         <th><%= Question.human_attribute_name("response") %></th>
-        <th></th>
+        <th class='hidden-phone'></th>
       </tr>
     </thead>
 
     <tbody>
       <% @questions.each do |question| %>
         <tr class='<%= question.checked? ? (question.correct? ? 'success' : 'error') : '' %>'>
-          <td><%= question.user.email %></td>
+          <td class='email'><%= question.user.email %></td>
           <td><%= question.response %></td>
-          <td>
+          <td class='hidden-phone'>
             <% if can? :check, question %>
               <span class='btn-group pull-right actions <%= question.checked? ? 'hide' : 'show' %>'>
                 <%= link_to [@game, @answer, question], class: 'btn btn-small btn-success', data: {correct: true} do %>

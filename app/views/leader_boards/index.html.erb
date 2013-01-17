@@ -15,7 +15,7 @@
     <tr>
       <th class='score'><%= t :overall_total %></th>
       <th><%= User.human_attribute_name(:email) %></th>
-      <th><%= t :finishes %></th>
+      <th class='hidden-phone'><%= t :finishes %></th>
     </tr>
   </thead>
   <tbody>
@@ -25,8 +25,8 @@
           <td class='score'>
             <%= "#{t :currency_symbol} #{user.overall_score}" %>
           </td>
-          <td><%= user.email %></td>
-          <td class='finishes'>
+          <td class='email'><%= user.email %></td>
+          <td class='finishes hidden-phone'>
             <i class='icon-trophy gold'></i>
             <span><%= user.first %></span>
             <i class='icon-trophy silver'></i>

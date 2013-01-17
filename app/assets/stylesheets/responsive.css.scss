@@ -56,4 +56,33 @@
   .well {
     padding: 8px;
   }
+
+  .table {
+    table-layout: fixed;
+    width: 100%;
+
+    thead th.score {
+      padding: 8px 0;
+    }
+
+    thead th, tbody td {
+      &.score {
+        width: 88px;
+      }
+
+      &.day {
+        width: 36px;
+      }
+
+      &.amount {
+        width: 48px;
+      }
+    }
+
+    td.email {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
 }
