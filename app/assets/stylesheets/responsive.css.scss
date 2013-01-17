@@ -65,7 +65,7 @@
       padding: 8px 0;
     }
 
-    thead th, tbody td {
+    thead > tr > th, tbody > tr > td {
       &.score {
         width: 88px;
       }
@@ -76,6 +76,10 @@
 
       &.amount {
         width: 48px;
+      }
+
+      &.finishes > span {
+        margin-right: 8px;
       }
     }
 

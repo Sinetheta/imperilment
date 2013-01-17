@@ -13,20 +13,20 @@
 <table class='table'>
   <thead>
     <tr>
-      <th class='score'><%= t :overall_total %></th>
+      <th class='score hidden-phone'><%= t :overall_total %></th>
       <th><%= User.human_attribute_name(:email) %></th>
-      <th class='hidden-phone'><%= t :finishes %></th>
+      <th><%= t :finishes %></th>
     </tr>
   </thead>
   <tbody>
     <% @users.each do |(_, users)| %>
       <% users.each do |user| %>
         <tr>
-          <td class='score'>
+          <td class='score hidden-phone'>
             <%= "#{t :currency_symbol} #{user.overall_score}" %>
           </td>
           <td class='email'><%= user.email %></td>
-          <td class='finishes hidden-phone'>
+          <td class='finishes'>
             <i class='icon-trophy gold'></i>
             <span><%= user.first %></span>
             <i class='icon-trophy silver'></i>
