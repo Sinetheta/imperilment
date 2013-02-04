@@ -13,7 +13,7 @@ describe Ability do
   end
 
   context 'when user is not an administrator' do
-    it { should be_able_to :read, Question }
+    it { should be_able_to :index, Question }
     it { should be_able_to :read, Game }
     it { should be_able_to :read, Answer }
 
@@ -29,6 +29,18 @@ describe Ability do
       end
 
       it { should_not be_able_to :check, Question }
+    end
+
+    context "when question's answer is closed" do
+      let(:question) { build_stubbed :question }
+      before(:each) { question.answer.stub(:closed?) { true } }
+      it { should be_able_to :show, question }
+    end
+
+    context "when question's answer is not closed" do
+      let(:question) { build_stubbed :question }
+      before(:each) { question.answer.stub(:closed?) { false } }
+      it { should_not be_able_to :show, question }
     end
   end
 end

@@ -10,7 +10,10 @@ class Ability
         can :final, Answer
         cannot :check, Question
       end
-      can :read, Question
+      can :index, Question
+      can :show, Question do |question|
+        question.answer.closed?
+      end
       can :read, Game
       can :read, Answer
     end
