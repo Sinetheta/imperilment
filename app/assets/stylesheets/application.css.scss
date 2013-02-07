@@ -15,6 +15,13 @@ $bronzeBackground: #e8a87a;
   font-style: normal;
 }
 
+@font-face {
+  font-family: imperilment;
+  src: font-url("imperilment.ttf") format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
 @mixin fancy-font {
   font-size: 28px;
   line-height: 36px;
