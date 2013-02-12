@@ -60,6 +60,8 @@ group :development, :test do
   gem 'simplecov', :require => false
   gem 'simplecov-rcov', :require => false
   gem 'sqlite3'
+
+  gem 'fuubar'
 end
 
 group :production do
