@@ -15,6 +15,12 @@ class Answer < ActiveRecord::Base
     }.order(:start_date).reverse_order.first
   end
 
+  def self.on(date)
+    self.where{ |a|
+      a.start_date == date
+    }.first
+  end
+
   def prev
     Answer.joins{game}.where{ |a|
       (a.updated_at < updated_at) &

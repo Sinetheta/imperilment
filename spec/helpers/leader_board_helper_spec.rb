@@ -36,7 +36,7 @@ describe LeaderBoardHelper do
       let!(:answer) { create :answer, game: game, start_date: date }
 
       context 'when there is no question' do
-        it { should == helper.icon('minus') }
+        it { should == helper.icon('asterisk') }
       end
 
       context 'when there is a question' do

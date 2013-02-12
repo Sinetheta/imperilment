@@ -11,6 +11,12 @@ describe Answer do
     end
   end
 
+  describe '.on' do
+    it 'should find the answer with the matching date' do
+      Answer.on(first.start_date).should == first
+    end
+  end
+
   describe '.prev' do
     context "when prevous record exists" do
       it 'should find the one before this one by start date' do

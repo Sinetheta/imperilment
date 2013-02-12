@@ -1,5 +1,22 @@
-<div style='float: right'>
-  <%= link_to 'Prev', [@answer.prev.game, @answer.prev], class: 'btn' if @answer.prev %>
-  <%= link_to 'Next', [@answer.next.game, @answer.next], class: 'btn' if @answer.next %>
+<div class='pull-right'>
+  <table class='breakdown'>
+    <thead>
+      <tr>
+        <% @game.date_range.count.times do %>
+          <th></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <% @game.date_range.each do |date| %>
+          <td>
+            <%= link_to [@game, Answer.on(date)] do %>
+              <%= breakdown_icon(@game, current_user, date) %>
+            <% end %>
+          </td>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
 </div>
-

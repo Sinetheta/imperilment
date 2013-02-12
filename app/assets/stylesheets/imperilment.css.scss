@@ -204,15 +204,19 @@ table.breakdown {
         border-left: none;
       }
 
-      & > i.icon-ok {
+      & i.icon-ok {
         color: $green;
       }
 
-      & > i.icon-remove {
+      & i.icon-remove {
         color: $red;
       }
 
-      & > i.icon-minus {
+      & i.icon-asterisk {
+        color: $orange;
+      }
+
+      & i.icon-minus {
         color: $grayLight;
       }
     }

@@ -17,7 +17,7 @@ module LeaderBoardHelper
     return '' if answer.nil?
 
     question = answer.question_for(user)
-    return icon 'minus' if question.nil?
+    return icon 'asterisk' if question.nil?
 
     case question.correct
     when true
