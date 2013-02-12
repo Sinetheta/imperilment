@@ -1,6 +1,16 @@
 require 'spec_helper'
 
 describe Question do
+  context 'when a question for an answer already exists' do
+    let(:answer) { build :answer }
+    let(:user) { build :user }
+
+    before(:each) { create :question, answer: answer, user: user }
+
+    let(:question) { build :question, answer: answer, user: user }
+    specify { question.should_not be_valid }
+  end
+
   describe '.checked?' do
     let(:question) { create :question }
     subject { question.checked? }

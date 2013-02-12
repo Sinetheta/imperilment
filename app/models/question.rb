@@ -5,6 +5,7 @@ class Question < ActiveRecord::Base
   attr_accessible :amount, :correct, :response
 
   validate :unchecked_response, :in_range?
+  validates :answer_id, uniqueness: { scope: :user_id }
 
   scope :unchecked, where(correct: nil)
   scope :checked, where{correct != nil}

@@ -35,6 +35,8 @@ en:
   update_model: Update %{model}
   previous_model: Previous %{model}
 
+  already_answered: "You've already provided a question!"
+
   respond:
     boom: Boom!
     zap: Zap!

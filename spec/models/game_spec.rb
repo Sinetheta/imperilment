@@ -15,7 +15,7 @@ describe Game do
 
     context "when there are results" do
       before do
-        2.times { create :question, answer: answer, user: user }
+        2.times { create :question, answer: create(:answer, game: game), user: user }
         Question.any_instance.stub(:value) { 200 }
       end
 
