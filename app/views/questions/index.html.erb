@@ -9,6 +9,7 @@
       <tr>
         <th><%= Question.human_attribute_name("user") %></th>
         <th><%= Question.human_attribute_name("response") %></th>
+        <th class='hidden=phone'><%= Question.human_attribute_name("amount") %></th>
         <th class='hidden-phone'></th>
       </tr>
     </thead>
@@ -18,6 +19,7 @@
         <tr class='<%= question.checked? ? (question.correct? ? 'success' : 'error') : '' %>'>
           <td class='email'><%= question.user.identifier %></td>
           <td><%= question.response %></td>
+          <td class='hidden-phone'><%= number_to_currency question.amount %></td>
           <td class='hidden-phone'>
             <% if can? :check, question %>
               <span class='btn-group pull-right actions <%= question.checked? ? 'hide' : 'show' %>'>
