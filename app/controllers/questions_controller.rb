@@ -6,7 +6,7 @@ class QuestionsController < ApplicationController
   respond_to :html, :json
 
   def index
-    unless current_user.has_role?(:admin)
+    if current_user && !current_user.has_role?(:admin)
       question = @answer.question_for(current_user)
       if question.nil? || !question.checked?
         @questions = @questions.none
