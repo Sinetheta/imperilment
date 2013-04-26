@@ -59,4 +59,20 @@ describe LeaderBoardHelper do
       end
     end
   end
+
+  describe '.breakdown_link' do
+    let(:game) { create :game }
+    let(:date) { Date.parse('1984-09-10') }
+
+    subject { helper.breakdown_link(game, date) }
+
+    context 'when there is no answer' do
+      it { should == 'javascript:;' }
+    end
+
+    context' when there is an answer' do
+      let!(:answer) { create :answer, game: game, start_date: date }
+      it { should == game_answer_path(game, answer) }
+    end
+  end
 end

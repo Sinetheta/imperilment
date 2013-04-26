@@ -42,7 +42,7 @@
                 <tbody>
                   <tr>
                     <% @game.date_range.each do |date| %>
-                      <td><%= breakdown_icon(@game, user, date) %></td>
+                      <td><%= link_to breakdown_icon(@game, user, date), breakdown_link(@game, date) %></td>
                     <% end %>
                   </tr>
                 </tbody>
