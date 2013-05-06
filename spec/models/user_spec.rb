@@ -107,24 +107,24 @@ describe User do
   end
 
   describe '#find_for_open_id' do
-    let(:result) { User.find_for_open_id(AccessToken.new({ "email" => email, "first_name" => name })) }
-    let(:name) { 'Art' }
+    let(:result) { User.find_for_open_id(AccessToken.new({ "email" => email, "last_name" => name })) }
+    let(:name) { 'Smith' }
 
     context "when user exists" do
       subject { result }
 
-      let!(:user) { create :user, first_name: first_name }
+      let!(:user) { create :user, last_name: last_name }
       let(:email) { user.email }
-      let(:first_name) { 'Merv' }
+      let(:last_name) { 'Smith' }
 
-      context "when the user's first_name is blank" do
-        let(:first_name) { nil }
-        its(:first_name) { should == name }
+      context "when the user's last_name is blank" do
+        let(:last_name) { nil }
+        its(:last_name) { should == name[0] }
       end
 
-      context "when the user's first_name is not blank" do
+      context "when the user's last_name is not blank" do
         subject { ->{result} }
-        it { should_not change(user, :first_name) }
+        it { should_not change(user, :last_name) }
       end
 
       it { should == user }
