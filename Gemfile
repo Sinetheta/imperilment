@@ -50,9 +50,6 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'pry-full'
-end
-
-group :development, :production do
   gem 'thin'
 end
 
@@ -70,4 +67,5 @@ end
 group :production do
   gem 'pg'
   gem 'exception_notification'
+  gem 'unicorn'
 end
