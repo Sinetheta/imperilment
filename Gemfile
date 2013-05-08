@@ -1,5 +1,7 @@
 source 'http://rubygems.org'
 
+ruby '2.0.0'
+
 gem 'rails', '~> 3.2.10'
 
 gem 'devise'
@@ -47,6 +49,7 @@ group :development do
 
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'pry-full'
 end
 
 group :development, :production do
