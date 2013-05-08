@@ -1,0 +1,22 @@
+<%
+  # http://mislav.uniqpath.com/rails/branching-the-database-along-with-your-code/
+  branch = `git symbolic-ref HEAD 2>/dev/null`.chomp.sub('refs/heads/', '')
+  suffix = `git config --bool branch.#{branch}.database`.chomp == 'true' ? "_#{branch}" : ""
+%>
+production:
+  adapter: sqlite3
+  database: db/production<%= suffix %>.sqlite3
+  pool: 5
+  timeout: 5000
+
+development:
+  adapter: sqlite3
+  database: db/development<%= suffix %>.sqlite3
+  pool: 5
+  timeout: 5000
+
+test:
+  adapter: sqlite3
+  database: ":memory:"
+  encoding: utf8
+  verbosity: quiet
