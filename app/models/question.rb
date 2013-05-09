@@ -7,6 +7,9 @@ class Question < ActiveRecord::Base
   validate :unchecked_response, :in_range?
   validates :answer_id, uniqueness: { scope: :user_id }
 
+  validates :amount, numericality: { greater_than_or_equal: 0 },
+    if: -> (x) { x.answer.amount.nil? }
+
   scope :unchecked, where(correct: nil)
   scope :checked, where{correct != nil}
 
@@ -42,6 +45,9 @@ class Question < ActiveRecord::Base
   def in_range?
     unless amount.nil? || amount.between?(0, answer.game.score(user))
       errors.add(:amount, "is not within the acceptable range. Nice try!")
+      false
+    else
+      true
     end
   end
 end

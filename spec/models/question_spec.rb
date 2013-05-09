@@ -1,6 +1,16 @@
 require 'spec_helper'
 
 describe Question do
+
+  context 'when a question and its answer have no value' do
+    let(:question) { build :question, amount: nil}
+    subject { question }
+    before(:each) do
+      question.answer.amount = nil
+    end
+    it { should_not be_valid }
+  end
+
   context 'when a question for an answer already exists' do
     let(:answer) { build :answer }
     let(:user) { build :user }
@@ -71,20 +81,38 @@ describe Question do
     end
   end
 
+  describe '.valid?' do
+    let(:game) { stub_model Game }
+    let(:answer) { stub_model Answer, game: game, amount: nil }
+    let(:question_amount) { nil }
+    let(:question) { build :question, answer: answer, amount: question_amount }
+
+    subject { question.valid? }
+    context 'when amounts are in range' do
+      before(:each) { question.stub(:in_range?) { true } }
+      context 'when question and answer amounts are nil' do
+        it { should be_false }
+      end
+      context 'when question amount is not nil' do
+        let(:question_amount) { 100 }
+        it { should be_true }
+      end
+    end
+  end
+
   describe '.in_range?' do
     let(:game) { stub_model Game }
-    let(:answer) { stub_model Answer }
+    let(:answer) { stub_model Answer, game: game }
     let(:question) { build :question, answer: answer, amount: nil }
 
+    subject { question.in_range? }
+
     context 'when the amount is nil' do
-      it 'should persist the question' do
-        question.save.should be_true
-      end
+      it { should be_true }
     end
 
     context 'when the amount is not nil' do
       before(:each) do
-        answer.stub(:game) { game }
         game.stub(:score) { 200 }
 
         question.amount = amount
@@ -93,17 +121,13 @@ describe Question do
       context 'and outside the range' do
         let(:amount) { -100 }
 
-        it 'should not persist the question' do
-          question.save.should be_false
-        end
+        it { should be_false }
       end
 
       context 'and within the range' do
         let(:amount) { 100 }
 
-        it 'should persist the question' do
-          question.save.should be_true
-        end
+        it { should be_true }
       end
     end
   end
