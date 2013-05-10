@@ -17,8 +17,6 @@ gem 'show_for'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 
-gem 'irbtools'
-
 group :test do
   gem 'mocha', '~> 0.12.0', require: false
 end
@@ -50,6 +48,10 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'pry-full'
+  gem 'hirb'
+  gem 'wirb'
+  gem 'meta_request'
+
   gem 'thin'
 end
 
