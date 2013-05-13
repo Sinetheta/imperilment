@@ -6,7 +6,8 @@ class Answer < ActiveRecord::Base
 
   attr_accessible :amount, :answer, :correct_question, :start_date, :category_id
 
-  validates :game, presence: true
+  validates :game_id, :category_id, :start_date, presence: true
+  validates :start_date, uniqueness: true
 
   def self.most_recent
     self.joins{game}.where{ |a|

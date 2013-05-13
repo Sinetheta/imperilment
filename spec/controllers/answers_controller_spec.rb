@@ -6,7 +6,13 @@ describe AnswersController do
   # Additional params sent with each request
   # Convenient for nested controllers.
   def default_params
-    {game_id: game.to_param}
+    {
+      game_id: game.to_param,
+      answer: {
+        category_id: 1,
+        start_date: answer.start_date + 1.day
+      }
+    }
   end
 
   let!(:answer) { create :answer }
@@ -99,7 +105,7 @@ describe AnswersController do
     describe "with valid params" do
       it "creates a new Answer" do
         expect {
-          post :create, default_params.merge(answer: {})
+          post :create, default_params
         }.to change(Answer, :count).by(1)
       end
 

@@ -56,6 +56,7 @@ group :development do
 end
 
 group :development, :test do
+  gem 'shoulda-matchers'
   gem 'rspec-rails'
   gem 'factory_girl_rails', :require => false
   gem 'rb-inotify', '~> 0.8.8'
