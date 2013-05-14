@@ -29,6 +29,8 @@ group :assets do
   gem 'font-awesome-sass-rails'
 
   gem 'uglifier'
+
+  gem 'datejs-rails'
 end
 
 group :development do
