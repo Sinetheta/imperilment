@@ -1,12 +1,8 @@
 # A sample Guardfile
 # More info at https://github.com/guard/guard#readme
 
-require 'capybara/poltergeist'
-
 guard 'bundler' do
   watch('Gemfile')
-  # Uncomment next line if Gemfile contain `gemspec' command
-  # watch(/^.+\.gemspec/)
 end
 
 guard 'livereload', :port => 50094 do
@@ -18,7 +14,7 @@ guard 'livereload', :port => 50094 do
   watch(%r{(app|vendor)/assets/\w+/(.+\.(css|js|html)).*})  { |m| "/assets/#{m[2]}" }
 end
 
-guard 'rspec', :cli => "--drb --drb-port 50091", :version => 2 do
+guard 'rspec', :cli => "--drb --drb-port 50091" do
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
   watch('spec/spec_helper.rb')  { "spec" }
@@ -39,12 +35,13 @@ guard 'rspec', :cli => "--drb --drb-port 50091", :version => 2 do
   watch(%r{^spec/acceptance/steps/(.+)_steps\.rb$})   { |m| Dir[File.join("**/#{m[1]}.feature")][0] || 'spec/acceptance' }
 end
 
+require 'capybara/poltergeist'
 guard :konacha, :driver => :poltergeist, port: 50093 do
-  watch(%r{^app/assets/javascripts/(.*)\.js(\.coffee)?$}) { |m| "#{m[1]}_spec.js" }
+  watch(%r{^app/assets/javascripts/(.*)\.js(\.coffee)?$}) { |m| "#{m[1]}_spec.js.coffee" }
   watch(%r{^spec/javascripts/.+_spec(\.js|\.js\.coffee)$})
 end
 
-guard 'spork', :cucumber_env => { 'RAILS_ENV' => 'test' }, :rspec_env => { 'RAILS_ENV' => 'test' }, :rspec_port => 50091 do
+guard 'spork', :rspec_env => { 'RAILS_ENV' => 'test' }, :rspec_port => 50091 do
   watch('config/application.rb')
   watch('config/environment.rb')
   watch('config/environments/test.rb')
@@ -52,6 +49,4 @@ guard 'spork', :cucumber_env => { 'RAILS_ENV' => 'test' }, :rspec_env => { 'RAIL
   watch('Gemfile')
   watch('Gemfile.lock')
   watch('spec/spec_helper.rb') { :rspec }
-  watch('test/test_helper.rb') { :test_unit }
-  watch(%r{features/support/}) { :cucumber }
 end
