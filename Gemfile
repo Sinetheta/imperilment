@@ -65,6 +65,8 @@ group :development, :test do
   gem 'sqlite3'
 
   gem 'fuubar'
+  gem 'konacha'
+  gem 'poltergeist'
 end
 
 group :production do
