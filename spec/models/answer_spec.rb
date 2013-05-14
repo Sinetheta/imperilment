@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'timecop'
 
 describe Answer do
   it { should validate_presence_of(:game_id) }
@@ -13,6 +14,34 @@ describe Answer do
   describe '#most_recent' do
     it 'should be the one with the latest start_date before today' do
       Answer.most_recent.should == second
+    end
+  end
+
+  describe '#next_free_date' do
+    let(:date) { Date.new(9999, 1, 4) }
+    subject { Answer.next_free_date }
+
+    context 'when there is atleast one previous answer' do
+      it 'should be equal to the day after the third answer' do
+        should == date
+      end
+    end
+
+    context 'when there are no previous answers' do
+      before do
+        Answer.destroy_all
+        Timecop.freeze
+      end
+      after do
+        Timecop.return
+      end
+      it { should == Date.today }
+    end
+  end
+
+  describe '#last_answer' do
+    it 'should return the last answer based on date' do
+      Answer.last_answer.should == third
     end
   end
 

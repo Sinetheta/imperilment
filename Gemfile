@@ -63,6 +63,7 @@ group :development, :test do
   gem 'simplecov', :require => false
   gem 'simplecov-rcov', :require => false
   gem 'sqlite3'
+  gem 'timecop'
 
   gem 'fuubar'
   gem 'konacha'

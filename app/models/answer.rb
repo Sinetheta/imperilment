@@ -22,6 +22,18 @@ class Answer < ActiveRecord::Base
     }.first
   end
 
+  def self.next_free_date
+    if last_answer
+      last_answer.start_date.next
+    else
+      Date.today
+    end
+  end
+
+  def self.last_answer
+    self.order(:start_date).last
+  end
+
   def prev
     Answer.joins{game}.where{ |a|
       (a.updated_at < updated_at) &
