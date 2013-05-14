@@ -1,6 +1,8 @@
 # A sample Guardfile
 # More info at https://github.com/guard/guard#readme
 
+require 'capybara/poltergeist'
+
 guard 'bundler' do
   watch('Gemfile')
   # Uncomment next line if Gemfile contain `gemspec' command
@@ -37,6 +39,10 @@ guard 'rspec', :cli => "--drb --drb-port 50091", :version => 2 do
   watch(%r{^spec/acceptance/steps/(.+)_steps\.rb$})   { |m| Dir[File.join("**/#{m[1]}.feature")][0] || 'spec/acceptance' }
 end
 
+guard :konacha, :driver => :poltergeist, port: 50093 do
+  watch(%r{^app/assets/javascripts/(.*)\.js(\.coffee)?$}) { |m| "#{m[1]}_spec.js" }
+  watch(%r{^spec/javascripts/.+_spec(\.js|\.js\.coffee)$})
+end
 
 guard 'spork', :cucumber_env => { 'RAILS_ENV' => 'test' }, :rspec_env => { 'RAILS_ENV' => 'test' }, :rspec_port => 50091 do
   watch('config/application.rb')

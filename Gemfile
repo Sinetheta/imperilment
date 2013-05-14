@@ -44,6 +44,7 @@ group :development do
   gem 'spork'
   gem 'guard-spork'
   gem 'guard-rspec'
+  gem 'guard-konacha'
 
   gem 'better_errors'
   gem 'binding_of_caller'
