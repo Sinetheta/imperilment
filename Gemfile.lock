@@ -53,6 +53,8 @@ GEM
       xpath (~> 2.0)
     childprocess (0.3.8)
       ffi (~> 1.0, >= 1.0.11)
+    ci_reporter (1.8.4)
+      builder (>= 2.1.2)
     coderay (1.0.8)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -367,6 +369,7 @@ DEPENDENCIES
   bootstrap-datepicker-rails
   bootstrap-sass
   cancan
+  ci_reporter
   coffee-rails
   devise
   exception_notification
