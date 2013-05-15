@@ -17,6 +17,6 @@ development:
 
 test:
   adapter: sqlite3
-  database: ":memory:"
-  encoding: utf8
-  verbosity: quiet
+  database: db/test<%= suffix %>.sqlite3
+  pool: 5
+  timeout: 5000

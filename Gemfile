@@ -41,10 +41,9 @@ group :development do
 
   gem 'guard-bundler'
   gem 'guard-livereload'
-  gem 'spork'
-  gem 'guard-spork'
   gem 'guard-rspec'
   gem 'guard-konacha'
+  gem 'guard-spring', github: 'mknapik/guard-spring'
 
   gem 'better_errors'
   gem 'binding_of_caller'
