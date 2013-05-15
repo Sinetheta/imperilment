@@ -17,9 +17,6 @@ gem 'show_for'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 
-# This adds rake tasks, so is required in all environments
-gem 'ci_reporter'
-
 group :test do
   gem 'mocha', '~> 0.12.0', require: false
 end
@@ -67,6 +64,7 @@ group :development, :test do
   gem 'simplecov', :require => false
   gem 'simplecov-rcov', :require => false
   gem 'sqlite3'
+  gem 'ci_reporter'
 
   gem 'fuubar'
   gem 'konacha'
