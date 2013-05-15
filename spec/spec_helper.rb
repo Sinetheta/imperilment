@@ -27,6 +27,7 @@ Spork.prefork do
 
   require File.expand_path("../../config/environment", __FILE__)
   require 'rspec/rails'
+  require 'shoulda/matchers/integrations/rspec'
   require 'rspec/autorun'
   require 'factory_girl'
 
