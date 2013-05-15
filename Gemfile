@@ -17,10 +17,6 @@ gem 'show_for'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 
-group :test do
-  gem 'mocha', '~> 0.12.0', require: false
-end
-
 group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'
