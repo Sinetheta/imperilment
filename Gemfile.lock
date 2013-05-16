@@ -47,7 +47,6 @@ GEM
       multi_json (~> 1.0)
     addressable (2.3.4)
     arel (3.0.2)
-    awesome_print (1.1.0)
     bcrypt-ruby (3.0.1)
     better_errors (0.8.0)
       coderay (>= 1.0.0)
@@ -94,7 +93,6 @@ GEM
       railties (~> 3.1)
       warden (~> 1.2.1)
     diff-lcs (1.2.4)
-    diffy (2.1.4)
     ejs (1.1.1)
     em-websocket (0.5.0)
       eventmachine (>= 0.12.9)
@@ -121,10 +119,6 @@ GEM
       rspec (~> 2.0)
       rspec-instafail (~> 0.2.0)
       ruby-progressbar (~> 1.0.0)
-    grit (2.5.0)
-      diff-lcs (~> 1.1)
-      mime-types (~> 1.15)
-      posix-spawn (~> 0.3.6)
     guard (1.7.0)
       formatador (>= 0.2.4)
       listen (>= 0.6.0)
@@ -200,38 +194,15 @@ GEM
     polyamorous (0.5.0)
       activerecord (~> 3.0)
     polyglot (0.3.3)
-    posix-spawn (0.3.6)
     pry-debugger (0.2.2)
       debugger (~> 1.3)
       pry (~> 0.9.10)
-    pry-developer_tools (0.1.1)
-      pry (>= 0.9.8.pre, < 0.11)
     pry-doc (0.4.5)
       pry (>= 0.9)
       yard (>= 0.8)
     pry-docmore (0.1.1)
       pry
       pry-doc
-    pry-editline (1.1.2)
-    pry-full (2.1.0)
-      awesome_print
-      pry-developer_tools
-      pry-editline
-      pry-git
-      pry-highlight
-      pry-plus
-      pry-pretty-numeric
-      pry-syntax-hacks
-      pry-theme
-    pry-git (0.2.3)
-      diffy
-      grit
-      pry (>= 0.9.8)
-    pry-highlight (0.0.1)
-      coderay
-      json
-      nokogiri
-      pry
     pry-plus (1.0.0)
       bond
       jist
@@ -240,18 +211,12 @@ GEM
       pry-docmore
       pry-rescue
       pry-stack_explorer
-    pry-pretty-numeric (0.1.1)
-      pry
     pry-rescue (1.1.1)
       interception (>= 0.3)
       pry
     pry-stack_explorer (0.4.9)
       binding_of_caller (>= 0.7)
       pry (~> 0.9.11)
-    pry-syntax-hacks (0.0.6)
-      pry (>= 0.9.8)
-    pry-theme (0.2.0)
-      json
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
     rack (1.4.5)
@@ -283,7 +248,7 @@ GEM
       thor (>= 0.14.6, < 2.0)
     raindrops (0.11.0)
     rake (10.0.4)
-    rb-inotify (0.8.8)
+    rb-inotify (0.9.0)
       ffi (>= 0.5.0)
     rdoc (3.12.2)
       json (~> 1.4)
@@ -397,10 +362,10 @@ DEPENDENCIES
   pg
   poltergeist
   pry!
-  pry-full
+  pry-plus
   quiet_assets
   rails (~> 3.2.10)
-  rb-inotify (~> 0.8.8)
+  rb-inotify (~> 0.9)
   rolify
   rspec-rails
   sass-rails

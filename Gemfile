@@ -45,7 +45,7 @@ group :development do
   gem 'binding_of_caller'
 
   gem 'pry', github: 'pry/pry'
-  gem 'pry-full'
+  gem 'pry-plus'
 
   gem 'hirb'
   gem 'wirb'
@@ -58,7 +58,7 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'rspec-rails'
   gem 'factory_girl_rails', :require => false
-  gem 'rb-inotify', '~> 0.8.8'
+  gem 'rb-inotify', '~> 0.9'
   gem 'simplecov', :require => false
   gem 'simplecov-rcov', :require => false
   gem 'sqlite3'
