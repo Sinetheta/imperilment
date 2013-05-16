@@ -1,7 +1,7 @@
 class LeaderBoardsController < ApplicationController
   before_filter :load_most_recent_game, except: [:index]
 
-  load_and_authorize_resource :game
+  authorize_resource :game
 
   respond_to :html
 
@@ -18,7 +18,9 @@ class LeaderBoardsController < ApplicationController
 
   protected
   def load_most_recent_game
-    unless params[:game_id]
+    if params[:game_id]
+      @game = Game.find(params[:game_id])
+    else
       @game = Game.order(:created_at).reverse_order.first
     end
   end

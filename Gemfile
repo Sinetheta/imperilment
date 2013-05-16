@@ -47,7 +47,10 @@ group :development do
 
   gem 'better_errors'
   gem 'binding_of_caller'
+
+  gem 'pry', github: 'pry/pry'
   gem 'pry-full'
+
   gem 'hirb'
   gem 'wirb'
   gem 'meta_request'

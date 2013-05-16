@@ -34,5 +34,16 @@ describe LeaderBoardsController do
     it 'should assign the users to @users' do
       assigns(:users).should == {0 => [user]}
     end
+
+    context 'when a game_id is passed' do
+      let(:other_game) { create :game }
+      before(:each) do
+        User.stub(:grouped_and_sorted_by_score).with(other_game)
+        get :show, game_id: other_game
+      end
+      it 'should assign the game to @game' do
+        assigns(:game).should == other_game
+      end
+    end
   end
 end
