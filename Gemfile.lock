@@ -95,6 +95,7 @@ GEM
       warden (~> 1.2.1)
     diff-lcs (1.2.4)
     diffy (2.1.4)
+    ejs (1.1.1)
     em-websocket (0.5.0)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.5.3)
@@ -165,6 +166,7 @@ GEM
       colorize
       railties (>= 3.1, < 5)
       sprockets
+    konacha-chai-matchers (0.1.2)
     launchy (2.3.0)
       addressable (~> 2.3)
     letter_opener (1.1.1)
@@ -375,6 +377,7 @@ DEPENDENCIES
   cancan
   coffee-rails
   devise
+  ejs
   exception_notification
   factory_girl_rails
   font-awesome-sass-rails
@@ -387,6 +390,7 @@ DEPENDENCIES
   hirb
   jquery-rails
   konacha
+  konacha-chai-matchers
   letter_opener
   meta_request
   omniauth-openid

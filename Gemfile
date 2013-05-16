@@ -66,6 +66,8 @@ group :development, :test do
 
   gem 'fuubar'
   gem 'konacha'
+  gem 'konacha-chai-matchers'
+  gem 'ejs'
   gem 'poltergeist'
 end
 
