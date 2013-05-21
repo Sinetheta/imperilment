@@ -9,13 +9,14 @@
     <%= f.input :amount do %>
       <div class='input-prepend'>
         <span class='add-on'><%= t(:currency_symbol) %></span>
-        <%= f.text_field :amount %>
+        <%= f.text_field :amount, data: { new: f.object.new_record? }%>
       </div>
     <% end %>
     <%= f.input :start_date do %>
       <div class='input-prepend'>
         <span class='add-on'><%= icon 'calendar' %></span>
-        <%= f.text_field :start_date, value: Answer.next_free_date, class: 'datepicker' %>
+        <% start_date = f.object.new_record? ? Answer.next_free_date : d(f.object.start_date) %>
+        <%= f.text_field :start_date, value: start_date, class: 'datepicker' %>
       </div>
     <% end %>
   </div>

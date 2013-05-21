@@ -87,3 +87,19 @@ describe 'answer', ->
         update_answer_amount($datepicker(), $amount())
 
         $amount().val().should.equal('')
+
+  describe '.init_datepicker', ->
+    beforeEach ->
+      set_up_datepicker()
+
+    context 'when editing an answer', ->
+      it 'should not change the value', ->
+        init_datepicker($datepicker(), $amount())
+        $amount().val().should.equal('')
+
+
+    context 'when creating an answer', ->
+      it 'should fill the value', ->
+        $amount().data('new', 'true')
+        init_datepicker($datepicker(), $amount())
+        $amount().val().should.equal('200')

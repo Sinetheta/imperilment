@@ -22,7 +22,8 @@
       'format': 'yyyy-mm-dd',
       'autoclose': true,
       'update'
-    update_answer_amount $datepicker, $amount
+    if $amount.data('new')
+      update_answer_amount $datepicker, $amount
 
 $ ->
   $datepicker = $('#answer_start_date')
