@@ -25,6 +25,31 @@ describe Game do
         it "is the sum of all values" do
           game.score(user).should == 400
         end
+
+        context "when the answer is nil (final imperilment)" do
+          before do
+            create :question, answer: create(:answer, game: game, amount:nil), user: user
+          end
+
+          context "when the game is not locked" do
+            before do
+              game.locked = false
+            end
+            it "should be the sum of all values, excluding the wager" do
+              game.score(user).should == 400
+            end
+          end
+
+          context "when the game is locked" do
+            before do
+              game.locked = true
+            end
+
+            it "should be the sum of all values" do
+              game.score(user).should == 600
+            end
+          end
+        end
       end
 
       context "when answer does not have a correct_question" do

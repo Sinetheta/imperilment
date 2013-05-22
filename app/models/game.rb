@@ -7,7 +7,11 @@ class Game < ActiveRecord::Base
 
   def score(user)
     Question.joins(:answer => :game).where(user_id: user.id, 'games.id' => self.id).sum do |question|
-      question.correct_question.blank? ? 0 : question.value
+      if question.answer.amount.nil? && !self.locked?
+        0
+      else
+        question.correct_question.blank? ? 0 : question.value
+      end
     end
   end
 
