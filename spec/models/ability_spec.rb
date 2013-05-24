@@ -10,6 +10,13 @@ describe Ability do
   context 'when user has admin privileges' do
     before(:each) { user.stub(:has_role?).with(:admin) { true } }
     it { should be_able_to :manage, :all }
+
+    context 'when user has not responded to an answer' do
+      let(:answer) { build_stubbed :answer }
+      before(:each) { answer.stub(:question_for) { nil } }
+
+      it { should_not be_able_to :check, answer }
+    end
   end
 
   context 'when user is not an administrator' do
@@ -28,7 +35,7 @@ describe Ability do
         it { should_not be_able_to :manage, question }
       end
 
-      it { should_not be_able_to :check, Question }
+      it { should_not be_able_to :check, Answer }
     end
 
     context "when question's answer is closed" do

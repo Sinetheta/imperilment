@@ -30,7 +30,7 @@
   <% end %>
 
   <% if @answer.closed? %>
-    <% if can?(:check, :question) %>
+    <% if can?(:check, @answer) %>
       <%= link_to t(:check_model, model: Question.model_name.human(count: :many)), [@game, @answer, Question], class: 'btn btn-info' %>
     <% elsif !question.is_a?(Symbol) && question.checked? %>
       <%= link_to t(:see_model, model: Question.model_name.human(count: :many)), [@game, @answer, Question], class: 'btn btn-info' %>
