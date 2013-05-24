@@ -25,7 +25,7 @@
             <td class='hidden-phone'><%= number_to_currency question.amount %></td>
           <% end %>
           <td class='hidden-phone'>
-            <% if can? :check, question %>
+            <% if can? :check, question.answer %>
               <span class='btn-group pull-right actions <%= question.checked? ? 'hide' : 'show' %>'>
                 <%= link_to [@game, @answer, question], class: 'btn btn-small btn-success', data: {correct: true} do %>
                   <%= icon 'thumbs-up' %>
