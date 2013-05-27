@@ -15,8 +15,6 @@ gem 'simple_form'
 gem 'show_for'
 
 gem 'will_paginate'
-gem 'will_paginate-bootstrap'
-
 gem 'select2-rails'
 
 group :assets do

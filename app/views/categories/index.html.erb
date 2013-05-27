@@ -30,6 +30,6 @@
   </tbody>
 </table>
 
-<%= will_paginate @categories %>
+<%= paginate @categories %>
 
 <%= link_to t(:new_model, model: Category.model_name.human), new_category_path, class: 'btn' %>

@@ -19,4 +19,11 @@ describe ApplicationHelper do
       it { should == '1964-03-30' }
     end
   end
+
+  describe '.paginate' do
+    it 'should call will_paginate' do
+      helper.should_receive(:will_paginate)
+      helper.paginate(OpenStruct.new)
+    end
+  end
 end

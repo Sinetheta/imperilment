@@ -328,8 +328,6 @@ GEM
     warden (1.2.1)
       rack (>= 1.0)
     will_paginate (3.0.4)
-    will_paginate-bootstrap (0.2.2)
-      will_paginate (>= 3.0.3)
     wirb (1.0.1)
       paint
     xpath (2.0.0)
@@ -388,5 +386,4 @@ DEPENDENCIES
   uglifier
   unicorn
   will_paginate
-  will_paginate-bootstrap
   wirb
