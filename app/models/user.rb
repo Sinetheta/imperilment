@@ -8,7 +8,6 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name
-
   # Extra fields for leader board stuffs.
   attr_writer :overall_score, :first, :second, :third
 

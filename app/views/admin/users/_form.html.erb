@@ -1,0 +1,14 @@
+<%= simple_form_for [:admin, @user] do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :email, input_html: {class: 'input-block-level' } %>
+    <%= f.input :first_name, input_html: {class: 'input-block-level'} %>
+    <%= f.input :last_name, input_html: {class: 'input-block-level'} %>
+
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: 'btn btn-primary' %>
+  </div>
+<% end %>

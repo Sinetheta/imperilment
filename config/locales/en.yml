@@ -70,6 +70,9 @@ en:
       category:
         one: Category
         other: Categories
+      user:
+        one: User
+        other: Users
       question:
         one: Question
         other: Questions

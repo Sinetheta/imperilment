@@ -46,8 +46,6 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
 
-  gem 'pry', github: 'pry/pry'
-  gem 'pry-plus'
 
   gem 'hirb'
   gem 'wirb'
@@ -65,6 +63,9 @@ group :development, :test do
   gem 'simplecov-rcov', :require => false
   gem 'sqlite3'
   gem 'timecop'
+
+  gem 'pry', github: 'pry/pry'
+  gem 'pry-plus'
 
   gem 'fuubar'
   gem 'konacha'

@@ -1,0 +1,42 @@
+class Admin::UsersController < ApplicationController
+  before_filter :authenticate_user!
+  load_and_authorize_resource
+
+  respond_to :html, :json
+
+  def index
+    @users = User.joins{roles.outer}.order{roles.id.desc}.group{users.id}
+    respond_with :admin, @users
+  end
+
+  def edit
+    respond_with :admin, @user
+  end
+
+  def grant_admin
+    if params[:admin] == 'true'
+      @user.add_role :admin
+    elsif params[:admin] == 'false'
+      @user.remove_role 'admin'
+    end
+    respond_with :admin, @user do |format|
+      format.js { head :ok }
+    end
+  end
+
+  def show
+    respond_with :admin, @user
+  end
+
+  def update
+    if @user.update_attributes(params[:user])
+      flash.notice = t :model_update_successful, model: User.model_name.human
+    end
+    respond_with :admin, @user
+  end
+
+  def destroy
+    @user.destroy
+    respond_with @user, location: admin_users_path
+  end
+end

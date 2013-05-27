@@ -1,0 +1,10 @@
+<span class='pull-right admin-grant <%= (user.has_role? :admin) ? 'hide' : 'show' %>'>
+  <%= link_to 'Make Admin',  grant_admin_user_path(user, admin: true),
+    method: :put, remote: true,
+    class: "btn btn-small btn-success" %>
+</span>
+<span class='pull-right admin-revoke <%= (user.has_role? :admin) ? 'show' : 'hide' %>'>
+  <%= link_to 'Revoke Admin',  grant_admin_user_path(user, admin: false),
+    method: :put, remote: true,
+    class: 'btn btn-small btn-warning' %>
+</span>

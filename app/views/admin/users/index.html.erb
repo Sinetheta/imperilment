@@ -1,0 +1,37 @@
+<h1> <%= User.model_name.human(count: :many) %> </h1>
+<% unless @users.empty? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th><%= User.human_attribute_name ( "email" ) %></th>
+        <th><%= User.human_attribute_name ( "full_name" ) %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+          <tr class='<%= 'success' if user.has_role? :admin %>'>
+          <td><%= user.email %></td>
+          <td><%= user.full_name %></td>
+          <td>
+            <% unless user == current_user %>
+              <%= render 'add_role', user: user %>
+            <% end %>
+          </td>
+          <td class='hidden-phone'>
+            <div class='btn-group'>
+              <%= link_to [:edit, :admin, user], class: 'btn btn-small' do %>
+                <%= icon 'pencil' %>
+              <% end %>
+              <%= link_to [:admin, user], class: 'btn btn-small' do %>
+                <%= icon 'eye-open' %>
+              <% end %>
+              <%= link_to [:admin, user], method: :delete, class: 'btn btn-danger btn-small', data: {confirm: t(:confirm_destroy)} do %>
+                <%= icon 'trash' %>
+              <% end %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
