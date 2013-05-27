@@ -5,6 +5,8 @@ class Game < ActiveRecord::Base
 
   scope :locked, -> { where(locked: true) }
 
+  self.per_page = 10
+
   def score(user)
     Question.joins(:answer => :game).where(user_id: user.id, 'games.id' => self.id).sum do |question|
       if question.answer.amount.nil? && !self.locked?

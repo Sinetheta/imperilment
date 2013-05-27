@@ -48,4 +48,6 @@
   </tbody>
 </table>
 
+<%= will_paginate @games %>
+
 <%= link_to t(:new_model, model: Game.model_name.human), new_game_path, class: 'btn' %>
