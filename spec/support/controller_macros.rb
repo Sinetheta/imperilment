@@ -2,10 +2,9 @@ module ControllerMacros
   def login
     before(:each) do
       unless user.nil?
-        mapping_symbol = user.has_role?(:admin) ? :admin : :user
-        @request.env["devise.mapping"] = Devise.mappings[mapping_symbol]
+        @request.env["devise.mapping"] = Devise.mappings[:user]
         @controller.stub(:current_user).and_return(user)
-        sign_in mapping_symbol, user
+        sign_in user
       end
     end
   end
