@@ -6,7 +6,7 @@ gem 'rails', '~> 4.0.0'
 
 gem 'devise'
 gem 'omniauth-openid'
-gem 'rolify'
+gem 'rolify', '~> 3.3.0.rc4'
 gem 'cancan'
 
 gem 'squeel'
