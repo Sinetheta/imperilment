@@ -31,6 +31,9 @@ gem 'uglifier'
 
 gem 'datejs-rails'
 
+# Heroku Rails 4 Compatibility
+gem 'rails_12factor'
+
 # Allow attr_accessible for now
 gem 'protected_attributes'
 
