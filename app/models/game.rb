@@ -8,7 +8,7 @@ class Game < ActiveRecord::Base
   self.per_page = 10
 
   def score(user)
-    Question.joins(:answer => :game).where(user_id: user.id, 'games.id' => self.id).sum do |question|
+    Question.joins(:answer => :game).where(user_id: user.id, 'games.id' => self.id).to_a.sum do |question|
       if question.answer.amount.nil? && !self.locked?
         0
       else

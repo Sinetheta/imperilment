@@ -10,10 +10,10 @@ class Question < ActiveRecord::Base
   validates :amount, numericality: { greater_than_or_equal: 0 },
     if: -> (x) { x.answer.amount.nil? }
 
-  scope :unchecked, where(correct: nil)
-  scope :checked, where{correct != nil}
+  scope :unchecked, -> { where(correct: nil) }
+  scope :checked, -> { where{correct != nil} }
 
-  scope :none, where('1 = 0')
+  scope :none, -> { where('1 = 0') }
 
   delegate :correct_question, to: :answer
 
