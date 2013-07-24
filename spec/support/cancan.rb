@@ -12,7 +12,7 @@ RSpec::Matchers.define :have_ability do |ability_hash, options = {}|
     ability_hash.each do |action, true_or_false|
       @ability_result[action] = ability.can?(action, target)
     end
-    !ability_hash.diff(@ability_result).any?
+    ability_hash == @ability_result
   end
 
   failure_message_for_should do |user|
