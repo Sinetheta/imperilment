@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 ruby '2.0.0'
 
-gem 'rails', '~> 3.2.10'
+gem 'rails', '~> 4.0.0'
 
 gem 'devise'
 gem 'omniauth-openid'
@@ -17,21 +17,22 @@ gem 'show_for'
 gem 'will_paginate'
 gem 'select2-rails'
 
-group :assets do
-  gem 'sass-rails'
-  gem 'coffee-rails'
+gem 'sass-rails'
+gem 'coffee-rails'
 
-  gem 'jquery-rails'
+gem 'jquery-rails'
 
-  gem 'bootstrap-sass'
-  gem 'bootstrap-datepicker-rails'
+gem 'bootstrap-sass'
+gem 'bootstrap-datepicker-rails'
 
-  gem 'font-awesome-sass-rails'
+gem 'font-awesome-sass-rails'
 
-  gem 'uglifier'
+gem 'uglifier'
 
-  gem 'datejs-rails'
-end
+gem 'datejs-rails'
+
+# Allow attr_accessible for now
+gem 'protected_attributes'
 
 group :development do
   gem 'quiet_assets'

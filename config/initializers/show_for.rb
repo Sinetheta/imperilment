@@ -4,10 +4,8 @@ ShowFor.setup do |config|
   config.wrapper_tag = nil
 
   config.label_tag = :dt
-  config.label_class = nil
 
   config.content_tag = :dd
-  config.content_class = nil
 
   config.separator = nil
 
