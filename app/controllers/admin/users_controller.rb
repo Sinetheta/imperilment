@@ -29,7 +29,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def update
-    if @user.update_attributes(params[:user])
+    if @user.update_attributes(user_params)
       flash.notice = t :model_update_successful, model: User.model_name.human
     end
     respond_with :admin, @user
@@ -38,5 +38,10 @@ class Admin::UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_with @user, location: admin_users_path
+  end
+
+  private
+  def user_params
+    params.require(:user).permit :email, :password, :password_confirmation, :remember_me, :first_name, :last_name
   end
 end

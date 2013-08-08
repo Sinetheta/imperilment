@@ -4,6 +4,7 @@ describe CategoriesController do
   authorize
 
   let!(:category) { create :category }
+  let(:default_params) { { category: { foo: 'bar' } } }
 
   describe "GET index" do
     it "assigns all categories as @categories" do
@@ -37,18 +38,18 @@ describe CategoriesController do
     describe "with valid params" do
       it "creates a new Category" do
         expect {
-          post :create, category: {}
+          post :create, default_params
         }.to change(Category, :count).by(1)
       end
 
       it "assigns a newly created category as @category" do
-        post :create
+        post :create, default_params
         assigns(:category).should be_a(Category)
         assigns(:category).should be_persisted
       end
 
       it "redirects to the created category" do
-        post :create
+        post :create, default_params
         response.should redirect_to(Category.last)
       end
     end
@@ -58,7 +59,7 @@ describe CategoriesController do
         # Trigger the behavior that occurs when invalid params are submitted
         Category.any_instance.stub(:save).and_return(false)
         Category.any_instance.stub(:errors).and_return(double(:errors, empty?: false))
-        post :create
+        post :create, default_params
         assigns(:category).should be_a_new(Category)
       end
 
@@ -66,7 +67,7 @@ describe CategoriesController do
         # Trigger the behavior that occurs when invalid params are submitted
         Category.any_instance.stub(:save).and_return(false)
         Category.any_instance.stub(:errors).and_return(double(:errors, empty?: false))
-        post :create
+        post :create, default_params
         response.should render_template("new")
       end
     end
@@ -80,12 +81,12 @@ describe CategoriesController do
       end
 
       it "assigns the requested category as @category" do
-        put :update, id: category.to_param
+        put :update, id: category.to_param, category: { "name" => "test" }
         assigns(:category).should eq(category)
       end
 
       it "redirects to the category" do
-        put :update, id: category.to_param
+        put :update, id: category.to_param, category: { "name" => "test" }
         response.should redirect_to(category)
       end
     end

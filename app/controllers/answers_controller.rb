@@ -47,6 +47,7 @@ class AnswersController < ApplicationController
   end
 
   def create
+    @answer.game_id = params.require(:game_id)
     if @answer.save
       flash.notice = t :model_create_successful, model: Answer.model_name.human
     end
@@ -54,7 +55,7 @@ class AnswersController < ApplicationController
   end
 
   def update
-    if @answer.update_attributes(params[:answer])
+    if @answer.update_attributes(answer_params)
       flash.notice = t :model_update_successful, model: Answer.model_name.human
     end
     respond_with @game, @answer
@@ -63,5 +64,10 @@ class AnswersController < ApplicationController
   def destroy
     @answer.destroy
     respond_with @answer, location: @game
+  end
+
+  private
+  def answer_params
+    params.require(:answer).permit :amount, :answer, :correct_question, :start_date, :category_id
   end
 end

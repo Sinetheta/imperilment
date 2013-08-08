@@ -2,8 +2,6 @@ class Question < ActiveRecord::Base
   belongs_to :user
   belongs_to :answer
 
-  attr_accessible :amount, :correct, :response
-
   validate :unchecked_response, :in_range?
   validates :answer_id, uniqueness: { scope: :user_id }
 

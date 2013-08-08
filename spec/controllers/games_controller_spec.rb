@@ -4,6 +4,7 @@ describe GamesController do
   authorize
 
   let!(:game) { create :game }
+  let(:default_params) { { game: {foo: 'bar'} } }
 
   describe "GET index" do
     it "assigns all games as @games" do
@@ -37,18 +38,18 @@ describe GamesController do
     describe "with valid params" do
       it "creates a new Game" do
         expect {
-          post :create, game: {}
+          post :create, default_params
         }.to change(Game, :count).by(1)
       end
 
       it "assigns a newly created game as @game" do
-        post :create
+        post :create, default_params
         assigns(:game).should be_a(Game)
         assigns(:game).should be_persisted
       end
 
       it "redirects to the created game" do
-        post :create
+        post :create, default_params
         response.should redirect_to(Game.last)
       end
     end
@@ -58,7 +59,7 @@ describe GamesController do
         # Trigger the behavior that occurs when invalid params are submitted
         Game.any_instance.stub(:save).and_return(false)
         Game.any_instance.stub(:errors).and_return(double(:errors, empty?: false))
-        post :create
+        post :create, default_params
         assigns(:game).should be_a_new(Game)
       end
 
@@ -66,7 +67,7 @@ describe GamesController do
         # Trigger the behavior that occurs when invalid params are submitted
         Game.any_instance.stub(:save).and_return(false)
         Game.any_instance.stub(:errors).and_return(double(:errors, empty?: false))
-        post :create
+        post :create, default_params
         response.should render_template("new")
       end
     end
@@ -80,12 +81,12 @@ describe GamesController do
       end
 
       it "assigns the requested game as @game" do
-        put :update, id: game.to_param, game: {}
+        put :update, id: game.to_param, game: {"ended_at" => "2012-12-27 15:58:08"}
         assigns(:game).should eq(game)
       end
 
       it "redirects to the game" do
-        put :update, id: game.to_param, game: {}
+        put :update, id: game.to_param, game: {"ended_at" => "2012-12-27 15:58:08"}
         response.should redirect_to(game)
       end
     end

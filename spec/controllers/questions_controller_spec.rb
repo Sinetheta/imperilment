@@ -24,7 +24,7 @@ describe QuestionsController do
   # Additional params sent with each request
   # Convenient for nested controllers.
   def default_params
-    {game_id: question.answer.game, answer_id: question.answer}
+    {game_id: question.answer.game, answer_id: question.answer, question: { foo: 'bar' }}
   end
 
   let!(:question) { create :question }
@@ -136,12 +136,12 @@ describe QuestionsController do
       end
 
       it "assigns the requested question as @question" do
-        put :update, default_params.merge(id: question.to_param, question: {})
+        put :update, default_params.merge(id: question.to_param)
         assigns(:question).should eq(question)
       end
 
       it "redirects to the question" do
-        put :update, default_params.merge(id: question.to_param, question: {})
+        put :update, default_params.merge(id: question.to_param)
         response.should redirect_to root_path
       end
     end
@@ -151,7 +151,7 @@ describe QuestionsController do
         # Trigger the behavior that occurs when invalid params are submitted
         Question.any_instance.stub(:save).and_return(false)
         Question.any_instance.stub(:errors).and_return(double(:errors, empty?: false))
-        put :update, default_params.merge(id: question.to_param, question: {})
+        put :update, default_params.merge(id: question.to_param)
         assigns(:question).should eq(question)
       end
 
@@ -159,7 +159,7 @@ describe QuestionsController do
         # Trigger the behavior that occurs when invalid params are submitted
         Question.any_instance.stub(:save).and_return(false)
         Question.any_instance.stub(:errors).and_return(double(:errors, empty?: false))
-        put :update, default_params.merge(id: question.to_param, question: {})
+        put :update, default_params.merge(id: question.to_param)
         response.should render_template("edit")
       end
     end

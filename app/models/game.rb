@@ -1,6 +1,4 @@
 class Game < ActiveRecord::Base
-  attr_accessible :ended_at, :locked
-
   has_many :answers
 
   scope :locked, -> { where(locked: true) }

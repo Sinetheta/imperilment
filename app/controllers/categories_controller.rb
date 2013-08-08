@@ -28,7 +28,7 @@ class CategoriesController < ApplicationController
   end
 
   def update
-    if @category.update_attributes(params[:category])
+    if @category.update_attributes(category_params)
       flash.notice = t :model_update_successful, model: Category.model_name.human
     end
     respond_with @category
@@ -37,5 +37,10 @@ class CategoriesController < ApplicationController
   def destroy
     @category.destroy
     respond_with @category, location: categories_path
+  end
+
+  private
+  def category_params
+    params.require(:category).permit :name
   end
 end

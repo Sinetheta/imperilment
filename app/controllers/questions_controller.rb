@@ -44,7 +44,7 @@ class QuestionsController < ApplicationController
 
   def update
     params[:question][:correct] = nil if params[:question][:correct] == 'null'
-    if @question.update_attributes(params[:question])
+    if @question.update_attributes(question_params)
       flash.notice = t :model_update_successful, model: Question.model_name.human if request.format == :html
     end
     respond_with @game, @answer, @question, location: root_path
@@ -53,5 +53,10 @@ class QuestionsController < ApplicationController
   def destroy
     @question.destroy
     respond_with @question, location: [@game, @answer]
+  end
+
+  private
+  def question_params
+    params.require(:question).permit(:response)
   end
 end

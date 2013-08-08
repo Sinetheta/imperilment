@@ -53,12 +53,12 @@ describe Admin::UsersController do
       end
 
       it "assigns the requested user as @user" do
-        put :update, id: user.to_param, user: {}
+        put :update, id: user.to_param, user: {'first_name' => 'Joe'}
         assigns(:user).should eq(user)
       end
 
       it "redirects to the user" do
-        put :update, id: user.to_param, user: {}
+        put :update, id: user.to_param, user: {'first_name' => 'Joe'}
         response.should redirect_to([:admin, user])
       end
     end

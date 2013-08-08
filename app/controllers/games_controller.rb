@@ -28,7 +28,7 @@ class GamesController < ApplicationController
   end
 
   def update
-    if @game.update_attributes(params[:game])
+    if @game.update_attributes(game_params)
       flash.notice = t :model_update_successful, model: Game.model_name.human if request.format == :html
     end
     respond_with @game
@@ -37,5 +37,10 @@ class GamesController < ApplicationController
   def destroy
     @game.destroy
     respond_with @game, location: games_path
+  end
+
+  private
+  def game_params
+    params.require("game").permit :ended_at, :locked
   end
 end

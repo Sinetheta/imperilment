@@ -4,8 +4,6 @@ class Answer < ActiveRecord::Base
 
   has_many :questions
 
-  attr_accessible :amount, :answer, :correct_question, :start_date, :category_id
-
   validates :game_id, :category_id, :start_date, presence: true
   validates :start_date, uniqueness: true
 

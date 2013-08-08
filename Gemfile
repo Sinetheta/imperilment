@@ -7,7 +7,7 @@ gem 'rails', '~> 4.0.0'
 gem 'devise'
 gem 'omniauth-openid'
 gem 'rolify', '~> 3.3.0.rc4'
-gem 'cancan'
+gem 'cancan', :git => 'https://github.com/3months/cancan', :branch => 'strong_parameters'
 
 gem 'squeel'
 
@@ -33,9 +33,6 @@ gem 'datejs-rails'
 
 # Heroku Rails 4 Compatibility
 gem 'rails_12factor'
-
-# Allow attr_accessible for now
-gem 'protected_attributes'
 
 group :development do
   gem 'quiet_assets'
