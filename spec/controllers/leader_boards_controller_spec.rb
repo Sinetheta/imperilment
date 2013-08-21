@@ -7,17 +7,14 @@ describe LeaderBoardsController do
   let(:user) { create :user }
 
   describe 'GET index' do
+    let(:game_results) { [double(GameResult)] }
     before(:each) do
-      User.stub(:with_overall_score) { {0 => [user]} }
+      GameResult.stub(:all_results) { game_results }
       get :index
     end
 
-    it 'should assign the games to @games' do
-      assigns(:games).should =~ [game]
-    end
-
-    it 'should assign the users to @users' do
-      assigns(:users).should == {0 => [user]}
+    it 'should assign the results to @results' do
+      assigns(:results).should == game_results
     end
   end
 

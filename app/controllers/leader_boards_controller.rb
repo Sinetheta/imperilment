@@ -6,9 +6,7 @@ class LeaderBoardsController < ApplicationController
   respond_to :html
 
   def index
-    @games = Game.locked
-    @users = User.with_overall_score
-    respond_with @users, @games
+    @results = GameResult.all_results
   end
 
   def show

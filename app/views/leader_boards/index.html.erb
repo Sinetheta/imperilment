@@ -19,23 +19,21 @@
     </tr>
   </thead>
   <tbody>
-    <% @users.each do |(_, users)| %>
-      <% users.each do |user| %>
-        <tr>
-          <td class='score hidden-phone'>
-            <%= "#{t :currency_symbol} #{user.overall_score}" %>
-          </td>
-          <td class='email'><%= user.identifier %></td>
-          <td class='finishes'>
-            <i class='icon-trophy gold'></i>
-            <span><%= user.first %></span>
-            <i class='icon-trophy silver'></i>
-            <span><%= user.second %></span>
-            <i class='icon-trophy bronze'></i>
-            <span><%= user.third %></span>
-          </td>
-        </tr>
-      <% end %>
+    <% @results.each do |result| %>
+      <tr>
+        <td class='score hidden-phone'>
+          <%= "#{t :currency_symbol} #{result[:total]}" %>
+        </td>
+        <td class='email'><%= User.find(result[:user_id]).identifier %></td>
+        <td class='finishes'>
+          <i class='icon-trophy gold'></i>
+          <span><%= result[:first] %></span>
+          <i class='icon-trophy silver'></i>
+          <span><%= result[:second] %></span>
+          <i class='icon-trophy bronze'></i>
+          <span><%= result[:third] %></span>
+        </td>
+      </tr>
     <% end %>
   </tbody>
 </table>
