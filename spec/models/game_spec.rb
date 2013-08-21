@@ -82,4 +82,35 @@ describe Game do
     subject { game.date_range }
     it { should == (date..(date + 1.day)) }
   end
+
+  describe '.calculate_result!' do
+    before do
+      User.stub(:grouped_and_sorted_by_score) { { 200 => [double(User, id: 1)], 100 => [double(User, id: 2), double(User, id: 3)], 0 => [double(User, id: 4)]} }
+    end
+
+    it 'creates 4 game results' do
+      expect { game.calculate_result! }.to change{GameResult.count}.by(4)
+    end
+
+    describe 'user placement' do
+      before { game.calculate_result! }
+      context 'first place user' do
+        it 'is in first place' do
+          GameResult.find_by!(user_id: 1).position.should == 1
+        end
+      end
+
+      context 'second place user' do
+        it 'is in second place' do
+          GameResult.find_by!(user_id: 3).position.should == 2
+        end
+      end
+
+      context 'last place user' do
+        it 'is in fourth place' do
+          GameResult.find_by!(user_id: 4).position.should == 4
+        end
+      end
+    end
+  end
 end

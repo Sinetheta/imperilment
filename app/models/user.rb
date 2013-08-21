@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   # Extra fields for leader board stuffs.
   attr_writer :overall_score, :first, :second, :third
 
+  has_many :game_results
+
   # Wish there was a nicer way to do this. >.<
   def overall_score; @overall_score ||= 0; end
   def first; @first ||= 0; end
