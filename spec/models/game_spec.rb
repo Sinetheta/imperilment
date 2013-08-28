@@ -113,4 +113,15 @@ describe Game do
       end
     end
   end
+
+  describe 'calculate_result hook' do
+    before do
+      User.stub(:grouped_and_sorted_by_score) { { 200 => [double(User, id: 1)] } }
+    end
+
+    it 'calculates results when locking the game' do
+      game.locked = true
+      expect { game.save! }.to change{GameResult.count}.by(1)
+    end
+  end
 end

@@ -4,6 +4,10 @@ class Game < ActiveRecord::Base
 
   scope :locked, -> { where(locked: true) }
 
+  before_update do
+    calculate_result! if self.locked_changed? && self.locked
+  end
+
   self.per_page = 10
 
   def score(user)
@@ -25,6 +29,7 @@ class Game < ActiveRecord::Base
   end
 
   def calculate_result!
+    GameResult.where(game_id: self.id).destroy_all
     position = 1
     User.grouped_and_sorted_by_score(self).each do |total, users|
       users.each do |user|
