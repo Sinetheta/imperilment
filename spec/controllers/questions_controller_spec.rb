@@ -144,6 +144,25 @@ describe QuestionsController do
         put :update, default_params.merge(id: question.to_param)
         response.should redirect_to root_path
       end
+
+      describe 'updating correct' do
+        subject { assigns(:question).correct }
+        context 'when user is an admin' do
+          before do
+            put :update, {id: question.to_param, game_id: question.answer.game, answer_id: question.answer, question: { correct: true }}
+          end
+          it { should be_true }
+        end
+
+        context 'when user is not an admin' do
+          before do
+            @ability.cannot :correct, Question
+            put :update, {id: question.to_param, game_id: question.answer.game, answer_id: question.answer, question: { correct: true }}
+          end
+          it { should be_nil }
+        end
+      end
+
     end
 
     describe "with invalid params" do

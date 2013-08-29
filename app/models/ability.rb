@@ -8,6 +8,7 @@ class Ability
       cannot :check, Answer do |answer|
         !answer.question_for user
       end
+      can :correct, Question
     else
       if user
         can :manage, Question, :user_id => user.id

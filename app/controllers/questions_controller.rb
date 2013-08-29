@@ -43,8 +43,9 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    params[:question][:correct] = nil if params[:question][:correct] == 'null'
-    if @question.update_attributes(question_params)
+    qp = question_params
+    qp[:correct] = nil if qp[:correct] == 'null'
+    if @question.update_attributes(qp)
       flash.notice = t :model_update_successful, model: Question.model_name.human if request.format == :html
     end
     respond_with @game, @answer, @question, location: root_path
@@ -56,7 +57,15 @@ class QuestionsController < ApplicationController
   end
 
   private
+  def permitted_question_params
+    if can? :correct, @question
+      [:response, :correct]
+    else
+      [:response]
+    end
+  end
+
   def question_params
-    params.require(:question).permit(:response)
+    params.require(:question).permit(*permitted_question_params)
   end
 end
