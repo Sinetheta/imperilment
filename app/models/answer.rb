@@ -3,6 +3,7 @@ class Answer < ActiveRecord::Base
   belongs_to :category
 
   has_many :questions
+  has_many :users, through: :questions
 
   validates :game_id, :category_id, :start_date, presence: true
   validates :start_date, uniqueness: true

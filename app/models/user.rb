@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
   def self.with_overall_score
     results = User.all
     Game.locked.each do |game|
-      scores = self.grouped_and_sorted_by_score(game)
+      scores = game.grouped_and_sorted_by_score
 
       scores.each_with_index do |(score, users), idx|
         users.each do |user|
@@ -55,14 +55,6 @@ class User < ActiveRecord::Base
       [-user.first, -user.second, -user.third, -user.overall_score]
     end.group_by do |user|
       user.overall_score
-    end
-  end
-
-  def self.grouped_and_sorted_by_score(game)
-    self.all.sort_by do |user|
-      -game.score(user)
-    end.group_by do |user|
-      game.score(user)
     end
   end
 
@@ -83,5 +75,6 @@ class User < ActiveRecord::Base
         password: Devise.friendly_token[0,20]
       )
     end
+      #stubbing methods from the class under test===bad
   end
 end

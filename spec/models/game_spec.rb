@@ -124,4 +124,17 @@ describe Game do
       expect { game.save! }.to change{GameResult.count}.by(1)
     end
   end
+
+  describe '#grouped_and_sorted_by_score' do
+    let(:user) { create :user }
+
+    before(:each) do
+      game.stub(:users) { [user] }
+      game.stub(:score) { 1 }
+    end
+
+    it 'should return the users grouped and sorted by score' do
+      game.grouped_and_sorted_by_score.should == {1 => [user]}
+    end
+  end
 end

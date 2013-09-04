@@ -1,5 +1,6 @@
 class Game < ActiveRecord::Base
   has_many :answers
+  has_many :users, through: :answers
   has_many :game_results
 
   scope :locked, -> { where(locked: true) }
@@ -36,6 +37,14 @@ class Game < ActiveRecord::Base
         GameResult.create! user_id: user.id, game_id: self.id, total: total, position: position
       end
       position += users.size
+    end
+  end
+
+  def grouped_and_sorted_by_score
+    users.uniq.sort_by do |user|
+      -self.score(user)
+    end.group_by do |user|
+      self.score(user)
     end
   end
 end

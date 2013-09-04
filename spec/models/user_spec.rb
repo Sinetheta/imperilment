@@ -85,24 +85,11 @@ describe User do
 
     before(:each) do
       Game.stub(:locked) { [game] }
-      User.any_instance.stub(:grouped_and_sorted_by_score).with(game) { {0 => [user]} }
+      game.stub(:grouped_and_sorted_by_score) { {0 => [user]} }
     end
 
     it 'should return the users with the overall_scores' do
       User.with_overall_score.should == {0 => [user]}
-    end
-  end
-
-  describe '#grouped_and_sorted_by_score' do
-    let(:game) { stub_model Game }
-    let!(:user) { create :user }
-
-    before(:each) do
-      game.stub(:score) { 1 }
-    end
-
-    it 'should return the users grouped and sorted by score' do
-      User.grouped_and_sorted_by_score(game).should == {1 => [user]}
     end
   end
 
