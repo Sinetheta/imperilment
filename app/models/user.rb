@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   attr_writer :overall_score, :first, :second, :third
 
   has_many :game_results
+  has_many :questions
 
   # Wish there was a nicer way to do this. >.<
   def overall_score; @overall_score ||= 0; end
