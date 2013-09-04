@@ -92,6 +92,11 @@ describe AnswersController do
       get :new, default_params
       assigns(:answer).should be_a_new(Answer)
     end
+
+    it 'picks the default category' do
+      get :new, default_params
+      assigns(:answer).category.should == Category.last
+    end
   end
 
   describe "GET edit" do

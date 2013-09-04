@@ -39,6 +39,7 @@ class AnswersController < ApplicationController
   end
 
   def new
+    @answer.category = Category.last
     respond_with @game, @answer
   end
 
