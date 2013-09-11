@@ -2,7 +2,7 @@ class AnswersController < ApplicationController
   load_and_authorize_resource :game
   load_and_authorize_resource :answer, through: :game
 
-  respond_to :html, :json
+  respond_to :html
 
   def index
     @answers = @answers.page(params[:page])
