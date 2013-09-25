@@ -10,7 +10,7 @@ class LeaderBoardsController < ApplicationController
   end
 
   def show
-    @users = User.grouped_and_sorted_by_score(@game)
+    @users = @game.grouped_and_sorted_by_score
     respond_with @users, @game
   end
 

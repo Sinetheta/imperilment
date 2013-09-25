@@ -20,7 +20,7 @@ describe LeaderBoardsController do
 
   describe 'GET show' do
     before(:each) do
-      User.stub(:grouped_and_sorted_by_score).with(game) { {0 => [user]} }
+      Game.any_instance.stub(:grouped_and_sorted_by_score) { {0 => [user]} }
       get :show
     end
 
