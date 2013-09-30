@@ -32,7 +32,7 @@ class Game < ActiveRecord::Base
   def calculate_result!
     GameResult.where(game_id: self.id).destroy_all
     position = 1
-    User.grouped_and_sorted_by_score(self).each do |total, users|
+    grouped_and_sorted_by_score.each do |total, users|
       users.each do |user|
         GameResult.create! user_id: user.id, game_id: self.id, total: total, position: position
       end
