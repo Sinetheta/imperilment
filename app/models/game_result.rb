@@ -8,6 +8,7 @@ class GameResult < ActiveRecord::Base
                       SUM(CASE WHEN position = 2 THEN 1 ELSE 0 END) as second,
                       SUM(CASE WHEN position = 3 THEN 1 ELSE 0 END) as third'
                      )
+      .where('total > 0')
       .group(:user_id)
       .order('first desc, second desc, third desc, total desc')
   end
