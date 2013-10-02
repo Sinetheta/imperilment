@@ -31,6 +31,8 @@ gem 'uglifier'
 
 gem 'datejs-rails'
 
+gem 'redcarpet'
+
 # Heroku Rails 4 Compatibility
 gem 'rails_12factor'
 
