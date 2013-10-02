@@ -14,7 +14,7 @@
   </div>
   <div class='span8'>
     <div class='area-answer'>
-      <div class='answer'><p><%= @answer.answer %></p></div>
+      <div class='answer'><%= raw Redcarpet::Markdown.new(Redcarpet::Render::HTML.new).render(@answer.answer) %></div>
     </div>
   </div>
 </div>
