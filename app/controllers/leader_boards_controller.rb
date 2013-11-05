@@ -10,11 +10,13 @@ class LeaderBoardsController < ApplicationController
   end
 
   def show
-    @users = @game.grouped_and_sorted_by_score
-    respond_with @users, @game
+    if @game
+      @users = @game.grouped_and_sorted_by_score
+    end
   end
 
   protected
+
   def load_most_recent_game
     if params[:game_id]
       @game = Game.find(params[:game_id])
