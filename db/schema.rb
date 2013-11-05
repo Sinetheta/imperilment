@@ -20,8 +20,8 @@ ActiveRecord::Schema.define(version: 20130828022713) do
     t.text     "answer"
     t.integer  "amount"
     t.date     "start_date"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "answers", ["category_id"], name: "index_answers_on_category_id"
@@ -29,8 +29,8 @@ ActiveRecord::Schema.define(version: 20130828022713) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "game_results", force: true do |t|
@@ -46,8 +46,8 @@ ActiveRecord::Schema.define(version: 20130828022713) do
 
   create_table "games", force: true do |t|
     t.date     "ended_at"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "locked",     default: false
   end
 
@@ -57,8 +57,8 @@ ActiveRecord::Schema.define(version: 20130828022713) do
     t.string   "response"
     t.boolean  "correct"
     t.integer  "amount"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "questions", ["answer_id"], name: "index_questions_on_answer_id"
@@ -68,8 +68,8 @@ ActiveRecord::Schema.define(version: 20130828022713) do
     t.string   "name"
     t.integer  "resource_id"
     t.string   "resource_type"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
@@ -86,8 +86,8 @@ ActiveRecord::Schema.define(version: 20130828022713) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "first_name"
     t.string   "last_name"
   end
