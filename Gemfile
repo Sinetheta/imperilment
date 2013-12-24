@@ -31,6 +31,9 @@ gem 'datejs-rails'
 
 gem 'redcarpet'
 
+gem 'dotenv-rails'
+gem 'oops'
+
 # Heroku Rails 4 Compatibility
 gem 'rails_12factor'
 
@@ -76,7 +79,7 @@ group :development, :test do
 end
 
 group :production do
-  gem 'pg'
+  gem 'mysql2'
   gem 'exception_notification'
   gem 'unicorn'
 end

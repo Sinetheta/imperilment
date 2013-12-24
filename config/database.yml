@@ -20,3 +20,9 @@ test:
   database: db/test<%= suffix %>.sqlite3
   pool: 5
   timeout: 5000
+
+deploy:
+  adapter: sqlite3
+  database: db/test<%= suffix %>.sqlite3
+  pool: 5
+  timeout: 5000
