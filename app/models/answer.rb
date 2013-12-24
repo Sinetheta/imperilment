@@ -9,16 +9,19 @@ class Answer < ActiveRecord::Base
   validates :start_date, uniqueness: true
 
   def self.most_recent
-    self.joins{game}.where{ |a|
-      (a.start_date <= DateTime.now) &
-      (a.game.locked == false)
-    }.order(:start_date).reverse_order.first
+    self.where('start_date <= ?', DateTime.now).order('start_date DESC').first
+  end
+
+  def prev
+    Answer.where('answers.updated_at < ?', updated_at).includes(:game).where("games.locked" => false).order('answers.updated_at DESC').first
+  end
+
+  def next
+    Answer.where('answers.updated_at > ?', updated_at).includes(:game).where("games.locked" => false).order('answers.updated_at ASC').first
   end
 
   def self.on(date)
-    self.where{ |a|
-      a.start_date == date
-    }.first
+    self.where(start_date: date).first
   end
 
   def self.next_free_date
@@ -31,20 +34,6 @@ class Answer < ActiveRecord::Base
 
   def self.last_answer
     self.order(:start_date).last
-  end
-
-  def prev
-    Answer.joins{game}.where{ |a|
-      (a.updated_at < updated_at) &
-      (a.game.locked == false)
-    }.order(:updated_at).reverse_order.first
-  end
-
-  def next
-    Answer.joins{game}.where{ |a|
-      (a.updated_at > updated_at) &
-      (a.game.locked == false)
-    }.order(:updated_at).first
   end
 
   def question_for(user)

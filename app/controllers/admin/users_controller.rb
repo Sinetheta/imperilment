@@ -5,7 +5,7 @@ class Admin::UsersController < ApplicationController
   respond_to :html, :json
 
   def index
-    @users = User.joins{roles.outer}.order{roles.id.desc}.group{users.id}
+    @users = User.joins('LEFT OUTER JOIN roles ON roles.resource_id = users.id').order('roles.id DESC').group('roles.id')
     respond_with :admin, @users
   end
 
