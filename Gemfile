@@ -32,7 +32,7 @@ gem 'datejs-rails'
 gem 'redcarpet'
 
 gem 'dotenv-rails'
-gem 'oops'
+gem 'oops', github: 'forkata/oops', branch: 'dotenv-support'
 
 # Heroku Rails 4 Compatibility
 gem 'rails_12factor'
