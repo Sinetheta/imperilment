@@ -3,10 +3,11 @@ class LeaderBoardsController < ApplicationController
 
   authorize_resource :game
 
-  respond_to :html
+  respond_to :html, :json
 
   def index
     @results = GameResult.all_results
+    respond_with(@results)
   end
 
   def show

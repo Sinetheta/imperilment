@@ -10,6 +10,6 @@ class GameResult < ActiveRecord::Base
                      )
       .where('total > 0')
       .group(:user_id)
-      .order('first desc, second desc, third desc, total desc')
+      .order('first desc, second desc, third desc, total desc').to_a
   end
 end

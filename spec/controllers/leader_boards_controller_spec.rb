@@ -7,14 +7,22 @@ describe LeaderBoardsController do
   let(:user) { create :user }
 
   describe 'GET index' do
-    let(:game_results) { [double(GameResult)] }
+    let(:game_results) { [GameResult.new] }
     before(:each) do
       GameResult.stub(:all_results) { game_results }
-      get :index
     end
 
-    it 'should assign the results to @results' do
-      assigns(:results).should == game_results
+    context 'html' do
+      it 'should assign the results to @results' do
+        get :index
+        assigns(:results).should == game_results
+      end
+    end
+    context 'json' do
+      it 'should assign the results to @results' do
+        get :index, format: :json
+        assigns(:results).should == game_results
+      end
     end
   end
 
