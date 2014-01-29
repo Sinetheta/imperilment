@@ -134,6 +134,7 @@ GEM
       railties (>= 3.0.0)
     faye-websocket (0.4.7)
       eventmachine (>= 0.12.0)
+    ffaker (1.23.0)
     ffi (1.9.0)
     font-awesome-sass-rails (3.0.2.2)
       railties (>= 3.1.1)
@@ -380,6 +381,7 @@ DEPENDENCIES
   ejs
   exception_notification
   factory_girl_rails
+  ffaker
   font-awesome-sass-rails
   fuubar
   guard-bundler

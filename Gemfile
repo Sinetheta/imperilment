@@ -76,6 +76,8 @@ group :development, :test do
   gem 'konacha-chai-matchers'
   gem 'ejs'
   gem 'poltergeist'
+
+  gem 'ffaker'
 end
 
 group :production do
