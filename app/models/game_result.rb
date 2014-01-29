@@ -12,4 +12,26 @@ class GameResult < ActiveRecord::Base
       .group(:user_id)
       .order('first desc, second desc, third desc, total desc').to_a
   end
+
+  def results
+    answers.map do |answer|
+      if !answer
+        :unavailable
+      elsif !(question = answer.question_for(user))
+        :unanswered
+      elsif question.correct.nil?
+        :unmarked
+      elsif question.correct
+        :correct
+      else
+        :incorrect
+      end
+    end
+  end
+
+  def answers
+    game.date_range.map do |date|
+      game.answers.detect{|a| a.start_date == date}
+    end
+  end
 end
