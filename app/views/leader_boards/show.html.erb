@@ -1,61 +1,55 @@
-<% if @users %>
-  <div class='dropdown-nav pull-right'>
-    <span><%= t :previous_model, model: Game.model_name.human(count: :many) %>:</span>
-    <select>
-      <% Game.order(:ended_at).each do |game| %>
-        <%= content_tag :option, l(game.ended_at, format: :long), value: game.id, data: {path: leader_board_path(game)}, selected: game.id == @game.id %>
-      <% end %>
-    </select>
-  </div>
-  <h1><%= t :leader_board %></h1>
+<div class='dropdown-nav pull-right'>
+  <span><%= t :previous_model, model: Game.model_name.human(count: :many) %>:</span>
+  <select>
+    <% Game.order(:ended_at).each do |game| %>
+      <%= content_tag :option, l(game.ended_at, format: :long), value: game.id, data: {path: leader_board_path(game)}, selected: game.id == @game.id %>
+  <% end %>
+  </select>
+</div>
+<h1><%= t :leader_board %></h1>
 
-  <table class='table'>
-    <thead>
-      <tr>
-        <th class='score'><%= t :weekly_total %></th>
-        <th><%= User.model_name.human %></th>
-        <% unless @game.answers.empty? %>
-          <th class='hidden-phone'><%= t :breakdown %></th>
+<table class='table'>
+  <thead>
+    <tr>
+      <th class='score'><%= t :weekly_total %></th>
+      <th><%= User.model_name.human %></th>
+      <% unless @game.answers.empty? %>
+        <th class='hidden-phone'><%= t :breakdown %></th>
+    <% end %>
+    </tr>
+  </thead>
+  <tbody>
+  <% @results.each do |result| %>
+    <tr class="<%= rank_class(result.position) %>">
+      <td class='score'>
+        <% if result.position == 1 %>
+          <%= icon 'trophy' %>
         <% end %>
-      </tr>
-    </thead>
-    <tbody>
-      <% @users.each_with_index do |(score, users), idx| %>
-        <% users.each do |user| %>
-          <tr class="<%= rank_class(idx) %>">
-            <td class='score'>
-              <% if idx == 0 %>
-                <%= icon 'trophy' %>
+        <%= "#{t :currency_symbol} #{result.total}" %>
+      </td>
+      <td class='email'><%= result.user.identifier %></td>
+      <% unless @game.answers.empty? %>
+        <td class='hidden-phone'>
+          <table class='breakdown'>
+            <thead>
+              <tr>
+                <% result.answers.each do %>
+                  <th></th>
               <% end %>
-              <%= "#{t :currency_symbol} #{score}" %>
-            </td>
-            <td class='email'><%= user.identifier %></td>
-            <% unless @game.answers.empty? %>
-              <td class='hidden-phone'>
-                <table class='breakdown'>
-                  <thead>
-                    <tr>
-                      <% @game.date_range.count.times do %>
-                        <th></th>
-                      <% end %>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <% @game.date_range.each do |date| %>
-                        <td><%= link_to breakdown_icon(@game, user, date), breakdown_link(@game, date) %></td>
-                      <% end %>
-                    </tr>
-                  </tbody>
-                </table>
-              </td>
-            <% end %>
-          </tr>
-        <% end %>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <% @game.date_range.zip(result.results).each do |(date, result_type)| %>
+                  <td><%= link_to breakdown_icon(result_type), breakdown_link(@game, date) %></td>
+                <% end %>
+              </tr>
+            </tbody>
+          </table>
+        </td>
       <% end %>
-    </tbody>
-  </table>
-  <%= link_to t(:overall_results), overall_leader_board_path, class: 'btn' %>
-<% else %>
-  <h1>Aint no games yo!</h1>
-<% end %>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<%= link_to t(:overall_results), overall_leader_board_path, class: 'btn' %>

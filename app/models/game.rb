@@ -29,14 +29,22 @@ class Game < ActiveRecord::Base
     (started_on..ended_at)
   end
 
-  def calculate_result!
-    GameResult.where(game_id: self.id).destroy_all
+  def build_results
     position = 1
+    results = []
     grouped_and_sorted_by_score.each do |total, users|
       users.each do |user|
-        GameResult.create! user_id: user.id, game_id: self.id, total: total, position: position
+        results << GameResult.new(user: user, game: self, total: total, position: position)
       end
       position += users.size
+    end
+    results
+  end
+
+  def calculate_result!
+    GameResult.where(game_id: self.id).destroy_all
+    build_results.each do |result|
+      result.save!
     end
   end
 

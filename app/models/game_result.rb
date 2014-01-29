@@ -19,12 +19,8 @@ class GameResult < ActiveRecord::Base
         :unavailable
       elsif !(question = answer.question_for(user))
         :unanswered
-      elsif question.correct.nil?
-        :unmarked
-      elsif question.correct
-        :correct
       else
-        :incorrect
+        question.status
       end
     end
   end

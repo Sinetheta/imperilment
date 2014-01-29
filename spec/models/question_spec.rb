@@ -38,6 +38,23 @@ describe Question do
     end
   end
 
+  describe '.status' do
+    let(:question) { build_stubbed :question, correct: correct }
+    subject{ question.status }
+    context 'unmarked' do
+      let(:correct){ nil }
+      it { should == :unmarked }
+    end
+    context 'correct' do
+      let(:correct){ true }
+      it { should == :correct }
+    end
+    context 'incorrect' do
+      let(:correct){ false }
+      it { should == :incorrect }
+    end
+  end
+
   describe '.value' do
     let(:question) { create :question, correct: correct }
     let(:amount) { 200 }

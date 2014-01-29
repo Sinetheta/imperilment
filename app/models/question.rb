@@ -47,4 +47,15 @@ class Question < ActiveRecord::Base
       true
     end
   end
+
+  def status
+    case correct
+    when nil
+      :unmarked
+    when true
+      :correct
+    when false
+      :incorrect
+    end
+  end
 end

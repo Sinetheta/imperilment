@@ -11,8 +11,9 @@
       <tr>
         <% @game.date_range.each do |date| %>
           <td>
-            <%= link_to [@game, Answer.on(date)] do %>
-              <%= breakdown_icon(@game, current_user, date) %>
+            <% answer = Answer.on(date) %>
+            <%= link_to [@game, answer] do %>
+              <%= breakdown_icon status_for(answer) %>
             <% end %>
           </td>
         <% end %>

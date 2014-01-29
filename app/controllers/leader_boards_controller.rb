@@ -12,7 +12,9 @@ class LeaderBoardsController < ApplicationController
 
   def show
     if @game
-      @users = @game.grouped_and_sorted_by_score
+      @results = @game.build_results
+    else
+      render 'no_games'
     end
   end
 

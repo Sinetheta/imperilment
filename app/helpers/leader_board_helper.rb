@@ -1,33 +1,42 @@
 module LeaderBoardHelper
   def rank_class(rank)
     case rank
-    when 0
-      "gold"
     when 1
-      "silver"
+      "gold"
     when 2
+      "silver"
+    when 3
       "bronze"
     else
       ""
     end
   end
 
-  def breakdown_icon(game, user, date)
-    answer = game.answers.reject{|a| a.start_date != date}.first
-    return '' if answer.nil?
-
-    question = answer.question_for(user)
-    return icon 'asterisk' if question.nil?
-
-    case question.correct
-    when true
-      return icon 'ok'
-    when false
-      return icon 'remove'
-    else
-      return icon 'minus'
+  def breakdown_icon(result)
+    case result
+    when :unavailable
+      ''
+    when :unanswered
+      icon 'asterisk'
+    when :unmarked
+      icon 'minus'
+    when :correct
+      icon 'ok'
+    when :incorrect
+      icon 'remove'
     end
   end
+
+  def status_for(answer)
+    if !answer
+      :unavailable
+    elsif !(question = answer.question_for(current_user))
+      :unanswered
+    else
+      question.status
+    end
+  end
+
 
   def breakdown_link(game, date)
     answer = game.answers.reject{|a| a.start_date != date}.first

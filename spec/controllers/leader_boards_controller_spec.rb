@@ -45,7 +45,8 @@ describe LeaderBoardsController do
       end
 
       it 'should assign the users to @users' do
-        assigns(:users).should == {0 => [user]}
+        assigns(:results).first.should be_a(GameResult)
+        assigns(:results).first.user.should == user
       end
 
       context 'when a game_id is passed' do

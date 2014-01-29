@@ -43,17 +43,9 @@ describe GameResult do
       it { should == [:unanswered, :unavailable] }
     end
 
-    context 'correct' do
-      let(:question){ double(:question, correct: true) }
-      it { should == [:correct, :unavailable] }
-    end
-    context 'incorrect' do
-      let(:question){ double(:question, correct: false) }
-      it { should == [:incorrect, :unavailable] }
-    end
-    context 'unmarked' do
-      let(:question){ double(:question, correct: nil) }
-      it { should == [:unmarked, :unavailable] }
+    context 'answered' do
+      let(:question){ double(:question, status: :questionstatus) }
+      it { should == [:questionstatus, :unavailable] }
     end
   end
 

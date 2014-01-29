@@ -86,7 +86,7 @@ describe Game do
   describe '.calculate_result!' do
     before do
       # FIXME - Don't stub methods no what you're testing
-      game.stub(:grouped_and_sorted_by_score) { { 200 => [double(User, id: 1)], 100 => [double(User, id: 2), double(User, id: 3)], 0 => [double(User, id: 4)]} }
+      game.stub(:grouped_and_sorted_by_score) { { 200 => [User.new(id: 1)], 100 => [User.new(id: 2), User.new(id: 3)], 0 => [User.new(id: 4)]} }
     end
 
     it 'creates 4 game results' do
@@ -118,7 +118,7 @@ describe Game do
   describe 'calculate_result hook' do
     before do
       # FIXME - Don't stub methods no what you're testing
-      game.stub(:grouped_and_sorted_by_score) { { 200 => [double(User, id: 1)] } }
+      game.stub(:grouped_and_sorted_by_score) { { 200 => [User.new(id: 1)] } }
     end
 
     it 'calculates results when locking the game' do
