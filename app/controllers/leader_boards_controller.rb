@@ -7,12 +7,13 @@ class LeaderBoardsController < ApplicationController
 
   def index
     @results = GameResult.all_results
-    respond_with(@results)
+    respond_with(@results, include: :user)
   end
 
   def show
     if @game
       @results = @game.build_results
+      respond_with(@results, include: :user, methods: :results)
     else
       render 'no_games'
     end
