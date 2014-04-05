@@ -1,6 +1,7 @@
 ((window) ->
   $ ->
-    $('select').select2()
+    # TODO: Figure out why this breaks konacha.
+    #$('select').select2()
 
     $(document).on 'focus', 'input.datepicker', ->
       $(this).datepicker
