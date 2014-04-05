@@ -15,7 +15,7 @@ gem 'show_for'
 gem 'will_paginate'
 gem 'select2-rails'
 
-gem 'sass-rails'
+gem 'sass-rails', '~> 4.0.2'
 gem 'coffee-rails'
 
 gem 'jquery-rails'
@@ -34,22 +34,12 @@ gem 'redcarpet'
 gem 'dotenv-rails'
 gem 'oops', github: 'forkata/oops', branch: 'dotenv-support'
 
-# Heroku Rails 4 Compatibility
-gem 'rails_12factor'
-
 group :development do
   gem 'quiet_assets'
   gem 'letter_opener'
 
-  gem 'guard-bundler'
-  gem 'guard-livereload'
-  gem 'guard-rspec'
-  gem 'guard-konacha'
-  gem 'guard-spring', github: 'mknapik/guard-spring'
-
   gem 'better_errors'
   gem 'binding_of_caller'
-
 
   gem 'hirb'
   gem 'wirb'
@@ -59,25 +49,35 @@ group :development do
 end
 
 group :development, :test do
+  gem 'guard-livereload'
+  gem 'guard-konacha'
+  gem 'guard-bundler'
+  gem 'guard-rspec', '~> 4.2.0'
+
+  gem 'spring'
+  gem 'spring-commands-rspec'
+
   gem 'minitest' # To get rid of errors
   gem 'shoulda-matchers'
-  gem 'rspec-rails'
-  gem 'factory_girl_rails', :require => false
-  gem 'simplecov', :require => false
-  gem 'simplecov-rcov', :require => false
-  gem 'sqlite3'
   gem 'timecop'
+  gem 'ffaker'
+  gem 'rspec-rails'
 
-  gem 'pry', github: 'pry/pry'
-  gem 'pry-plus'
+  gem 'factory_girl_rails'
+  gem 'simplecov'
+  gem 'simplecov-rcov'
 
-  gem 'fuubar'
+  gem 'sqlite3'
+
   gem 'konacha'
   gem 'konacha-chai-matchers'
   gem 'ejs'
   gem 'poltergeist'
 
-  gem 'ffaker'
+  gem 'pry-rails'
+  gem 'pry-remote'
+  gem 'pry-nav'
+  gem 'pry-debugger'
 end
 
 group :production do
