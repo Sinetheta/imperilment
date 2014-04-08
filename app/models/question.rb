@@ -10,8 +10,6 @@ class Question < ActiveRecord::Base
   scope :unchecked, -> { where(correct: nil) }
   scope :checked, -> { where{correct != nil} }
 
-  scope :none, -> { where('1 = 0') }
-
   delegate :correct_question, to: :answer
 
   def checked?
