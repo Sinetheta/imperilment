@@ -4,7 +4,7 @@ require 'spec_helper'
 describe BootstrapHelper do
   describe '.icon' do
     subject { helper.icon 'hammer' }
-    specify { should == "<i class=\"icon-hammer icon\"></i> " }
+    specify { should == "<i class=\"fa-hammer fa\"></i> " }
   end
 
   describe '.flash_notice' do

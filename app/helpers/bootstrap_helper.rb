@@ -2,7 +2,7 @@
 
 module BootstrapHelper
   def icon *classes
-    classes = classes.map {|x| "icon-#{x}" } << "icon"
+    classes = classes.map {|x| "fa-#{x}" } << 'fa'
     content_tag(:i, '', class: classes) + ' '
   end
   def flash_notice type, css_class

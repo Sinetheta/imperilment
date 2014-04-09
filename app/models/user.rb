@@ -1,10 +1,11 @@
 class User < ActiveRecord::Base
-  rolify
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :omniauthable, :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable
+
+  rolify
 
   # Extra fields for leader board stuffs.
   attr_writer :overall_score, :first, :second, :third

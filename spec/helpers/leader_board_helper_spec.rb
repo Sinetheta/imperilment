@@ -41,12 +41,12 @@ describe LeaderBoardHelper do
 
     context 'correct' do
       let(:result){ :correct }
-      it { should == helper.icon('ok') }
+      it { should == helper.icon('check') }
     end
 
     context 'incorrect' do
       let(:result){ :incorrect }
-      it { should == helper.icon('remove') }
+      it { should == helper.icon('times') }
     end
   end
 

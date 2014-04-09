@@ -6,7 +6,7 @@ gem 'rails', '~> 4.1.0'
 
 gem 'devise'
 gem 'omniauth-openid'
-gem 'rolify', '~> 3.3.0.rc4'
+gem 'rolify'
 gem 'cancan', :git => 'https://github.com/3months/cancan', :branch => 'strong_parameters'
 
 gem 'simple_form'
@@ -20,10 +20,10 @@ gem 'coffee-rails'
 
 gem 'jquery-rails'
 
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', '~> 2.3.0'
 gem 'bootstrap-datepicker-rails'
 
-gem 'font-awesome-sass-rails'
+gem 'font-awesome-rails'
 
 gem 'uglifier'
 
@@ -32,10 +32,7 @@ gem 'datejs-rails'
 gem 'redcarpet'
 
 gem 'dotenv-rails'
-gem 'oops', github: 'forkata/oops', branch: 'dotenv-support'
-
-# Heroku Rails 4 Compatibility
-gem 'rails_12factor'
+gem 'oops', github: 'freerunningtech/oops'
 
 group :development do
   gem 'quiet_assets'
@@ -69,7 +66,6 @@ group :development, :test do
   gem 'timecop'
 
   gem 'pry', github: 'pry/pry'
-  gem 'pry-plus'
 
   gem 'fuubar'
   gem 'konacha'

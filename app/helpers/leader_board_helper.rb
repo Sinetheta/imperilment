@@ -21,9 +21,9 @@ module LeaderBoardHelper
     when :unmarked
       icon 'minus'
     when :correct
-      icon 'ok'
+      icon 'check'
     when :incorrect
-      icon 'remove'
+      icon 'times'
     end
   end
 
