@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/freerunningtech/oops.git
-  revision: 6ec9858a82199062feb6b486efe02e2192ae0c04
+  revision: 46ffb5d92456b2cb31d2a958cb53b42a96dca5a9
   specs:
     oops (0.0.5)
       aws-sdk (~> 1.11)
