@@ -36,4 +36,8 @@ task :development_data => :environment do
 
 end
 
+Oops::Tasks.new do |oops|
+  oops.includes += Dir['.env*']
+end
+
 Imperilment::Application.load_tasks
