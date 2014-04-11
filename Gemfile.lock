@@ -274,7 +274,9 @@ GEM
     show_for (0.3.0)
       actionpack (>= 3.2, < 5)
       activemodel (>= 3.2, < 5)
-    simple_form (1.4.1)
+    simple_form (3.0.2)
+      actionpack (~> 4.0)
+      activemodel (~> 4.0)
     simplecov (0.8.2)
       docile (~> 1.1.0)
       multi_json
