@@ -15,13 +15,13 @@
         <td>
           <div class='btn-group pull-right'>
             <%= link_to category, class: 'btn btn-small' do %>
-              <%= icon 'eye-open' %>
+              <%= icon 'eye' %>
             <% end %>
             <%= link_to [:edit, category], class: 'btn btn-small' do %>
               <%= icon 'pencil' %>
             <% end %>
             <%= link_to category, method: :delete, class: 'btn btn-danger btn-small', data: {confirm: t(:confirm_destroy)} do %>
-              <%= icon 'trash' %>
+              <%= icon 'trash-o' %>
             <% end %>
           </div>
         </td>
