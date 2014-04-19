@@ -4,6 +4,8 @@ ruby '2.0.0'
 
 gem 'rails', '~> 4.1.0.beta'
 
+gem "active_model_serializers"
+
 gem 'devise'
 gem 'omniauth-openid'
 gem 'rolify', '~> 3.3.0.rc4'
@@ -17,6 +19,8 @@ gem 'select2-rails'
 
 gem 'sass-rails', '~> 4.0.2'
 gem 'coffee-rails'
+
+gem 'js-routes'
 
 gem 'jquery-rails'
 

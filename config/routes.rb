@@ -6,6 +6,14 @@ Imperilment::Application.routes.draw do
     end
   end
 
+  namespace :api do
+    resources :games, only: [:show] do
+      resources :answers, only: [:index, :show] do
+        resources :questions, only: [:show, :update]
+      end
+    end
+  end
+
   resources :categories
   resources :games do
     resources :answers do
