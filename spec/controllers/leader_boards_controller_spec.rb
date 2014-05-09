@@ -61,4 +61,30 @@ describe LeaderBoardsController do
       end
     end
   end
+
+  describe "GET money" do
+    let(:game_results) { [GameResult.new] }
+    before(:each) do
+      GameResult.stub(:all_results_by_money) { game_results }
+    end
+
+    it 'should assign the results to @results' do
+      get :money
+      assigns(:results).should == game_results
+    end
+
+    it 'should respond to html' do
+      get :money
+      response.should be_success
+    end
+
+    it 'should respond to json' do
+      get :money, format: :json
+      response.should be_success
+    end
+  end
 end
+
+
+
+

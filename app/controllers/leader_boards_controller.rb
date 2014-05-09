@@ -19,6 +19,11 @@ class LeaderBoardsController < ApplicationController
     end
   end
 
+  def money
+    @results = GameResult.all_results_by_money
+    respond_with(@results, include: :user)
+  end
+
   protected
 
   def load_most_recent_game

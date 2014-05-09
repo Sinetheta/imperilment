@@ -1,0 +1,27 @@
+<table class='table'>
+  <thead>
+    <tr>
+      <th class='score hidden-phone'><%= t :overall_total %></th>
+      <th><%= User.model_name.human %></th>
+      <th><%= t :finishes %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @results.each do |result| %>
+      <tr>
+        <td class='score hidden-phone'>
+          <%= "#{t :currency_symbol} #{result[:total]}" %>
+        </td>
+        <td class='email'><%= User.find(result[:user_id]).identifier %></td>
+        <td class='finishes'>
+          <i class='fa fa-trophy gold'></i>
+          <span><%= result[:first] %></span>
+          <i class='fa fa-trophy silver'></i>
+          <span><%= result[:second] %></span>
+          <i class='fa fa-trophy bronze'></i>
+          <span><%= result[:third] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

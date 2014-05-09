@@ -65,7 +65,7 @@ group :development, :test do
   gem 'sqlite3'
   gem 'timecop'
 
-  gem 'pry', github: 'pry/pry'
+  gem 'pry'
 
   gem 'fuubar'
   gem 'konacha'

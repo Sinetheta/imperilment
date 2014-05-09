@@ -15,6 +15,7 @@ en:
 
   pick_a_week: Pick a Week
   overall_results: Overall Results
+  overall_results_by_money: Overall Results By Total Money
   overall_total: Overall Total
   weekly_total: Weekly Total
   weekly_results: Weekly Results
@@ -58,6 +59,8 @@ en:
   leader_boards:
     index:
       info: 'These are the overall results to date for all finished games. The current week is not taken into account.'
+    money:
+      info: 'These are the overall results to date for all finished games, ordered by total money. The current week is not taken into account.'
 
   activerecord:
     models:

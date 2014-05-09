@@ -14,15 +14,6 @@ GIT
       spring
 
 GIT
-  remote: git://github.com/pry/pry.git
-  revision: 762dc796ded0ab11c37a3a6851252026200508f1
-  specs:
-    pry (0.10.0.pre)
-      coderay (~> 1.1.0)
-      method_source (~> 0.8)
-      slop (~> 3.4)
-
-GIT
   remote: https://github.com/3months/cancan
   revision: b9aa14fd51b773340e5901a6bd02ca07c765c73b
   branch: strong_parameters
@@ -211,6 +202,10 @@ GEM
       multi_json (~> 1.0)
       websocket-driver (>= 0.2.0)
     polyglot (0.3.4)
+    pry (0.9.12.6)
+      coderay (~> 1.0)
+      method_source (~> 0.8)
+      slop (~> 3.4)
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
     rack (1.5.2)
@@ -362,7 +357,7 @@ DEPENDENCIES
   omniauth-openid
   oops!
   poltergeist
-  pry!
+  pry
   quiet_assets
   rails (~> 4.1.1)
   redcarpet

@@ -16,6 +16,7 @@ Imperilment::Application.routes.draw do
     end
   end
 
+  get 'leader_board/money' => 'leader_boards#money', as: :overall_money_leader_board
   get '/leader_board/overall' => 'leader_boards#index', as: :overall_leader_board
   get '/leader_board(/:game_id)' => 'leader_boards#show', as: :leader_board
   root :to => 'landing#show'
