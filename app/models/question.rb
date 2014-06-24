@@ -9,6 +9,8 @@ class Question < ActiveRecord::Base
 
   scope :unchecked, -> { where(correct: nil) }
   scope :checked, -> { where{correct != nil} }
+  scope :correct, -> { where(correct: true) }
+  scope :by_game, ->(game) { joins(answer: :game).where(games: { id: game.id }) }
 
   delegate :correct_question, to: :answer
 

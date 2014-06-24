@@ -16,6 +16,7 @@
       <% unless @game.answers.empty? %>
         <th class='hidden-phone'><%= t :breakdown %></th>
     <% end %>
+    <th class='record'><%= t :percentage_correct %></th>
     </tr>
   </thead>
   <tbody>
@@ -46,6 +47,9 @@
               </tr>
             </tbody>
           </table>
+        </td>
+        <td>
+          <%= number_to_percentage result.user.percentage_correct_by_game(result.game), precision: 1 %>
         </td>
       <% end %>
     </tr>

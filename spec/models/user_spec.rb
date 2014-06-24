@@ -125,4 +125,33 @@ describe User do
       end
     end
   end
+
+  RSpec.shared_context "shared percentage setup" do
+    let(:user) { create :user }
+    let(:game) { create :game }
+    let(:answer1) { create :answer, game: game }
+    let(:answer2) { create :answer, game: game }
+    let(:answer3) { create :answer }
+    let!(:question1) { create :question, correct: false, user: user, answer: answer1 }
+    let!(:question2) { create :question, correct: true, user: user, answer: answer2 }
+    let!(:question3) { create :question, correct: true, user: user, answer: answer3 }
+  end
+
+  describe ".percentage_correct_by_game" do
+    include_context "shared percentage setup"
+    let(:game_percentage) { 50.0 }
+
+    it "returns the percentage of the game's questions that the user correctly answered" do
+      expect(user.percentage_correct_by_game game).to eql game_percentage
+    end
+  end
+
+  describe ".percentage_correct_overall" do
+    include_context "shared percentage setup"
+    let(:overall_percentage) { (2.0/3.0)*100 }
+
+    it "returns the percentage of all questions that the user correctly answered" do
+      expect(user.percentage_correct_overall).to eql overall_percentage
+    end
+  end
 end

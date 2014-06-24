@@ -53,6 +53,8 @@ group :development do
   gem 'meta_request'
 
   gem 'thin'
+
+  gem 'xray-rails'
 end
 
 group :development, :test do
