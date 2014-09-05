@@ -10,3 +10,16 @@ It's the triva game where you get the answers, and need to respond with the ques
 * ruby >= 1.9.3
 * Some database (sqlite3/mysql/postgresql should all work)
 * [A day-to-day Jeopardy calendar](http://www.amazon.com/Jeopardy-2014-Day---Day-Calendar/dp/1449430880/)
+
+## Getting Started
+
+ - `$ bundle install`
+ - `$ sh bootstrap`
+ - `$ rails server`
+
+## Development
+
+### Admin
+
+http://localhost:3000/users/sign_in to login without using acutal gmail auth,
+ **Email:** `admin@example.com` **Password:** `test123`
