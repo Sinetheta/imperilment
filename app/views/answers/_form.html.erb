@@ -1,27 +1,23 @@
 <%= simple_form_for [@game, @answer] do |f| %>
   <%= f.error_notification %>
+  ANSWERs
+  <%= f.association :category %>
+  <%= f.input :correct_question, input_html: {rows: 5} %>
+  <%= f.input :answer, input_html: {rows: 5} %>
 
-  <div class="form-inputs">
-    <%= f.association :category, input_html: {class: 'input-xlarge'} %>
-    <%= f.input :correct_question, input_html: {class: 'input-block-level', rows: 5} %>
-    <%= f.input :answer, input_html: {class: 'input-block-level', rows: 5} %>
+  <%= f.input :amount do %>
+    <div class='input-group'>
+      <span class='input-group-addon'><%= t(:currency_symbol) %></span>
+      <%= f.text_field :amount, data: { new: f.object.new_record? }, class: 'form-control' %>
+    </div>
+  <% end %>
+  <%= f.input :start_date do %>
+    <div class='input-group'>
+      <span class='input-group-addon'><%= icon 'calendar' %></span>
+      <% start_date = f.object.new_record? ? Answer.next_free_date : d(f.object.start_date) %>
+      <%= f.text_field :start_date, value: start_date, class: 'form-control datepicker' %>
+    </div>
+  <% end %>
 
-    <%= f.input :amount do %>
-      <div class='input-prepend'>
-        <span class='add-on'><%= t(:currency_symbol) %></span>
-        <%= f.text_field :amount, data: { new: f.object.new_record? }%>
-      </div>
-    <% end %>
-    <%= f.input :start_date do %>
-      <div class='input-prepend'>
-        <span class='add-on'><%= icon 'calendar' %></span>
-        <% start_date = f.object.new_record? ? Answer.next_free_date : d(f.object.start_date) %>
-        <%= f.text_field :start_date, value: start_date, class: 'datepicker' %>
-      </div>
-    <% end %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, class: 'btn btn-primary' %>
-  </div>
+  <%= f.button :submit, class: 'btn btn-primary' %>
 <% end %>

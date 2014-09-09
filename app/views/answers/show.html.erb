@@ -2,7 +2,7 @@
 <h1 class='answer-date'><%= @answer.start_date %></h1>
 
 <div class='question-container row'>
-  <div class='span4'>
+  <div class='col-md-4'>
     <div class="area">
       <div class='category'><p><%= @answer.category.name %></p></div>
     </div>
@@ -12,7 +12,7 @@
       </div>
     <% end %>
   </div>
-  <div class='span8'>
+  <div class='col-md-8'>
     <div class='area-answer'>
       <div class='answer'><%= raw Redcarpet::Markdown.new(Redcarpet::Render::HTML.new).render(@answer.answer) %></div>
     </div>

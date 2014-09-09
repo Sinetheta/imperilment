@@ -22,7 +22,7 @@
           <% if can? :check, answer %>
             <% unchecked_questions = answer.questions.unchecked.count %>
             <% if unchecked_questions > 0 %>
-              <%= link_to [@game, answer, :questions], class: 'badge badge-danger' do %>
+              <%= link_to [@game, answer, :questions], class: 'badge' do %>
                 <%= unchecked_questions %>
               <% end %>
             <% end %>

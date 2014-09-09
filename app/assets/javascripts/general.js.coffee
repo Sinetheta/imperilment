@@ -1,6 +1,11 @@
 ((window) ->
   $ ->
-    $('select').select2()
+    $('select')
+    # bootstrap styles added by simple form are bad for the <select>
+    .removeClass('form-control')
+    # but we still need to style "inside" of the generated label+input pair
+    .wrapAll('<div />')
+    .select2()
 
     $(document).on 'focus', 'input.datepicker', ->
       $(this).datepicker

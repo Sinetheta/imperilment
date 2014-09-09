@@ -110,14 +110,13 @@ form {
 }
 
 .badge {
-  @include border-radius(16px);
+  border-radius: 16px;
   width: 14px;
   height: 14px;
   padding: 4px;
   text-align: center;
 
   &.badge-danger {
-    @include buttonBackground($btnDangerBackground, $btnDangerBackgroundHighlight);
     background-color: #a90329;
     border: 1px solid;
     border-color: #bd362f #bd362f #802420;
@@ -159,33 +158,33 @@ form {
 }
 
 table.breakdown {
-  border: 1px solid $grayLight;
+  border: 1px solid $gray-light;
   border-collapse: separate;
-  background-color: $white;
-  @include border-radius(4px);
+  background-color: white;
+  border-radius: 4px;
 
   thead tr {
     th {
-      @include buttonBackground($grayLighter, $grayLight);
-      border-left: 1px solid $grayLight;
-      border-bottom: 1px solid $grayLight;
+      background: $gray-lighter;
+      border-left: 1px solid $gray-light;
+      border-bottom: 1px solid $gray-light;
       padding: 2px;
       text-align: center;
 
       &:first-child {
-        @include border-top-left-radius(2px);
+        border-top-left-radius: 2px;
         border-left: none;
       }
 
       &:last-child {
-        @include border-top-right-radius(2px);
+        border-top-right-radius: 2px;
       }
     }
   }
 
   tbody tr {
     td {
-      border-left: 1px solid $grayLight;
+      border-left: 1px solid $gray-light;
       padding: 2px;
       width: 16px;
       line-height: 12px;
@@ -196,19 +195,19 @@ table.breakdown {
       }
 
       & i.fa-check {
-        color: $green;
+        color: $brand-success;
       }
 
       & i.fa-times {
-        color: $red;
+        color: $brand-danger;
       }
 
       & i.fa-asterisk {
-        color: $orange;
+        color: $brand-warning;
       }
 
       & i.fa-minus {
-        color: $grayLight;
+        color: $gray-light;
       }
     }
   }
@@ -228,10 +227,10 @@ i {
   }
 }
 
-.navbar .brand {
-  margin: 3px;
-  border: solid grey 2px;
-  border-radius: 4px;
-  padding: 5px;
+.navbar-default .navbar-brand {
+  color: $link-color;
   font-family: imperilment;
+  &:hover {
+    color: $link-hover-color;
+  }
 }

@@ -1,11 +1,7 @@
 <%= simple_form_for(@category) do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :name %>
-  </div>
+  <%= f.input :name %>
 
-  <div class="form-actions">
-    <%= f.button :submit, class: 'btn btn-primary' %>
-  </div>
+  <%= f.button :submit, class: 'btn btn-primary' %>
 <% end %>
