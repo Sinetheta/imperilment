@@ -14,12 +14,12 @@
       <tr class='<%= game.locked? ? 'info' : '' %>'>
         <td><%= l game.ended_at, format: :long %></td>
         <td>
-          <%= link_to Answer.model_name.human(count: :many), game_answers_path(game), class: 'btn btn-small' %>
+          <%= link_to Answer.model_name.human(count: :many), game_answers_path(game), class: 'btn btn-small btn-default' %>
           <div class='btn-group'>
-            <%= link_to game, class: 'btn btn-small' do %>
+            <%= link_to game, class: 'btn btn-small btn-default' do %>
               <%= icon 'eye' %>
             <% end %>
-            <%= link_to [:edit, game], class: 'btn btn-small' do %>
+            <%= link_to [:edit, game], class: 'btn btn-small btn-default' do %>
               <%= icon 'pencil' %>
             <% end %>
             <%= link_to game, method: :delete, class: 'btn btn-danger btn-small', data: {confirm: t(:confirm_destroy)} do %>
@@ -50,4 +50,4 @@
 
 <%= paginate @games %>
 
-<%= link_to t(:new_model, model: Game.model_name.human), new_game_path, class: 'btn' %>
+<%= link_to t(:new_model, model: Game.model_name.human), new_game_path, class: 'btn btn-default' %>
