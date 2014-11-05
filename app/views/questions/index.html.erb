@@ -18,7 +18,7 @@
 
     <tbody>
       <% @questions.each do |question| %>
-        <tr class='<%= question.checked? ? (question.correct? ? 'success' : 'error') : '' %>'>
+        <tr class='<%= question.checked? ? (question.correct? ? 'success' : 'danger') : '' %>'>
           <td class='email'><%= question.user.identifier %></td>
           <td><%= question.response %></td>
           <% if @answer.amount.nil? %>
