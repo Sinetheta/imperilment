@@ -10,8 +10,8 @@ class User < ActiveRecord::Base
   # Extra fields for leader board stuffs.
   attr_writer :overall_score, :first, :second, :third
 
-  has_many :game_results
-  has_many :questions
+  has_many :game_results, dependent: :destroy
+  has_many :questions, dependent: :destroy
 
   # Wish there was a nicer way to do this. >.<
   def overall_score; @overall_score ||= 0; end
