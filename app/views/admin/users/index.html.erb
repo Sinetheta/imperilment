@@ -19,10 +19,10 @@
           </td>
           <td class='hidden-phone'>
             <div class='btn-group'>
-              <%= link_to [:edit, :admin, user], class: 'btn btn-small' do %>
+              <%= link_to [:edit, :admin, user], class: 'btn btn-small btn-default' do %>
                 <%= icon 'pencil' %>
               <% end %>
-              <%= link_to [:admin, user], class: 'btn btn-small' do %>
+              <%= link_to [:admin, user], class: 'btn btn-small btn-default' do %>
                 <%= icon 'eye' %>
               <% end %>
               <%= link_to [:admin, user], method: :delete, class: 'btn btn-danger btn-small', data: {confirm: t(:confirm_destroy)} do %>
