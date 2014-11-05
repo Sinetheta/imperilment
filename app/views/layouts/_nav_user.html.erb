@@ -1,6 +1,6 @@
 <div class='navbar-right btn-group'>
   <% if current_user %>
-    <a class='btn dropdown-toggle' href='#' data-toggle='dropdown'>
+    <a class='btn-link dropdown-toggle' href='#' data-toggle='dropdown'>
       <%= icon :user %>
       <%= current_user.email %>
       <span class='caret'></span>
@@ -23,7 +23,7 @@
       </li>
     </ul>
   <% else %>
-    <%= link_to user_omniauth_authorize_path(:google), class: 'btn' do %>
+    <%= link_to user_omniauth_authorize_path(:google), class: 'btn-link' do %>
       <%= icon :user %>
       Log in
     <% end %>

@@ -235,3 +235,10 @@ i {
     color: $link-hover-color;
   }
 }
+
+.navbar-right a {
+  display: block;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  line-height: 20px;
+}
