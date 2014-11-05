@@ -14,10 +14,10 @@
         <td><%= category.name %></td>
         <td>
           <div class='btn-group pull-right'>
-            <%= link_to category, class: 'btn btn-small' do %>
+            <%= link_to category, class: 'btn btn-small btn-default' do %>
               <%= icon 'eye' %>
             <% end %>
-            <%= link_to [:edit, category], class: 'btn btn-small' do %>
+            <%= link_to [:edit, category], class: 'btn btn-small btn-default' do %>
               <%= icon 'pencil' %>
             <% end %>
             <%= link_to category, method: :delete, class: 'btn btn-danger btn-small', data: {confirm: t(:confirm_destroy)} do %>
@@ -32,4 +32,4 @@
 
 <%= paginate @categories %>
 
-<%= link_to t(:new_model, model: Category.model_name.human), new_category_path, class: 'btn' %>
+<%= link_to t(:new_model, model: Category.model_name.human), new_category_path, class: 'btn btn-default' %>
