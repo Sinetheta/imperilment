@@ -36,10 +36,10 @@
         <td class='amount'><%= number_to_currency answer.amount, precision: 0, unit: t(:currency_symbol) %></td>
         <td class='hidden-phone'>
           <div class='btn-group'>
-            <%= link_to [@game, answer], class: 'btn btn-small' do %>
+            <%= link_to [@game, answer], class: 'btn btn-small btn-default' do %>
               <%= icon 'eye' %>
             <% end %>
-            <%= link_to [:edit, @game, answer], class: 'btn btn-small' do %>
+            <%= link_to [:edit, @game, answer], class: 'btn btn-small btn-default' do %>
               <%= icon 'pencil' %>
             <% end %>
             <%= link_to [@game, answer], method: :delete, class: 'btn btn-danger btn-small', data: {confirm: t(:confirm_destroy)} do %>
@@ -52,4 +52,4 @@
   </tbody>
 </table>
 
-<%= link_to t(:new_model, model: Answer.model_name.human), [:new, @game, :answer], class: 'btn' %>
+<%= link_to t(:new_model, model: Answer.model_name.human), [:new, @game, :answer], class: 'btn btn-default' %>

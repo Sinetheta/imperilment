@@ -37,7 +37,7 @@
     <% end %>
   <% end %>
   <div class='pull-right'>
-    <%= link_to t(:edit), [:edit, @game, @answer], class: 'btn' if can?(:edit, @answer) %>
-    <%= link_to t(:back), [@game, :answers], class: 'btn' %>
+    <%= link_to t(:edit), [:edit, @game, @answer], class: 'btn btn-default' if can?(:edit, @answer) %>
+    <%= link_to t(:back), [@game, :answers], class: 'btn btn-default' %>
   </div>
 </div>
