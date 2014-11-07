@@ -28,16 +28,14 @@
 
       request.done (msg)->
         if correct is null
-          container.removeClass('success error')
-          container.find('span.checked').fadeOut ->
-            container.find('span.actions').fadeIn()
+          container.removeClass('success danger')
+          container.find('span.checked, span.actions').toggleClass('show hide')
         else
           if correct
             container.addClass('success')
           else
-            container.addClass('error')
-          container.find('span.actions').fadeOut ->
-            container.find('span.checked').fadeIn()
+            container.addClass('danger')
+          container.find('span.actions, span.checked').toggleClass('show hide')
       false
 
     $(document).on 'click', 'a[data-lock]', ->
