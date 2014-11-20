@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 ruby '2.0.0'
 
-gem 'rails', '~> 4.1.1'
+gem 'rails', '~> 4.2.0.beta4'
 
 gem 'devise'
 gem 'omniauth-openid'
@@ -15,7 +15,7 @@ gem 'show_for'
 gem 'will_paginate'
 gem 'select2-rails'
 
-gem 'sass-rails', '>= 3.2'
+gem 'sass-rails', '~> 5.0.0.beta1'
 gem 'coffee-rails'
 
 gem 'jquery-rails'

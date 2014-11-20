@@ -12,7 +12,7 @@ describe BootstrapHelper do
       helper.flash['notice'] = 'test'
     end
     subject { helper.flash_notice 'notice', 'error' }
-    specify { should == "<div class=\"alert alert-block alert-error fade in\"><button class=\"close\" data-dismiss=\"alert\" name=\"button\" type=\"button\">×</button><h4 class=\"alert-heading\">Notice</h4><p>test</p></div>" }
+    specify { should == "<div class=\"alert alert-block alert-error fade in\"><button name=\"button\" type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button><h4 class=\"alert-heading\">Notice</h4><p>test</p></div>" }
   end
 
   describe '.progress_bar' do
