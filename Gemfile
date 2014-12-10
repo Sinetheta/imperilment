@@ -34,6 +34,8 @@ gem 'redcarpet'
 gem 'dotenv-rails'
 gem 'oops', github: 'freerunningtech/oops'
 
+gem "skylight"
+
 group :development do
   gem 'quiet_assets'
   gem 'letter_opener'
