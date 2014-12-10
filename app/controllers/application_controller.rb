@@ -3,6 +3,12 @@ class ApplicationController < ActionController::Base
 
   check_authorization unless: :devise_controller?
 
+  before_filter do
+    if params[:profile]
+      Rack::MiniProfiler.authorize_request
+    end
+  end
+
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
       message = exception.message

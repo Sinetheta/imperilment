@@ -34,7 +34,9 @@ gem 'redcarpet'
 gem 'dotenv-rails'
 gem 'oops', github: 'freerunningtech/oops'
 
-gem "skylight"
+gem 'skylight'
+gem 'rack-mini-profiler'
+gem 'flamegraph'
 
 group :development do
   gem 'quiet_assets'

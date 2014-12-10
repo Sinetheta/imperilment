@@ -11,5 +11,12 @@ describe ApplicationController do
       get :index, format: :json
     end
     specify { response.status.should == 403 }
+
+    context "when ?profile=true" do
+      it "should authorize the request for mini-profiler" do
+        expect(Rack::MiniProfiler).to receive(:authorize_request)
+        get :index, format: :json, profile: true
+      end
+    end
   end
 end
