@@ -37,4 +37,10 @@ class GameResult < ActiveRecord::Base
       .where('total > 0')
       .group(:user_id)
   end
+
+  def percentage_correct
+    correct = results.count(:correct)
+    incorrect = results.count(:incorrect)
+    correct.to_f / (correct + incorrect).to_f * 100
+  end
 end

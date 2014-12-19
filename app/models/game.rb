@@ -23,7 +23,7 @@ class Game < ActiveRecord::Base
   end
 
   def started_on
-    answers.order(:start_date).pluck(:start_date).first
+    answers.map{|a| a.start_date }.min
   end
 
   def date_range

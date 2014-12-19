@@ -140,9 +140,14 @@ describe User do
   describe ".percentage_correct_by_game" do
     include_context "shared percentage setup"
     let(:game_percentage) { 50.0 }
+    before do
+      game.update!(ended_at: game.started_on + 1.week)
+      game.reload # Needed to have all the answers loaded
+    end
+    let(:game_result) { GameResult.new(user: user, game: game) }
 
     it "returns the percentage of the game's questions that the user correctly answered" do
-      expect(user.percentage_correct_by_game game).to eql game_percentage
+      expect(game_result.percentage_correct).to eql game_percentage
     end
   end
 

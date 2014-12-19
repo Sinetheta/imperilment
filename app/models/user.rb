@@ -79,11 +79,6 @@ class User < ActiveRecord::Base
       #stubbing methods from the class under test===bad
   end
 
-  def percentage_correct_by_game game
-    questions_by_game = questions.by_game game
-    ((questions_by_game.correct.count.to_f / questions_by_game.count.to_f)*100)
-  end
-
   def percentage_correct_overall
     ((questions.correct.count.to_f / questions.count.to_f)*100)
   end
