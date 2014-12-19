@@ -29,7 +29,7 @@ describe LeaderBoardsController do
   describe 'GET show' do
     context "games dont exist" do
       it 'shouldnt fail miserably with an exception' do
-        Game.stub_chain("order.reverse_order.first").and_return(nil)
+        Game.destroy_all
         get :show
         assigns(:game).should be_nil
       end

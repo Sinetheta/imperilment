@@ -20,6 +20,7 @@ describe Game do
         2.times do
           answer = create(:answer, game: game, correct_question: correct_question, amount: answer_value)
           create :question, answer: answer, user: user, correct: true
+          game.reload
         end
       end
 
@@ -33,6 +34,7 @@ describe Game do
           before do
             answer = create(:answer, game: game, amount: nil, correct_question: correct_question)
             create :question, answer: answer, user: user, correct: true, amount: 200
+            game.reload
           end
 
           context "when the game is not locked" do

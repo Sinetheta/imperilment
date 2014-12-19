@@ -27,10 +27,11 @@ class LeaderBoardsController < ApplicationController
   protected
 
   def load_most_recent_game
+    games_scope = Game.includes(:answers => :questions)
     if params[:game_id]
-      @game = Game.find(params[:game_id])
+      @game = games_scope.find(params[:game_id])
     else
-      @game = Game.order(:created_at).reverse_order.first
+      @game = games_scope.order(:created_at).reverse_order.first
     end
   end
 end
