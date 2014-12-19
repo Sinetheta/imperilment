@@ -14,26 +14,30 @@ describe Game do
     end
 
     context "when there are results" do
+      let(:answer_value){ 200 }
+
       before do
-        2.times { create :question, answer: create(:answer, game: game), user: user }
-        Question.any_instance.stub(:value) { 200 }
+        2.times do
+          answer = create(:answer, game: game, correct_question: correct_question, amount: answer_value)
+          create :question, answer: answer, user: user, correct: true
+        end
       end
 
       context "when answer has a correct_question" do
-        before { Question.any_instance.stub(:correct_question) { "Correct!" } }
-
+        let(:correct_question){ "Correct!" }
         it "is the sum of all values" do
           game.score(user).should == 400
         end
 
         context "when the answer is nil (final imperilment)" do
           before do
-            create :question, answer: create(:answer, game: game, amount:nil), user: user
+            answer = create(:answer, game: game, amount: nil, correct_question: correct_question)
+            create :question, answer: answer, user: user, correct: true, amount: 200
           end
 
           context "when the game is not locked" do
             before do
-              game.locked = false
+              game.update!(locked: false)
             end
             it "should be the sum of all values, excluding the wager" do
               game.score(user).should == 400
@@ -42,7 +46,7 @@ describe Game do
 
           context "when the game is locked" do
             before do
-              game.locked = true
+              game.update!(locked: true)
             end
 
             it "should be the sum of all values" do
@@ -53,7 +57,7 @@ describe Game do
       end
 
       context "when answer does not have a correct_question" do
-        before { Question.any_instance.stub(:correct_question) { "" } }
+        let(:correct_question){ "" }
 
         it "does not include any results" do
           game.score(user).should == 0
