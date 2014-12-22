@@ -22,7 +22,6 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    raise "Can't create second question" if @answer.question_for(current_user)
     respond_with @game, @answer, @question
   end
 
