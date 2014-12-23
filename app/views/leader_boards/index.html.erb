@@ -2,7 +2,7 @@
   <span><%= t :weekly_results %>:</span>
   <select>
     <option><%= t :pick_a_week %></option>
-    <% Game.order(:ended_at).each do |game| %>
+    <% @games.order(:ended_at).each do |game| %>
       <%= content_tag :option, l(game.ended_at, format: :long), value: game.id, data: {path: leader_board_path(game)} %>
     <% end %>
   </select>

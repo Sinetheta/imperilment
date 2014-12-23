@@ -1,9 +1,9 @@
 <div class='dropdown-nav pull-right'>
   <span><%= t :previous_model, model: Game.model_name.human(count: :many) %>:</span>
   <select>
-    <% Game.order(:ended_at).each do |game| %>
+    <% @games.each do |game| %>
       <%= content_tag :option, l(game.ended_at, format: :long), value: game.id, data: {path: leader_board_path(game)}, selected: game.id == @game.id %>
-  <% end %>
+    <% end %>
   </select>
 </div>
 <h1><%= t :leader_board %></h1>

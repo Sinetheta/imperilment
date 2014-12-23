@@ -1,5 +1,5 @@
 class LeaderBoardsController < ApplicationController
-  before_filter :load_most_recent_game, except: [:index]
+  before_filter :load_games
 
   authorize_resource :game
 
@@ -11,6 +11,12 @@ class LeaderBoardsController < ApplicationController
   end
 
   def show
+    if params[:game_id]
+      @game = @games.find(params[:game_id])
+    else
+      @game = @games.last
+    end
+
     if @game
       @results = @game.build_results
       respond_with(@results, include: :user, methods: :results)
@@ -26,12 +32,11 @@ class LeaderBoardsController < ApplicationController
 
   protected
 
-  def load_most_recent_game
-    games_scope = Game.includes(:answers => :questions)
-    if params[:game_id]
-      @game = games_scope.find(params[:game_id])
-    else
-      @game = games_scope.order(:created_at).reverse_order.first
-    end
+  def season
+    Season.current
+  end
+
+  def load_games
+    @games ||= season.games
   end
 end
