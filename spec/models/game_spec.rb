@@ -143,11 +143,12 @@ describe Game do
   end
 
   describe '#grouped_and_sorted_by_score' do
-    let(:user) { create :user }
+    let!(:user) { create :user }
+    let!(:answer) { create :answer, game: game, amount: 1}
+    let!(:question) { create :question, user: user, answer: answer, correct: true }
 
     before(:each) do
-      game.stub(:users) { [user] }
-      game.stub(:score) { 1 }
+      game.reload
     end
 
     it 'should return the users grouped and sorted by score' do
