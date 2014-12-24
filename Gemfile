@@ -73,7 +73,6 @@ group :development, :test do
 
   gem 'pry'
 
-  gem 'fuubar'
   gem 'konacha'
   gem 'konacha-chai-matchers'
   gem 'ejs'
