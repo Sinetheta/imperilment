@@ -122,11 +122,8 @@ describe Game do
   end
 
   describe 'calculate_result hook' do
-    before do
-      # FIXME - Don't stub methods; know what you're testing.
-      game.stub(:grouped_and_sorted_by_score) { { 200 => [User.new(id: 1)] } }
-    end
-
+    let!(:answer) { create :answer, game: game }
+    let!(:question) { create :question, answer: answer }
     it 'calculates results when locking the game' do
       game.locked = true
       expect { game.save! }.to change{GameResult.count}.by(1)
