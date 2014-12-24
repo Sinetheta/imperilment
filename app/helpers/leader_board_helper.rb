@@ -36,14 +36,4 @@ module LeaderBoardHelper
       question.status
     end
   end
-
-
-  def breakdown_link(game, date)
-    answer = game.answers.reject{|a| a.start_date != date}.first
-    if answer.nil?
-      'javascript:;'
-    else
-      game_answer_path(game, answer)
-    end
-  end
 end
