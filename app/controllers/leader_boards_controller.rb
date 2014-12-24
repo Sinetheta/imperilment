@@ -11,10 +11,11 @@ class LeaderBoardsController < ApplicationController
   end
 
   def show
+    game_scope = @games.includes(:answers => :questions)
     if params[:game_id]
-      @game = @games.find(params[:game_id])
+      @game = game_scope.find(params[:game_id])
     else
-      @game = @games.last
+      @game = game_scope.last
     end
 
     if @game
