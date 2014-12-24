@@ -9,13 +9,13 @@ gem 'omniauth-openid'
 gem 'rolify'
 gem 'cancan', :git => 'https://github.com/3months/cancan', :branch => 'strong_parameters'
 
-gem 'simple_form', '3.1.0.rc2'
+gem 'simple_form', '3.1.0'
 gem 'show_for'
 
 gem 'will_paginate'
 gem 'select2-rails'
 
-gem 'sass-rails', '~> 5.0.0.beta1'
+gem 'sass-rails', '~> 5.0.0'
 gem 'coffee-rails'
 
 gem 'jquery-rails'
