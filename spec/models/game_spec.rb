@@ -123,7 +123,7 @@ describe Game do
 
   describe 'calculate_result hook' do
     before do
-      # FIXME - Don't stub methods no what you're testing
+      # FIXME - Don't stub methods; know what you're testing.
       game.stub(:grouped_and_sorted_by_score) { { 200 => [User.new(id: 1)] } }
     end
 
