@@ -7,7 +7,7 @@ gem 'rails', '~> 4.2.0'
 gem 'devise'
 gem 'omniauth-openid'
 gem 'rolify'
-gem 'cancan', :git => 'https://github.com/3months/cancan', :branch => 'strong_parameters'
+gem 'cancancan'
 
 gem 'simple_form', '3.1.0'
 gem 'show_for'

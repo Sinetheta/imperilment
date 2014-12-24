@@ -13,13 +13,6 @@ GIT
       guard
       spring
 
-GIT
-  remote: https://github.com/3months/cancan
-  revision: b9aa14fd51b773340e5901a6bd02ca07c765c73b
-  branch: strong_parameters
-  specs:
-    cancan (1.6.10)
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -76,6 +69,7 @@ GEM
       sass (~> 3.2)
     builder (3.2.2)
     callsite (0.0.11)
+    cancancan (1.9.2)
     capybara (2.2.1)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -365,7 +359,7 @@ DEPENDENCIES
   binding_of_caller
   bootstrap-datepicker-rails
   bootstrap-sass (~> 3.2.0)
-  cancan!
+  cancancan
   coffee-rails
   datejs-rails
   devise
