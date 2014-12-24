@@ -68,4 +68,55 @@ describe GameResult do
       it { should == [:questionstatus, :unavailable] }
     end
   end
+
+  describe 'percentage_correct' do
+    let(:start_date){ Date.new(2012, 1, 1) }
+    let(:user){ User.new }
+    let(:game){ Game.new answers: answers, ended_at: start_date + 1.week }
+    let(:game_result){ GameResult.new(user: user, game: game) }
+
+    def answer correct
+      @date ||= start_date
+      Answer.new do |a|
+        a.start_date = @date
+        a.questions.new do |q|
+          q.user = user
+          q.correct = correct
+        end
+        @date += 1.day
+      end
+    end
+
+    subject { game_result.percentage_correct }
+
+    context 'with no answers' do
+      let(:answers){ [] }
+      it{ should == 0 }
+    end
+
+    context 'with one unanswered answer' do
+      let(:answers){ [answer(nil)] }
+      it{ should == 0 }
+    end
+
+    context 'with one incorrect answer' do
+      let(:answers){ [answer(false)] }
+      it{ should == 0 }
+    end
+
+    context 'with one correct answer' do
+      let(:answers){ [answer(true)] }
+      it{ should == 100 }
+    end
+
+    context 'with one correct answer, one unanswered' do
+      let(:answers){ [answer(true), answer(nil)] }
+      it{ should == 100 }
+    end
+
+    context 'with one correct answer, one incorrect' do
+      let(:answers){ [answer(true), answer(false)] }
+      it{ should == 50 }
+    end
+  end
 end

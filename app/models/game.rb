@@ -27,7 +27,11 @@ class Game < ActiveRecord::Base
   end
 
   def date_range
-    (started_on..ended_at)
+    if started_on
+      (started_on..ended_at)
+    else
+      []
+    end
   end
 
   def build_results
