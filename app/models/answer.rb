@@ -36,9 +36,16 @@ class Answer < ActiveRecord::Base
     self.order(:start_date).last
   end
 
+  def questions_by_user_id
+    @questions_by_user ||= Hash[questions.map do |q|
+      [q.user_id, q]
+    end]
+  end
+  private :questions_by_user_id
+
   def question_for(user)
     return nil unless user
-    questions.detect{|q| q.user_id == user.id }
+    questions_by_user_id[user.id]
   end
 
   def closed?
