@@ -90,9 +90,21 @@ describe Game do
   end
 
   describe '.calculate_result!' do
+    let(:user1) { create :user }
+    let(:user2) { create :user }
+    let(:user3) { create :user }
+    let(:user4) { create :user }
+
+    let(:answer1) { create :answer, game: game, amount: 200 }
+    let(:answer2) { create :answer, game: game, amount: 100 }
+
+    let!(:question1) { create :question, correct: true, answer: answer1, user: user1 }
+    let!(:question2) { create :question, correct: true, answer: answer2, user: user2 }
+    let!(:question3) { create :question, correct: true, answer: answer2, user: user3 }
+    let!(:question4) { create :question, correct: false, answer: answer2, user: user4 }
+
     before do
-      # FIXME - Don't stub methods no what you're testing
-      game.stub(:grouped_and_sorted_by_score) { { 200 => [User.new(id: 1)], 100 => [User.new(id: 2), User.new(id: 3)], 0 => [User.new(id: 4)]} }
+      game.reload
     end
 
     it 'creates 4 game results' do
