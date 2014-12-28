@@ -7,23 +7,23 @@ describe BreadcrumbHelper do
       before(:each) do
         helper.breadcrumb { "block" }
       end
-      specify { helper.breadcrumb.should == ['block'] }
+      specify { expect(helper.breadcrumb).to eq(['block']) }
     end
     context 'given content' do
       before(:each) do
         helper.breadcrumb 'content'
       end
-      specify { helper.breadcrumb.should == ['content'] }
+      specify { expect(helper.breadcrumb).to eq(['content']) }
     end
   end
 
   describe '.render_breadcrumbs' do
     before(:each) do
-      helper.stub(:breadcrumb).and_return ['second', 'first']
+      allow(helper).to receive(:breadcrumb).and_return ['second', 'first']
     end
 
     subject { helper.render_breadcrumbs '+' }
 
-    specify { should == "<ul class=\"breadcrumb\"><li>first<span class=\"divider\">+</span></li><li>second</li></ul>" }
+    specify { is_expected.to eq("<ul class=\"breadcrumb\"><li>first<span class=\"divider\">+</span></li><li>second</li></ul>") }
   end
 end

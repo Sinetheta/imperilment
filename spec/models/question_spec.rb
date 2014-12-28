@@ -8,7 +8,7 @@ describe Question do
     before(:each) do
       question.answer.amount = nil
     end
-    it { should_not be_valid }
+    it { is_expected.not_to be_valid }
   end
 
   context 'when a question for an answer already exists' do
@@ -18,7 +18,7 @@ describe Question do
     before(:each) { create :question, answer: answer, user: user }
 
     let(:question) { build :question, answer: answer, user: user }
-    specify { question.should_not be_valid }
+    specify { expect(question).not_to be_valid }
   end
 
   describe '.checked?' do
@@ -30,11 +30,11 @@ describe Question do
         question.correct = false
         question.save!
       end
-      it { should be_true }
+      it { is_expected.to be_truthy }
     end
 
     context 'when a question has not been checked' do
-      it { should be_false }
+      it { is_expected.to be_falsey }
     end
   end
 
@@ -43,15 +43,15 @@ describe Question do
     subject{ question.status }
     context 'unmarked' do
       let(:correct){ nil }
-      it { should == :unmarked }
+      it { is_expected.to eq(:unmarked) }
     end
     context 'correct' do
       let(:correct){ true }
-      it { should == :correct }
+      it { is_expected.to eq(:correct) }
     end
     context 'incorrect' do
       let(:correct){ false }
-      it { should == :incorrect }
+      it { is_expected.to eq(:incorrect) }
     end
   end
 
@@ -69,17 +69,17 @@ describe Question do
 
       context "when correct" do
         let(:correct) { true }
-        it { should == amount }
+        it { is_expected.to eq(amount) }
       end
 
       context "when not correct" do
         let(:correct) { false }
-        it { should == (-amount) }
+        it { is_expected.to eq(-amount) }
       end
 
       context "when not correct or incorrect" do
         let(:correct) { nil }
-        it { should == 0 }
+        it { is_expected.to eq(0) }
       end
     end
 
@@ -88,12 +88,12 @@ describe Question do
 
       context "when correct" do
         let(:correct) { true }
-        it { should == amount }
+        it { is_expected.to eq(amount) }
       end
 
       context "when not correct" do
         let(:correct) { false }
-        it { should == 0 }
+        it { is_expected.to eq(0) }
       end
     end
   end
@@ -106,13 +106,13 @@ describe Question do
 
     subject { question.valid? }
     context 'when amounts are in range' do
-      before(:each) { question.stub(:in_range?) { true } }
+      before(:each) { allow(question).to receive(:in_range?) { true } }
       context 'when question and answer amounts are nil' do
-        it { should be_false }
+        it { is_expected.to be_falsey }
       end
       context 'when question amount is not nil' do
         let(:question_amount) { 100 }
-        it { should be_true }
+        it { is_expected.to be_truthy }
       end
     end
   end
@@ -125,12 +125,12 @@ describe Question do
     subject { question.in_range? }
 
     context 'when the amount is nil' do
-      it { should be_true }
+      it { is_expected.to be_truthy }
     end
 
     context 'when the amount is not nil' do
       before(:each) do
-        game.stub(:score) { 200 }
+        allow(game).to receive(:score) { 200 }
 
         question.amount = amount
       end
@@ -138,13 +138,13 @@ describe Question do
       context 'and outside the range' do
         let(:amount) { -100 }
 
-        it { should be_false }
+        it { is_expected.to be_falsey }
       end
 
       context 'and within the range' do
         let(:amount) { 100 }
 
-        it { should be_true }
+        it { is_expected.to be_truthy }
       end
     end
   end

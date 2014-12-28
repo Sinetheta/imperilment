@@ -2,10 +2,10 @@ require 'spec_helper'
 require 'timecop'
 
 describe Answer do
-  it { should validate_presence_of(:game_id) }
-  it { should validate_presence_of(:category_id) }
-  it { should validate_presence_of(:start_date) }
-  it { should validate_uniqueness_of(:start_date) }
+  it { is_expected.to validate_presence_of(:game_id) }
+  it { is_expected.to validate_presence_of(:category_id) }
+  it { is_expected.to validate_presence_of(:start_date) }
+  it { is_expected.to validate_uniqueness_of(:start_date) }
 
   let!(:first) { create :answer, start_date: '2013-01-01 00:00:00' }
   let!(:second) { create :answer, start_date: '2013-01-02 00:00:00' }
@@ -13,7 +13,7 @@ describe Answer do
 
   describe '#most_recent' do
     it 'should be the one with the latest start_date before today' do
-      Answer.most_recent.should == second
+      expect(Answer.most_recent).to eq(second)
     end
   end
 
@@ -23,7 +23,7 @@ describe Answer do
 
     context 'when there is atleast one previous answer' do
       it 'should be equal to the day after the third answer' do
-        should == date
+        is_expected.to eq(date)
       end
     end
 
@@ -35,32 +35,32 @@ describe Answer do
       after do
         Timecop.return
       end
-      it { should == Date.today }
+      it { is_expected.to eq(Date.today) }
     end
   end
 
   describe '#last_answer' do
     it 'should return the last answer based on date' do
-      Answer.last_answer.should == third
+      expect(Answer.last_answer).to eq(third)
     end
   end
 
   describe '.on' do
     it 'should find the answer with the matching date' do
-      Answer.on(first.start_date).should == first
+      expect(Answer.on(first.start_date)).to eq(first)
     end
   end
 
   describe '.prev' do
     context "when prevous record exists" do
       it 'should find the one before this one by start date' do
-        second.prev.should == first
+        expect(second.prev).to eq(first)
       end
     end
 
     context "when previous record does not exist" do
       it 'returns nil' do
-        first.prev.should be_nil
+        expect(first.prev).to be_nil
       end
     end
   end
@@ -68,13 +68,13 @@ describe Answer do
   describe '.next' do
     context "when next record exists" do
       it 'should find the one after this one by start date' do
-        second.next.should == third
+        expect(second.next).to eq(third)
       end
     end
 
     context "when next record does not exist" do
       it 'returns nil' do
-        third.next.should be_nil
+        expect(third.next).to be_nil
       end
     end
   end
@@ -84,17 +84,17 @@ describe Answer do
 
     context "when correct_question is nil" do
       before { first.correct_question = nil }
-      it { should be_false }
+      it { is_expected.to be_falsey }
     end
 
     context "when correct_question is the empty string" do
       before { first.correct_question = "" }
-      it { should be_false }
+      it { is_expected.to be_falsey }
     end
 
     context "when correct_question is some text" do
       before { first.correct_question = "Question" }
-      it { should be_true }
+      it { is_expected.to be_truthy }
     end
   end
 end

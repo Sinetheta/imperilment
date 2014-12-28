@@ -8,12 +8,12 @@ describe TitleHelper do
 
     context 'just one title' do
       let(:titles) { ['just_one'] }
-      specify { helper.title.should == titles }
+      specify { expect(helper.title).to eq(titles) }
     end
 
     context 'multiple titles' do
       let(:titles) { ['first', 'second'] }
-      specify { helper.title.should == titles }
+      specify { expect(helper.title).to eq(titles) }
     end
   end
 end

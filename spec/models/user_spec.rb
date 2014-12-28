@@ -12,7 +12,7 @@ describe User do
     context "when user is an administrator" do
       let(:user) { create :admin }
 
-      specify { user.should have_ability(:edit, for: Game.new) }
+      specify { expect(user).to have_ability(:edit, for: Game.new) }
     end
   end
 
@@ -21,12 +21,12 @@ describe User do
 
     [:overall_score, :first, :second, :third].each do |v|
       context 'when not set' do
-        specify { user.send(v).should == 0 }
+        specify { expect(user.send(v)).to eq(0) }
       end
 
       context 'when set' do
         before(:each) { user.instance_variable_set("@#{v.to_s}", 10) }
-        specify { user.send(v).should == 10 }
+        specify { expect(user.send(v)).to eq(10) }
       end
     end
   end
@@ -38,27 +38,27 @@ describe User do
 
     context 'when rank is 0' do
       let(:rank) { 0 }
-      it { should change(user, :first).by(1) }
-      it { should_not change(user, :second) }
-      it { should_not change(user, :third) }
+      it { is_expected.to change(user, :first).by(1) }
+      it { is_expected.not_to change(user, :second) }
+      it { is_expected.not_to change(user, :third) }
     end
     context 'when rank is 1' do
       let(:rank) { 1 }
-      it { should_not change(user, :first) }
-      it { should change(user, :second).by(1) }
-      it { should_not change(user, :third) }
+      it { is_expected.not_to change(user, :first) }
+      it { is_expected.to change(user, :second).by(1) }
+      it { is_expected.not_to change(user, :third) }
     end
     context 'when rank is 2' do
       let(:rank) { 2 }
-      it { should_not change(user, :first) }
-      it { should_not change(user, :second) }
-      it { should change(user, :third).by(1) }
+      it { is_expected.not_to change(user, :first) }
+      it { is_expected.not_to change(user, :second) }
+      it { is_expected.to change(user, :third).by(1) }
     end
     context 'when rank is anything else' do
       let(:rank) { 3 }
-      it { should_not change(user, :first) }
-      it { should_not change(user, :second) }
-      it { should_not change(user, :third) }
+      it { is_expected.not_to change(user, :first) }
+      it { is_expected.not_to change(user, :second) }
+      it { is_expected.not_to change(user, :third) }
     end
   end
 
@@ -70,12 +70,12 @@ describe User do
 
     context 'when the first_name is blank' do
       let(:name) { nil }
-      it { should == email }
+      it { is_expected.to eq(email) }
     end
 
     context 'when the first_name is not blank' do
       let(:name) { 'Alex' }
-      it { should == name }
+      it { is_expected.to eq(name) }
     end
   end
 
@@ -84,12 +84,12 @@ describe User do
     let!(:user) { create :user }
 
     before(:each) do
-      Game.stub(:locked) { [game] }
-      game.stub(:grouped_and_sorted_by_score) { {0 => [user]} }
+      allow(Game).to receive(:locked) { [game] }
+      allow(game).to receive(:grouped_and_sorted_by_score) { {0 => [user]} }
     end
 
     it 'should return the users with the overall_scores' do
-      User.with_overall_score.should == {0 => [user]}
+      expect(User.with_overall_score).to eq({0 => [user]})
     end
   end
 
@@ -106,15 +106,19 @@ describe User do
 
       context "when the user's last_name is blank" do
         let(:last_name) { nil }
-        its(:last_name) { should == name[0] }
+
+        describe '#last_name' do
+          subject { super().last_name }
+          it { is_expected.to eq(name[0]) }
+        end
       end
 
       context "when the user's last_name is not blank" do
         subject { ->{result} }
-        it { should_not change(user, :last_name) }
+        it { is_expected.not_to change(user, :last_name) }
       end
 
-      it { should == user }
+      it { is_expected.to eq(user) }
     end
 
     context "when user does not exist" do

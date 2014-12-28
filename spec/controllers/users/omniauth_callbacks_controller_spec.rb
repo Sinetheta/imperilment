@@ -12,18 +12,18 @@ describe Users::OmniauthCallbacksController do
 
     it "assigns user to @user" do
       get :google, email: "test@facebook.com"
-      assigns(:user).should == user
+      expect(assigns(:user)).to eq(user)
     end
 
     it "signs the user in" do
       get :google
-      subject.current_user.should == user
+      expect(subject.current_user).to eq(user)
     end
 
     it "redirects to the dashboard" do
       session[:"user.return_to"] = '/'
       get :google
-      response.should redirect_to '/'
+      expect(response).to redirect_to '/'
     end
 
   end

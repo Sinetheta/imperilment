@@ -5,19 +5,19 @@ describe LeaderBoardHelper do
     subject { helper.rank_class(rank) }
     context 'when the rank is 1' do
       let(:rank) { 1 }
-      it { should == 'gold' }
+      it { is_expected.to eq('gold') }
     end
     context 'when the rank is 2' do
       let(:rank) { 2 }
-      it { should == 'silver' }
+      it { is_expected.to eq('silver') }
     end
     context 'when the rank is 3' do
       let(:rank) { 3 }
-      it { should == 'bronze' }
+      it { is_expected.to eq('bronze') }
     end
     context 'when the rank anything else' do
       let(:rank) { 4 }
-      it { should == '' }
+      it { is_expected.to eq('') }
     end
   end
 
@@ -26,27 +26,27 @@ describe LeaderBoardHelper do
 
     context 'unavailable' do
       let(:result){ :unavailable }
-      it { should be_blank }
+      it { is_expected.to be_blank }
     end
 
     context 'unanswered' do
       let(:result){ :unanswered }
-      it { should == helper.icon('asterisk') }
+      it { is_expected.to eq(helper.icon('asterisk')) }
     end
 
     context 'unmarked' do
       let(:result){ :unmarked }
-      it { should == helper.icon('minus') }
+      it { is_expected.to eq(helper.icon('minus')) }
     end
 
     context 'correct' do
       let(:result){ :correct }
-      it { should == helper.icon('check') }
+      it { is_expected.to eq(helper.icon('check')) }
     end
 
     context 'incorrect' do
       let(:result){ :incorrect }
-      it { should == helper.icon('times') }
+      it { is_expected.to eq(helper.icon('times')) }
     end
   end
 
@@ -56,16 +56,16 @@ describe LeaderBoardHelper do
     before{ controller.stub(current_user: user) }
     context 'nil answer' do
       let(:answer){ nil }
-      it { should == :unavailable }
+      it { is_expected.to eq(:unavailable) }
     end
     context 'nil question' do
       let(:answer){ double(:answer, question_for: nil) }
-      it { should == :unanswered }
+      it { is_expected.to eq(:unanswered) }
     end
     context 'nil question' do
       let(:answer){ double(:answer, question_for: question) }
       let(:question){ double(:question, status: :foobar) }
-      it { should == :foobar }
+      it { is_expected.to eq(:foobar) }
     end
   end
 

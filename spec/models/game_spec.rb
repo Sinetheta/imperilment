@@ -9,7 +9,7 @@ describe Game do
 
     context "when no results" do
       it "is 0" do
-        game.score(user).should == 0
+        expect(game.score(user)).to eq(0)
       end
     end
 
@@ -27,7 +27,7 @@ describe Game do
       context "when answer has a correct_question" do
         let(:correct_question){ "Correct!" }
         it "is the sum of all values" do
-          game.score(user).should == 400
+          expect(game.score(user)).to eq(400)
         end
 
         context "when the answer is nil (final imperilment)" do
@@ -42,7 +42,7 @@ describe Game do
               game.update!(locked: false)
             end
             it "should be the sum of all values, excluding the wager" do
-              game.score(user).should == 400
+              expect(game.score(user)).to eq(400)
             end
           end
 
@@ -52,7 +52,7 @@ describe Game do
             end
 
             it "should be the sum of all values" do
-              game.score(user).should == 600
+              expect(game.score(user)).to eq(600)
             end
           end
         end
@@ -62,7 +62,7 @@ describe Game do
         let(:correct_question){ "" }
 
         it "does not include any results" do
-          game.score(user).should == 0
+          expect(game.score(user)).to eq(0)
         end
       end
     end
@@ -73,7 +73,7 @@ describe Game do
     let(:date) { Date.parse('1984-09-10') }
 
     subject { game.started_on }
-    it { should == date }
+    it { is_expected.to eq(date) }
   end
 
   describe '.date_range' do
@@ -86,7 +86,7 @@ describe Game do
     end
 
     subject { game.date_range }
-    it { should == (date..(date + 1.day)) }
+    it { is_expected.to eq(date..(date + 1.day)) }
   end
 
   describe '.calculate_result!' do
@@ -115,19 +115,19 @@ describe Game do
       before { game.calculate_result! }
       context 'first place user' do
         it 'is in first place' do
-          GameResult.find_by!(user_id: 1).position.should == 1
+          expect(GameResult.find_by!(user_id: 1).position).to eq(1)
         end
       end
 
       context 'second place user' do
         it 'is in second place' do
-          GameResult.find_by!(user_id: 3).position.should == 2
+          expect(GameResult.find_by!(user_id: 3).position).to eq(2)
         end
       end
 
       context 'last place user' do
         it 'is in fourth place' do
-          GameResult.find_by!(user_id: 4).position.should == 4
+          expect(GameResult.find_by!(user_id: 4).position).to eq(4)
         end
       end
     end
@@ -152,7 +152,7 @@ describe Game do
     end
 
     it 'should return the users grouped and sorted by score' do
-      game.grouped_and_sorted_by_score.should == {1 => [user]}
+      expect(game.grouped_and_sorted_by_score).to eq({1 => [user]})
     end
   end
 end

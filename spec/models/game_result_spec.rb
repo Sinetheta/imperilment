@@ -15,12 +15,12 @@ describe GameResult do
     describe 'user 1' do
       subject { GameResult.all_results }
 
-      specify { subject.first.first.should == 1 }
-      specify { subject.first.second.should == 0 }
-      specify { subject.first.third.should == 2 }
-      specify { subject.last.first.should == 1 }
-      specify { subject.last.second.should == 0 }
-      specify { subject.last.third.should == 0 }
+      specify { expect(subject.first.first).to eq(1) }
+      specify { expect(subject.first.second).to eq(0) }
+      specify { expect(subject.first.third).to eq(2) }
+      specify { expect(subject.last.first).to eq(1) }
+      specify { expect(subject.last.second).to eq(0) }
+      specify { expect(subject.last.third).to eq(0) }
     end
   end
 
@@ -55,17 +55,17 @@ describe GameResult do
     subject{ game_result.results }
 
     before do
-      game_result.stub(:game).and_return(game)
-      answer.stub(:question_for).with(user).and_return{question}
+      allow(game_result).to receive(:game).and_return(game)
+      allow(answer).to receive(:question_for).with(user){question}
     end
 
     context 'unanswered' do
-      it { should == [:unanswered, :unavailable] }
+      it { is_expected.to eq([:unanswered, :unavailable]) }
     end
 
     context 'answered' do
       let(:question){ double(:question, status: :questionstatus) }
-      it { should == [:questionstatus, :unavailable] }
+      it { is_expected.to eq([:questionstatus, :unavailable]) }
     end
   end
 
@@ -91,32 +91,32 @@ describe GameResult do
 
     context 'with no answers' do
       let(:answers){ [] }
-      it{ should == 0 }
+      it{ is_expected.to eq(0) }
     end
 
     context 'with one unanswered answer' do
       let(:answers){ [answer(nil)] }
-      it{ should == 0 }
+      it{ is_expected.to eq(0) }
     end
 
     context 'with one incorrect answer' do
       let(:answers){ [answer(false)] }
-      it{ should == 0 }
+      it{ is_expected.to eq(0) }
     end
 
     context 'with one correct answer' do
       let(:answers){ [answer(true)] }
-      it{ should == 100 }
+      it{ is_expected.to eq(100) }
     end
 
     context 'with one correct answer, one unanswered' do
       let(:answers){ [answer(true), answer(nil)] }
-      it{ should == 100 }
+      it{ is_expected.to eq(100) }
     end
 
     context 'with one correct answer, one incorrect' do
       let(:answers){ [answer(true), answer(false)] }
-      it{ should == 50 }
+      it{ is_expected.to eq(50) }
     end
   end
 end

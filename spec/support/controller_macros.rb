@@ -3,7 +3,7 @@ module ControllerMacros
     before(:each) do
       unless user.nil?
         @request.env["devise.mapping"] = Devise.mappings[:user]
-        @controller.stub(:current_user).and_return(user)
+        allow(@controller).to receive(:current_user).and_return(user)
         sign_in user
       end
     end
@@ -24,7 +24,7 @@ module ControllerMacros
     before(:each) do
       @ability = Object.new.tap {|o| o.extend CanCan::Ability}
       @ability.can :manage, :all
-      @controller.stub(:current_ability) { @ability }
+      allow(@controller).to receive(:current_ability) { @ability }
     end
   end
 

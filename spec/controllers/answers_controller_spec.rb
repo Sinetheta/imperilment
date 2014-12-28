@@ -22,7 +22,7 @@ describe AnswersController do
   describe "GET index" do
     it "assigns all answers as @answers" do
       get :index, default_params
-      assigns(:answers).should =~ [answer]
+      expect(assigns(:answers)).to match_array([answer])
     end
   end
 
@@ -30,7 +30,7 @@ describe AnswersController do
     context "when answer has an amount" do
       it "assigns the requested answer as @answer" do
         get :show, default_params.merge(id: answer.to_param)
-        assigns(:answer).should eq(answer)
+        expect(assigns(:answer)).to eq(answer)
       end
     end
 
@@ -40,14 +40,14 @@ describe AnswersController do
       context "when current user has a question assigned" do
         it "assigns the requested answer as @answer" do
           get :show, default_params.merge(id: answer.to_param)
-          assigns(:answer).should eq(answer)
+          expect(assigns(:answer)).to eq(answer)
         end
       end
 
       context "when the current user does nto have a question assigned" do
         it "redirects to the final round" do
           get :show, default_params.merge(id: answer.to_param)
-          response.should redirect_to([:final, game, answer])
+          expect(response).to redirect_to([:final, game, answer])
         end
       end
     end
@@ -55,33 +55,33 @@ describe AnswersController do
 
   describe "GET final" do
     context "when the user has an question" do
-      before { Answer.any_instance.stub(:question_for) { build :question } }
+      before { allow_any_instance_of(Answer).to receive(:question_for) { build :question } }
 
       it "redirects to the show page" do
         get :final, default_params.merge(id: answer.to_param)
-        response.should redirect_to([game, answer])
+        expect(response).to redirect_to([game, answer])
       end
     end
 
     context "when the user does not have a question" do
       it "assigns @answer" do
         get :final, default_params.merge(id: answer.to_param)
-        assigns(:answer).should eq(answer)
+        expect(assigns(:answer)).to eq(answer)
       end
 
-      before { Game.any_instance.stub(:score) { 1000 } }
+      before { allow_any_instance_of(Game).to receive(:score) { 1000 } }
 
       context "when wager is valid" do
         it "creates a question" do
           get :final, default_params.merge(id: answer.to_param, wager: 600)
-          assigns(:question).should be_a(Question)
+          expect(assigns(:question)).to be_a(Question)
         end
       end
 
       context" when wager is not valid" do
         it "flashes an error" do
           get :final, default_params.merge(id: answer.to_param, wager: 1600)
-          assigns(:question).errors[:amount].should_not be_nil
+          expect(assigns(:question).errors[:amount]).not_to be_nil
         end
       end
     end
@@ -90,19 +90,19 @@ describe AnswersController do
   describe "GET new" do
     it "assigns a new answer as @answer" do
       get :new, default_params
-      assigns(:answer).should be_a_new(Answer)
+      expect(assigns(:answer)).to be_a_new(Answer)
     end
 
     it 'picks the default category' do
       get :new, default_params
-      assigns(:answer).category.should == Category.last
+      expect(assigns(:answer).category).to eq(Category.last)
     end
   end
 
   describe "GET edit" do
     it "assigns the requested answer as @answer" do
       get :edit, default_params.merge(id: answer.to_param)
-      assigns(:answer).should eq(answer)
+      expect(assigns(:answer)).to eq(answer)
     end
   end
 
@@ -116,31 +116,31 @@ describe AnswersController do
 
       it "assigns a newly created answer as @answer" do
         post :create, default_params
-        assigns(:answer).should be_a(Answer)
-        assigns(:answer).should be_persisted
+        expect(assigns(:answer)).to be_a(Answer)
+        expect(assigns(:answer)).to be_persisted
       end
 
       it "redirects to the created answer" do
         post :create, default_params
-        response.should redirect_to([game, Answer.last])
+        expect(response).to redirect_to([game, Answer.last])
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved answer as @answer" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Answer.any_instance.stub(:save).and_return(false)
-        Answer.any_instance.stub(:errors).and_return(double(:errors, empty?: false))
+        allow_any_instance_of(Answer).to receive(:save).and_return(false)
+        allow_any_instance_of(Answer).to receive(:errors).and_return(double(:errors, empty?: false))
         post :create, default_params
-        assigns(:answer).should be_a_new(Answer)
+        expect(assigns(:answer)).to be_a_new(Answer)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Answer.any_instance.stub(:save).and_return(false)
-        Answer.any_instance.stub(:errors).and_return(double(:errors, empty?: false))
+        allow_any_instance_of(Answer).to receive(:save).and_return(false)
+        allow_any_instance_of(Answer).to receive(:errors).and_return(double(:errors, empty?: false))
         post :create, default_params
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -148,36 +148,36 @@ describe AnswersController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested answer" do
-        Answer.any_instance.should_receive(:update_attributes).with({ "amount" => '100' })
+        expect_any_instance_of(Answer).to receive(:update_attributes).with({ "amount" => '100' })
         put :update, default_params.merge(id: answer.to_param, answer: { "amount" => '100' })
       end
 
       it "assigns the requested answer as @answer" do
         put :update, default_params.merge(id: answer.to_param)
-        assigns(:answer).should eq(answer)
+        expect(assigns(:answer)).to eq(answer)
       end
 
       it "redirects to the answer" do
         put :update, default_params.merge(id: answer.to_param)
-        response.should redirect_to([game, answer])
+        expect(response).to redirect_to([game, answer])
       end
     end
 
     describe "with invalid params" do
       it "assigns the answer as @answer" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Answer.any_instance.stub(:save).and_return(false)
-        Answer.any_instance.stub(:errors).and_return(double(:errors, empty?: false))
+        allow_any_instance_of(Answer).to receive(:save).and_return(false)
+        allow_any_instance_of(Answer).to receive(:errors).and_return(double(:errors, empty?: false))
         put :update, default_params.merge(id: answer.to_param, answer: { "amount" => "invalid value" })
-        assigns(:answer).should eq(answer)
+        expect(assigns(:answer)).to eq(answer)
       end
 
       it "re-renders the 'edit' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Answer.any_instance.stub(:save).and_return(false)
-        Answer.any_instance.stub(:errors).and_return(double(:errors, empty?: false))
+        allow_any_instance_of(Answer).to receive(:save).and_return(false)
+        allow_any_instance_of(Answer).to receive(:errors).and_return(double(:errors, empty?: false))
         put :update, default_params.merge(id: answer.to_param, answer: { "amount" => "invalid value" })
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -191,7 +191,7 @@ describe AnswersController do
 
     it "redirects to the answers list" do
       delete :destroy, default_params.merge(id: answer.to_param)
-      response.should redirect_to(game)
+      expect(response).to redirect_to(game)
     end
   end
 end

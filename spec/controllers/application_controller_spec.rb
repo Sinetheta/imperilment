@@ -10,7 +10,7 @@ describe ApplicationController do
     before(:each) do
       get :index, format: :json
     end
-    specify { response.status.should == 403 }
+    specify { expect(response.status).to eq(403) }
 
     context "when ?profile=true" do
       it "should authorize the request for mini-profiler" do
