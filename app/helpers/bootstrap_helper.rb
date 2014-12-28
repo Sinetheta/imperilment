@@ -13,8 +13,4 @@ module BootstrapHelper
       content_tag(:p, flash[type])
     end
   end
-  def progress_bar percentage, &block
-    block ||= proc{}
-    content_tag(:div, content_tag(:div, class: 'bar', style: ("width: %.2f%%" % percentage), &block), class: 'progress progress-success')
-  end
 end
