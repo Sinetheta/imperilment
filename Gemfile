@@ -1,7 +1,5 @@
 source 'http://rubygems.org'
 
-ruby '2.0.0'
-
 gem 'rails', '~> 4.2.0'
 
 gem 'devise'
@@ -70,7 +68,7 @@ end
 group :test do
   gem 'minitest' # To get rid of errors
   gem 'shoulda-matchers'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 2.99.0'
   gem 'factory_girl_rails', :require => false
   gem 'simplecov', :require => false
   gem 'simplecov-rcov', :require => false
