@@ -22,10 +22,10 @@ class AnswersController < ApplicationController
       redirect_to [@game, @answer]
     else
       if params[:wager]
-        @question = Question.new
-        @question.user = current_user
-        @question.amount = params[:wager]
-        @question.answer = @answer
+        @question = @answer.questions.new do |q|
+          q.user = current_user
+          q.amount = params[:wager]
+        end
         if @question.save
           redirect_to [@game, @answer]
         else
@@ -46,7 +46,7 @@ class AnswersController < ApplicationController
   end
 
   def create
-    @answer.game_id = params.require(:game_id)
+    @answer.game = @game
     if @answer.save
       flash.notice = t :model_create_successful, model: Answer.model_name.human
     end

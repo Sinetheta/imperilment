@@ -63,7 +63,7 @@ class User < ActiveRecord::Base
     data = access_token.info
     if user = User.where(email: data["email"]).first
       # TODO: Once all current users have last_name, we can pull this out.
-      if user.last_name.blank?
+      if !user.last_name?
         user.last_name = data["last_name"].try(:first)
         user.save!
       end
