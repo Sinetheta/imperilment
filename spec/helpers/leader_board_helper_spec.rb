@@ -53,7 +53,7 @@ describe LeaderBoardHelper do
   describe '.status_for' do
     subject { helper.status_for(answer) }
     let(:user){ double(:user) }
-    before{ controller.stub(current_user: user) }
+    before{ allow(controller).to receive(:current_user).and_return(user) }
     context 'nil answer' do
       let(:answer){ nil }
       it { is_expected.to eq(:unavailable) }
