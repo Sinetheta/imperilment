@@ -68,7 +68,8 @@ end
 group :test do
   gem 'minitest' # To get rid of errors
   gem 'shoulda-matchers'
-  gem 'rspec-rails', '~> 2.99.0'
+  gem 'rspec-rails', '~> 3.0'
+  gem 'rspec-activemodel-mocks'
   gem 'factory_girl_rails', :require => false
   gem 'simplecov', :require => false
   gem 'simplecov-rcov', :require => false
