@@ -1,7 +1,7 @@
 Imperilment::Application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   namespace :admin do
-    resources :users do
+    resources :users, except: %i[new create] do
       put :grant_admin , on: :member, as: :grant
     end
   end
