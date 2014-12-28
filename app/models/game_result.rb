@@ -27,13 +27,14 @@ class GameResult < ActiveRecord::Base
   end
 
   def self.select_results_by_user
-    self.select('user_id, sum(total) as total,
-                      SUM(CASE WHEN position = 1 THEN 1 ELSE 0 END) as first,
-                      SUM(CASE WHEN position = 2 THEN 1 ELSE 0 END) as second,
-                      SUM(CASE WHEN position = 3 THEN 1 ELSE 0 END) as third'
+    User.joins(:game_results).select('users.*,
+                 sum(total) as total,
+                 SUM(CASE WHEN position = 1 THEN 1 ELSE 0 END) as first,
+                 SUM(CASE WHEN position = 2 THEN 1 ELSE 0 END) as second,
+                 SUM(CASE WHEN position = 3 THEN 1 ELSE 0 END) as third'
                      )
       .where('total > 0')
-      .group(:user_id)
+      .group('users.id')
   end
 
   def percentage_correct

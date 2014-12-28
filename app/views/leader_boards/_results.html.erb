@@ -11,19 +11,19 @@
     <% @results.each do |result| %>
       <tr>
         <td class='score hidden-phone'>
-          <%= "#{t :currency_symbol} #{result[:total]}" %>
+          <%= "#{t :currency_symbol} #{result.total}" %>
         </td>
-        <td class='email'><%= User.find(result[:user_id]).identifier %></td>
+        <td class='email'><%= result.identifier %></td>
         <td class='finishes'>
           <i class='fa fa-trophy gold'></i>
-          <span><%= result[:first] %></span>
+          <span><%= result.first %></span>
           <i class='fa fa-trophy silver'></i>
-          <span><%= result[:second] %></span>
+          <span><%= result.second %></span>
           <i class='fa fa-trophy bronze'></i>
-          <span><%= result[:third] %></span>
+          <span><%= result.third %></span>
         </td>
         <td class='record'>
-          <%= number_to_percentage result.user.percentage_correct_overall, precision: 1 %>
+          <%= number_to_percentage result.percentage_correct_overall, precision: 1 %>
         </td>
       </tr>
     <% end %>

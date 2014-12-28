@@ -3,13 +3,17 @@ require 'spec_helper'
 describe GameResult do
   describe '::all_results' do
     before do
-      GameResult.create! user_id: 1, position: 1, total: 1
-      GameResult.create! user_id: 1, position: 3, total: 1
-      GameResult.create! user_id: 1, position: 3, total: 1
-      GameResult.create! user_id: 1, position: 5, total: 1
-      GameResult.create! user_id: 2, position: 1, total: 1
+      user1 = create :user
+      user2 = create :user
+      user3 = create :user
+
+      GameResult.create! user: user1, position: 1, total: 1
+      GameResult.create! user: user1, position: 3, total: 1
+      GameResult.create! user: user1, position: 3, total: 1
+      GameResult.create! user: user1, position: 5, total: 1
+      GameResult.create! user: user2, position: 1, total: 1
       # This user shouldn't appear in the results, as they have no total
-      GameResult.create! user_id: 3, position: 10, total: 0
+      GameResult.create! user: user3, position: 10, total: 0
     end
 
     describe 'user 1' do
@@ -26,19 +30,24 @@ describe GameResult do
 
   describe '::all_results_by_money' do
     before do
-      GameResult.create! user_id: 1, position: 1, total: 1
-      GameResult.create! user_id: 1, position: 3, total: 1
-      GameResult.create! user_id: 1, position: 5, total: 1
-      GameResult.create! user_id: 2, position: 1, total: 1
-      GameResult.create! user_id: 2, position: 3, total: 1
-      GameResult.create! user_id: 4, position: 3, total: 5
+      user1 = create :user
+      user2 = create :user
+      user3 = create :user
+      user4 = create :user
+
+      GameResult.create! user: user1, position: 1, total: 1
+      GameResult.create! user: user1, position: 3, total: 1
+      GameResult.create! user: user1, position: 5, total: 1
+      GameResult.create! user: user2, position: 1, total: 1
+      GameResult.create! user: user2, position: 3, total: 1
+      GameResult.create! user: user4, position: 3, total: 5
       # This user shouldn't appear in the results, as they have no total
-      GameResult.create! user_id: 3, position: 10, total: 0
+      GameResult.create! user: user3, position: 10, total: 0
     end
 
     it 'sorts users by total money' do
-      results = GameResult.all_results_by_money.map! do |result|
-        { result.user_id => result.total }
+      results = GameResult.all_results_by_money.map do |result|
+        { result.id => result.total }
       end
       expect(results).to eql [{4 => 5}, {1 => 3}, {2 => 2}]
     end
