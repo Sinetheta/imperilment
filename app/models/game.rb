@@ -14,10 +14,10 @@ class Game < ActiveRecord::Base
   def score(user)
     answers.to_a.sum(0) do |answer|
       question = answer.question_for(user)
-      if !question || question.answer.amount.nil? && !self.locked?
+      if !question || !question.closed? || (question.final? && !locked?)
         0
       else
-        question.correct_question.blank? ? 0 : question.value
+        question.value
       end
     end
   end
