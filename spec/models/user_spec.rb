@@ -16,52 +16,6 @@ describe User do
     end
   end
 
-  describe 'readers' do
-    let(:user) { create :user }
-
-    [:overall_score, :first, :second, :third].each do |v|
-      context 'when not set' do
-        specify { expect(user.send(v)).to eq(0) }
-      end
-
-      context 'when set' do
-        before(:each) { user.instance_variable_set("@#{v.to_s}", 10) }
-        specify { expect(user.send(v)).to eq(10) }
-      end
-    end
-  end
-
-  describe '.increment_rank' do
-    let(:user) { create :user }
-
-    subject { ->{user.increment_rank(rank)} }
-
-    context 'when rank is 0' do
-      let(:rank) { 0 }
-      it { is_expected.to change(user, :first).by(1) }
-      it { is_expected.not_to change(user, :second) }
-      it { is_expected.not_to change(user, :third) }
-    end
-    context 'when rank is 1' do
-      let(:rank) { 1 }
-      it { is_expected.not_to change(user, :first) }
-      it { is_expected.to change(user, :second).by(1) }
-      it { is_expected.not_to change(user, :third) }
-    end
-    context 'when rank is 2' do
-      let(:rank) { 2 }
-      it { is_expected.not_to change(user, :first) }
-      it { is_expected.not_to change(user, :second) }
-      it { is_expected.to change(user, :third).by(1) }
-    end
-    context 'when rank is anything else' do
-      let(:rank) { 3 }
-      it { is_expected.not_to change(user, :first) }
-      it { is_expected.not_to change(user, :second) }
-      it { is_expected.not_to change(user, :third) }
-    end
-  end
-
   describe '.identifier' do
     let(:user) { create :user, first_name: name, email: email }
     let(:email) { 'alex.t@imperilment.com' }
@@ -76,20 +30,6 @@ describe User do
     context 'when the first_name is not blank' do
       let(:name) { 'Alex' }
       it { is_expected.to eq(name) }
-    end
-  end
-
-  describe '#with_overall_score' do
-    let(:game) { stub_model Game }
-    let!(:user) { create :user }
-
-    before(:each) do
-      allow(Game).to receive(:locked) { [game] }
-      allow(game).to receive(:grouped_and_sorted_by_score) { {0 => [user]} }
-    end
-
-    it 'should return the users with the overall_scores' do
-      expect(User.with_overall_score).to eq({0 => [user]})
     end
   end
 

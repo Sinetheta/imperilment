@@ -13,50 +13,12 @@ class User < ActiveRecord::Base
   has_many :game_results, dependent: :destroy
   has_many :questions, dependent: :destroy
 
-  # Wish there was a nicer way to do this. >.<
-  def overall_score; @overall_score ||= 0; end
-  def first; @first ||= 0; end
-  def second; @second ||= 0; end
-  def third; @third ||= 0; end
-
-  def increment_rank(rank)
-    case rank
-    when 0
-      self.first += 1
-    when 1
-      self.second += 1
-    when 2
-      self.third += 1
-    end
-  end
-
   def identifier
     full_name.blank? ? email : full_name
   end
 
   def full_name
     [first_name, last_name].reject {|n| n.blank?}.join ' '
-  end
-
-  def self.with_overall_score
-    results = User.all
-    Game.locked.each do |game|
-      scores = game.grouped_and_sorted_by_score
-
-      scores.each_with_index do |(score, users), idx|
-        users.each do |user|
-          result = results.find{|u| u == user}
-          result.overall_score += score
-          result.increment_rank(idx)
-        end
-      end
-    end
-
-    results.sort_by do |user|
-      [-user.first, -user.second, -user.third, -user.overall_score]
-    end.group_by do |user|
-      user.overall_score
-    end
   end
 
   def self.find_for_open_id(access_token, signed_in_resource=nil)

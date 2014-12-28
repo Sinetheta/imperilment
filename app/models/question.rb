@@ -8,9 +8,7 @@ class Question < ActiveRecord::Base
   validates :amount, numericality: { greater_than_or_equal: 0 }, if: ->(x) { x.answer.amount.nil? }
 
   scope :unchecked, -> { where(correct: nil) }
-  scope :checked, -> { where{correct != nil} }
   scope :correct, -> { where(correct: true) }
-  scope :by_game, ->(game) { joins(answer: :game).where(games: { id: game.id }) }
 
   delegate :correct_question, to: :answer
 
