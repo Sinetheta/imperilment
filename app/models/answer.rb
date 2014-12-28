@@ -12,14 +12,6 @@ class Answer < ActiveRecord::Base
     self.where('start_date <= ?', DateTime.now).order('start_date DESC').first
   end
 
-  def prev
-    Answer.where('answers.updated_at < ?', updated_at).includes(:game).where("games.locked" => false).order('answers.updated_at DESC').first
-  end
-
-  def next
-    Answer.where('answers.updated_at > ?', updated_at).includes(:game).where("games.locked" => false).order('answers.updated_at ASC').first
-  end
-
   def self.on(date)
     self.where(start_date: date).first
   end

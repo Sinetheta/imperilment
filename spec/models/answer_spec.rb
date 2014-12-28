@@ -51,34 +51,6 @@ describe Answer do
     end
   end
 
-  describe '.prev' do
-    context "when prevous record exists" do
-      it 'should find the one before this one by start date' do
-        expect(second.prev).to eq(first)
-      end
-    end
-
-    context "when previous record does not exist" do
-      it 'returns nil' do
-        expect(first.prev).to be_nil
-      end
-    end
-  end
-
-  describe '.next' do
-    context "when next record exists" do
-      it 'should find the one after this one by start date' do
-        expect(second.next).to eq(third)
-      end
-    end
-
-    context "when next record does not exist" do
-      it 'returns nil' do
-        expect(third.next).to be_nil
-      end
-    end
-  end
-
   describe '.closed' do
     subject { first.closed? }
 
