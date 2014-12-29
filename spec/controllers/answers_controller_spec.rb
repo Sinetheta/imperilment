@@ -81,7 +81,7 @@ describe AnswersController do
       context" when wager is not valid" do
         it "flashes an error" do
           get :final, default_params.merge(id: answer.to_param, wager: 1600)
-          flash.alert.should_not be_nil
+          assigns(:question).errors[:amount].should_not be_nil
         end
       end
     end

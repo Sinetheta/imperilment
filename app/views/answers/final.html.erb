@@ -8,6 +8,13 @@
   </div>
   <div class='col-md-8'>
     <h3>You may wager up to $<%= @game.score(current_user) %></h3>
+    <% if @question.errors.any? %>
+      <div class="errors">
+        <% @question.errors[:amount].each do |error| %>
+          Wager <%= error %>
+        <% end %>
+      </div>
+    <% end %>
     <form method='get'>
       <div class="form-group">
         <div class="input-group">
