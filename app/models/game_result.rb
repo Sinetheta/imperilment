@@ -23,9 +23,7 @@ class GameResult < ActiveRecord::Base
   end
 
   def answers
-    game.date_range.map do |date|
-      game.answers.detect{|a| a.start_date == date}
-    end
+    game.all_answers
   end
 
   def self.select_results_by_user

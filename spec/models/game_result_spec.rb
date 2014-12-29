@@ -45,10 +45,10 @@ describe GameResult do
   end
 
   describe 'results' do
-    let(:answers){ [answer] }
+    let(:answers){ [answer, nil] }
     let(:answer){ double(:answer, start_date: 1) }
     let(:question){ nil }
-    let(:game){ double(:game, date_range: [1,2], answers: answers) }
+    let(:game){ double(:game, date_range: [1,2], all_answers: answers) }
     let(:user){ User.new }
     let(:game_result){ described_class.new(user: user, total: 1000, position: 2) }
 

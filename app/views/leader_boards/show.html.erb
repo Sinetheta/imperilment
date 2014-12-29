@@ -41,8 +41,12 @@
             </thead>
             <tbody>
               <tr>
-                <% @game.date_range.zip(result.results).each do |(date, result_type)| %>
-                  <td><%= link_to breakdown_icon(result_type), breakdown_link(@game, date) %></td>
+                <% @game.all_answers.zip(result.results).each do |(answer, result_type)| %>
+                  <td>
+                    <% unless result_type == :unavailable %>
+                      <%= link_to breakdown_icon(result_type), game_answer_path(@game, answer) %>
+                    <% end %>
+                  </td>
                 <% end %>
               </tr>
             </tbody>

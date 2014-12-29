@@ -34,6 +34,15 @@ class Game < ActiveRecord::Base
     end
   end
 
+  def all_answers
+    @all_answers ||= begin
+      a = answers.to_a
+      date_range.map do |date|
+        a.detect{|a| a.start_date == date }
+      end
+    end
+  end
+
   def build_results
     position = 1
     results = []
