@@ -62,23 +62,24 @@ group :development do
 end
 
 group :development, :test do
+  gem 'pry'
+  gem 'ffaker'
+  gem 'sqlite3'
+end
+
+group :test do
   gem 'minitest' # To get rid of errors
   gem 'shoulda-matchers'
   gem 'rspec-rails'
   gem 'factory_girl_rails', :require => false
   gem 'simplecov', :require => false
   gem 'simplecov-rcov', :require => false
-  gem 'sqlite3'
   gem 'timecop'
-
-  gem 'pry'
 
   gem 'konacha'
   gem 'konacha-chai-matchers'
   gem 'ejs'
   gem 'poltergeist'
-
-  gem 'ffaker'
 end
 
 group :production do
