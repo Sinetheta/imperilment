@@ -1,5 +1,6 @@
 class AnswersController < ApplicationController
-  load_and_authorize_resource :game
+  before_filter :load_game
+  authorize_resource :game
   load_and_authorize_resource :answer, through: :game
 
   respond_to :html
@@ -66,6 +67,9 @@ class AnswersController < ApplicationController
   end
 
   private
+  def load_game
+    @game = Game.includes(:answers => :questions).find(params[:game_id])
+  end
   def answer_params
     params.require(:answer).permit :amount, :answer, :correct_question, :start_date, :category_id
   end

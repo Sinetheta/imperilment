@@ -9,9 +9,8 @@
     </thead>
     <tbody>
       <tr>
-        <% @game.date_range.each do |date| %>
+        <% @game.all_answers.each do |answer| %>
           <td>
-            <% answer = Answer.on(date) %>
             <%= link_to [@game, answer] do %>
               <%= breakdown_icon status_for(answer) %>
             <% end %>
