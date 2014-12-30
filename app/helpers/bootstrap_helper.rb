@@ -1,9 +1,8 @@
 # Encoding: utf-8
 
 module BootstrapHelper
-  def icon *classes
-    classes = classes.map {|x| "fa-#{x}" } << 'fa'
-    content_tag(:i, '', class: classes) + ' '
+  def icon name
+    %{<i class="fa-#{name} fa"></i> }.html_safe
   end
   def flash_notice type, css_class
     return unless flash[type].present?
