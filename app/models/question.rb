@@ -5,7 +5,7 @@ class Question < ActiveRecord::Base
   validate :unchecked_response, :in_range?
   validates :answer_id, uniqueness: { scope: :user_id }
 
-  validates :amount, numericality: { greater_than_or_equal: 0 }, if: ->(x) { x.answer.amount.nil? }
+  validates :amount, numericality: { greater_than_or_equal: 0 }, if: :final?
 
   scope :unchecked, -> { where(correct: nil) }
   scope :correct, -> { where(correct: true) }
@@ -23,7 +23,7 @@ class Question < ActiveRecord::Base
   end
 
   def value
-    if answer.amount
+    if !final?
       correct? ? answer.amount : 0
     else
       case correct

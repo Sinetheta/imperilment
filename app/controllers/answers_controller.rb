@@ -11,7 +11,7 @@ class AnswersController < ApplicationController
   end
 
   def show
-    if @answer.amount.nil? && @answer.question_for(current_user).nil?
+    if @answer.final? && @answer.question_for(current_user).nil?
       redirect_to [:final, @game, @answer]
     else
       respond_with @game, @answer

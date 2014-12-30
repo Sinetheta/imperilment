@@ -9,7 +9,7 @@
       <tr>
         <th><%= Question.human_attribute_name("user") %></th>
         <th><%= Question.human_attribute_name("response") %></th>
-        <% if @answer.amount.nil? %>
+        <% if @answer.final? %>
           <th class='hidden=phone'><%= Question.human_attribute_name("amount") %></th>
         <% end %>
         <th class='hidden-phone'></th>
@@ -21,7 +21,7 @@
         <tr class='<%= question.checked? ? (question.correct? ? 'success' : 'danger') : '' %>'>
           <td class='email'><%= question.user.identifier %></td>
           <td><%= question.response %></td>
-          <% if @answer.amount.nil? %>
+          <% if @answer.final? %>
             <td class='hidden-phone'><%= number_to_currency question.amount %></td>
           <% end %>
           <td class='hidden-phone'>
