@@ -1,3 +1,5 @@
+#= require select2
+
 ((window) ->
   $ ->
     $('select')
