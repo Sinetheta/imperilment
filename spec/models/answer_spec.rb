@@ -45,12 +45,6 @@ describe Answer do
     end
   end
 
-  describe '.on' do
-    it 'should find the answer with the matching date' do
-      expect(Answer.on(first.start_date)).to eq(first)
-    end
-  end
-
   describe '.closed' do
     subject { first.closed? }
 
