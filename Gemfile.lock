@@ -184,6 +184,7 @@ GEM
     lumberjack (1.0.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
+    memory_profiler (0.0.4)
     meta_request (0.2.9)
       callsite
       rack-contrib
@@ -324,6 +325,7 @@ GEM
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
     sqlite3 (1.3.9)
+    stackprof (0.2.7)
     thin (1.6.2)
       daemons (>= 1.0.9)
       eventmachine (>= 1.0.0)
@@ -385,6 +387,7 @@ DEPENDENCIES
   konacha
   konacha-chai-matchers
   letter_opener
+  memory_profiler
   meta_request
   minitest
   mysql2
@@ -408,6 +411,7 @@ DEPENDENCIES
   simplecov-rcov
   skylight
   sqlite3
+  stackprof
   thin
   timecop
   uglifier
