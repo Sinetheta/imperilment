@@ -1,3 +1,5 @@
+#= require select2
+
 ((window) ->
   $ ->
     $('select')
@@ -50,13 +52,7 @@
         headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')}
 
       request.done (msg)->
-        if lock
-          container.addClass('info')
-          container.find('span.lock').fadeOut ->
-            container.find('span.unlock').fadeIn()
-        else
-          container.removeClass('info')
-          container.find('span.unlock').fadeOut ->
-            container.find('span.lock').fadeIn()
+        container.find('.lock, .unlock').toggleClass('show hide')
+        container.toggleClass('info')
       false
 ) ($window ? window)
