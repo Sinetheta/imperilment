@@ -7,7 +7,7 @@ class LeaderBoardsController < ApplicationController
 
   def index
     @results = GameResult.all_results
-    respond_with(@results, include: :user)
+    respond_with(@results)
   end
 
   def show
@@ -28,7 +28,7 @@ class LeaderBoardsController < ApplicationController
 
   def money
     @results = GameResult.all_results_by_money
-    respond_with(@results, include: :user)
+    respond_with(@results)
   end
 
   protected
