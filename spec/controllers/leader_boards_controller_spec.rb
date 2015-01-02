@@ -1,27 +1,27 @@
 require 'spec_helper'
 
 describe LeaderBoardsController do
-  authorize_and_login
-
   let!(:game) { create :game, locked: true }
-  let(:user) { create :user }
+
+  let(:result){ assigns(:results)[0] }
 
   describe 'GET index' do
-    let(:game_results) { [GameResult.new] }
-    before(:each) do
-      allow(GameResult).to receive(:all_results) { game_results }
-    end
+    let!(:game_result) { create(:game_result, game: game, total: 300, position: 1) }
 
     context 'html' do
       it 'should assign the results to @results' do
         get :index
-        expect(assigns(:results)).to eq(game_results)
+        expect(result).to eq(game_result.user)
+        expect(result.total).to eq(300)
+        expect(result.first).to  eq(1)
+        expect(result.second).to eq(0)
+        expect(result.third).to  eq(0)
       end
     end
     context 'json' do
       it 'should assign the results to @results' do
         get :index, format: :json
-        expect(assigns(:results)).to eq(game_results)
+        expect(result).to eq(game_result.user)
       end
     end
   end
@@ -35,24 +35,24 @@ describe LeaderBoardsController do
       end
     end
     context "games exist" do
+      let!(:answer){ create :answer, game: game }
+      let!(:question){ create :question, answer: answer }
+
       before(:each) do
-        allow_any_instance_of(Game).to receive(:grouped_and_sorted_by_score) { {0 => [user]} }
-        get :show
+        get :show, id: game.id
       end
 
       it 'should assign the game to @game' do
         expect(assigns(:game)).to eq(game)
       end
 
-      it 'should assign the users to @users' do
-        expect(assigns(:results).first).to be_a(GameResult)
-        expect(assigns(:results).first.user).to eq(user)
+      it 'should assign the users to @results' do
+        expect(result.user).to eq(question.user)
       end
 
       context 'when a game_id is passed' do
         let(:other_game) { create :game }
         before(:each) do
-          allow(User).to receive(:grouped_and_sorted_by_score).with(other_game)
           get :show, game_id: other_game
         end
         it 'should assign the game to @game' do
@@ -63,14 +63,11 @@ describe LeaderBoardsController do
   end
 
   describe "GET money" do
-    let(:game_results) { [GameResult.new] }
-    before(:each) do
-      allow(GameResult).to receive(:all_results_by_money) { game_results }
-    end
+    let!(:game_result) { create(:game_result, game: game) }
 
     it 'should assign the results to @results' do
       get :money
-      expect(assigns(:results)).to eq(game_results)
+      expect(result).to eq(game_result.user)
     end
 
     it 'should respond to html' do
@@ -84,7 +81,3 @@ describe LeaderBoardsController do
     end
   end
 end
-
-
-
-
