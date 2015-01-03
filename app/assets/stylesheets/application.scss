@@ -24,12 +24,22 @@ $bronzeBackground: #e8a87a;
   font-style: normal;
 }
 
-@mixin fancy-font {
+@mixin fancy-serif {
   font-size: 28px;
   line-height: 36px;
   text-transform: uppercase;
   text-shadow: 2px 2px black;
-  font-family: korinna serif;
+  font-family: korinna, serif;
+  font-weight: bold;
+  color: white;
+}
+
+@mixin fancy-sans {
+  font-size: 28px;
+  line-height: 36px;
+  text-transform: uppercase;
+  text-shadow: 4px 4px black;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: bold;
   color: white;
 }

@@ -25,7 +25,7 @@ div.pagination {
   position: relative;
 
   h1, p {
-    @include fancy-font;
+    @include fancy-sans;
     text-align: center;
     vertical-align: middle;
     line-height: 30px;
@@ -63,11 +63,11 @@ div.pagination {
     }
 
     .category {
-      @include fancy-font;
+      @include fancy-sans;
     }
 
     .dollar-value {
-      @include fancy-font;
+      @include fancy-sans;
       font-size: 64px;
       line-height: 72px;
       color: #ff8;
@@ -100,7 +100,7 @@ div.pagination {
   }
 
   .answer {
-    @include fancy-font;
+    @include fancy-serif;
   }
 }
 
