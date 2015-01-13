@@ -48,17 +48,7 @@ group :development do
   gem 'guard-konacha'
   gem 'guard-spring', github: 'mknapik/guard-spring'
 
-  gem 'better_errors'
-  gem 'binding_of_caller'
-
-
-  gem 'hirb'
-  gem 'wirb'
-  gem 'meta_request'
-
   gem 'thin'
-
-  gem 'xray-rails'
 end
 
 group :development, :test do
