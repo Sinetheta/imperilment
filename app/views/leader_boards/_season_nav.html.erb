@@ -1,0 +1,13 @@
+<div class="row">
+<div class="col-sm-3 text-left">
+  <%= link_to 'Last year', "?season=#{@season.year-1}", class: 'btn btn-default' %>
+</div>
+<div class="col-sm-6 text-center">
+  <%= @season.year %> Season
+</div>
+<div class="col-sm-3 text-right">
+  <% unless @season.year == Season.current.year %>
+    <%= link_to 'Next year', "?season=#{@season.year+1}", class: 'btn btn-default' %>
+  <% end %>
+</div>
+</div>

@@ -1,12 +1,4 @@
-<div class='dropdown-nav pull-right'>
-  <span><%= t :weekly_results %>:</span>
-  <select>
-    <option><%= t :pick_a_week %></option>
-    <% @games.order(:ended_at).each do |game| %>
-      <%= content_tag :option, l(game.ended_at, format: :long), value: game.id, data: {path: leader_board_path(game)} %>
-    <% end %>
-  </select>
-</div>
+<%= render 'season_nav' %>
 <h1><%= t :leader_board %></h1>
 <p><%= t '.info' %></p>
 <%= render "results" %>
