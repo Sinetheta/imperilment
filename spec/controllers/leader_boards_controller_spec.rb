@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe LeaderBoardsController do
   let!(:game) { create :game, locked: true }
+  let(:season) { game.ended_at.year }
 
   let(:result){ assigns(:results)[0] }
 
@@ -10,7 +11,7 @@ describe LeaderBoardsController do
 
     context 'html' do
       it 'should assign the results to @results' do
-        get :index
+        get :index, season: season
         expect(result).to eq(game_result.user)
         expect(result.total).to eq(300)
         expect(result.first).to  eq(1)
@@ -20,7 +21,7 @@ describe LeaderBoardsController do
     end
     context 'json' do
       it 'should assign the results to @results' do
-        get :index, format: :json
+        get :index, season: season, format: :json
         expect(result).to eq(game_result.user)
       end
     end
@@ -28,7 +29,7 @@ describe LeaderBoardsController do
     context 'with no season' do
       it 'should have the current year' do
         get :index
-        expect(assigns(:season).year).to eq(game.ended_at.year)
+        expect(assigns(:season).year).to eq(Time.current.year)
       end
     end
     context 'with a season' do
@@ -56,7 +57,7 @@ describe LeaderBoardsController do
       let!(:question){ create :question, answer: answer }
 
       before(:each) do
-        get :show, id: game.id
+        get :show, id: game.id, season: season
       end
 
       it 'should assign the game to @game' do
@@ -70,7 +71,7 @@ describe LeaderBoardsController do
       context 'when a game_id is passed' do
         let(:other_game) { create :game }
         before(:each) do
-          get :show, game_id: other_game
+          get :show, game_id: other_game, season: season
         end
         it 'should assign the game to @game' do
           expect(assigns(:game)).to eq(other_game)
@@ -83,17 +84,17 @@ describe LeaderBoardsController do
     let!(:game_result) { create(:game_result, game: game) }
 
     it 'should assign the results to @results' do
-      get :money
+      get :money, season: season
       expect(result).to eq(game_result.user)
     end
 
     it 'should respond to html' do
-      get :money
+      get :money, season: season
       expect(response).to be_success
     end
 
     it 'should respond to json' do
-      get :money, format: :json
+      get :money, season: season, format: :json
       expect(response).to be_success
     end
   end

@@ -31,11 +31,7 @@ class Season
 
   private
   def self.latest_year
-    if game = Game.order(:ended_at).last
-      game.ended_at.year
-    else
-      Time.current.year
-    end
+    Time.current.year
   end
 
   def time
