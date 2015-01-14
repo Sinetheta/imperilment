@@ -3,11 +3,11 @@ class GameResult < ActiveRecord::Base
   belongs_to :game
 
   def self.all_results
-    select_results_by_user.order('first desc, second desc, third desc, total desc').to_a
+    select_results_by_user.reorder('first desc, second desc, third desc, total desc').to_a
   end
 
   def self.all_results_by_money
-    select_results_by_user.order('total desc, first desc, second desc, third desc').to_a
+    select_results_by_user.reorder('total desc, first desc, second desc, third desc').to_a
   end
 
   def results
