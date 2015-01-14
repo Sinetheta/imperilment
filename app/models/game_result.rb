@@ -27,7 +27,9 @@ class GameResult < ActiveRecord::Base
   end
 
   def self.select_results_by_user
-    User.joins(:game_results).select('users.*,
+    User.joins(:game_results)
+        .merge(all)
+        .select('users.*,
                  sum(total) as total,
                  SUM(CASE WHEN position = 1 THEN 1 ELSE 0 END) as first,
                  SUM(CASE WHEN position = 2 THEN 1 ELSE 0 END) as second,

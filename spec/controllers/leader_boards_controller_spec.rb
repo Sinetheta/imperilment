@@ -24,6 +24,23 @@ describe LeaderBoardsController do
         expect(result).to eq(game_result.user)
       end
     end
+
+    context 'with no season' do
+      it 'should have the current year' do
+        get :index
+        expect(assigns(:season).year).to eq(game.ended_at.year)
+      end
+    end
+    context 'with a season' do
+      it 'should have the correct year' do
+        # Everything before this was a mistake.
+        get :index, season: 1776
+        expect(assigns(:season).year).to eq(1776)
+
+        # but I'm pretty sure imperilment wasn't inventes
+        expect(assigns(:results)).to be_empty
+      end
+    end
   end
 
   describe 'GET show' do
