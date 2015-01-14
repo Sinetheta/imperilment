@@ -133,6 +133,39 @@ describe Game do
     end
   end
 
+  describe 'next and prev' do
+    let!(:first){ create :game, ended_at: 2.weeks.ago }
+    let!(:middle){ create :game, ended_at: 1.week.ago }
+    let!(:last){ create :game, ended_at: Date.current }
+
+    describe "first game" do
+      it "has no previous" do
+        expect(first.prev).to be_nil
+      end
+      it "has a next" do
+        expect(first.next).to eq middle
+      end
+    end
+
+    describe "middle game" do
+      it "has a previous" do
+        expect(middle.prev).to eq first
+      end
+      it "has a next" do
+        expect(middle.next).to eq last
+      end
+    end
+
+    describe "last game" do
+      it "has a prev" do
+        expect(last.prev).to eq middle
+      end
+      it "has no next" do
+        expect(last.next).to be_nil
+      end
+    end
+  end
+
   describe 'calculate_result hook' do
     let!(:answer) { create :answer, game: game }
     let!(:question) { create :question, answer: answer }

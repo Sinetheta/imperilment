@@ -1,6 +1,5 @@
 class LeaderBoardsController < ApplicationController
-  before_filter :set_season
-  before_filter :load_games
+  before_filter :set_season, only: [:index, :money]
 
   authorize_resource :game
 
@@ -16,9 +15,8 @@ class LeaderBoardsController < ApplicationController
     respond_with(@results)
   end
 
-
   def show
-    game_scope = @games.includes(:answers => :questions)
+    game_scope = Game.includes(:answers => :questions)
     if params[:game_id]
       @game = game_scope.find(params[:game_id])
     else
@@ -42,9 +40,5 @@ class LeaderBoardsController < ApplicationController
       else
         Season.current
       end
-  end
-
-  def load_games
-    @games ||= @season.games
   end
 end

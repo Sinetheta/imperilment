@@ -1,0 +1,15 @@
+<div class="row">
+<div class="col-sm-3 text-left">
+  <% if @game.prev %>
+    <%= link_to 'Previous game', leader_board_path(game_id: @game.prev), class: 'btn btn-default' %>
+  <% end %>
+</div>
+<div class="col-sm-6 text-center">
+  Week <%= @game.ended_at.strftime("%V") %>
+</div>
+<div class="col-sm-3 text-right">
+  <% if @game.next %>
+    <%= link_to 'Next game', leader_board_path(game_id: @game.next), class: 'btn btn-default' %>
+  <% end %>
+</div>
+</div>

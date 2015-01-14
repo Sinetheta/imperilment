@@ -11,6 +11,14 @@ class Game < ActiveRecord::Base
 
   self.per_page = 10
 
+  def next
+    @next ||= Game.order('games.ended_at ASC').where('games.ended_at > ?', ended_at).first
+  end
+
+  def prev
+    @prev ||= Game.order('games.ended_at DESC').where('games.ended_at < ?', ended_at).first
+  end
+
   def score(user)
     answers.to_a.sum(0) do |answer|
       question = answer.question_for(user)
