@@ -1,31 +1,29 @@
-<div class='navbar-right btn-group'>
-  <% if current_user %>
-    <a class='btn-link dropdown-toggle' href='#' data-toggle='dropdown'>
-      <%= icon :user %>
-      <%= current_user.email %>
-      <span class='caret'></span>
-    </a>
-    <ul class='dropdown-menu'>
-      <% if Devise.mappings[:user].registerable? %>
-        <li>
-          <%= link_to edit_user_registration_path do %>
-            <%= icon :cog %>
-            Preferences
-          <% end %>
-        </li>
-        <li class='divider'></li>
-      <% end %>
+<% if current_user %>
+  <a class='btn-link dropdown-toggle' href='#' data-toggle='dropdown'>
+    <%= icon :user %>
+    <%= current_user.email %>
+    <span class='caret'></span>
+  </a>
+  <ul class='dropdown-menu'>
+    <% if Devise.mappings[:user].registerable? %>
       <li>
-        <%= link_to destroy_user_session_path, method: :delete do %>
-          <%= icon :off %>
-          Sign out
+        <%= link_to edit_user_registration_path do %>
+          <%= icon :cog %>
+          Preferences
         <% end %>
       </li>
-    </ul>
-  <% else %>
-    <%= link_to user_omniauth_authorize_path(:google), class: 'btn-link' do %>
-      <%= icon :user %>
-      Log in
+      <li class='divider'></li>
     <% end %>
+    <li>
+      <%= link_to destroy_user_session_path, method: :delete do %>
+        <%= icon :off %>
+        Sign out
+      <% end %>
+    </li>
+  </ul>
+<% else %>
+  <%= link_to user_omniauth_authorize_path(:google), class: 'btn-link' do %>
+    <%= icon :user %>
+    Log in
   <% end %>
-</div>
+<% end %>

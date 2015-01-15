@@ -25,7 +25,14 @@
         <% end %>
       </ul>
 
-      <%= render 'layouts/nav_user' %>
+      <div class='nav navbar-nav navbar-right'>
+        <li>
+          <%= render 'layouts/nav_answers' %>
+        </li>
+        <li class="dropdown">
+          <%= render 'layouts/nav_user' %>
+        </li>
+      </div>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>

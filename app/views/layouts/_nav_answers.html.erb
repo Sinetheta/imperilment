@@ -1,0 +1,6 @@
+<% if current_user && (count = current_user.pending_answers.count) > 0 %>
+    <a href="/">
+      <span class="label label-primary"><%= count %></span>
+    </a>
+  </li>
+<% end %>
