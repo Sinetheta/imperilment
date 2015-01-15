@@ -45,4 +45,18 @@ class User < ActiveRecord::Base
     ((questions.correct.count.to_f / questions.count.to_f)*100)
   end
 
+  def pending_answers
+    # Answers from unlocked games with no matching question
+    answer = Answer.arel_table
+    question = Question.arel_table
+    question_join = answer
+      .join(question, Arel::Nodes::OuterJoin)
+      .on(question[:answer_id].eq(answer[:id]).and(question[:user_id].eq(id)))
+    Answer
+      .joins(question_join.join_sources)
+      .joins(:game)
+      .where(games: {locked: false})
+      .where(questions: {id: nil})
+      .order(:start_date)
+  end
 end

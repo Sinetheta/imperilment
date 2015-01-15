@@ -103,4 +103,35 @@ describe User do
       expect(user.percentage_correct_overall).to eql overall_percentage
     end
   end
+
+  describe "#pending_answers" do
+    let!(:user){ create :user }
+    let!(:game){ create :game }
+    let!(:answer){ create :answer, game: game }
+    subject{ user.pending_answers }
+
+    context "Answer has question from same user" do
+      let!(:question){ create :question, answer: answer, user: user }
+      it{ is_expected.to eq [] }
+    end
+    context "Answer has question from other user" do
+      let!(:question){ create :question, answer: answer }
+      it{ is_expected.to eq [answer] }
+    end
+    context "Game is locked" do
+      let!(:game){ create :game, locked: true }
+      it{ is_expected.to eq [] }
+    end
+    context "one unanswered question" do
+      it{ is_expected.to eq [answer] }
+    end
+    context "two unanswered questions in one game" do
+      let(:answer2){ create :answer, game: game }
+      it{ is_expected.to eq [answer, answer2] }
+    end
+    context "two unanswered questions across games" do
+      let(:answer2){ create :answer }
+      it{ is_expected.to eq [answer, answer2] }
+    end
+  end
 end
