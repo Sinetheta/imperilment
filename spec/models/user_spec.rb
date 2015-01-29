@@ -95,15 +95,6 @@ describe User do
     end
   end
 
-  describe ".percentage_correct_overall" do
-    include_context "shared percentage setup"
-    let(:overall_percentage) { (2.0/3.0)*100 }
-
-    it "returns the percentage of all questions that the user correctly answered" do
-      expect(user.percentage_correct_overall).to eql overall_percentage
-    end
-  end
-
   describe "#pending_answers" do
     let!(:user){ create :user }
     let!(:game){ create :game }

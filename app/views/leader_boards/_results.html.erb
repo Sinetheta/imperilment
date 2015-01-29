@@ -4,7 +4,6 @@
       <th class='score hidden-phone'><%= t :overall_total %></th>
       <th><%= User.model_name.human %></th>
       <th><%= t :finishes %></th>
-      <th><%= t :percentage_correct %></th>
     </tr>
   </thead>
   <tbody>
@@ -21,9 +20,6 @@
           <span><%= result.second %></span>
           <i class='fa fa-trophy bronze'></i>
           <span><%= result.third %></span>
-        </td>
-        <td class='record'>
-          <%= number_to_percentage result.percentage_correct_overall, precision: 1 %>
         </td>
       </tr>
     <% end %>
