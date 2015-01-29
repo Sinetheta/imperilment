@@ -38,11 +38,4 @@ class GameResult < ActiveRecord::Base
       .where('total > 0')
       .group('users.id')
   end
-
-  def percentage_correct
-    correct = results.count(:correct)
-    incorrect = results.count(:incorrect)
-    return 0 if correct.zero? # Avoid NaN
-    correct.to_f / (correct + incorrect).to_f * 100
-  end
 end

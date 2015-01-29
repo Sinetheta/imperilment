@@ -70,31 +70,6 @@ describe User do
     end
   end
 
-  RSpec.shared_context "shared percentage setup" do
-    let(:user) { create :user }
-    let(:game) { create :game }
-    let(:answer1) { create :answer, game: game }
-    let(:answer2) { create :answer, game: game }
-    let(:answer3) { create :answer }
-    let!(:question1) { create :question, correct: false, user: user, answer: answer1 }
-    let!(:question2) { create :question, correct: true, user: user, answer: answer2 }
-    let!(:question3) { create :question, correct: true, user: user, answer: answer3 }
-  end
-
-  describe ".percentage_correct_by_game" do
-    include_context "shared percentage setup"
-    let(:game_percentage) { 50.0 }
-    before do
-      game.update!(ended_at: game.started_on + 1.week)
-      game.reload # Needed to have all the answers loaded
-    end
-    let(:game_result) { GameResult.new(user: user, game: game) }
-
-    it "returns the percentage of the game's questions that the user correctly answered" do
-      expect(game_result.percentage_correct).to eql game_percentage
-    end
-  end
-
   describe "#pending_answers" do
     let!(:user){ create :user }
     let!(:game){ create :game }
