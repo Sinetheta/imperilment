@@ -3,7 +3,7 @@
 <%= simple_form_for [@game, @answer, @question], html: {class: 'form'} do |f| %>
   <%= f.error_notification %>
   <p>
-    <%= @answer.answer %>
+      <div class='answer'><%= render_markdown(@answer.answer) %></div>
   </p>
 
   <% if @question.errors.messages[:answer_id] %>
@@ -13,7 +13,6 @@
   <% end %>
 
   <%= f.input :response, label: false, input_html: {class: 'form-control', autocomplete: 'off', autocorrect: 'off', spellcheck: 'false'} %>
-
   <%= f.button :submit, value: submit_text, class: 'btn btn-primary' %>
   <%= link_to t(:back), [@game, @answer], class: 'btn pull-right btn-default' %>
 <% end %>

@@ -52,12 +52,13 @@ group :development do
 end
 
 group :development, :test do
-  gem 'pry'
+  gem 'pry-rails'
   gem 'ffaker'
   gem 'sqlite3'
 end
 
 group :test do
+  gem 'capybara'
   gem 'minitest' # To get rid of errors
   gem 'shoulda-matchers'
   gem 'rspec-rails', '~> 3.0'
