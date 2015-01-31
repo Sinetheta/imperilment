@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
     [first_name, last_name].reject {|n| n.blank?}.join ' '
   end
 
-  def self.find_for_open_id(access_token, signed_in_resource=nil)
+  def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
     data = access_token.info
     if user = User.where(email: data["email"]).first
       # TODO: Once all current users have last_name, we can pull this out.

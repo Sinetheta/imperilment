@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 gem 'rails', '~> 4.2.0'
 
 gem 'devise'
-gem 'omniauth-openid'
+gem "omniauth-google-oauth2"
 gem 'rolify'
 gem 'cancancan'
 
@@ -53,6 +53,7 @@ end
 
 group :development, :test do
   gem 'pry-rails'
+  gem 'pry-byebug'
   gem 'ffaker'
   gem 'sqlite3'
 end

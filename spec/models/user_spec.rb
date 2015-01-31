@@ -33,8 +33,8 @@ describe User do
     end
   end
 
-  describe '#find_for_open_id' do
-    let(:result) { User.find_for_open_id(AccessToken.new({ "email" => email, "last_name" => name })) }
+  describe '#find_for_google_oauth2' do
+    let(:result) { User.find_for_google_oauth2(AccessToken.new({ "email" => email, "last_name" => name })) }
     let(:name) { 'Smith' }
 
     context "when user exists" do
