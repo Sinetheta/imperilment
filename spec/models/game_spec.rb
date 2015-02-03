@@ -68,6 +68,30 @@ describe Game do
     end
   end
 
+  describe '#all_answers' do
+    context "an unsaved game" do
+      let(:game){ Game.new }
+      it "should have no answers" do
+        expect(game.all_answers).to eq []
+      end
+    end
+
+    context "an game without answers" do
+      let(:game){ create :game }
+      it "should have no answers" do
+        expect(game.all_answers).to eq []
+      end
+    end
+
+    context "an game with an answer" do
+      let(:game){ create :game }
+      let!(:answer){ create :answer, game: game, start_date: game.ended_at }
+      it "should have no answers" do
+        expect(game.all_answers).to eq [answer]
+      end
+    end
+  end
+
   describe '.started_on' do
     let!(:answer) { create :answer, game: game, start_date: date }
     let(:date) { Date.parse('1984-09-10') }
