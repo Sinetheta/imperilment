@@ -41,12 +41,6 @@ group :development do
   gem 'quiet_assets'
   gem 'letter_opener'
 
-  gem 'guard-bundler'
-  gem 'guard-livereload'
-  gem 'guard-rspec'
-  gem 'guard-konacha'
-  gem 'guard-spring', github: 'mknapik/guard-spring'
-
   gem 'thin'
 end
 
