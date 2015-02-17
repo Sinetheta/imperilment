@@ -32,7 +32,6 @@ gem 'redcarpet'
 gem 'dotenv-rails'
 gem 'oops', github: 'freerunningtech/oops'
 
-gem 'skylight'
 gem 'rack-mini-profiler'
 gem 'flamegraph'
 gem 'stackprof'
