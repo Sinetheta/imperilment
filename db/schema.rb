@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20130828022713) do
 
-  create_table "answers", force: true do |t|
+  create_table "answers", force: :cascade do |t|
     t.integer  "game_id"
     t.integer  "category_id"
     t.text     "correct_question"
@@ -27,13 +27,13 @@ ActiveRecord::Schema.define(version: 20130828022713) do
   add_index "answers", ["category_id"], name: "index_answers_on_category_id"
   add_index "answers", ["game_id"], name: "index_answers_on_game_id"
 
-  create_table "categories", force: true do |t|
+  create_table "categories", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "game_results", force: true do |t|
+  create_table "game_results", force: :cascade do |t|
     t.integer "game_id"
     t.integer "user_id"
     t.integer "total"
@@ -44,14 +44,14 @@ ActiveRecord::Schema.define(version: 20130828022713) do
   add_index "game_results", ["position"], name: "index_game_results_on_position"
   add_index "game_results", ["user_id"], name: "index_game_results_on_user_id"
 
-  create_table "games", force: true do |t|
+  create_table "games", force: :cascade do |t|
     t.date     "ended_at"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "locked",     default: false
   end
 
-  create_table "questions", force: true do |t|
+  create_table "questions", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "answer_id"
     t.string   "response"
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 20130828022713) do
   add_index "questions", ["answer_id"], name: "index_questions_on_answer_id"
   add_index "questions", ["user_id"], name: "index_questions_on_user_id"
 
-  create_table "roles", force: true do |t|
+  create_table "roles", force: :cascade do |t|
     t.string   "name"
     t.integer  "resource_id"
     t.string   "resource_type"
@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(version: 20130828022713) do
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], name: "index_roles_on_name"
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 20130828022713) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
-  create_table "users_roles", id: false, force: true do |t|
+  create_table "users_roles", id: false, force: :cascade do |t|
     t.integer "user_id"
     t.integer "role_id"
   end
