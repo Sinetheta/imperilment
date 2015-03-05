@@ -21,6 +21,7 @@ en:
   weekly_total: Weekly Total
   weekly_results: Weekly Results
   finishes: Finishes
+  percent_correct: Percent Correct
 
   leader_board: Leader Board
   confirm_destroy: Are you sure?

@@ -55,4 +55,16 @@ class User < ActiveRecord::Base
       .where(questions: {id: nil})
       .order(:start_date)
   end
+
+  def correct_ratio(season=nil)
+    season ||= Season.current
+    total = self.questions.where(created_at: season.date_range).count.to_f
+    correct = self.questions.where(created_at: season.date_range).correct.count
+
+    if total > 0
+      correct / total
+    else
+      0.0
+    end
+  end
 end

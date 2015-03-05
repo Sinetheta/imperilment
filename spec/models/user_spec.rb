@@ -100,4 +100,41 @@ describe User do
       it{ is_expected.to eq [answer, answer2] }
     end
   end
+
+  describe "#correct_ratio" do
+    let(:user){ create :user }
+
+    context "without provided season" do
+      let(:game){ create :game }
+      let(:answer){ create :answer, game: game }
+      subject{ user.correct_ratio }
+
+      context "with all-correct questions" do
+        let!(:question){ create :question, user: user, answer: answer, correct: true }
+        it { is_expected.to eq 1.0 }
+      end
+
+      context "with no questions" do
+        it { is_expected.to eq 0.0 }
+      end
+    end
+
+    context "with provided season" do
+      before do
+        Timecop.freeze(1.year.ago) do
+          game = create :game, ended_at: Time.now
+
+          answer1 = create :answer, game: game
+          answer2 = create :answer, game: game
+
+          create :question, user: user, answer: answer1, correct: true
+          create :question, user: user, answer: answer2, correct: false
+        end
+      end
+
+      subject{ user.correct_ratio(Season.new(1.year.ago.year)) }
+
+      it { is_expected.to eq 0.5 }
+    end
+  end
 end

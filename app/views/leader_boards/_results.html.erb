@@ -4,6 +4,7 @@
       <th class='score hidden-phone'><%= t :overall_total %></th>
       <th><%= User.model_name.human %></th>
       <th><%= t :finishes %></th>
+      <th><%= t :percent_correct %>
     </tr>
   </thead>
   <tbody>
@@ -20,6 +21,9 @@
           <span><%= result.second %></span>
           <i class='fa fa-trophy bronze'></i>
           <span><%= result.third %></span>
+        </td>
+        <td class='percent'>
+          <%= (result.correct_ratio * 100).round(2) %>%
         </td>
       </tr>
     <% end %>
