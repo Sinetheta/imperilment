@@ -8,22 +8,22 @@
     </tr>
   </thead>
   <tbody>
-    <% @results.each do |result| %>
+    <% @results.each do |user| %>
       <tr>
         <td class='score hidden-phone'>
-          <%= "#{t :currency_symbol} #{result.total}" %>
+          <%= "#{t :currency_symbol} #{user.total}" %>
         </td>
-        <td class='email'><%= result.identifier %></td>
+        <td class='email'><%= user.identifier %></td>
         <td class='finishes'>
           <i class='fa fa-trophy gold'></i>
-          <span><%= result.first %></span>
+          <span><%= user.first %></span>
           <i class='fa fa-trophy silver'></i>
-          <span><%= result.second %></span>
+          <span><%= user.second %></span>
           <i class='fa fa-trophy bronze'></i>
-          <span><%= result.third %></span>
+          <span><%= user.third %></span>
         </td>
         <td class='percent'>
-          <%= (result.correct_ratio * 100).round(2) %>%
+          <%= (user.correct_ratio * 100).round(2) %>%
         </td>
       </tr>
     <% end %>
