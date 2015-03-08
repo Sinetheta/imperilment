@@ -9,6 +9,7 @@ gem 'cancancan'
 
 gem 'simple_form', '3.1.0'
 gem 'show_for'
+gem 'validate_url'
 
 gem 'will_paginate'
 gem 'select2-rails'

@@ -297,6 +297,9 @@ GEM
       rack
       raindrops (~> 0.7)
     uuidtools (2.1.4)
+    validate_url (1.0.0)
+      activemodel (>= 3.0.0)
+      addressable
     warden (1.2.3)
       rack (>= 1.0)
     websocket-driver (0.3.2)
@@ -354,4 +357,5 @@ DEPENDENCIES
   timecop
   uglifier
   unicorn
+  validate_url
   will_paginate
