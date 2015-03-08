@@ -1,0 +1,8 @@
+<%= simple_form_for(@web_hook) do |f| %>
+  <%= f.error_notification %>
+
+  <%= f.input :url, as: :url %>
+  <%= f.input :active, as: :boolean, wrapper: :inline_checkbox %>
+
+  <%= f.button :submit, class: 'btn btn-primary' %>
+<% end %>

@@ -64,6 +64,10 @@ en:
     money:
       info: 'These are the overall results to date for all finished games, ordered by total money. The current week is not taken into account.'
 
+  web_hooks:
+    new:
+      info: 'We’ll send a POST request to the URL below with details of any events.'
+
   activerecord:
     models:
       answer:
