@@ -59,4 +59,17 @@ describe WebHooksController do
       end
     end
   end
+  describe "DELETE destroy" do
+    it "destroys the requested web hook" do
+      expect {
+        delete :destroy, id: web_hook.to_param
+      }.to change(WebHook, :count).by(-1)
+    end
+
+    it "redirects to the web hooks list" do
+      delete :destroy, id: web_hook.to_param
+      expect(response).to redirect_to(web_hooks_url)
+    end
+  end
+
 end

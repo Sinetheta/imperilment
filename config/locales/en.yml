@@ -50,6 +50,7 @@ en:
     say_what: Say What!?
 
   model_create_successful: '%{model} was successfully created.'
+  model_destroy_successful: '%{model} was successfully removed.'
   model_update_successful: '%{model} was successfully updated.'
   flash:
     header:

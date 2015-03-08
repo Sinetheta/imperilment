@@ -23,6 +23,13 @@ class WebHooksController < ApplicationController
     end
   end
 
+  def destroy
+    if @web_hook.destroy
+      flash.notice = t :model_destroy_successful, model: WebHook.model_name.human
+    end
+    redirect_to action: :index
+  end
+
   private
   def web_hook_params
     params.require(:web_hook).permit(:url, :active)
