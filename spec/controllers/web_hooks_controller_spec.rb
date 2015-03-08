@@ -20,35 +20,42 @@ describe WebHooksController do
   end
 
   describe "POST create" do
-    let(:default_params) { { web_hook: { url: 'http://www.example.com/fake_hook', active: true } } }
-    subject(:valid_hook) { post :create, default_params }
+    subject { post :create, request_params }
 
-    describe "with valid params" do
+    context "with valid params" do
+      let(:request_params) { { web_hook: { url: 'http://www.example.com/fake_hook', active: true } } }
+
       it "creates a new WebHook" do
-        expect{ valid_hook }.to change(WebHook, :count).by(1)
+        expect{ subject }.to change(WebHook, :count).by(1)
       end
 
-      it "assigns a newly created web hook as @web_hook" do
-        valid_hook
-        expect(assigns(:web_hook)).to be_a(WebHook)
-        expect(assigns(:web_hook)).to be_persisted
+      describe 'controller instance variables' do
+        before do
+          subject
+        end
+        it "sets @web_hook" do
+          expect(assigns(:web_hook)).to be_a(WebHook)
+        end
+        it 'persists @web_hook' do
+          expect(assigns(:web_hook)).to be_persisted
+        end
       end
 
       it "redirects to the web hook list" do
-        expect(valid_hook).to redirect_to(web_hooks_url)
+        expect(subject).to redirect_to(web_hooks_url)
       end
     end
 
-    describe "with invalid params" do
-      subject(:invalid_hook) { post :create, web_hook: { url: 'nope' } }
+    context "with invalid params" do
+      let(:request_params) { { web_hook: { url: 'nope' } } }
 
       it "assigns a newly created but unsaved web hook as @web_hook" do
-        invalid_hook
+        subject
         expect(assigns(:web_hook)).to be_a(WebHook)
       end
 
       it "re-renders the 'new' template" do
-        expect(invalid_hook).to render_template("new")
+        expect(subject).to render_template("new")
       end
     end
   end
