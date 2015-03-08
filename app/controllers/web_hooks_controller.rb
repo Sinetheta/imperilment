@@ -13,10 +13,22 @@ class WebHooksController < ApplicationController
     respond_with(@web_hook)
   end
 
+  def edit
+  end
+
   def create
     @web_hook = WebHook.new(web_hook_params)
     if @web_hook.save
       flash.notice = t :model_create_successful, model: WebHook.model_name.human
+      redirect_to action: :index
+    else
+      respond_with @web_hook
+    end
+  end
+
+  def update
+    if @web_hook.update(web_hook_params)
+      flash.notice = t :model_update_successful, model: WebHook.model_name.human
       redirect_to action: :index
     else
       respond_with @web_hook

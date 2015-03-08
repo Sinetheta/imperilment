@@ -19,6 +19,13 @@ describe WebHooksController do
     end
   end
 
+  describe "GET edit" do
+    it "assigns the requested web hook as @web_hook" do
+      get :edit, id: web_hook.to_param
+      expect(assigns(:web_hook)).to eq(web_hook)
+    end
+  end
+
   describe "POST create" do
     subject { post :create, request_params }
 
@@ -59,6 +66,44 @@ describe WebHooksController do
       end
     end
   end
+
+  describe "PUT update" do
+    describe "with valid params" do
+      it "updates the requested web hook" do
+        expect_any_instance_of(WebHook).to receive(:update).with({ url: 'http://www.example.com/new_hook' })
+        put :update, id: web_hook.to_param, web_hook: { url: 'http://www.example.com/new_hook' }
+      end
+
+      it "assigns the requested web hook as @web_hook" do
+        put :update, id: web_hook.to_param, web_hook: { url: 'http://www.example.com/new_hook' }
+        expect(assigns(:web_hook)).to eq(web_hook)
+      end
+
+      it "redirects to the web hook list" do
+        put :update, id: web_hook.to_param, web_hook: { url: 'http://www.example.com/new_hook' }
+        expect(response).to redirect_to(web_hooks_url)
+      end
+    end
+
+    describe "with invalid params" do
+      it "assigns the web hook as @web_hook" do
+        # Trigger the behavior that occurs when invalid params are submitted
+        allow_any_instance_of(WebHook).to receive(:save).and_return(false)
+        allow_any_instance_of(WebHook).to receive(:errors).and_return(double(:errors, empty?: false))
+        put :update, id: web_hook.to_param, web_hook: { url: 'invalid_hook' }
+        expect(assigns(:web_hook)).to eq(web_hook)
+      end
+
+      it "re-renders the 'edit' template" do
+        # Trigger the behavior that occurs when invalid params are submitted
+        allow_any_instance_of(WebHook).to receive(:save).and_return(false)
+        allow_any_instance_of(WebHook).to receive(:errors).and_return(double(:errors, empty?: false))
+        put :update, id: web_hook.to_param, web_hook: { url: 'invalid_hook' }
+        expect(response).to render_template("edit")
+      end
+    end
+  end
+
   describe "DELETE destroy" do
     it "destroys the requested web hook" do
       expect {

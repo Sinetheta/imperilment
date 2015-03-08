@@ -15,6 +15,9 @@
         <td><%= link_to web_hook.url, edit_web_hook_path(web_hook) %></td>
         <td>
           <div class='btn-group'>
+            <%= link_to [:edit, web_hook], class: 'btn btn-small btn-default' do %>
+              <%= icon 'pencil' %>
+            <% end %>
             <%= link_to web_hook, method: :delete, class: 'btn btn-danger btn-small', data: {confirm: t(:confirm_destroy)} do %>
               <%= icon 'trash-o' %>
             <% end %>
