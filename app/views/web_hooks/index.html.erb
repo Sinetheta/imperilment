@@ -1,0 +1,21 @@
+<h1><%= WebHook.model_name.human(count: :many) %></h1>
+
+<table class="table web-hooks">
+  <thead>
+    <tr>
+      <th><%= WebHook.human_attribute_name("url") %></th>
+      <th><%= WebHook.human_attribute_name("active") %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @web_hooks.each do |web_hook| %>
+      <tr>
+        <td><%= link_to web_hook.url, edit_web_hook_path(web_hook) %></td>
+        <td><%= web_hook.active ? bs_label('Active', :active) : bs_label('Disabled', :inactive) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t(:new_model, model: WebHook.model_name.human), new_web_hook_path, class: 'btn btn-default' %>

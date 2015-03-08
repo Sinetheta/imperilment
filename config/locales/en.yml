@@ -81,11 +81,16 @@ en:
       question:
         one: Question
         other: Questions
+      web_hook:
+        one: Web Hook
+        other: Web Hooks
     attributes:
       game:
         ended_at: Ends On
       answer:
         unchecked_questions: Unchecked Questions
+      web_hook:
+        url: Payload URL
 
   date:
     formats:
