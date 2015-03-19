@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'uri'
 
 describe WebHook do
   it 'has a valid factory' do
@@ -13,6 +14,10 @@ describe WebHook do
     web_hook = FactoryGirl.build(:web_hook, url: 'CATS!')
     expect(web_hook).to_not be_valid
     expect(web_hook.errors[:url]).to eq(['is not a valid URL'])
+  end
+
+  it 'creates a uri from the url' do
+    expect(FactoryGirl.create(:web_hook).uri).to be_an(URI)
   end
 
   it 'defaults to active' do
