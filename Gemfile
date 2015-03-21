@@ -69,6 +69,7 @@ group :test do
   gem 'konacha-chai-matchers'
   gem 'ejs'
   gem 'poltergeist'
+  gem 'webmock'
 end
 
 group :production do
