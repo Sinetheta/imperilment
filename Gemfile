@@ -2,6 +2,8 @@ source 'http://rubygems.org'
 
 gem 'rails', '~> 4.2.0'
 
+gem 'rabl-rails'
+
 gem 'devise'
 gem "omniauth-google-oauth2"
 gem 'rolify'
