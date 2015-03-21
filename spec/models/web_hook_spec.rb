@@ -24,4 +24,10 @@ describe WebHook do
     web_hook = WebHook.new url: 'http://www.example.com'
     expect(web_hook.active).to be(true)
   end
+
+  it 'has an active scope' do
+    active = FactoryGirl.create :web_hook
+    inactive = FactoryGirl.create :web_hook, active: false
+    expect(WebHook.active).to eq([active])
+  end
 end
