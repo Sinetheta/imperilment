@@ -36,27 +36,13 @@ describe User do
   describe '#find_for_google_oauth2' do
     let(:result) { User.find_for_google_oauth2(AccessToken.new("email" => email, "last_name" => name)) }
     let(:name) { 'Smith' }
+    let(:last_name) { 'Smith' }
 
     context "when user exists" do
       subject { result }
 
       let!(:user) { create :user, last_name: last_name }
       let(:email) { user.email }
-      let(:last_name) { 'Smith' }
-
-      context "when the user's last_name is blank" do
-        let(:last_name) { nil }
-
-        describe '#last_name' do
-          subject { super().last_name }
-          it { is_expected.to eq(name[0]) }
-        end
-      end
-
-      context "when the user's last_name is not blank" do
-        subject { -> { result } }
-        it { is_expected.not_to change(user, :last_name) }
-      end
 
       it { is_expected.to eq(user) }
     end
@@ -64,8 +50,12 @@ describe User do
     context "when user does not exist" do
       let(:email) { 'new@user.com' }
 
-      it 'creates a user' do
+      it 'creates a user with the correct attributes' do
         expect { result }.to change { User.count }.by(1)
+        expect(User.last).to have_attributes(
+          email: email,
+          last_name: 'S'
+        )
       end
     end
   end

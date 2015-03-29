@@ -23,22 +23,12 @@ class User < ActiveRecord::Base
 
   def self.find_for_google_oauth2(access_token, _signed_in_resource = nil)
     data = access_token.info
-    if (user = User.where(email: data["email"]).first)
-      # TODO: Once all current users have last_name, we can pull this out.
-      unless user.last_name?
-        user.last_name = data["last_name"].try(:first)
-        user.save!
-      end
-      user
-    else
-      User.create!(
-        email: data["email"],
-        first_name: data["first_name"],
-        last_name: data["last_name"].try(:first),
-        password: Devise.friendly_token[0, 20]
-      )
+    User.where(email: data["email"]).first_or_create! do |user|
+      user.email = data["email"]
+      user.first_name = data["first_name"]
+      user.last_name = data["last_name"].try!(:first)
+      user.password = Devise.friendly_token[0, 20]
     end
-    # stubbing methods from the class under test===bad
   end
 
   def pending_answers
