@@ -20,19 +20,18 @@
 </div>
 
 <div class='well'>
-  <% action = :new; question = :question %>
-  <% if @answer.question_for(current_user) %>
-    <% action = :edit %>
-    <% question = @answer.question_for(current_user) %>
-  <% end %>
-  <% if question.is_a?(Symbol) || !question.checked? %>
-    <%= link_to "Your Response", [action, @game, @answer, question], class: 'btn btn-primary' %>
+  <% question = @answer.question_for(current_user) %>
+
+  <% if !question %>
+    <%= link_to "Your Response", [:new, @game, @answer, :question], class: 'btn btn-primary' %>
+  <% elsif !question.checked? %>
+    <%= link_to "Your Response", [:edit, @game, @answer, question], class: 'btn btn-primary' %>
   <% end %>
 
   <% if @answer.closed? %>
     <% if can?(:check, @answer) %>
       <%= link_to t(:check_model, model: Question.model_name.human(count: :many)), [@game, @answer, Question], class: 'btn btn-info' %>
-    <% elsif !question.is_a?(Symbol) && question.checked? %>
+    <% elsif question && question.checked? %>
       <%= link_to t(:see_model, model: Question.model_name.human(count: :many)), [@game, @answer, Question], class: 'btn btn-info' %>
     <% end %>
   <% end %>
