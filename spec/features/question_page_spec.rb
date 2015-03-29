@@ -3,7 +3,7 @@ require 'spec_helper'
 feature 'Question page' do
   let(:answer) { create :answer }
   before do
-    answer.update(answer:"_answer_")
+    answer.update(answer: "_answer_")
     sign_in
   end
 

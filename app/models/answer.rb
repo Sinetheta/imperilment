@@ -9,7 +9,7 @@ class Answer < ActiveRecord::Base
   validates :start_date, uniqueness: true
 
   def self.most_recent
-    self.where('start_date <= ?', DateTime.now).order('start_date DESC').first
+    where('start_date <= ?', DateTime.now).order('start_date DESC').first
   end
 
   def self.next_free_date
@@ -21,7 +21,7 @@ class Answer < ActiveRecord::Base
   end
 
   def self.last_answer
-    self.order(:start_date).last
+    order(:start_date).last
   end
 
   def questions_by_user_id

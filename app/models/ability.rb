@@ -11,7 +11,7 @@ class Ability
       can :correct, Question
     else
       if user
-        can :manage, Question, :user_id => user.id
+        can :manage, Question, user_id: user.id
         can :final, Answer
         cannot :check, Answer
       end

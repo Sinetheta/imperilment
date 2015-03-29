@@ -40,6 +40,7 @@ class GamesController < ApplicationController
   end
 
   private
+
   def game_params
     params.require("game").permit :ended_at, :locked
   end

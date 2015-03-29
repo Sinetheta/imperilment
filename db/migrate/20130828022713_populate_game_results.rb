@@ -1,6 +1,6 @@
 class PopulateGameResults < ActiveRecord::Migration
   def up
-    Game.all.each { |game| game.calculate_result! }
+    Game.all.each(&:calculate_result!)
   end
 
   def down

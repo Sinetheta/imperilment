@@ -1,5 +1,5 @@
 class Admin::UsersController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   load_and_authorize_resource
 
   respond_to :html, :json
@@ -40,6 +40,7 @@ class Admin::UsersController < ApplicationController
   end
 
   private
+
   def user_params
     params.require(:user).permit :email, :password, :password_confirmation, :remember_me, :first_name, :last_name
   end

@@ -22,7 +22,7 @@ module ControllerMacros
   # since we test that all seperately.
   def authorize
     before(:each) do
-      @ability = Object.new.tap {|o| o.extend CanCan::Ability}
+      @ability = Object.new.tap { |o| o.extend CanCan::Ability }
       @ability.can :manage, :all
       allow(@controller).to receive(:current_ability) { @ability }
     end

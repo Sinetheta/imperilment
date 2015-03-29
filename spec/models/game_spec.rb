@@ -14,7 +14,7 @@ describe Game do
     end
 
     context "when there are results" do
-      let(:answer_value){ 200 }
+      let(:answer_value) { 200 }
 
       before do
         2.times do
@@ -25,7 +25,7 @@ describe Game do
       end
 
       context "when answer has a correct_question" do
-        let(:correct_question){ "Correct!" }
+        let(:correct_question) { "Correct!" }
         it "is the sum of all values" do
           expect(game.score(user)).to eq(400)
         end
@@ -59,7 +59,7 @@ describe Game do
       end
 
       context "when answer does not have a correct_question" do
-        let(:correct_question){ "" }
+        let(:correct_question) { "" }
 
         it "does not include any results" do
           expect(game.score(user)).to eq(0)
@@ -70,22 +70,22 @@ describe Game do
 
   describe '#all_answers' do
     context "an unsaved game" do
-      let(:game){ Game.new }
+      let(:game) { Game.new }
       it "should have no answers" do
         expect(game.all_answers).to eq []
       end
     end
 
     context "an game without answers" do
-      let(:game){ create :game }
+      let(:game) { create :game }
       it "should have no answers" do
         expect(game.all_answers).to eq []
       end
     end
 
     context "an game with an answer" do
-      let(:game){ create :game }
-      let!(:answer){ create :answer, game: game, start_date: game.ended_at }
+      let(:game) { create :game }
+      let!(:answer) { create :answer, game: game, start_date: game.ended_at }
       it "should have no answers" do
         expect(game.all_answers).to eq [answer]
       end
@@ -132,7 +132,7 @@ describe Game do
     end
 
     it 'creates 4 game results' do
-      expect { game.calculate_result! }.to change{GameResult.count}.by(4)
+      expect { game.calculate_result! }.to change { GameResult.count }.by(4)
     end
 
     describe 'user placement' do
@@ -158,9 +158,9 @@ describe Game do
   end
 
   describe 'next and prev' do
-    let!(:first){ create :game, ended_at: 2.weeks.ago }
-    let!(:middle){ create :game, ended_at: 1.week.ago }
-    let!(:last){ create :game, ended_at: Date.current }
+    let!(:first) { create :game, ended_at: 2.weeks.ago }
+    let!(:middle) { create :game, ended_at: 1.week.ago }
+    let!(:last) { create :game, ended_at: Date.current }
 
     describe "first game" do
       it "has no previous" do
@@ -195,13 +195,13 @@ describe Game do
     let!(:question) { create :question, answer: answer }
     it 'calculates results when locking the game' do
       game.locked = true
-      expect { game.save! }.to change{GameResult.count}.by(1)
+      expect { game.save! }.to change { GameResult.count }.by(1)
     end
   end
 
   describe '#grouped_and_sorted_by_score' do
     let!(:user) { create :user }
-    let!(:answer) { create :answer, game: game, amount: 1}
+    let!(:answer) { create :answer, game: game, amount: 1 }
     let!(:question) { create :question, user: user, answer: answer, correct: true }
 
     before(:each) do
@@ -209,7 +209,7 @@ describe Game do
     end
 
     it 'should return the users grouped and sorted by score' do
-      expect(game.grouped_and_sorted_by_score).to eq({1 => [user]})
+      expect(game.grouped_and_sorted_by_score).to eq(1 => [user])
     end
   end
 end

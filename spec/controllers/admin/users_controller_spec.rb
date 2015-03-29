@@ -45,20 +45,19 @@ describe Admin::UsersController do
   end
 
   describe 'PUT update' do
-
     describe "with valid params" do
       it "updates the requested user" do
-        expect_any_instance_of(User).to receive(:update_attributes).with({'first_name' => 'Joe'})
+        expect_any_instance_of(User).to receive(:update_attributes).with('first_name' => 'Joe')
         put :update, id: user.to_param, user: { 'first_name' => 'Joe' }
       end
 
       it "assigns the requested user as @user" do
-        put :update, id: user.to_param, user: {'first_name' => 'Joe'}
+        put :update, id: user.to_param, user: { 'first_name' => 'Joe' }
         expect(assigns(:user)).to eq(user)
       end
 
       it "redirects to the user" do
-        put :update, id: user.to_param, user: {'first_name' => 'Joe'}
+        put :update, id: user.to_param, user: { 'first_name' => 'Joe' }
         expect(response).to redirect_to([:admin, user])
       end
     end
@@ -84,15 +83,14 @@ describe Admin::UsersController do
 
   describe 'DELETE destroy ' do
     it "destroys the requested user" do
-      expect {
+      expect do
         delete :destroy, id: user.to_param
-      }.to change(User, :count).by(-1)
+      end.to change(User, :count).by(-1)
     end
 
     it "redirects to the user list" do
       delete :destroy, id: user.to_param
       expect(response).to redirect_to(admin_users_url)
     end
-
   end
 end

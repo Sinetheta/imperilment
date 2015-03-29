@@ -3,7 +3,7 @@ require 'spec_helper'
 describe ApplicationController do
   controller do
     def index
-      raise CanCan::AccessDenied
+      fail CanCan::AccessDenied
     end
   end
   describe 'GET show' do

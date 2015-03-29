@@ -4,7 +4,7 @@ describe GamesController do
   authorize
 
   let!(:game) { create :game }
-  let(:default_params) { { game: {foo: 'bar'} } }
+  let(:default_params) { { game: { foo: 'bar' } } }
 
   describe "GET index" do
     it "assigns all games as @games" do
@@ -37,9 +37,9 @@ describe GamesController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new Game" do
-        expect {
+        expect do
           post :create, default_params
-        }.to change(Game, :count).by(1)
+        end.to change(Game, :count).by(1)
       end
 
       it "assigns a newly created game as @game" do
@@ -76,17 +76,17 @@ describe GamesController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested game" do
-        expect_any_instance_of(Game).to receive(:update_attributes).with({ "ended_at" => "2012-12-27 15:58:08" })
+        expect_any_instance_of(Game).to receive(:update_attributes).with("ended_at" => "2012-12-27 15:58:08")
         put :update, id: game.to_param, game: { "ended_at" => "2012-12-27 15:58:08" }
       end
 
       it "assigns the requested game as @game" do
-        put :update, id: game.to_param, game: {"ended_at" => "2012-12-27 15:58:08"}
+        put :update, id: game.to_param, game: { "ended_at" => "2012-12-27 15:58:08" }
         expect(assigns(:game)).to eq(game)
       end
 
       it "redirects to the game" do
-        put :update, id: game.to_param, game: {"ended_at" => "2012-12-27 15:58:08"}
+        put :update, id: game.to_param, game: { "ended_at" => "2012-12-27 15:58:08" }
         expect(response).to redirect_to(game)
       end
     end
@@ -112,9 +112,9 @@ describe GamesController do
 
   describe "DELETE destroy" do
     it "destroys the requested game" do
-      expect {
+      expect do
         delete :destroy, id: game.to_param
-      }.to change(Game, :count).by(-1)
+      end.to change(Game, :count).by(-1)
     end
 
     it "redirects to the games list" do
@@ -122,5 +122,4 @@ describe GamesController do
       expect(response).to redirect_to(games_url)
     end
   end
-
 end

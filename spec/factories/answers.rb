@@ -7,6 +7,6 @@ FactoryGirl.define do
     correct_question "What is a test?"
     answer "This type of code is used to ensure correct behaviour."
     amount 100
-    sequence(:start_date) { |n| Date.new(2013,1,1) + n.days }
+    sequence(:start_date) { |n| Date.new(2013, 1, 1) + n.days }
   end
 end

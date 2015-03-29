@@ -57,9 +57,9 @@ group :test do
   gem 'shoulda-matchers'
   gem 'rspec-rails', '~> 3.0'
   gem 'rspec-activemodel-mocks'
-  gem 'factory_girl_rails', :require => false
-  gem 'simplecov', :require => false
-  gem 'simplecov-rcov', :require => false
+  gem 'factory_girl_rails', require: false
+  gem 'simplecov', require: false
+  gem 'simplecov-rcov', require: false
   gem 'timecop'
 
   gem 'konacha'

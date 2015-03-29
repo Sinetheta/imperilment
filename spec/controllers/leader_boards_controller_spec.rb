@@ -4,7 +4,7 @@ describe LeaderBoardsController do
   let!(:game) { create :game, locked: true }
   let(:season) { game.ended_at.year }
 
-  let(:result){ assigns(:results)[0] }
+  let(:result) { assigns(:results)[0] }
 
   describe 'GET index' do
     let!(:game_result) { create(:game_result, game: game, total: 300, position: 1) }
@@ -14,9 +14,9 @@ describe LeaderBoardsController do
         get :index, season: season
         expect(result).to eq(game_result.user)
         expect(result.total).to eq(300)
-        expect(result.first).to  eq(1)
+        expect(result.first).to eq(1)
         expect(result.second).to eq(0)
-        expect(result.third).to  eq(0)
+        expect(result.third).to eq(0)
       end
     end
     context 'json' do
@@ -53,8 +53,8 @@ describe LeaderBoardsController do
       end
     end
     context "games exist" do
-      let!(:answer){ create :answer, game: game }
-      let!(:question){ create :question, answer: answer }
+      let!(:answer) { create :answer, game: game }
+      let!(:question) { create :question, answer: answer }
 
       before(:each) do
         get :show, id: game.id, season: season

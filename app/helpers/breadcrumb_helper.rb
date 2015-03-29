@@ -1,6 +1,6 @@
 
 module BreadcrumbHelper
-  def breadcrumb content=nil, &block
+  def breadcrumb(content = nil, &block)
     @breadcrumbs ||= []
     if content
       @breadcrumbs << content
@@ -9,7 +9,8 @@ module BreadcrumbHelper
     end
     @breadcrumbs
   end
-  def render_breadcrumbs divider='/'
+
+  def render_breadcrumbs(divider = '/')
     return if breadcrumb.empty?
     breadcrumbs = breadcrumb.dup
     last = breadcrumbs.shift

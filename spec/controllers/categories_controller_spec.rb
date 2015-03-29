@@ -37,9 +37,9 @@ describe CategoriesController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new Category" do
-        expect {
+        expect do
           post :create, default_params
-        }.to change(Category, :count).by(1)
+        end.to change(Category, :count).by(1)
       end
 
       it "assigns a newly created category as @category" do
@@ -76,7 +76,7 @@ describe CategoriesController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested category" do
-        expect_any_instance_of(Category).to receive(:update_attributes).with({ "name" => "Test" })
+        expect_any_instance_of(Category).to receive(:update_attributes).with("name" => "Test")
         put :update, id: category.to_param, category: { "name" => "Test" }
       end
 
@@ -112,9 +112,9 @@ describe CategoriesController do
 
   describe "DELETE destroy" do
     it "destroys the requested category" do
-      expect {
+      expect do
         delete :destroy, id: category.to_param
-      }.to change(Category, :count).by(-1)
+      end.to change(Category, :count).by(-1)
     end
 
     it "redirects to the categories list" do
@@ -122,5 +122,4 @@ describe CategoriesController do
       expect(response).to redirect_to(categories_url)
     end
   end
-
 end

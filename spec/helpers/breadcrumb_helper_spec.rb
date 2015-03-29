@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe BreadcrumbHelper do
-
   describe '.breadcrumb' do
     context 'given a block' do
       before(:each) do
@@ -19,7 +18,7 @@ describe BreadcrumbHelper do
 
   describe '.render_breadcrumbs' do
     before(:each) do
-      allow(helper).to receive(:breadcrumb).and_return ['second', 'first']
+      allow(helper).to receive(:breadcrumb).and_return %w(second first)
     end
 
     subject { helper.render_breadcrumbs '+' }

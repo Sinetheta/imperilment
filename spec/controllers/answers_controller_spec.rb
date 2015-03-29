@@ -78,7 +78,7 @@ describe AnswersController do
         end
       end
 
-      context" when wager is not valid" do
+      context " when wager is not valid" do
         it "flashes an error" do
           get :final, default_params.merge(id: answer.to_param, wager: 1600)
           expect(assigns(:question).errors[:amount]).not_to be_nil
@@ -109,9 +109,9 @@ describe AnswersController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new Answer" do
-        expect {
+        expect do
           post :create, default_params
-        }.to change(Answer, :count).by(1)
+        end.to change(Answer, :count).by(1)
       end
 
       it "assigns a newly created answer as @answer" do
@@ -148,7 +148,7 @@ describe AnswersController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested answer" do
-        expect_any_instance_of(Answer).to receive(:update_attributes).with({ "amount" => '100' })
+        expect_any_instance_of(Answer).to receive(:update_attributes).with("amount" => '100')
         put :update, default_params.merge(id: answer.to_param, answer: { "amount" => '100' })
       end
 
@@ -184,9 +184,9 @@ describe AnswersController do
 
   describe "DELETE destroy" do
     it "destroys the requested answer" do
-      expect {
+      expect do
         delete :destroy, default_params.merge(id: answer.to_param)
-      }.to change(Answer, :count).by(-1)
+      end.to change(Answer, :count).by(-1)
     end
 
     it "redirects to the answers list" do

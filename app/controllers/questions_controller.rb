@@ -56,6 +56,7 @@ class QuestionsController < ApplicationController
   end
 
   private
+
   def permitted_question_params
     if can? :correct, @question
       [:response, :correct]

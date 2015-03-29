@@ -49,23 +49,23 @@ describe GameResult do
       results = GameResult.all_results_by_money.map do |result|
         { result.id => result.total }
       end
-      expect(results).to eql [{4 => 5}, {1 => 3}, {2 => 2}]
+      expect(results).to eql [{ 4 => 5 }, { 1 => 3 }, { 2 => 2 }]
     end
   end
 
   describe 'results' do
-    let(:answers){ [answer, nil] }
-    let(:answer){ double(:answer, start_date: 1) }
-    let(:question){ nil }
-    let(:game){ double(:game, date_range: [1,2], all_answers: answers) }
-    let(:user){ User.new }
-    let(:game_result){ described_class.new(user: user, total: 1000, position: 2) }
+    let(:answers) { [answer, nil] }
+    let(:answer) { double(:answer, start_date: 1) }
+    let(:question) { nil }
+    let(:game) { double(:game, date_range: [1, 2], all_answers: answers) }
+    let(:user) { User.new }
+    let(:game_result) { described_class.new(user: user, total: 1000, position: 2) }
 
-    subject{ game_result.results }
+    subject { game_result.results }
 
     before do
       allow(game_result).to receive(:game).and_return(game)
-      allow(answer).to receive(:question_for).with(user){question}
+      allow(answer).to receive(:question_for).with(user) { question }
     end
 
     context 'unanswered' do
@@ -73,7 +73,7 @@ describe GameResult do
     end
 
     context 'answered' do
-      let(:question){ double(:question, status: :questionstatus) }
+      let(:question) { double(:question, status: :questionstatus) }
       it { is_expected.to eq([:questionstatus, :unavailable]) }
     end
   end

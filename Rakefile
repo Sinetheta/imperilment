@@ -4,7 +4,7 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-task :development_data => :environment do
+task development_data: :environment do
   admin = User.new(email: 'admin@example.com', password: 'test123')
   admin.save!(validate: false)
   admin.add_role :admin
@@ -24,7 +24,7 @@ task :development_data => :environment do
   date = 1.months.ago.beginning_of_week
   while date <= Time.current
     game = Game.create!(created_at: date, ended_at: date + 6.days)
-    7.times do |i|
+    7.times do |_i|
       answer = game.answers.create!(category: category, amount: [200, 400, 800].sample, answer: 'Answer', correct_question: 'Correct Question', start_date: date, created_at: date)
       users.each do |user|
         answer.questions.create!(user: user, correct: [true, false].sample)
@@ -33,7 +33,6 @@ task :development_data => :environment do
     end
     game.update(locked: true)
   end
-
 end
 
 Oops::Tasks.new do |oops|

@@ -5,7 +5,7 @@ guard 'bundler' do
   watch('Gemfile')
 end
 
-guard 'livereload', :port => 50094 do
+guard 'livereload', port: 50_094 do
   watch(%r{app/views/.+\.(erb|haml|slim)$})
   watch(%r{app/helpers/.+\.rb})
   watch(%r{public/.+\.(css|js|html)})
@@ -16,7 +16,7 @@ end
 
 guard 'spring' do
   watch(%r{^spec/.+_spec\.rb$})
-  watch(%r{^spec/spec_helper\.rb$})                   { |m| 'spec' }
+  watch(%r{^spec/spec_helper\.rb$})                   { |_m| 'spec' }
   watch(%r{^app/(.+)\.rb$})                           { |m| "spec/#{m[1]}_spec.rb" }
   watch(%r{^lib/(.+)\.rb$})                           { |m| "spec/lib/#{m[1]}_spec.rb" }
   watch(%r{^app/controllers/(.+)_(controller)\.rb$})  do |m|
@@ -25,7 +25,7 @@ guard 'spring' do
 end
 
 require 'capybara/poltergeist'
-guard :konacha, :driver => :poltergeist, port: 50093 do
+guard :konacha, driver: :poltergeist, port: 50_093 do
   watch(%r{^app/assets/javascripts/(.*)\.js(\.coffee)?$}) { |m| "#{m[1]}_spec.js.coffee" }
   watch(%r{^spec/javascripts/.+_spec(\.js|\.js\.coffee)$})
 end

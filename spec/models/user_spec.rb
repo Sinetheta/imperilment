@@ -34,7 +34,7 @@ describe User do
   end
 
   describe '#find_for_google_oauth2' do
-    let(:result) { User.find_for_google_oauth2(AccessToken.new({ "email" => email, "last_name" => name })) }
+    let(:result) { User.find_for_google_oauth2(AccessToken.new("email" => email, "last_name" => name)) }
     let(:name) { 'Smith' }
 
     context "when user exists" do
@@ -54,7 +54,7 @@ describe User do
       end
 
       context "when the user's last_name is not blank" do
-        subject { ->{result} }
+        subject { -> { result } }
         it { is_expected.not_to change(user, :last_name) }
       end
 
@@ -65,52 +65,52 @@ describe User do
       let(:email) { 'new@user.com' }
 
       it 'creates a user' do
-        expect { result }.to change{User.count}.by(1)
+        expect { result }.to change { User.count }.by(1)
       end
     end
   end
 
   describe "#pending_answers" do
-    let!(:user){ create :user }
-    let!(:game){ create :game }
-    let!(:answer){ create :answer, game: game }
-    subject{ user.pending_answers }
+    let!(:user) { create :user }
+    let!(:game) { create :game }
+    let!(:answer) { create :answer, game: game }
+    subject { user.pending_answers }
 
     context "Answer has question from same user" do
-      let!(:question){ create :question, answer: answer, user: user }
-      it{ is_expected.to eq [] }
+      let!(:question) { create :question, answer: answer, user: user }
+      it { is_expected.to eq [] }
     end
     context "Answer has question from other user" do
-      let!(:question){ create :question, answer: answer }
-      it{ is_expected.to eq [answer] }
+      let!(:question) { create :question, answer: answer }
+      it { is_expected.to eq [answer] }
     end
     context "Game is locked" do
-      let!(:game){ create :game, locked: true }
-      it{ is_expected.to eq [] }
+      let!(:game) { create :game, locked: true }
+      it { is_expected.to eq [] }
     end
     context "one unanswered question" do
-      it{ is_expected.to eq [answer] }
+      it { is_expected.to eq [answer] }
     end
     context "two unanswered questions in one game" do
-      let(:answer2){ create :answer, game: game }
-      it{ is_expected.to eq [answer, answer2] }
+      let(:answer2) { create :answer, game: game }
+      it { is_expected.to eq [answer, answer2] }
     end
     context "two unanswered questions across games" do
-      let(:answer2){ create :answer }
-      it{ is_expected.to eq [answer, answer2] }
+      let(:answer2) { create :answer }
+      it { is_expected.to eq [answer, answer2] }
     end
   end
 
   describe "#correct_ratio" do
-    let(:user){ create :user }
+    let(:user) { create :user }
 
     context "without provided season" do
-      let(:game){ create :game }
-      let(:answer){ create :answer, game: game }
-      subject{ user.correct_ratio }
+      let(:game) { create :game }
+      let(:answer) { create :answer, game: game }
+      subject { user.correct_ratio }
 
       context "with all-correct questions" do
-        let!(:question){ create :question, user: user, answer: answer, correct: true }
+        let!(:question) { create :question, user: user, answer: answer, correct: true }
         it { is_expected.to eq 1.0 }
       end
 
@@ -132,7 +132,7 @@ describe User do
         end
       end
 
-      subject{ user.correct_ratio(Season.new(1.year.ago.year)) }
+      subject { user.correct_ratio(Season.new(1.year.ago.year)) }
 
       it { is_expected.to eq 0.5 }
     end

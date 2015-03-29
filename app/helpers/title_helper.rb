@@ -1,5 +1,5 @@
 module TitleHelper
-  def title title=nil
+  def title(title = nil)
     @title ||= []
     @title << title if title
     @title

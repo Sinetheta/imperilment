@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :omniauthable, :database_authenticatable, :registerable,
-    :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable
 
   rolify
 
@@ -18,14 +18,14 @@ class User < ActiveRecord::Base
   end
 
   def full_name
-    [first_name, last_name].reject {|n| n.blank?}.join ' '
+    [first_name, last_name].reject(&:blank?).join ' '
   end
 
-  def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
+  def self.find_for_google_oauth2(access_token, _signed_in_resource = nil)
     data = access_token.info
     if user = User.where(email: data["email"]).first
       # TODO: Once all current users have last_name, we can pull this out.
-      if !user.last_name?
+      unless user.last_name?
         user.last_name = data["last_name"].try(:first)
         user.save!
       end
@@ -35,31 +35,31 @@ class User < ActiveRecord::Base
         email: data["email"],
         first_name: data["first_name"],
         last_name: data["last_name"].try(:first),
-        password: Devise.friendly_token[0,20]
+        password: Devise.friendly_token[0, 20]
       )
     end
-      #stubbing methods from the class under test===bad
+    # stubbing methods from the class under test===bad
   end
 
   def pending_answers
     # Answers from unlocked games with no matching question
     answer = Answer.arel_table
     question = Question.arel_table
-    question_join = answer
-      .join(question, Arel::Nodes::OuterJoin)
-      .on(question[:answer_id].eq(answer[:id]).and(question[:user_id].eq(id)))
-    Answer
-      .joins(question_join.join_sources)
-      .joins(:game)
-      .where(games: {locked: false})
-      .where(questions: {id: nil})
-      .order(:start_date)
+    question_join = answer.
+                    join(question, Arel::Nodes::OuterJoin).
+                    on(question[:answer_id].eq(answer[:id]).and(question[:user_id].eq(id)))
+    Answer.
+      joins(question_join.join_sources).
+      joins(:game).
+      where(games: { locked: false }).
+      where(questions: { id: nil }).
+      order(:start_date)
   end
 
-  def correct_ratio(season=nil)
+  def correct_ratio(season = nil)
     season ||= Season.current
-    total = self.questions.where(created_at: season.date_range).count.to_f
-    correct = self.questions.where(created_at: season.date_range).correct.count
+    total = questions.where(created_at: season.date_range).count.to_f
+    correct = questions.where(created_at: season.date_range).correct.count
 
     if total > 0
       correct / total

@@ -24,7 +24,7 @@ describe QuestionsController do
   # Additional params sent with each request
   # Convenient for nested controllers.
   def default_params
-    {game_id: question.answer.game, answer_id: question.answer, question: { foo: 'bar' }}
+    { game_id: question.answer.game, answer_id: question.answer, question: { foo: 'bar' } }
   end
 
   let!(:question) { create :question }
@@ -80,7 +80,8 @@ describe QuestionsController do
   end
 
   describe "GET edit" do
-    it "assigns the requested question as @question" do get :edit, default_params.merge(id: question.to_param)
+    it "assigns the requested question as @question" do
+      get :edit, default_params.merge(id: question.to_param)
       expect(assigns(:question)).to eq(question)
     end
   end
@@ -88,9 +89,9 @@ describe QuestionsController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new Question" do
-        expect {
+        expect do
           post :create, default_params
-        }.to change(Question, :count).by(1)
+        end.to change(Question, :count).by(1)
       end
 
       it "assigns a newly created question as @question" do
@@ -131,7 +132,7 @@ describe QuestionsController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested question" do
-        expect_any_instance_of(Question).to receive(:update_attributes).with({ "response" => "" })
+        expect_any_instance_of(Question).to receive(:update_attributes).with("response" => "")
         put :update, default_params.merge(id: question.to_param, question: { "response" => "" })
       end
 
@@ -149,7 +150,7 @@ describe QuestionsController do
         subject { assigns(:question).correct }
         context 'when user is an admin' do
           before do
-            put :update, {id: question.to_param, game_id: question.answer.game, answer_id: question.answer, question: { correct: true }}
+            put :update, id: question.to_param, game_id: question.answer.game, answer_id: question.answer, question: { correct: true }
           end
           it { is_expected.to be_truthy }
         end
@@ -157,12 +158,11 @@ describe QuestionsController do
         context 'when user is not an admin' do
           before do
             @ability.cannot :correct, Question
-            put :update, {id: question.to_param, game_id: question.answer.game, answer_id: question.answer, question: { correct: true }}
+            put :update, id: question.to_param, game_id: question.answer.game, answer_id: question.answer, question: { correct: true }
           end
           it { is_expected.to be_nil }
         end
       end
-
     end
 
     describe "with invalid params" do
@@ -186,9 +186,9 @@ describe QuestionsController do
 
   describe "DELETE destroy" do
     it "destroys the requested question" do
-      expect {
+      expect do
         delete :destroy, default_params.merge(id: question.to_param)
-      }.to change(Question, :count).by(-1)
+      end.to change(Question, :count).by(-1)
     end
 
     it "redirects to the questions list" do
@@ -196,5 +196,4 @@ describe QuestionsController do
       expect(response).to redirect_to [game, answer]
     end
   end
-
 end

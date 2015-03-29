@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   check_authorization unless: :devise_controller?
 
-  before_filter do
+  before_action do
     if params[:profile]
       Rack::MiniProfiler.authorize_request
     end
@@ -13,8 +13,8 @@ class ApplicationController < ActionController::Base
     respond_to do |format|
       message = exception.message
       format.html { redirect_to user_omniauth_authorize_path(:google) }
-      format.json { render json: {error: 'forbidden', message: message}, status: :forbidden }
-      format.xml  { render xml:  {error: 'forbidden', message: message}, status: :forbidden }
+      format.json { render json: { error: 'forbidden', message: message }, status: :forbidden }
+      format.xml  { render xml:  { error: 'forbidden', message: message }, status: :forbidden }
     end
   end
 end

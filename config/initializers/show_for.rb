@@ -11,5 +11,5 @@ ShowFor.setup do |config|
 
   config.collection_tag = :ul
 
-  config.association_methods = [ :name, :title, :to_s ]
+  config.association_methods = [:name, :title, :to_s]
 end

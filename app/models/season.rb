@@ -1,7 +1,7 @@
 class Season
   attr_reader :year
 
-  def initialize year
+  def initialize(year)
     @year = year
   end
 
@@ -30,6 +30,7 @@ class Season
   end
 
   private
+
   def self.latest_year
     Time.current.year
   end

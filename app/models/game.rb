@@ -6,7 +6,7 @@ class Game < ActiveRecord::Base
   scope :locked, -> { where(locked: true) }
 
   before_update do
-    calculate_result! if self.locked_changed? && self.locked
+    calculate_result! if self.locked_changed? && locked
   end
 
   self.per_page = 10
@@ -31,7 +31,7 @@ class Game < ActiveRecord::Base
   end
 
   def started_on
-    answers.map{|a| a.start_date }.min
+    answers.map(&:start_date).min
   end
 
   def date_range
@@ -46,7 +46,7 @@ class Game < ActiveRecord::Base
     @all_answers ||= begin
       a = answers.to_a
       date_range.map do |date|
-        a.detect{|a| a.start_date == date }
+        a.detect { |a| a.start_date == date }
       end
     end
   end
@@ -64,17 +64,15 @@ class Game < ActiveRecord::Base
   end
 
   def calculate_result!
-    GameResult.where(game_id: self.id).destroy_all
-    build_results.each do |result|
-      result.save!
-    end
+    GameResult.where(game_id: id).destroy_all
+    build_results.each(&:save!)
   end
 
   def grouped_and_sorted_by_score
     users.uniq.sort_by do |user|
-      -self.score(user)
+      -score(user)
     end.group_by do |user|
-      self.score(user)
+      score(user)
     end
   end
 end

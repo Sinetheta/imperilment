@@ -9,13 +9,13 @@ end
 module Imperilment
   class Application < Rails::Application
     config.generators do |g|
-      g.orm                 :active_record
-      g.template_engine     :erb
-      g.test_framework      :rspec, view_specs: false, request_specs: false, routing_specs: false
+      g.orm :active_record
+      g.template_engine :erb
+      g.test_framework :rspec, view_specs: false, request_specs: false, routing_specs: false
       g.fixture_replacement :factory_girl, dir: 'spec/factories'
-      g.stylesheets         false
-      g.javascripts         false
-      g.helper              false
+      g.stylesheets false
+      g.javascripts false
+      g.helper false
     end
 
     # Settings in config/environments/* take precedence over those specified here.

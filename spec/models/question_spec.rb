@@ -1,9 +1,8 @@
 require 'spec_helper'
 
 describe Question do
-
   context 'when a question and its answer have no value' do
-    let(:question) { build :question, amount: nil}
+    let(:question) { build :question, amount: nil }
     subject { question }
     before(:each) do
       question.answer.amount = nil
@@ -40,17 +39,17 @@ describe Question do
 
   describe '.status' do
     let(:question) { build_stubbed :question, correct: correct }
-    subject{ question.status }
+    subject { question.status }
     context 'unmarked' do
-      let(:correct){ nil }
+      let(:correct) { nil }
       it { is_expected.to eq(:unmarked) }
     end
     context 'correct' do
-      let(:correct){ true }
+      let(:correct) { true }
       it { is_expected.to eq(:correct) }
     end
     context 'incorrect' do
-      let(:correct){ false }
+      let(:correct) { false }
       it { is_expected.to eq(:incorrect) }
     end
   end

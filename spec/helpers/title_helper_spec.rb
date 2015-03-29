@@ -12,7 +12,7 @@ describe TitleHelper do
     end
 
     context 'multiple titles' do
-      let(:titles) { ['first', 'second'] }
+      let(:titles) { %w(first second) }
       specify { expect(helper.title).to eq(titles) }
     end
   end

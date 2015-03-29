@@ -25,48 +25,47 @@ describe LeaderBoardHelper do
     subject { helper.breakdown_icon(result) }
 
     context 'unavailable' do
-      let(:result){ :unavailable }
+      let(:result) { :unavailable }
       it { is_expected.to be_blank }
     end
 
     context 'unanswered' do
-      let(:result){ :unanswered }
+      let(:result) { :unanswered }
       it { is_expected.to eq(helper.icon('asterisk')) }
     end
 
     context 'unmarked' do
-      let(:result){ :unmarked }
+      let(:result) { :unmarked }
       it { is_expected.to eq(helper.icon('minus')) }
     end
 
     context 'correct' do
-      let(:result){ :correct }
+      let(:result) { :correct }
       it { is_expected.to eq(helper.icon('check')) }
     end
 
     context 'incorrect' do
-      let(:result){ :incorrect }
+      let(:result) { :incorrect }
       it { is_expected.to eq(helper.icon('times')) }
     end
   end
 
   describe '.status_for' do
     subject { helper.status_for(answer) }
-    let(:user){ double(:user) }
-    before{ allow(controller).to receive(:current_user).and_return(user) }
+    let(:user) { double(:user) }
+    before { allow(controller).to receive(:current_user).and_return(user) }
     context 'nil answer' do
-      let(:answer){ nil }
+      let(:answer) { nil }
       it { is_expected.to eq(:unavailable) }
     end
     context 'nil question' do
-      let(:answer){ double(:answer, question_for: nil) }
+      let(:answer) { double(:answer, question_for: nil) }
       it { is_expected.to eq(:unanswered) }
     end
     context 'nil question' do
-      let(:answer){ double(:answer, question_for: question) }
-      let(:question){ double(:question, status: :foobar) }
+      let(:answer) { double(:answer, question_for: question) }
+      let(:question) { double(:question, status: :foobar) }
       it { is_expected.to eq(:foobar) }
     end
   end
-
 end

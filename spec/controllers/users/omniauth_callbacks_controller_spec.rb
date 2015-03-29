@@ -25,7 +25,5 @@ describe Users::OmniauthCallbacksController do
       get :google
       expect(response).to redirect_to '/'
     end
-
   end
 end
-
