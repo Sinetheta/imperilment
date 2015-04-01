@@ -33,7 +33,6 @@ class AnswersController < ApplicationController
           respond_with @game, @answer
         end
       end
-
     end
   end
 

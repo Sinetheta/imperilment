@@ -44,9 +44,9 @@ class Game < ActiveRecord::Base
 
   def all_answers
     @all_answers ||= begin
-      a = answers.to_a
+      as = answers.to_a
       date_range.map do |date|
-        a.detect { |a| a.start_date == date }
+        as.detect { |a| a.start_date == date }
       end
     end
   end

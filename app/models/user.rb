@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
 
   def self.find_for_google_oauth2(access_token, _signed_in_resource = nil)
     data = access_token.info
-    if user = User.where(email: data["email"]).first
+    if (user = User.where(email: data["email"]).first)
       # TODO: Once all current users have last_name, we can pull this out.
       unless user.last_name?
         user.last_name = data["last_name"].try(:first)

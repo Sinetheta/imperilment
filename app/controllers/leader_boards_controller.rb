@@ -1,5 +1,6 @@
 class LeaderBoardsController < ApplicationController
   before_action :set_season, only: [:index, :money]
+  before_action :set_game, only: [:show]
 
   authorize_resource :game
 
@@ -16,13 +17,6 @@ class LeaderBoardsController < ApplicationController
   end
 
   def show
-    game_scope = Game.includes(answers: :questions)
-    if params[:game_id]
-      @game = game_scope.find(params[:game_id])
-    else
-      @game = game_scope.last
-    end
-
     if @game
       @results = @game.build_results
       respond_with(@results, include: :user, methods: :results)
@@ -32,6 +26,15 @@ class LeaderBoardsController < ApplicationController
   end
 
   protected
+
+  def set_game
+    game_scope = Game.includes(answers: :questions)
+    if params[:game_id]
+      @game = game_scope.find(params[:game_id])
+    else
+      @game = game_scope.last
+    end
+  end
 
   def set_season
     @season =
