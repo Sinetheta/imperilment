@@ -229,7 +229,13 @@ i {
 }
 
 .navbar-default .navbar-brand {
-  font-family: imperilment;
+  svg path {
+    fill: $navbar-default-brand-color;
+  }
+
+  &:hover svg path {
+    fill: $navbar-default-brand-hover-color;
+  }
 }
 
 .navbar-right a {
