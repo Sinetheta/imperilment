@@ -2,7 +2,7 @@
 
 module BootstrapHelper
   def icon(name)
-    %(<i class="fa-#{name} fa"></i> ).html_safe
+    %(<i class="icon-#{name}"></i> ).html_safe
   end
 
   def flash_notice(type, css_class)

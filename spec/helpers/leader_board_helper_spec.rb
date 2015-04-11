@@ -41,12 +41,12 @@ describe LeaderBoardHelper do
 
     context 'correct' do
       let(:result) { :correct }
-      it { is_expected.to eq(helper.icon('check')) }
+      it { is_expected.to eq(helper.icon('ok')) }
     end
 
     context 'incorrect' do
       let(:result) { :incorrect }
-      it { is_expected.to eq(helper.icon('times')) }
+      it { is_expected.to eq(helper.icon('cancel')) }
     end
   end
 

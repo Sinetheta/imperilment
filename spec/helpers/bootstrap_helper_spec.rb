@@ -4,7 +4,7 @@ require 'spec_helper'
 describe BootstrapHelper do
   describe '.icon' do
     subject { helper.icon 'hammer' }
-    specify { is_expected.to eq("<i class=\"fa-hammer fa\"></i> ") }
+    specify { is_expected.to eq("<i class=\"icon-hammer\"></i> ") }
   end
 
   describe '.flash_notice' do

@@ -195,19 +195,19 @@ table.breakdown {
         border-left: none;
       }
 
-      & i.fa-check {
+      & i.icon-ok {
         color: $brand-success;
       }
 
-      & i.fa-times {
+      & i.icon-cancel {
         color: $brand-danger;
       }
 
-      & i.fa-asterisk {
+      & i.icon-asterisk {
         color: $brand-warning;
       }
 
-      & i.fa-minus {
+      & i.icon-minus {
         color: $gray-light;
       }
     }
