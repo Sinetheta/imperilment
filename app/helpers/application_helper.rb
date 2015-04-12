@@ -19,10 +19,4 @@ module ApplicationHelper
   def render_markdown(text)
     raw Redcarpet::Markdown.new(Redcarpet::Render::HTML.new).render(text)
   end
-
-  def inline_svg(path)
-    File.open("app/assets/images/#{path}", 'rt') do |file|
-      file.read.html_safe
-    end
-  end
 end

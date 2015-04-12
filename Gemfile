@@ -30,6 +30,8 @@ gem 'datejs-rails'
 
 gem 'redcarpet'
 
+gem 'inline_svg'
+
 gem 'dotenv-rails'
 gem 'oops', github: 'freerunningtech/oops'
 

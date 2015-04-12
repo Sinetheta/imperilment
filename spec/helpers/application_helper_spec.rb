@@ -30,16 +30,4 @@ describe ApplicationHelper do
       helper.paginate(OpenStruct.new)
     end
   end
-
-  describe 'inline_svg' do
-    subject { inline_svg('imperilment-logo.svg') }
-
-    it 'returns the file contents' do
-      expect(md5_hash subject).to eq('dcd29a61e7e81998f263be03b7e1f99c')
-    end
-
-    it 'returns a safe string' do
-      expect(subject.html_safe?).to be(true)
-    end
-  end
 end
