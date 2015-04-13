@@ -23,7 +23,7 @@
   <% question = @answer.question_for(current_user) %>
 
   <% if !question %>
-    <%= link_to "Your Response", [:new, @game, @answer, :question], class: 'btn btn-primary btn-lg btn-block' %>
+    <%= link_to "What is ...", [:new, @game, @answer, :question], class: 'btn btn-primary btn-lg btn-block' %>
   <% elsif !question.checked? %>
     <%= link_to "Your Response", [:edit, @game, @answer, question], class: 'btn btn-primary btn-lg btn-block' %>
   <% elsif @answer.closed? %>
