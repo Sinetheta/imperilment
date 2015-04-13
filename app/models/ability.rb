@@ -6,7 +6,7 @@ class Ability
       can :manage, :all
       # Cannot check Answer when user hasn't supplied their question
       cannot :check, Answer do |answer|
-        !answer.question_for user
+        !answer.closed? || !answer.question_for(user)
       end
       can :correct, Question
     else
