@@ -2,8 +2,14 @@
 
 FactoryGirl.define do
   factory :answer do
+    ignore do
+      category_name nil
+    end
+
     game
-    category
+    category do
+      build :category, name: category_name
+    end
     correct_question "What is a test?"
     answer "This type of code is used to ensure correct behaviour."
     amount 100
