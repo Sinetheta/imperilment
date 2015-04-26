@@ -15,6 +15,7 @@ Imperilment::Application.routes.draw do
       end
     end
   end
+  resources :web_hooks
 
   get 'leader_board/money' => 'leader_boards#money', as: :overall_money_leader_board
   get '/leader_board/overall' => 'leader_boards#index', as: :overall_leader_board

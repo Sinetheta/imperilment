@@ -1,0 +1,32 @@
+<h1><%= WebHook.model_name.human(count: :many) %></h1>
+
+<table class="table web-hooks">
+  <thead>
+    <tr>
+      <th><%= WebHook.human_attribute_name("url") %></th>
+      <th></th>
+      <th><%= WebHook.human_attribute_name("active") %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @web_hooks.each do |web_hook| %>
+      <tr>
+        <td><%= link_to web_hook.url, edit_web_hook_path(web_hook) %></td>
+        <td>
+          <div class='btn-group'>
+            <%= link_to [:edit, web_hook], class: 'btn btn-small btn-default' do %>
+              <%= icon 'pencil' %>
+            <% end %>
+            <%= link_to web_hook, method: :delete, class: 'btn btn-danger btn-small', data: {confirm: t(:confirm_destroy)} do %>
+              <%= icon 'trash-empty' %>
+            <% end %>
+          </div>
+        </td>
+        <td><%= web_hook.active ? bs_label('Active', :active) : bs_label('Disabled', :inactive) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t(:new_model, model: WebHook.model_name.human), new_web_hook_path, class: 'btn btn-default' %>

@@ -23,6 +23,9 @@
         <% if can? :manage, Category %>
           <li><%= link_to Category.model_name.human(count: :many), categories_path %></li>
         <% end %>
+        <% if can? :manage, WebHook %>
+          <li><%= link_to WebHook.model_name.human(count: :many), web_hooks_path %></li>
+        <% end %>
       </ul>
 
       <div class='nav navbar-nav navbar-right'>

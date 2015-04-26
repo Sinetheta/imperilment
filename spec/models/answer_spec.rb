@@ -2,8 +2,8 @@ require 'spec_helper'
 require 'timecop'
 
 describe Answer do
-  it { is_expected.to validate_presence_of(:game_id) }
-  it { is_expected.to validate_presence_of(:category_id) }
+  it { is_expected.to validate_presence_of(:game) }
+  it { is_expected.to validate_presence_of(:category) }
   it { is_expected.to validate_presence_of(:start_date) }
   it { is_expected.to validate_uniqueness_of(:start_date) }
 

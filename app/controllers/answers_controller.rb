@@ -49,6 +49,8 @@ class AnswersController < ApplicationController
     @answer.game = @game
     if @answer.save
       flash.notice = t :model_create_successful, model: Answer.model_name.human
+      event = WebHook::Event::NewAnswer.new(@answer)
+      WebHook::Dispatch.new(event, WebHook.all).deliver
     end
     respond_with @game, @answer
   end

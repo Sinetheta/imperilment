@@ -5,7 +5,7 @@ class Answer < ActiveRecord::Base
   has_many :questions
   has_many :users, through: :questions
 
-  validates :game_id, :category_id, :start_date, presence: true
+  validates :game, :category, :start_date, presence: true
   validates :start_date, uniqueness: true
 
   def self.most_recent

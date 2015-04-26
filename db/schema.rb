@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130828022713) do
+ActiveRecord::Schema.define(version: 20150307173552) do
 
   create_table "answers", force: :cascade do |t|
     t.integer  "game_id"
@@ -101,5 +101,12 @@ ActiveRecord::Schema.define(version: 20130828022713) do
   end
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
+
+  create_table "web_hooks", force: :cascade do |t|
+    t.string   "url"
+    t.boolean  "active",     default: true
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
 
 end

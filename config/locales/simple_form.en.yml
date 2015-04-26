@@ -10,6 +10,9 @@ en:
       # html: '<abbr title="required">*</abbr>'
     error_notification:
       default_message: "Please review the problems below:"
+    hints:
+      web_hook:
+        active: 'We will deliver event details when this hook is triggered.'
     # Examples
     # labels:
     #   defaults:

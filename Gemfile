@@ -2,6 +2,8 @@ source 'http://rubygems.org'
 
 gem 'rails', '~> 4.2.0'
 
+gem 'rabl-rails'
+
 gem 'devise'
 gem "omniauth-google-oauth2"
 gem 'rolify'
@@ -9,6 +11,7 @@ gem 'cancancan'
 
 gem 'simple_form', '3.1.0'
 gem 'show_for'
+gem 'validate_url'
 
 gem 'will_paginate'
 gem 'select2-rails'
@@ -69,6 +72,7 @@ group :test do
   gem 'konacha-chai-matchers'
   gem 'ejs'
   gem 'poltergeist'
+  gem 'webmock'
 end
 
 group :production do

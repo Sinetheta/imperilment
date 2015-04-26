@@ -50,6 +50,7 @@ en:
     say_what: Say What!?
 
   model_create_successful: '%{model} was successfully created.'
+  model_destroy_successful: '%{model} was successfully removed.'
   model_update_successful: '%{model} was successfully updated.'
   flash:
     header:
@@ -63,6 +64,10 @@ en:
       info: 'These are the overall results to date for all finished games. The current week is not taken into account.'
     money:
       info: 'These are the overall results to date for all finished games, ordered by total money. The current week is not taken into account.'
+
+  web_hooks:
+    new:
+      info: 'We’ll send a POST request to the URL below with details of any events.'
 
   activerecord:
     models:
@@ -81,11 +86,16 @@ en:
       question:
         one: Question
         other: Questions
+      web_hook:
+        one: Web Hook
+        other: Web Hooks
     attributes:
       game:
         ended_at: Ends On
       answer:
         unchecked_questions: Unchecked Questions
+      web_hook:
+        url: Payload URL
 
   date:
     formats:

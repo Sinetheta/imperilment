@@ -107,39 +107,47 @@ describe AnswersController do
   end
 
   describe "POST create" do
+    let(:web_hook) { create :web_hook }
+    let!(:mock) { stub_request(:any, web_hook.uri) }
+
     describe "with valid params" do
+      subject { post :create, default_params }
       it "creates a new Answer" do
-        expect do
-          post :create, default_params
-        end.to change(Answer, :count).by(1)
+        expect {
+          subject
+        }.to change(Answer, :count).by(1)
       end
 
       it "assigns a newly created answer as @answer" do
-        post :create, default_params
+        subject
         expect(assigns(:answer)).to be_a(Answer)
         expect(assigns(:answer)).to be_persisted
       end
 
+      it "delivers the notification" do
+        subject
+        expect(mock).to have_been_made
+      end
+
       it "redirects to the created answer" do
-        post :create, default_params
+        subject
         expect(response).to redirect_to([game, Answer.last])
       end
     end
 
     describe "with invalid params" do
-      it "assigns a newly created but unsaved answer as @answer" do
+      before(:each) do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Answer).to receive(:save).and_return(false)
         allow_any_instance_of(Answer).to receive(:errors).and_return(double(:errors, empty?: false))
         post :create, default_params
+      end
+
+      it "assigns a newly created but unsaved answer as @answer" do
         expect(assigns(:answer)).to be_a_new(Answer)
       end
 
       it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        allow_any_instance_of(Answer).to receive(:save).and_return(false)
-        allow_any_instance_of(Answer).to receive(:errors).and_return(double(:errors, empty?: false))
-        post :create, default_params
         expect(response).to render_template("new")
       end
     end
