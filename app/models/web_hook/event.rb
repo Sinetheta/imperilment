@@ -13,7 +13,7 @@ class WebHook::Event
 
   private
   def to_json
-    json = RablRails.render(@payload, template, :view_path => 'app/views', :format => :json)
+    json = RablRails.render(@payload, template, view_path: 'app/views', format: :json)
     {
       type: type,
       action: action,
