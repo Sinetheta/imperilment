@@ -88,24 +88,33 @@ describe QuestionsController do
 
   describe "POST create" do
     describe "with valid params" do
+      let(:web_hook) { create :web_hook }
+      let!(:mock) { stub_request(:any, web_hook.uri) }
+      subject { post :create, default_params }
+
       it "creates a new Question" do
         expect do
-          post :create, default_params
+          subject
         end.to change(Question, :count).by(1)
       end
 
       it "assigns a newly created question as @question" do
-        post :create, default_params
+        subject
         expect(assigns(:question)).to be_a(Question)
       end
 
       it 'persists the newly created question' do
-        post :create, default_params
+        subject
         expect(assigns(:question)).to be_persisted
       end
 
+      it "delivers the notification" do
+        subject
+        expect(mock).to have_been_made
+      end
+
       it "redirects to the created question" do
-        post :create, default_params
+        subject
         expect(response).to redirect_to root_path
       end
     end

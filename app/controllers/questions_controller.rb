@@ -37,6 +37,8 @@ class QuestionsController < ApplicationController
 
     if @question.save
       flash.notice = t :model_create_successful, model: Question.model_name.human
+      event = WebHook::Event::NewQuestion.new(@question)
+      WebHook::Dispatch.new(event, WebHook.all).deliver
     end
     respond_with @game, @answer, @question, location: root_path
   end
