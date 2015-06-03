@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe LeaderBoardsController do
-  let!(:game) { create :game, locked: true }
+  let!(:game) { create :game, locked: true, ended_at: Date.tomorrow }
   let(:season) { game.ended_at.year }
 
   let(:result) { assigns(:results)[0] }
@@ -19,6 +19,7 @@ describe LeaderBoardsController do
         expect(result.third).to eq(0)
       end
     end
+
     context 'json' do
       it 'should assign the results to @results' do
         get :index, season: season, format: :json
@@ -56,15 +57,15 @@ describe LeaderBoardsController do
       let!(:answer) { create :answer, game: game }
       let!(:question) { create :question, answer: answer }
 
-      before(:each) do
-        get :show, id: game.id, season: season
-      end
+      subject { get :show, id: game.id, season: season }
 
       it 'should assign the game to @game' do
+        subject
         expect(assigns(:game)).to eq(game)
       end
 
       it 'should assign the users to @results' do
+        subject
         expect(result.user).to eq(question.user)
       end
 
@@ -74,7 +75,32 @@ describe LeaderBoardsController do
           get :show, game_id: other_game, season: season
         end
         it 'should assign the game to @game' do
+          subject
           expect(assigns(:game)).to eq(other_game)
+        end
+      end
+
+      context 'with a previous game' do
+        before do
+          last_week_game = create :game, ended_at: game.ended_at - 1.week
+          last_week_answer = create :answer, game: last_week_game
+          create :question, answer: last_week_answer, user: last_week_user
+        end
+
+        let(:last_week_user) { create :user }
+
+        it 'has last weeks users' do
+          subject
+          expect(assigns(:results).map(&:user)).to include last_week_user
+        end
+
+        context 'user exists in both weeks' do
+          let(:last_week_user) { question.user }
+
+          it 'has only the one result' do
+            subject
+            expect(assigns(:results).count).to eq 1
+          end
         end
       end
     end
