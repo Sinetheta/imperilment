@@ -57,7 +57,7 @@ describe LeaderBoardsController do
       let!(:answer) { create :answer, game: game }
       let!(:question) { create :question, answer: answer }
 
-      subject { get :show, game_id: game.id, season: season }
+      subject { get :show, season: season }
 
       it 'should assign the game to @game' do
         subject
@@ -79,6 +79,7 @@ describe LeaderBoardsController do
       end
 
       context 'with a previous game' do
+
         before do
           last_week_game = create :game, ended_at: game.ended_at - 1.week
           last_week_answer = create :answer, game: last_week_game
@@ -86,6 +87,7 @@ describe LeaderBoardsController do
         end
 
         let(:last_week_user) { create :user }
+        subject { get :show, game_id: game.id, season: season }
 
         it 'has last weeks users' do
           subject
