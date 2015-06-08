@@ -57,7 +57,7 @@ describe LeaderBoardsController do
       let!(:answer) { create :answer, game: game }
       let!(:question) { create :question, answer: answer }
 
-      subject { get :show, game_id: game.id, season: season }
+      subject { get :show, season: season }
 
       it 'should assign the game to @game' do
         subject
@@ -79,17 +79,36 @@ describe LeaderBoardsController do
       end
 
       context 'with a previous game' do
-        before do
-          last_week_game = create :game, ended_at: game.ended_at - 1.week
+
+        def create_question user
           last_week_answer = create :answer, game: last_week_game
           create :question, answer: last_week_answer, user: last_week_user
         end
 
+        let(:last_week_game) { create :game, ended_at: game.ended_at - 1.week }
         let(:last_week_user) { create :user }
+
+        before do
+          create_question last_week_user
+        end
+
+        subject { get :show, game_id: game.id, season: season }
 
         it 'has last weeks users' do
           subject
           expect(assigns(:results).map(&:user)).to include last_week_user
+        end
+
+        context 'user has multiple answers from last week' do
+          before do
+            create_question last_week_user
+          end
+
+          it 'has a user once' do
+            subject
+            matching_users = assigns(:results).select { |y| y.user == last_week_user }
+            expect(matching_users.count).to eq 1
+          end
         end
 
         context 'user exists in both weeks' do
