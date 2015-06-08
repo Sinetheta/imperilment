@@ -28,9 +28,9 @@ class LeaderBoardsController < ApplicationController
   protected
 
   def inject_last_weeks_users(game_results)
-    return game_results unless @game.next
+    return game_results unless @game.prev
 
-    game_results + (@game.next.users - game_results.map(&:user)).map do |user|
+    game_results + (@game.prev.users - game_results.map(&:user)).map do |user|
       GameResult.new(user: user,
                      game: @game,
                      total: 0,

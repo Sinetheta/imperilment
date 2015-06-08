@@ -57,7 +57,7 @@ describe LeaderBoardsController do
       let!(:answer) { create :answer, game: game }
       let!(:question) { create :question, answer: answer }
 
-      subject { get :show, id: game.id, season: season }
+      subject { get :show, game_id: game.id, season: season }
 
       it 'should assign the game to @game' do
         subject
@@ -71,9 +71,7 @@ describe LeaderBoardsController do
 
       context 'when a game_id is passed' do
         let(:other_game) { create :game }
-        before(:each) do
-          get :show, game_id: other_game, season: season
-        end
+        subject { get :show, game_id: other_game, season: season }
         it 'should assign the game to @game' do
           subject
           expect(assigns(:game)).to eq(other_game)
