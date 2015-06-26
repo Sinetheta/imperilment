@@ -8,8 +8,10 @@ class SimpleCov::Formatter::MergedFormatter
   end
 end
 
-SimpleCov.formatter = SimpleCov::Formatter::MergedFormatter
-SimpleCov.start 'rails'
+if ENV['COVERAGE']
+  SimpleCov.formatter = SimpleCov::Formatter::MergedFormatter
+  SimpleCov.start 'rails'
+end
 
 ENV["RAILS_ENV"] ||= 'test'
 
