@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :answer do
-    ignore do
+    transient do
       category_name nil
     end
 
