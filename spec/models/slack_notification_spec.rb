@@ -8,8 +8,8 @@ end
 
 RSpec.describe SlackNotification, type: :model do
   let(:notification) { SlackNotification.new(
-        username: "Tester",
-        icon_emoji: ":testing:",
+        username: 'Tester',
+        icon_emoji: ':testing:',
         channel: '#test',
         http_client: NoOpHTTPClient)
     }
@@ -34,6 +34,15 @@ RSpec.describe SlackNotification, type: :model do
 
     it 'has the correct channel' do
       expect(subject['channel']).to eq('#test')
+    end
+
+    it 'has the default attachments which demonstrate a formatted message' do
+      expect(subject['attachments']).to eq [{
+        'title' => 'A message from Imperilment.',
+        'text' => 'A message for Slack.',
+        'color' => '#337AB7',
+        'fallback' => 'A message for Slack from Imperilment.'
+      }]
     end
   end
 end

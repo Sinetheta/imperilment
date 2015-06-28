@@ -9,13 +9,22 @@ class SlackNotification
 
   def deliver
     return unless webhook_url
-    @notifier.ping message
+    @notifier.ping message, attachments: attachments
   end
 
   private
 
   def message
     ''
+  end
+
+  def attachments
+    [{
+      title: "A message from Imperilment.",
+      text: "A message for Slack.",
+      color: "#337AB7",
+      fallback: "A message for Slack from Imperilment.",
+    }]
   end
 
   def webhook_url
