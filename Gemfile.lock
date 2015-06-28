@@ -299,6 +299,7 @@ GEM
     simplecov-html (0.10.0)
     simplecov-rcov (0.2.3)
       simplecov (>= 0.4.1)
+    slack-notifier (1.2.1)
     slop (3.6.0)
     sprockets (3.2.0)
       rack (~> 1.0)
@@ -389,6 +390,7 @@ DEPENDENCIES
   simple_form (= 3.1.0)
   simplecov
   simplecov-rcov
+  slack-notifier
   sqlite3
   stackprof
   thin
