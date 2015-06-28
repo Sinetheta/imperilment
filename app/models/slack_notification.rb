@@ -1,4 +1,8 @@
 class SlackNotification
+  include ActionView::Helpers
+  include ActionDispatch::Routing
+  include Rails.application.routes.url_helpers
+
   def initialize(options={})
     @notifier = Slack::Notifier.new(webhook_url, {
       username: "Imperilment!",
@@ -19,11 +23,13 @@ class SlackNotification
   end
 
   def attachments
+    absolute_url = url_for([:root, { only_path: false }])
     [{
       title: "A message from Imperilment.",
+      title_link: absolute_url,
       text: "A message for Slack.",
       color: "#337AB7",
-      fallback: "A message for Slack from Imperilment.",
+      fallback: "A message for Slack from Imperilment. #{absolute_url}",
     }]
   end
 

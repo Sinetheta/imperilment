@@ -39,9 +39,10 @@ RSpec.describe SlackNotification, type: :model do
     it 'has the default attachments which demonstrate a formatted message' do
       expect(subject['attachments']).to eq [{
         'title' => 'A message from Imperilment.',
+        'title_link' => 'http://test.com/',
         'text' => 'A message for Slack.',
         'color' => '#337AB7',
-        'fallback' => 'A message for Slack from Imperilment.'
+        'fallback' => 'A message for Slack from Imperilment. http://test.com/'
       }]
     end
   end
