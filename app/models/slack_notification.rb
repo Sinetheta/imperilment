@@ -7,7 +7,7 @@ class SlackNotification
     @notifier = Slack::Notifier.new(webhook_url, {
       username: "Imperilment!",
       icon_emoji: ":imperilment:",
-      channel: '#random'
+      channel: '#frt'
     }.merge(options))
   end
 
