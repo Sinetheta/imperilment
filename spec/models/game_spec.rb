@@ -3,6 +3,11 @@ require 'spec_helper'
 describe Game do
   let(:game) { create :game }
   let(:user) { create :user }
+  let(:slack_webhook_url) { 'http://slack.com' }
+  let!(:mock) { stub_request(:any, slack_webhook_url) }
+  before do
+    ENV['SLACK_WEBHOOK_URL'] = slack_webhook_url
+  end
 
   describe '.score' do
     let(:answer) { create :answer, game: game, amount: 400 }
@@ -153,6 +158,10 @@ describe Game do
         it 'is in fourth place' do
           expect(GameResult.find_by!(user_id: 4).position).to eq(4)
         end
+      end
+
+      it "sends a Slack api notification" do
+        expect(mock).to have_been_made
       end
     end
   end

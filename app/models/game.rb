@@ -66,6 +66,7 @@ class Game < ActiveRecord::Base
   def calculate_result!
     GameResult.where(game_id: id).destroy_all
     build_results.each(&:save!)
+    SlackNotification::GameFinalization.new(self).deliver if game_results.any?
   end
 
   def grouped_and_sorted_by_score
