@@ -35,5 +35,28 @@ RSpec.describe SlackNotification::NewAnswer, type: :model do
         'fallback' => 'New Imperilment clue! http://test.com/games/1/answers/829'
       }]
     end
+
+    context "when answer has no amount" do
+      let(:answer) do
+        FactoryGirl.create(
+          :answer,
+          id: 829,
+          answer: nil,
+          category_name: 'Rails RSpec',
+          amount: nil
+        )
+      end
+
+      it 'has the corract attachments' do
+        expect(subject['attachments']).to eq [{
+          'pretext' => 'Final Imperilment!',
+          'title' => 'Rails RSpec',
+          'title_link' => 'http://test.com/games/1/answers/829',
+          'text' => nil,
+          'color' => '#337AB7',
+          'fallback' => 'Final Imperilment! http://test.com/games/1/answers/829'
+        }]
+      end
+    end
   end
 end

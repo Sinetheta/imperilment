@@ -9,12 +9,22 @@ class SlackNotification::NewAnswer < SlackNotification
   def attachments
     answer_path = url_for([@answer.game, @answer, { only_path: false }])
     [{
-      pretext: "New Imperilment clue!",
-      title: "#{@answer.category.name} for $#{@answer.amount}",
+      pretext: pretext,
+      title: title,
       title_link: answer_path,
       text: @answer.answer,
       color: "#337AB7",
-      fallback: "New Imperilment clue! #{answer_path}",
+      fallback: "#{pretext} #{answer_path}",
     }]
+  end
+
+  def pretext
+    @answer.amount ? "New Imperilment clue!" : "Final Imperilment!"
+  end
+
+  def title
+    title = "#{@answer.category.name}"
+    title << " for $#{@answer.amount}" if @answer.amount
+    title
   end
 end
