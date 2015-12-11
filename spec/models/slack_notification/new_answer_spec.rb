@@ -52,7 +52,7 @@ RSpec.describe SlackNotification::NewAnswer, type: :model do
           'pretext' => 'Final Imperilment!',
           'title' => 'Rails RSpec',
           'title_link' => 'http://test.com/games/1/answers/829',
-          'text' => nil,
+          'text' => '',
           'color' => '#337AB7',
           'fallback' => 'Final Imperilment! http://test.com/games/1/answers/829'
         }]

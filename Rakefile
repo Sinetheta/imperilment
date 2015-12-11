@@ -10,10 +10,10 @@ task development_data: :environment do
   admin.add_role :admin
 
   users = (0..10).map do
-    first_name = Faker::Name.first_name
-    last_name = Faker::Name.last_name
+    first_name = FFaker::Name.first_name
+    last_name = FFaker::Name.last_name
     User.create!(
-      email: Faker::Internet.email("#{first_name} #{last_name}"),
+      email: FFaker::Internet.email("#{first_name} #{last_name}"),
       first_name: first_name,
       last_name:  last_name,
       password: 'asdfg12345'

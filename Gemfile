@@ -24,8 +24,7 @@ gem 'jquery-rails'
 gem 'bootstrap-sass', '~> 3.3.0'
 gem 'bootstrap-datepicker-rails'
 
-# we need PR#25 to be published for proper file extensions
-gem 'fontello_rails_converter', :git => 'git://github.com/railslove/fontello_rails_converter.git'
+gem 'fontello_rails_converter'
 
 gem 'uglifier'
 
@@ -48,8 +47,6 @@ gem 'memory_profiler'
 group :development do
   gem 'quiet_assets'
   gem 'letter_opener'
-
-  gem 'thin'
 end
 
 group :development, :test do

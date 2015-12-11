@@ -4,6 +4,7 @@ class SlackNotification
   include Rails.application.routes.url_helpers
 
   def initialize(options={})
+    return unless webhook_url
     @notifier = Slack::Notifier.new(webhook_url, {
       username: "Imperilment!",
       icon_emoji: ":imperilment:",
@@ -12,8 +13,7 @@ class SlackNotification
   end
 
   def deliver
-    return unless webhook_url
-    @notifier.ping message, attachments: attachments
+    @notifier.ping(message, attachments: attachments) if @notifier
   end
 
   private
@@ -23,13 +23,12 @@ class SlackNotification
   end
 
   def attachments
-    absolute_url = url_for([:root, { only_path: false }])
     [{
       title: "A message from Imperilment.",
-      title_link: absolute_url,
+      title_link: root_url,
       text: "A message for Slack.",
       color: "#337AB7",
-      fallback: "A message for Slack from Imperilment. #{absolute_url}",
+      fallback: "A message for Slack from Imperilment. #{root_url}",
     }]
   end
 
