@@ -7,14 +7,13 @@ class SlackNotification::NewAnswer < SlackNotification
   private
 
   def attachments
-    answer_path = url_for([@answer.game, @answer, { only_path: false }])
     [{
       pretext: pretext,
       title: title,
-      title_link: answer_path,
-      text: @answer.answer,
+      title_link: game_answer_url(@answer.game, @answer),
+      text: @answer.answer || "",
       color: "#337AB7",
-      fallback: "#{pretext} #{answer_path}",
+      fallback: "#{pretext} #{game_answer_url(@answer.game, @answer)}",
     }]
   end
 

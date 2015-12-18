@@ -19,7 +19,6 @@ require 'rails/application'
 
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
-require 'shoulda/matchers/integrations/rspec'
 require 'factory_girl_rails'
 require 'capybara/rspec'
 require 'webmock/rspec'
@@ -30,6 +29,14 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 OmniAuth.config.test_mode = true
 OmniAuth.config.add_mock(:google)
+
+# Configure shoulda-matchers to work with RSpec and Rails.
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
+end
 
 RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your

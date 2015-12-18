@@ -7,14 +7,13 @@ class SlackNotification::GameFinalization < SlackNotification
   private
 
   def attachments
-    game_path = url_for([:leader_board, { game_id: @game.id, only_path: false }])
     [{
       pretext: "Imperilment results are in!",
       title: "This week's winners",
-      title_link: game_path,
+      title_link: leader_board_url(@game.id),
       text: podium_text,
       color: "#337AB7",
-      fallback: "This week's winners are in! #{game_path}",
+      fallback: "This week's winners are in! #{leader_board_url(@game.id)}",
     }]
   end
 
