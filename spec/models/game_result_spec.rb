@@ -30,26 +30,26 @@ describe GameResult do
 
   describe '::all_results_by_money' do
     before do
-      user1 = create :user
-      user2 = create :user
-      user3 = create :user
-      user4 = create :user
+      @user1 = create :user
+      @user2 = create :user
+      @user3 = create :user
+      @user4 = create :user
 
-      GameResult.create! user: user1, position: 1, total: 1
-      GameResult.create! user: user1, position: 3, total: 1
-      GameResult.create! user: user1, position: 5, total: 1
-      GameResult.create! user: user2, position: 1, total: 1
-      GameResult.create! user: user2, position: 3, total: 1
-      GameResult.create! user: user4, position: 3, total: 5
+      GameResult.create! user: @user1, position: 1, total: 1
+      GameResult.create! user: @user1, position: 3, total: 1
+      GameResult.create! user: @user1, position: 5, total: 1
+      GameResult.create! user: @user2, position: 1, total: 1
+      GameResult.create! user: @user2, position: 3, total: 1
+      GameResult.create! user: @user4, position: 3, total: 5
       # This user shouldn't appear in the results, as they have no total
-      GameResult.create! user: user3, position: 10, total: 0
+      GameResult.create! user: @user3, position: 10, total: 0
     end
 
     it 'sorts users by total money' do
       results = GameResult.all_results_by_money.map do |result|
-        { result.id => result.total }
+        { result => result.total }
       end
-      expect(results).to eql [{ 4 => 5 }, { 1 => 3 }, { 2 => 2 }]
+      expect(results).to eq [{ @user4 => 5 }, { @user1 => 3 }, { @user2 => 2 }]
     end
   end
 
