@@ -9,13 +9,14 @@ describe AnswersController do
     {
       game_id: game.to_param,
       answer: {
-        category_id: 1,
+        category_id: category.id,
         start_date: answer.start_date + 1.day
       }
     }
   end
 
   let!(:answer) { create :answer }
+  let(:category) { answer.category }
 
   let(:game) { answer.game }
 
