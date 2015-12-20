@@ -8,7 +8,7 @@ describe WebHook::Event::NewAnswer do
     subject { event.serialize }
 
     it 'contains a link back to the answer' do
-      expect(subject).to include('http://test.com/games/1/answers/1')
+      expect(subject).to include("http://test.com/games/#{answer.game.id}/answers/#{answer.id}")
     end
 
     it 'does not contain the correct response' do
