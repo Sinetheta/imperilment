@@ -144,19 +144,19 @@ describe Game do
       before { game.calculate_result! }
       context 'first place user' do
         it 'is in first place' do
-          expect(GameResult.find_by!(user_id: 1).position).to eq(1)
+          expect(GameResult.find_by!(user_id: user1.id).position).to eq(1)
         end
       end
 
       context 'second place user' do
         it 'is in second place' do
-          expect(GameResult.find_by!(user_id: 3).position).to eq(2)
+          expect(GameResult.find_by!(user_id: user3.id).position).to eq(2)
         end
       end
 
       context 'last place user' do
         it 'is in fourth place' do
-          expect(GameResult.find_by!(user_id: 4).position).to eq(4)
+          expect(GameResult.find_by!(user_id: user4.id).position).to eq(4)
         end
       end
 

@@ -8,7 +8,6 @@ end
 
 RSpec.describe SlackNotification::NewAnswer, type: :model do
   let(:answer) { FactoryGirl.create :answer,
-    id: 829,
     answer: 'What is fail?',
     category_name: 'Rails RSpec',
     amount: 200
@@ -29,10 +28,10 @@ RSpec.describe SlackNotification::NewAnswer, type: :model do
       expect(subject['attachments']).to eq [{
         'pretext' => 'New Imperilment clue!',
         'title' => 'Rails RSpec for $200',
-        'title_link' => 'http://test.com/games/1/answers/829',
+        'title_link' => "http://test.com/games/#{answer.game.id}/answers/#{answer.id}",
         'text' => 'What is fail?',
         'color' => '#337AB7',
-        'fallback' => 'New Imperilment clue! http://test.com/games/1/answers/829'
+        'fallback' => "New Imperilment clue! http://test.com/games/#{answer.game.id}/answers/#{answer.id}"
       }]
     end
 
@@ -40,7 +39,6 @@ RSpec.describe SlackNotification::NewAnswer, type: :model do
       let(:answer) do
         FactoryGirl.create(
           :answer,
-          id: 829,
           answer: nil,
           category_name: 'Rails RSpec',
           amount: nil
@@ -51,10 +49,10 @@ RSpec.describe SlackNotification::NewAnswer, type: :model do
         expect(subject['attachments']).to eq [{
           'pretext' => 'Final Imperilment!',
           'title' => 'Rails RSpec',
-          'title_link' => 'http://test.com/games/1/answers/829',
+          'title_link' => "http://test.com/games/#{answer.game.id}/answers/#{answer.id}",
           'text' => '',
           'color' => '#337AB7',
-          'fallback' => 'Final Imperilment! http://test.com/games/1/answers/829'
+          'fallback' => "Final Imperilment! http://test.com/games/#{answer.game.id}/answers/#{answer.id}"
         }]
       end
     end
