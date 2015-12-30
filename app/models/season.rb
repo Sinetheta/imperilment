@@ -9,8 +9,16 @@ class Season
     new latest_year
   end
 
+  def start_date
+    Date.commercial(@year, 1).beginning_of_day
+  end
+
+  def end_date
+    (Date.commercial(@year + 1, 1) - 1.day).end_of_day
+  end
+
   def date_range
-    time.beginning_of_year..time.end_of_year
+    start_date..end_date
   end
 
   def games
@@ -32,10 +40,7 @@ class Season
   private
 
   def self.latest_year
-    Time.current.year
+    Time.current.to_date.cwyear
   end
 
-  def time
-    Time.new(@year)
-  end
 end
