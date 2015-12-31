@@ -110,8 +110,9 @@ describe User do
     end
 
     context "with provided season" do
+      let(:season) { Season.new(1.year.ago.year) }
       before do
-        Timecop.freeze(1.year.ago) do
+        Timecop.freeze(season.date_range.begin) do
           game = create :game, ended_at: Time.now
 
           answer1 = create :answer, game: game
@@ -122,7 +123,7 @@ describe User do
         end
       end
 
-      subject { user.correct_ratio(Season.new(1.year.ago.year)) }
+      subject { user.correct_ratio(season) }
 
       it { is_expected.to eq 0.5 }
     end
