@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe LeaderBoardsController do
-  let!(:game) { create :game, locked: true, ended_at: Date.tomorrow }
-  let(:season) { game.ended_at.year }
+  let!(:game) { create :game, locked: true, ended_at: Date.current }
+  let(:season) { game.ended_at.cwyear }
 
   let(:result) { assigns(:results)[0] }
 
@@ -30,7 +30,7 @@ describe LeaderBoardsController do
     context 'with no season' do
       it 'should have the current year' do
         get :index
-        expect(assigns(:season).year).to eq(Time.current.year)
+        expect(assigns(:season).year).to eq(Date.current.cwyear)
       end
     end
     context 'with a season' do
