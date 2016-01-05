@@ -23,7 +23,7 @@
           <span><%= user.third %></span>
         </td>
         <td class='percent'>
-          <%= (user.correct_ratio * 100).round(2) %>%
+          <%= (user.correct_ratio(@season) * 100).round(2) %>%
         </td>
       </tr>
     <% end %>
