@@ -31,7 +31,8 @@ RSpec.describe SlackNotification::NewAnswer, type: :model do
         'title_link' => "http://test.com/games/#{answer.game.id}/answers/#{answer.id}",
         'text' => 'What is fail?',
         'color' => '#337AB7',
-        'fallback' => "New Imperilment clue! http://test.com/games/#{answer.game.id}/answers/#{answer.id}"
+        'fallback' => "New Imperilment clue! http://test.com/games/#{answer.game.id}/answers/#{answer.id}",
+        "mrkdwn_in" => ["text"]
       }]
     end
 
@@ -52,7 +53,8 @@ RSpec.describe SlackNotification::NewAnswer, type: :model do
           'title_link' => "http://test.com/games/#{answer.game.id}/answers/#{answer.id}",
           'text' => '',
           'color' => '#337AB7',
-          'fallback' => "Final Imperilment! http://test.com/games/#{answer.game.id}/answers/#{answer.id}"
+          'fallback' => "Final Imperilment! http://test.com/games/#{answer.game.id}/answers/#{answer.id}",
+          "mrkdwn_in" => ["text"]
         }]
       end
     end

@@ -14,6 +14,7 @@ class SlackNotification::NewAnswer < SlackNotification
       text: @answer.answer || "",
       color: "#337AB7",
       fallback: "#{pretext} #{game_answer_url(@answer.game, @answer)}",
+      mrkdwn_in: %w(text),
     }]
   end
 
