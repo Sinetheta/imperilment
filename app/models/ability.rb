@@ -20,7 +20,9 @@ class Ability
         question.answer.closed?
       end
       can :read, Game
-      can :read, Answer
+      can :read, Answer do |answer|
+        Answer.active.exists?(answer.id)
+      end
     end
   end
 end
