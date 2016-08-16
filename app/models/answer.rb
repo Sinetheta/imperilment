@@ -55,4 +55,8 @@ class Answer < ActiveRecord::Base
   def final?
     !amount
   end
+
+  def active?
+    Answer.active.exists?(self.id)
+  end
 end
