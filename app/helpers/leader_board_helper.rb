@@ -28,7 +28,7 @@ module LeaderBoardHelper
   end
 
   def status_for(answer)
-    if !answer || !Answer.active.exists?(answer.id)
+    if !answer || !answer.active?
       :unavailable
     elsif !(question = answer.question_for(current_user))
       :unanswered
