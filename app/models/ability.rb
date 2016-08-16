@@ -21,7 +21,7 @@ class Ability
       end
       can :read, Game
       can :read, Answer do |answer|
-        Answer.active.exists?(answer.id)
+        answer.active?
       end
     end
   end
