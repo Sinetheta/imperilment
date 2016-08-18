@@ -63,4 +63,54 @@ describe Answer do
       it { is_expected.to be_truthy }
     end
   end
+
+  describe '.active?' do
+    let!(:sat_answer) { create :answer, start_date: '2016-08-13 00:00:00' }
+    let!(:sun_answer) { create :answer, start_date: '2016-08-14 00:00:00' }
+    let!(:today_answer) { create :answer, start_date: Time.zone.now }
+
+    context "when the answer is active" do
+      subject { first.active? }
+      it { is_expected.to be_truthy }
+    end
+
+    context "when the answer is inactive" do
+      subject { third.active? }
+      it { is_expected.to be_falsey }
+    end
+
+    context "when the answer is for a Saturday" do
+      subject { sat_answer.active? }
+      it "should be active on Friday" do
+        Timecop.freeze(Time.zone.local(2016, 8, 12, 0, 0, 0)) do
+          expect(sat_answer.active?).to be_truthy
+        end
+      end
+
+      it "should be active on Saturday" do
+        Timecop.freeze(Time.zone.local(2016, 8, 13, 0, 0, 0)) do
+          expect(sat_answer.active?).to be_truthy
+        end
+      end
+    end
+
+    context "when the answer is for a Sunday" do
+      it "should be inactive on Sunday" do
+        Timecop.freeze(Time.zone.local(2016, 8, 14, 0, 0, 0)) do
+          expect(sun_answer.active?).to be_falsey
+        end
+      end
+
+      it "should be active on Monday" do
+        Timecop.freeze(Time.zone.local(2016, 8, 15, 0, 0, 0)) do
+          expect(sun_answer.active?).to be_truthy
+        end
+      end
+    end
+
+    context "when the answer is for today" do
+      subject { today_answer.active? }
+      it { is_expected.to be_truthy }
+    end
+  end
 end

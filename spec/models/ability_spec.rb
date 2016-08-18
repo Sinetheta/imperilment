@@ -22,7 +22,20 @@ describe Ability do
   context 'when user is not an administrator' do
     it { is_expected.to be_able_to :index, Question }
     it { is_expected.to be_able_to :read, Game }
-    it { is_expected.to be_able_to :read, Answer }
+
+    describe 'reading answers' do
+      let(:answer) { build_stubbed :answer }
+
+      context 'when answer is inactive' do
+        before(:each) { allow(answer).to receive(:active?) { false } }
+        it { is_expected.not_to be_able_to :read, answer }
+      end
+
+      context 'when answer is active' do
+        before(:each) { allow(answer).to receive(:active?) { true } }
+        it { is_expected.to be_able_to :read, answer }
+      end
+    end
 
     describe 'managing questions' do
       context 'when question is for user' do

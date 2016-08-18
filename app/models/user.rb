@@ -43,7 +43,8 @@ class User < ActiveRecord::Base
       joins(:game).
       where(games: { locked: false }).
       where(questions: { id: nil }).
-      order(:start_date)
+      order(:start_date).
+      merge(Answer.active)
   end
 
   def correct_ratio(season = nil)
