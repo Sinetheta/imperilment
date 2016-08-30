@@ -17,7 +17,7 @@ module ApplicationHelper
   end
 
   def render_markdown(text)
-    raw Redcarpet::Markdown.new(Redcarpet::Render::HTML.new).render(text)
+    raw Redcarpet::Markdown.new(Redcarpet::Render::HTML.new, { superscript: true }).render(text)
   end
 
   def login_path
