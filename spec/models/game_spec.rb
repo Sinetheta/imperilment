@@ -9,6 +9,14 @@ describe Game do
     ENV['SLACK_WEBHOOK_URL'] = slack_webhook_url
   end
 
+  it "should have a valid factory" do
+    FactoryGirl.build(:game).should be_valid
+  end
+
+  it "should require an end date" do
+    FactoryGirl.build(:game, ended_at: nil).should_not be_valid
+  end
+
   describe '.score' do
     let(:answer) { create :answer, game: game, amount: 400 }
 
