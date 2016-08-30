@@ -68,6 +68,7 @@ describe Answer do
     let!(:sat_answer) { create :answer, start_date: '2016-08-13 00:00:00' }
     let!(:sun_answer) { create :answer, start_date: '2016-08-14 00:00:00' }
     let!(:today_answer) { create :answer, start_date: Time.zone.now }
+    let!(:tom_answer) { create :answer, start_date: (Time.zone.now + 1.day).change(hour: 0) }
 
     context "when the answer is active" do
       subject { first.active? }
@@ -111,6 +112,14 @@ describe Answer do
     context "when the answer is for today" do
       subject { today_answer.active? }
       it { is_expected.to be_truthy }
+    end
+
+    context "when today is in the afternoon" do
+      it "tomorrow's answer should be inactive" do
+        Timecop.freeze(Time.zone.local(Time.zone.now.year, Time.zone.now.month,
+                                       Time.zone.now.day, 22, 0, 0))
+        expect(tom_answer.active?).to be_falsey
+      end
     end
   end
 end

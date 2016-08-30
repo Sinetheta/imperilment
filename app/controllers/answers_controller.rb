@@ -6,8 +6,9 @@ class AnswersController < ApplicationController
   respond_to :html
 
   def index
+    @blocked = "~~ Provide a question for this answer to see this content. ~~"
     @answers = @answers.page(params[:page])
-    respond_with @game, @answers
+    respond_with @game, @answers, @blocked
   end
 
   def show
