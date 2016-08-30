@@ -33,7 +33,7 @@ class Answer < ActiveRecord::Base
     today += 1.day if today.friday?
     today -= 1.day if today.sunday?
 
-    today
+    today.change(hour: 0)
   end
 
   def questions_by_user_id
