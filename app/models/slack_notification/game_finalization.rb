@@ -9,11 +9,11 @@ class SlackNotification::GameFinalization < SlackNotification
   def attachments
     [{
       pretext: "Imperilment results are in!",
-      title: "This week's winners",
+      title: "Last week's winners",
       title_link: leader_board_url(@game.id),
       text: podium_text,
       color: "#337AB7",
-      fallback: "This week's winners are in! #{leader_board_url(@game.id)}",
+      fallback: "Last week's winners are in! #{leader_board_url(@game.id)}",
     }]
   end
 

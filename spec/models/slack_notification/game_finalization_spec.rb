@@ -32,11 +32,11 @@ RSpec.describe SlackNotification::GameFinalization, type: :model do
     it 'has the correct attachments' do
       expect(subject['attachments']).to eq [{
         'pretext' => 'Imperilment results are in!',
-        'title' => "This week's winners",
+        'title' => "Last week's winners",
         'title_link' => 'http://test.com/leader_board/772',
         'text' => ":trophy: $4200 First P\n\n:silver: $2500 foo@bar.com\n\n:silver: $2500 Also 2",
         'color' => '#337AB7',
-        'fallback' => "This week's winners are in! http://test.com/leader_board/772"
+        'fallback' => "Last week's winners are in! http://test.com/leader_board/772"
       }]
     end
   end
