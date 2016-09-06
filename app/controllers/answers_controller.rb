@@ -50,7 +50,6 @@ class AnswersController < ApplicationController
     @answer.game = @game
     if @answer.save
       flash.notice = t :model_create_successful, model: Answer.model_name.human
-      SlackNotification::NewAnswer.new(@answer).deliver
     end
     respond_with @game, @answer
   end

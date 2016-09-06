@@ -108,13 +108,6 @@ describe AnswersController do
   end
 
   describe "POST create" do
-    let(:slack_webhook_url) { 'http://slack.com' }
-    let!(:mock) { stub_request(:any, slack_webhook_url) }
-
-    before do
-      ENV['SLACK_WEBHOOK_URL'] = slack_webhook_url
-    end
-
     describe "with valid params" do
       subject { post :create, default_params }
       it "creates a new Answer" do
@@ -127,11 +120,6 @@ describe AnswersController do
         subject
         expect(assigns(:answer)).to be_a(Answer)
         expect(assigns(:answer)).to be_persisted
-      end
-
-      it "sends a Slack api notification" do
-        subject
-        expect(mock).to have_been_made
       end
 
       it "redirects to the created answer" do
