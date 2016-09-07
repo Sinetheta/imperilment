@@ -43,6 +43,7 @@ gem 'rack-mini-profiler'
 gem 'flamegraph'
 gem 'stackprof'
 gem 'memory_profiler'
+gem 'whenever'
 
 group :development do
   gem 'quiet_assets'
