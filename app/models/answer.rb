@@ -1,5 +1,7 @@
 class Answer < ActiveRecord::Base
   scope :active, -> { where("start_date <= ?", effective_date) }
+  scope :announceable, -> { where("start_date <= ? AND start_date >= ?",
+                                 effective_date, announce_date) }
 
   belongs_to :game
   belongs_to :category
@@ -28,12 +30,20 @@ class Answer < ActiveRecord::Base
 
   # Adjust date to include Saturday in Friday's release, and postpone Sunday until Monday's release
   def self.effective_date
-    today = Time.zone.now
+    today = Date.current
 
     today += 1.day if today.friday?
     today -= 1.day if today.sunday?
 
-    today.change(hour: 0)
+    today
+  end
+
+  def self.announce_date
+    today = Date.current
+
+    today -= 1.day if today.monday?
+
+    today
   end
 
   def questions_by_user_id
