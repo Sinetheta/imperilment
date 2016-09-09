@@ -65,10 +65,10 @@ describe Answer do
   end
 
   describe '.active?' do
+    let!(:thu_answer) { create :answer, start_date: '2016-08-11 00:00:00' }
+    let!(:fri_answer) { create :answer, start_date: '2016-08-12 00:00:00' }
     let!(:sat_answer) { create :answer, start_date: '2016-08-13 00:00:00' }
     let!(:sun_answer) { create :answer, start_date: '2016-08-14 00:00:00' }
-    let!(:today_answer) { create :answer, start_date: Date.current }
-    let!(:tom_answer) { create :answer, start_date: Date.tomorrow }
 
     context "when the answer is active" do
       subject { first }
@@ -83,13 +83,13 @@ describe Answer do
     context "when the answer is for a Saturday" do
       subject { sat_answer.active? }
       it "should be active on Friday" do
-        Timecop.freeze(Time.zone.local(2016, 8, 12, 0, 0, 0)) do
+        Timecop.travel(Time.zone.local(2016, 8, 12, 0, 0, 0)) do
           expect(sat_answer).to be_active
         end
       end
 
       it "should be active on Saturday" do
-        Timecop.freeze(Time.zone.local(2016, 8, 13, 0, 0, 0)) do
+        Timecop.travel(Time.zone.local(2016, 8, 13, 0, 0, 0)) do
           expect(sat_answer).to be_active
         end
       end
@@ -97,28 +97,30 @@ describe Answer do
 
     context "when the answer is for a Sunday" do
       it "should be inactive on Sunday" do
-        Timecop.freeze(Time.zone.local(2016, 8, 14, 0, 0, 0)) do
+        Timecop.travel(Time.zone.local(2016, 8, 14, 0, 0, 0)) do
           expect(sun_answer).not_to be_active
         end
       end
 
       it "should be active on Monday" do
-        Timecop.freeze(Time.zone.local(2016, 8, 15, 0, 0, 0)) do
+        Timecop.travel(Time.zone.local(2016, 8, 15, 0, 0, 0)) do
           expect(sun_answer).to be_active
         end
       end
     end
 
     context "when the answer is for today" do
-      subject { today_answer }
-      it { is_expected.to be_active }
+      subject { thu_answer }
+      Timecop.travel(Time.zone.local(2016, 8, 11, 22, 0, 0)) do
+        it { is_expected.to be_active }
+      end
     end
 
     context "when today is in the afternoon" do
       it "tomorrow's answer should be inactive" do
-        Timecop.freeze(Time.zone.local(Time.zone.now.year, Time.zone.now.month,
-                                       Time.zone.now.day, 22, 0, 0))
-        expect(tom_answer).not_to be_active
+        Timecop.travel(Time.zone.local(2016, 8, 11, 22, 0, 0)) do
+          expect(fri_answer).not_to be_active
+        end
       end
     end
   end
