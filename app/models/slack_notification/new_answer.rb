@@ -11,7 +11,7 @@ class SlackNotification::NewAnswer < SlackNotification
       pretext: pretext,
       title: title,
       title_link: game_answer_url(@answer.game, @answer),
-      text: @answer.answer || "",
+      text: text,
       color: "#337AB7",
       fallback: "#{pretext} #{game_answer_url(@answer.game, @answer)}",
       mrkdwn_in: %w(text),
@@ -20,6 +20,10 @@ class SlackNotification::NewAnswer < SlackNotification
 
   def pretext
     @answer.amount ? "New Imperilment clue!" : "Final Imperilment!"
+  end
+  
+  def text
+    @answer.amount ? @answer.answer : ""
   end
 
   def title
