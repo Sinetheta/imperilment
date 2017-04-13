@@ -12,7 +12,7 @@ class GameResult < ActiveRecord::Base
 
   def results
     answers.map do |answer|
-      if !answer || !answer.active?
+      if !answer
         :unavailable
       elsif !(question = answer.question_for(user))
         :unanswered
