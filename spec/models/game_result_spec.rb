@@ -54,9 +54,8 @@ describe GameResult do
   end
 
   describe 'results' do
-    let(:answers) { [answer, inactive_answer, nil] }
-    let(:answer) { double(:answer, start_date: 1, active?: true) }
-    let(:inactive_answer) { double(:answer, start_date: 1, active?: false) }
+    let(:answers) { [answer, nil] }
+    let(:answer) { double(:answer, start_date: 1) }
     let(:question) { nil }
     let(:game) { double(:game, date_range: [1, 2], all_answers: answers) }
     let(:user) { User.new }
@@ -70,12 +69,12 @@ describe GameResult do
     end
 
     context 'unanswered' do
-      it { is_expected.to eq([:unanswered, :unavailable, :unavailable]) }
+      it { is_expected.to eq([:unanswered, :unavailable]) }
     end
 
     context 'answered' do
       let(:question) { double(:question, status: :questionstatus) }
-      it { is_expected.to eq([:questionstatus, :unavailable, :unavailable]) }
+      it { is_expected.to eq([:questionstatus, :unavailable]) }
     end
   end
 end

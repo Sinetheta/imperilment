@@ -1,5 +1,4 @@
 class Answer < ActiveRecord::Base
-  scope :active, -> { where("start_date <= ?", effective_date) }
   scope :announceable, -> { where("start_date <= ? AND start_date >= ?",
                                  effective_date, announce_date) }
 
@@ -13,7 +12,7 @@ class Answer < ActiveRecord::Base
   validates :start_date, uniqueness: true
 
   def self.most_recent
-    where('start_date <= ?', effective_date).order('start_date DESC').first
+    where('start_date <= ?', DateTime.now).order('start_date DESC').first
   end
 
   def self.next_free_date
@@ -26,16 +25,6 @@ class Answer < ActiveRecord::Base
 
   def self.last_answer
     order(:start_date).last
-  end
-
-  # Adjust date to include Saturday in Friday's release, and postpone Sunday until Monday's release
-  def self.effective_date
-    today = Date.current
-
-    today += 1.day if today.friday?
-    today -= 1.day if today.sunday?
-
-    today
   end
 
   def self.announce_date
@@ -64,9 +53,5 @@ class Answer < ActiveRecord::Base
 
   def final?
     !amount
-  end
-
-  def active?
-    Answer.active.exists?(self.id)
   end
 end

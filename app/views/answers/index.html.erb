@@ -30,8 +30,8 @@
         </td>
         <td class='day'><%= answer.start_date.strftime('%a') %></td>
         <td>
-          <p><strong><%= answer.active? ? answer.category.try(:name) : @blocked %></strong></p>
-          <p><%= answer.active? ? answer.answer : @blocked %></p>
+          <p><strong><%= answer.category.try(:name) %></strong></p>
+          <p><%= answer.answer %></p>
         </td>
         <td class='amount'><%= number_to_currency answer.amount, precision: 0, unit: t(:currency_symbol) %></td>
         <td class='hidden-phone'>

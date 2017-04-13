@@ -58,16 +58,12 @@ describe LeaderBoardHelper do
       let(:answer) { nil }
       it { is_expected.to eq(:unavailable) }
     end
-    context 'future answer' do
-      let(:answer) { double(:answer, active?: false) }
-      it { is_expected.to eq(:unavailable) }
-    end
     context 'nil question' do
-      let(:answer) { double(:answer, question_for: nil, active?: true) }
+      let(:answer) { double(:answer, question_for: nil) }
       it { is_expected.to eq(:unanswered) }
     end
     context 'nil question' do
-      let(:answer) { double(:answer, question_for: question, active?: true) }
+      let(:answer) { double(:answer, question_for: question) }
       let(:question) { double(:question, status: :foobar) }
       it { is_expected.to eq(:foobar) }
     end

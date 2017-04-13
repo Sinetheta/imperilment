@@ -66,11 +66,6 @@ describe User do
     let!(:answer) { create :answer, game: game }
     subject { user.pending_answers }
 
-    context "Answer from the future exists" do
-      let!(:future_answer) { create :answer, game: game, start_date: '9999-01-03 00:00:00' }
-      it { is_expected.to eq [answer] }
-    end
-
     context "Answer has question from same user" do
       let!(:question) { create :question, answer: answer, user: user }
       it { is_expected.to eq [] }
