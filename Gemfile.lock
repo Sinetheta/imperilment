@@ -118,7 +118,7 @@ GEM
     ffaker (2.1.0)
     flamegraph (0.1.0)
       fast_stack
-    fontello_rails_converter (0.4.2)
+    fontello_rails_converter (0.4.4)
       activesupport
       launchy
       rest-client
