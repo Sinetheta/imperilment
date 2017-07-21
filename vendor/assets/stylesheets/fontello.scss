@@ -1,10 +1,11 @@
 @font-face {
   font-family: 'fontello';
-  src: font-url('fontello.eot?81824217');
-  src: font-url('fontello.eot?81824217#iefix') format('embedded-opentype'),
-       font-url('fontello.woff?81824217') format('woff'),
-       font-url('fontello.ttf?81824217') format('truetype'),
-       font-url('fontello.svg?81824217#fontello') format('svg');
+  src: font-url('fontello.eot?45429847');
+  src: font-url('fontello.eot?45429847#iefix') format('embedded-opentype'),
+       font-url('fontello.woff2?45429847') format('woff2'),
+       font-url('fontello.woff?45429847') format('woff'),
+       font-url('fontello.ttf?45429847') format('truetype'),
+       font-url('fontello.svg?45429847#fontello') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -14,7 +15,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'fontello';
-    src: font-url('fontello.svg?81824217#fontello') format('svg');
+    src: font-url('fontello.svg?45429847#fontello') format('svg');
   }
 }
 */
@@ -73,6 +74,8 @@
 %icon-ccw:before { @extend %icon-base; content: '\e810'; } /* '' */
 %icon-hammer:before { @extend %icon-base; content: '\e811'; } /* '' */
 %icon-off:before { @extend %icon-base; content: '\e812'; } /* '' */
+%icon-left-open:before { @extend %icon-base; content: '\e813'; } /* '' */
+%icon-right-open:before { @extend %icon-base; content: '\e814'; } /* '' */
 
 .icon-user { @extend %icon-user; }
 .icon-award { @extend %icon-award; }
@@ -93,3 +96,5 @@
 .icon-ccw { @extend %icon-ccw; }
 .icon-hammer { @extend %icon-hammer; }
 .icon-off { @extend %icon-off; }
+.icon-left-open { @extend %icon-left-open; }
+.icon-right-open { @extend %icon-right-open; }

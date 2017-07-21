@@ -1,5 +1,15 @@
 <%= render 'nav' %>
-<h1 class='answer-date'><%= @answer.start_date %></h1>
+<h1 class='answer-date'>
+  <% @prev = @answer.prev %>
+  <% unless @prev.nil? %>
+    <%= link_to icon('left-open'), game_answer_path(@prev.game, @prev), class: "btn btn-primary" %>
+  <% end %>
+  <%= @answer.start_date %>
+  <% @next = @answer.next %>
+  <% unless @next.nil? %>
+    <%= link_to icon('right-open'), game_answer_path(@next.game, @next), class: "btn btn-primary" %>
+  <% end %>
+</h1>
 
 <div class='question-container row'>
   <div class='col-md-4'>

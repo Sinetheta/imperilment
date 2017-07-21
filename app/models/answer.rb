@@ -54,4 +54,16 @@ class Answer < ActiveRecord::Base
   def final?
     !amount
   end
+
+  def next
+    Answer.where("id > ?", self.id).first
+  end
+
+  def prev
+    Answer.where("id < ?", self.id).last
+  end
+
+  def empty?
+    false
+  end
 end
