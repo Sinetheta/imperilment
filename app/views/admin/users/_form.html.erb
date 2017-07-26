@@ -5,5 +5,8 @@
   <%= f.input :first_name %>
   <%= f.input :last_name %>
 
+  <%= f.check_box :in_office, {checked: @user.in_office} %>
+  <%= f.label :in_office %> <br>
+
   <%= f.button :submit, class: 'btn btn-primary' %>
 <% end %>
