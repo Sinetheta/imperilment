@@ -2,4 +2,5 @@
 <h1><%= t :leader_board %></h1>
 <p><%= t '.info' %></p>
 <%= render "results" %>
-<%= link_to t(:overall_results_by_money), overall_money_leader_board_path, class: 'btn btn-default' %>
+<%= link_to t(:overall_results_by_money), overall_money_leader_board_path(in_office: params[:in_office]), class: 'btn btn-default' %>
+<%= render 'switch_btn' %>

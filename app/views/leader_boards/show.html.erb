@@ -53,6 +53,7 @@
   <% end %>
   </tbody>
 </table>
-<%= link_to t(:overall_results), overall_leader_board_path, class: 'btn btn-default' %>
-<%= link_to t(:overall_results_by_money), overall_money_leader_board_path, class: 'btn btn-default' %>
+<%= link_to t(:overall_results), overall_leader_board_path(in_office: params[:in_office]), class: 'btn btn-default' %>
+<%= link_to t(:overall_results_by_money), overall_money_leader_board_path(in_office: params[:in_office]), class: 'btn btn-default' %>
+<%= render 'switch_btn' %>
 
