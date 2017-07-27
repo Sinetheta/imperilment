@@ -1,4 +1,5 @@
 class Game < ActiveRecord::Base
+  validates :ended_at, presence: true
   has_many :answers
   has_many :users, through: :answers
   has_many :game_results
