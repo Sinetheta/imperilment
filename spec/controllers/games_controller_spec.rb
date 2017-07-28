@@ -4,7 +4,7 @@ describe GamesController do
   authorize
 
   let!(:game) { create :game }
-  let(:default_params) { { game: { foo: 'bar' } } }
+  let(:default_params) { { game: { ended_at: '2017-01-01' } } }
 
   describe "GET index" do
     it "assigns all games as @games" do
