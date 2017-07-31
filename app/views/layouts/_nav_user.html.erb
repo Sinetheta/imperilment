@@ -1,6 +1,6 @@
 <% if current_user %>
   <a class='btn-link dropdown-toggle' href='#' data-toggle='dropdown'>
-    <%= icon :user %>
+    <%= avatar_for current_user %>
     <%= current_user.email %>
     <span class='caret'></span>
   </a>

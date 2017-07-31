@@ -243,4 +243,13 @@ i {
   padding-top: 15px;
   padding-bottom: 15px;
   line-height: 20px;
+
+  /* Make avatar images ignore padding-top and padding-bot
+    on .navbar-right so that they don't expand the navbar */
+  img {
+    margin: -10px auto;
+    border-radius: 5px;
+    width: 40px;
+    height: 40px;
+  }
 }

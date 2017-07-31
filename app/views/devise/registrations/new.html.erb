@@ -6,6 +6,7 @@
   <%= f.input :email, :required => true, :autofocus => true %>
   <%= f.input :password, :required => true %>
   <%= f.input :password_confirmation, :required => true %>
+  <%= f.hidden_field :avatar_url %>
 
   <%= f.button :submit, "Sign up" %>
 <% end %>
