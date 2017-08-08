@@ -24,4 +24,8 @@ Imperilment::Application.routes.draw do
   get '/leader_board/overall' => 'leader_boards#index', as: :overall_leader_board
   get '/leader_board(/:game_id)' => 'leader_boards#show', as: :leader_board
   root to: 'landing#show'
+
+  devise_scope :user do
+    post "/change_avatar" => "users/registrations#change_avatar", as: :change_avatar
+  end
 end

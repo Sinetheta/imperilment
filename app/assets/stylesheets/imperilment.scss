@@ -270,3 +270,9 @@ th.avatar {
 td.avatar {
   text-align: center;
 }
+
+/* Make the loading icon spin */
+.icon-spin6 {
+  animation: 1s linear infinite spin;
+  display: inline-block;
+}
