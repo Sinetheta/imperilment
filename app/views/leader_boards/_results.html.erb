@@ -2,6 +2,7 @@
   <thead>
     <tr>
       <th class='score hidden-phone'><%= t :overall_total %></th>
+      <th class="avatar">&nbsp;</th>
       <th><%= User.model_name.human %></th>
       <th><%= t :finishes %></th>
       <th><%= t :percent_correct %>
@@ -13,6 +14,7 @@
         <td class='score hidden-phone'>
           <%= "#{t :currency_symbol} #{user.total}" %>
         </td>
+        <td class='avatar'><%= avatar_for user %></td>
         <td class='email'><%= user.identifier %></td>
         <td class='finishes'>
           <i class='icon-award gold'></i>

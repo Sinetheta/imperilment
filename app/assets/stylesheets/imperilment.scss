@@ -253,3 +253,20 @@ i {
     height: 40px;
   }
 }
+
+/* Round the avatar image's corners */
+.avatar > img {
+  border-radius: 5px;
+}
+/* Size the avatars on the leader board */
+.avatar > img, .avatar > i {
+  width: 3rem;
+}
+/* Set the avatar column width */
+th.avatar {
+  width: 3.5rem;
+}
+/* Horizontally align avatars */
+td.avatar {
+  text-align: center;
+}

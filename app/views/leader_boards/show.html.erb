@@ -5,6 +5,7 @@
   <thead>
     <tr>
       <th class='score'><%= t :weekly_total %></th>
+      <th class='avatar'>&nbsp;</th>
       <th><%= User.model_name.human %></th>
       <% unless @game.answers.empty? %>
         <th class='hidden-phone'><%= t :breakdown %></th>
@@ -20,6 +21,7 @@
         <% end %>
         <%= "#{t :currency_symbol} #{result.total}" %>
       </td>
+      <td class='avatar'><%= avatar_for result.user %></td>
       <td class='email'><%= result.user.identifier %></td>
       <% unless @game.answers.empty? %>
         <td class='hidden-phone'>
