@@ -276,3 +276,9 @@ td.avatar {
   animation: 1s linear infinite spin;
   display: inline-block;
 }
+
+sup {
+  top: 0;
+  font-size: 0.5em;
+  vertical-align: super;
+}

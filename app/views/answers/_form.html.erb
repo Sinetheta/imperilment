@@ -19,5 +19,7 @@
     </div>
   <% end %>
 
-  <%= f.button :submit, class: 'btn btn-primary' %>
+  <%# Note: "disable_with" prevents the button from being clicked twice and the form %>
+  <%#   from submitting twice. %>
+  <%= f.button :submit, class: 'btn btn-primary', data: {disable_with: "Creating Answer"} %>
 <% end %>

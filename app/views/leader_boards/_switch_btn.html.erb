@@ -1,0 +1,4 @@
+<%# Button to switch between the in-office and everybody versions of this page %>
+<% @btn_label = params[:in_office] ? :view_everybody_leader_board : :view_office_leader_board %>
+<%= link_to t(@btn_label), url_for(:in_office => params[:in_office] ? '' : 'in_office'), class: 'btn btn-default' %>
+

@@ -10,24 +10,28 @@
   </thead>
   <tbody>
     <% @results.each do |user| %>
-      <tr>
-        <td class='score hidden-phone'>
-          <%= "#{t :currency_symbol} #{user.total}" %>
-        </td>
-        <td class='avatar'><%= avatar_for user %></td>
-        <td class='email'><%= user.identifier %></td>
-        <td class='finishes'>
-          <i class='icon-award gold'></i>
-          <span><%= user.first %></span>
-          <i class='icon-award silver'></i>
-          <span><%= user.second %></span>
-          <i class='icon-award bronze'></i>
-          <span><%= user.third %></span>
-        </td>
-        <td class='percent'>
-          <%= (user.correct_ratio(@season) * 100).round(2) %>%
-        </td>
-      </tr>
+      <%# If the in_office param is set, and the user is not in office, %>
+      <%#   omit this user. %>
+      <% unless params[:in_office] && !user.in_office %>
+        <tr>
+          <td class='score hidden-phone'>
+            <%= "#{t :currency_symbol} #{user.total}" %>
+          </td>
+          <td class='avatar'><%= avatar_for user %></td>
+          <td class='email'><%= user.identifier %></td>
+          <td class='finishes'>
+            <i class='icon-award gold'></i>
+            <span><%= user.first %></span>
+            <i class='icon-award silver'></i>
+            <span><%= user.second %></span>
+            <i class='icon-award bronze'></i>
+            <span><%= user.third %></span>
+          </td>
+          <td class='percent'>
+            <%= (user.correct_ratio(@season) * 100).round(2) %>%
+          </td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

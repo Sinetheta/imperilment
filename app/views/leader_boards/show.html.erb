@@ -14,43 +14,48 @@
   </thead>
   <tbody>
   <% @results.each do |result| %>
-    <tr class="<%= rank_class(result.position) %>">
-      <td class='score'>
-        <% if result.position == 1 %>
-          <%= icon 'award' %>
-        <% end %>
-        <%= "#{t :currency_symbol} #{result.total}" %>
-      </td>
-      <td class='avatar'><%= avatar_for result.user %></td>
-      <td class='email'><%= result.user.identifier %></td>
-      <% unless @game.answers.empty? %>
-        <td class='hidden-phone'>
-          <table class='breakdown'>
-            <thead>
-              <tr>
-                <% result.answers.each do %>
-                  <th></th>
-              <% end %>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <% @game.all_answers.zip(result.results).each do |(answer, result_type)| %>
-                  <td>
-                    <% unless result_type == :unavailable %>
-                      <%= link_to breakdown_icon(result_type), game_answer_path(@game, answer) %>
-                    <% end %>
-                  </td>
-                <% end %>
-              </tr>
-            </tbody>
-          </table>
+    <%# Only omit a user if we are showing the in office leaderboards %>
+    <%#   and they are not in office. %>
+    <% unless params[:in_office] && !result.user.in_office %>
+      <tr class="<%= rank_class(result.position) %>">
+        <td class='score'>
+          <% if result.position == 1 %>
+            <%= icon 'award' %>
+          <% end %>
+          <%= "#{t :currency_symbol} #{result.total}" %>
         </td>
-      <% end %>
-    </tr>
+        <td class='avatar'><%= avatar_for result.user %></td>
+        <td class='email'><%= result.user.identifier %></td>
+        <% unless @game.answers.empty? %>
+          <td class='hidden-phone'>
+            <table class='breakdown'>
+              <thead>
+                <tr>
+                  <% result.answers.each do %>
+                    <th></th>
+                <% end %>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <% @game.all_answers.zip(result.results).each do |(answer, result_type)| %>
+                    <td>
+                      <% unless result_type == :unavailable %>
+                        <%= link_to breakdown_icon(result_type), game_answer_path(@game, answer) %>
+                      <% end %>
+                    </td>
+                  <% end %>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
   <% end %>
   </tbody>
 </table>
-<%= link_to t(:overall_results), overall_leader_board_path, class: 'btn btn-default' %>
-<%= link_to t(:overall_results_by_money), overall_money_leader_board_path, class: 'btn btn-default' %>
+<%= link_to t(:overall_results), overall_leader_board_path(in_office: params[:in_office]), class: 'btn btn-default' %>
+<%= link_to t(:overall_results_by_money), overall_money_leader_board_path(in_office: params[:in_office]), class: 'btn btn-default' %>
+<%= render 'switch_btn' %>
 
