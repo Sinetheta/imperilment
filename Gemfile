@@ -1,7 +1,9 @@
 source 'http://rubygems.org'
 ruby '2.4.10'
 
-gem 'rails', '~> 4.2.0'
+gem 'bigdecimal', '1.4.2'
+
+gem 'rails', '~> 4.2.8'
 
 gem 'rabl-rails'
 
