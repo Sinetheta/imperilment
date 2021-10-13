@@ -1,28 +1,22 @@
-<%
-  # http://mislav.uniqpath.com/rails/branching-the-database-along-with-your-code/
-  branch = `git symbolic-ref HEAD 2>/dev/null`.chomp.sub('refs/heads/', '')
-  suffix = `git config --bool branch.#{branch}.database`.chomp == 'true' ? "_#{branch}" : ""
-%>
-production:
+default: &default
   adapter: sqlite3
-  database: db/production<%= suffix %>.sqlite3
-  pool: 5
+  encoding: unicode
+  # For details on connection pooling, see Rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
+
+production:
+  <<: *default
+  adapter: postgresql
+  database: imperilment_production
+  username: imperilment
+  password: <%= ENV['DATABASE_URL'] %>
 
 development:
   adapter: sqlite3
-  database: db/development<%= suffix %>.sqlite3
-  pool: 5
-  timeout: 5000
+  database: db/development.sqlite3
 
 test:
   adapter: sqlite3
-  database: db/test<%= suffix %>.sqlite3
-  pool: 5
-  timeout: 5000
-
-deploy:
-  adapter: sqlite3
-  database: db/test<%= suffix %>.sqlite3
-  pool: 5
-  timeout: 5000
+  database: db/test.sqlite3
