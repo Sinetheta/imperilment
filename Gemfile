@@ -65,8 +65,9 @@ group :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'rspec-activemodel-mocks'
   gem 'factory_girl_rails', require: false
-  gem 'simplecov', require: false
+  gem 'simplecov', '< 0.19', require: false
   gem 'simplecov-rcov', require: false
+  gem 'docile', '< 1.4'
   gem 'timecop'
 
   gem 'konacha'
