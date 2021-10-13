@@ -38,7 +38,6 @@ gem 'redcarpet'
 gem 'inline_svg'
 
 gem 'dotenv-rails'
-gem 'oops', github: 'freerunningtech/oops'
 
 gem 'slack-notifier'
 
