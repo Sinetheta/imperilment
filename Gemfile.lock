@@ -330,6 +330,7 @@ GEM
 
 PLATFORMS
   ruby
+  x86_64-linux
 
 DEPENDENCIES
   bigdecimal (= 1.4.2)
