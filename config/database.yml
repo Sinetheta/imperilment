@@ -9,9 +9,7 @@ default: &default
 production:
   <<: *default
   adapter: postgresql
-  database: imperilment_production
-  username: imperilment
-  password: <%= ENV['DATABASE_URL'] %>
+  url: <%= ENV['DATABASE_URL'] %>
 
 development:
   adapter: sqlite3
