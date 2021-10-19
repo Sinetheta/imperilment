@@ -1,0 +1,28 @@
+{
+  "name": "Quiz Game",
+  "description": "A self-hosted web-based quiz game.",
+  "keywords": [
+    "rails",
+    "quiz",
+    "openhack"
+  ],
+  "repository": "https://github.com/Sinetheta/imperilment",
+  "scripts": {
+    "postdeploy": "bin/rake db:schema:load db:seed"
+  },
+  "env": {
+    "SECRET_TOKEN": {
+      "description": "A secret key for verifying the integrity of signed cookies.",
+      "generator": "secret"
+    },
+    "RAILS_ENV": {
+      "description": "Defines the environment that Rails will run under.",
+      "value": "production"
+    }
+  },
+  "image": "heroku/ruby",
+  "stack": "heroku-18",
+  "addons": [
+    "heroku-postgresql:hobby-dev"
+  ]
+}
