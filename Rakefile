@@ -5,10 +5,6 @@
 require File.expand_path('../config/application', __FILE__)
 
 task development_data: :environment do
-  admin = User.new(email: 'admin@example.com', password: 'test123')
-  admin.save!(validate: false)
-  admin.add_role :admin
-
   users = (0..10).map do
     first_name = FFaker::Name.first_name
     last_name = FFaker::Name.last_name
