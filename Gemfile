@@ -80,6 +80,5 @@ end
 group :production do
   gem 'pg', '~> 0.15' # compatibility with ruby 2.4
   gem 'rails_12factor'
-  gem 'exception_notification'
   gem 'unicorn'
 end
