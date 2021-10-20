@@ -34,5 +34,5 @@ The current glyph set can be seen at http://localhost:3000/fontello-demo.html
 2. Change selected glyphs as needed and save your session.
 3. `bundle exec fontello convert --stylesheet-extension=.scss` to fetch those changes and update vendor assets.
 
-[1]: https://github.com/Sinetheta/imperilment/blob/main/vendor/assets/fonts/config.json
+[1]: /vendor/assets/fonts/config.json
 [2]: https://github.com/railslove/fontello_rails_converter
