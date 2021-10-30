@@ -56,7 +56,6 @@ end
 
 group :test do
   gem 'capybara'
-  gem 'minitest' # To get rid of errors
   gem 'shoulda-matchers'
   gem 'rspec-rails', '~> 3.0'
   gem 'rspec-activemodel-mocks'
