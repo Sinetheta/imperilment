@@ -45,7 +45,6 @@ gem 'stackprof'
 gem 'whenever'
 
 group :development do
-  gem 'quiet_assets'
   gem 'letter_opener'
 end
 

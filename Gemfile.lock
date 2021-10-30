@@ -165,8 +165,6 @@ GEM
       slop (~> 3.4)
     pry-rails (0.3.4)
       pry (>= 0.9.10)
-    quiet_assets (1.1.0)
-      railties (>= 3.1, < 5.0)
     rabl-rails (0.4.1)
       activesupport (>= 3.1)
       railties (>= 3.1)
@@ -326,7 +324,6 @@ DEPENDENCIES
   omniauth-google-oauth2
   pg (~> 0.15)
   pry-rails
-  quiet_assets
   rabl-rails
   rack-mini-profiler
   rails (~> 4.2.8)
