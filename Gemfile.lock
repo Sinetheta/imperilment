@@ -133,7 +133,6 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
-    memory_profiler (0.9.6)
     method_source (0.8.2)
     mime-types (2.99.3)
     mini_mime (1.1.1)
@@ -331,7 +330,6 @@ DEPENDENCIES
   inline_svg
   jquery-rails
   letter_opener
-  memory_profiler
   minitest
   omniauth-google-oauth2
   pg (~> 0.15)
