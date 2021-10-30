@@ -5,8 +5,6 @@ gem 'bigdecimal', '1.4.2'
 
 gem 'rails', '~> 4.2.8'
 
-gem 'rabl-rails'
-
 gem 'devise'
 gem "omniauth-google-oauth2"
 gem 'rolify'
