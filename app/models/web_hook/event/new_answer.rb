@@ -1,21 +1,27 @@
-require 'json'
+module WebHook::Event
+  class NewAnswer
+    def initialize answer
+      @answer = answer
+    end
 
-class WebHook::Event::NewAnswer < WebHook::Event
+    def serialize
+      as_json.to_json
+    end
 
-  def initialize answer
-    super(answer)
-  end
+    def as_json
+      @answer.as_json(
+        except: :correct_question,
+        include: {
+          category: { only: [:id, :name] }
+        }
+      ).tap do |h|
+        h['url'] = reply_url
+      end
+    end
 
-  def action
-    'new'
-  end
-
-  def type
-    'answer'
-  end
-
-  protected
-  def template
-    'answers/show'
+    # The app url where contestants can visit to respond to the clue.
+    def reply_url
+      Rails.application.routes.url_helpers.game_answer_url(@answer.game, @answer)
+    end
   end
 end

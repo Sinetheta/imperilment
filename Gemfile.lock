@@ -167,10 +167,6 @@ GEM
       slop (~> 3.4)
     pry-rails (0.3.4)
       pry (>= 0.9.10)
-    rabl-rails (0.4.1)
-      activesupport (>= 3.1)
-      railties (>= 3.1)
-      thread_safe (~> 0.3.1)
     racc (1.6.0)
     rack (1.6.13)
     rack-mini-profiler (0.9.8)
@@ -328,7 +324,6 @@ DEPENDENCIES
   omniauth-google-oauth2
   pg (~> 0.15)
   pry-rails
-  rabl-rails
   rack-mini-profiler
   rails (~> 4.2.8)
   rails_12factor
