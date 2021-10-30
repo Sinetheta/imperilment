@@ -41,7 +41,6 @@ gem 'dotenv-rails'
 gem 'slack-notifier'
 
 gem 'rack-mini-profiler'
-gem 'flamegraph'
 gem 'stackprof'
 gem 'whenever'
 
