@@ -296,9 +296,6 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
-    validate_url (1.0.2)
-      activemodel (>= 3.0.0)
-      addressable
     warden (1.2.4)
       rack (>= 1.0)
     webmock (1.22.3)
@@ -361,7 +358,6 @@ DEPENDENCIES
   timecop
   uglifier
   unicorn
-  validate_url
   webmock
   whenever
   will_paginate

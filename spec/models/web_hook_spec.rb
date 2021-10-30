@@ -10,12 +10,6 @@ describe WebHook do
     expect(FactoryGirl.build :web_hook, url: nil).to_not be_valid
   end
 
-  it 'is validates url format' do
-    web_hook = FactoryGirl.build(:web_hook, url: 'CATS!')
-    expect(web_hook).to_not be_valid
-    expect(web_hook.errors[:url]).to eq(['is not a valid URL'])
-  end
-
   it 'creates a uri from the url' do
     expect(FactoryGirl.create(:web_hook).uri).to be_an(URI)
   end
