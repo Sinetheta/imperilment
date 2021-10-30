@@ -56,7 +56,6 @@ GEM
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
     chronic (0.10.2)
-    cliver (0.3.2)
     coderay (1.1.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
@@ -65,7 +64,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.10.0)
-    colorize (0.7.7)
     concurrent-ruby (1.1.9)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
@@ -126,14 +124,6 @@ GEM
     json (1.8.6)
     jwt (1.5.2)
     kgio (2.10.0)
-    konacha (3.7.0)
-      actionpack (>= 3.1, < 5)
-      capybara
-      colorize
-      railties (>= 3.1, < 5)
-      sprockets (>= 2, < 4)
-      tilt
-    konacha-chai-matchers (1.0.0)
     launchy (2.4.3)
       addressable (~> 2.3)
     letter_opener (1.4.1)
@@ -175,11 +165,6 @@ GEM
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
     pg (0.21.0)
-    poltergeist (1.8.1)
-      capybara (~> 2.1)
-      cliver (~> 0.3.1)
-      multi_json (~> 1.0)
-      websocket-driver (>= 0.2.0)
     pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -320,9 +305,6 @@ GEM
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff
-    websocket-driver (0.6.3)
-      websocket-extensions (>= 0.1.0)
-    websocket-extensions (0.1.2)
     whenever (0.9.7)
       chronic (>= 0.6.3)
     will_paginate (3.0.7)
@@ -351,14 +333,11 @@ DEPENDENCIES
   fontello_rails_converter
   inline_svg
   jquery-rails
-  konacha
-  konacha-chai-matchers
   letter_opener
   memory_profiler
   minitest
   omniauth-google-oauth2
   pg (~> 0.15)
-  poltergeist
   pry-rails
   quiet_assets
   rabl-rails

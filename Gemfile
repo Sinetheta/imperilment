@@ -70,10 +70,7 @@ group :test do
   gem 'docile', '< 1.4'
   gem 'timecop'
 
-  gem 'konacha'
-  gem 'konacha-chai-matchers'
   gem 'ejs'
-  gem 'poltergeist'
   gem 'webmock'
 end
 
