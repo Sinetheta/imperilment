@@ -54,7 +54,7 @@ describe WebHooksController do
     end
 
     context "with invalid params" do
-      let(:request_params) { { web_hook: { url: 'nope' } } }
+      let(:request_params) { { web_hook: { url: nil } } }
 
       it "assigns a newly created but unsaved web hook as @web_hook" do
         subject
