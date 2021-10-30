@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 ruby '2.7.4'
 
-gem 'rails', '~> 5.2.6'
+gem 'rails', '~> 6.1'
 gem 'sprockets', '~> 3.7.2' # compatibility with bootstrap-sass
 
 gem 'devise'
