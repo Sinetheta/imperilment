@@ -1,4 +1,4 @@
-class TestEvent < WebHook::Event
+class TestEvent
   def serialize
     'payload'
   end
