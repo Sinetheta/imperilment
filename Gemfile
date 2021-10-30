@@ -1,27 +1,26 @@
 source 'http://rubygems.org'
 ruby '2.7.4'
 
-gem 'bigdecimal', '1.4.2'
-
-gem 'rails', '~> 4.2.8'
+gem 'rails', '~> 5.2.6'
+gem 'sprockets', '~> 3.7.2' # compatibility with bootstrap-sass
 
 gem 'devise'
 gem "omniauth-google-oauth2"
 gem 'rolify'
 gem 'cancancan'
 
-gem 'simple_form', '3.1.0'
+gem 'simple_form'
 gem 'show_for'
 
 gem 'will_paginate'
 gem 'select2-rails'
 
-gem 'sass-rails', '~> 5.0.0'
+gem 'sass-rails'
 gem 'coffee-rails'
 
 gem 'jquery-rails'
 
-gem 'bootstrap-sass', '~> 3.3.0'
+gem 'bootstrap-sass'
 gem 'bootstrap-datepicker-rails'
 
 gem 'fontello_rails_converter'
@@ -55,7 +54,7 @@ end
 group :test do
   gem 'capybara'
   gem 'shoulda-matchers'
-  gem 'rspec-rails', '~> 3.0'
+  gem 'rspec-rails'
   gem 'rspec-activemodel-mocks'
   gem 'factory_girl_rails', require: false
   gem 'simplecov', require: false
@@ -67,7 +66,7 @@ group :test do
 end
 
 group :production do
-  gem 'pg', '~> 0.15' # compatibility with ruby 2.4
+  gem 'pg'
   gem 'rails_12factor'
   gem 'unicorn'
 end
