@@ -6,7 +6,7 @@
       <div class='answer'><%= render_markdown(@answer.answer) %></div>
   </p>
 
-  <% if @question.errors.messages[:answer_id] %>
+  <% if @question.errors.messages[:answer_id].any? %>
     <div class='alert alert-error'>
       <%= t :already_answered %>
     </div>
