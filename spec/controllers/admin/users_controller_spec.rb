@@ -47,7 +47,7 @@ describe Admin::UsersController do
   describe 'PUT update' do
     describe "with valid params" do
       it "updates the requested user" do
-        expect_any_instance_of(User).to receive(:update_attributes).with('first_name' => 'Joe')
+        expect_any_instance_of(User).to receive(:update).with('first_name' => 'Joe')
         put :update, id: user.to_param, user: { 'first_name' => 'Joe' }
       end
 
@@ -73,7 +73,7 @@ describe Admin::UsersController do
 
       it "re-renders the 'edit' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        allow_any_instance_of(User).to receive(:update_attributes).and_return(false)
+        allow_any_instance_of(User).to receive(:update).and_return(false)
         allow_any_instance_of(User).to receive(:errors).and_return(double(:errors, empty?: false))
         put :update, id: user.to_param, user: { "email" => "invalid value" }
         expect(response).to render_template("edit")

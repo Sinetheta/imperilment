@@ -54,7 +54,7 @@ class AnswersController < ApplicationController
   end
 
   def update
-    if @answer.update_attributes(answer_params)
+    if @answer.update(answer_params)
       flash.notice = t :model_update_successful, model: Answer.model_name.human
     end
     respond_with @game, @answer

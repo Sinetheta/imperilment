@@ -76,7 +76,7 @@ describe CategoriesController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested category" do
-        expect_any_instance_of(Category).to receive(:update_attributes).with("name" => "Test")
+        expect_any_instance_of(Category).to receive(:update).with("name" => "Test")
         put :update, id: category.to_param, category: { "name" => "Test" }
       end
 

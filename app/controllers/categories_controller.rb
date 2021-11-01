@@ -28,7 +28,7 @@ class CategoriesController < ApplicationController
   end
 
   def update
-    if @category.update_attributes(category_params)
+    if @category.update(category_params)
       flash.notice = t :model_update_successful, model: Category.model_name.human
     end
     respond_with @category

@@ -76,7 +76,7 @@ describe GamesController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested game" do
-        expect_any_instance_of(Game).to receive(:update_attributes).with("ended_at" => "2012-12-27 15:58:08")
+        expect_any_instance_of(Game).to receive(:update).with("ended_at" => "2012-12-27 15:58:08")
         put :update, id: game.to_param, game: { "ended_at" => "2012-12-27 15:58:08" }
       end
 

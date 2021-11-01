@@ -141,7 +141,7 @@ describe QuestionsController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested question" do
-        expect_any_instance_of(Question).to receive(:update_attributes).with("response" => "")
+        expect_any_instance_of(Question).to receive(:update).with("response" => "")
         put :update, default_params.merge(id: question.to_param, question: { "response" => "" })
       end
 
