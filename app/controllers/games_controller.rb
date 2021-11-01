@@ -28,7 +28,7 @@ class GamesController < ApplicationController
   end
 
   def update
-    if @game.update_attributes(game_params)
+    if @game.update(game_params)
       flash.notice = t :model_update_successful, model: Game.model_name.human if request.format == :html
     end
     respond_with @game

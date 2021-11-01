@@ -46,7 +46,7 @@ class QuestionsController < ApplicationController
   def update
     qp = question_params
     qp[:correct] = nil if qp[:correct] == 'null'
-    if @question.update_attributes(qp)
+    if @question.update(qp)
       flash.notice = t :model_update_successful, model: Question.model_name.human if request.format == :html
     end
     respond_with @game, @answer, @question, location: root_path

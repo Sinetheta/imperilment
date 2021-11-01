@@ -149,7 +149,7 @@ describe AnswersController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested answer" do
-        expect_any_instance_of(Answer).to receive(:update_attributes).with("amount" => '100')
+        expect_any_instance_of(Answer).to receive(:update).with("amount" => '100')
         put :update, default_params.merge(id: answer.to_param, answer: { "amount" => '100' })
       end
 
