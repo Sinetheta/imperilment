@@ -23,7 +23,7 @@ gem 'jquery-rails'
 gem 'bootstrap-sass'
 gem 'bootstrap-datepicker-rails'
 
-gem 'fontello_rails_converter'
+gem 'fontello_rails_converter', github: 'Sinetheta/fontello_rails_converter', branch: :master
 
 gem 'uglifier'
 
