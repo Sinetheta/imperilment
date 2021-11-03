@@ -1,5 +1,5 @@
 source 'http://rubygems.org'
-ruby '2.7.4'
+ruby '3.0.2'
 
 gem 'rails', '~> 6.1'
 gem 'sprockets', '~> 3.7.2' # compatibility with bootstrap-sass
@@ -39,6 +39,7 @@ gem 'slack-notifier'
 
 gem 'rack-mini-profiler'
 gem 'stackprof'
+gem 'unicorn-rails'
 gem 'whenever'
 
 group :development do
@@ -68,5 +69,4 @@ end
 group :production do
   gem 'pg'
   gem 'rails_12factor'
-  gem 'unicorn'
 end

@@ -1,3 +1,14 @@
+GIT
+  remote: https://github.com/Sinetheta/fontello_rails_converter.git
+  revision: cc558375cebe2420f09f06c5db78faa1ee0d2113
+  branch: master
+  specs:
+    fontello_rails_converter (0.4.6)
+      activesupport
+      launchy
+      rest-client
+      rubyzip (~> 1.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -139,11 +150,6 @@ GEM
     faraday-rack (1.0.0)
     ffaker (2.20.0)
     ffi (1.15.4)
-    fontello_rails_converter (0.4.6)
-      activesupport
-      launchy
-      rest-client
-      rubyzip (~> 1.0)
     globalid (0.5.2)
       activesupport (>= 5.0)
     hashdiff (1.0.1)
@@ -187,8 +193,6 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.12.5)
       mini_portile2 (~> 2.6.1)
-      racc (~> 1.4)
-    nokogiri (1.12.5-x86_64-linux)
       racc (~> 1.4)
     oauth2 (1.4.7)
       faraday (>= 0.8, < 2.0)
@@ -342,6 +346,9 @@ GEM
     unicorn (6.0.0)
       kgio (~> 2.6)
       raindrops (~> 0.7)
+    unicorn-rails (2.2.1)
+      rack
+      unicorn
     warden (1.2.9)
       rack (>= 2.0.9)
     webmock (3.14.0)
@@ -374,7 +381,7 @@ DEPENDENCIES
   ejs
   factory_girl_rails
   ffaker
-  fontello_rails_converter
+  fontello_rails_converter!
   inline_svg
   jquery-rails
   letter_opener
@@ -401,13 +408,13 @@ DEPENDENCIES
   stackprof
   timecop
   uglifier
-  unicorn
+  unicorn-rails
   webmock
   whenever
   will_paginate
 
 RUBY VERSION
-   ruby 2.7.4p191
+   ruby 3.0.2p107
 
 BUNDLED WITH
-   1.17.3
+   2.2.30
