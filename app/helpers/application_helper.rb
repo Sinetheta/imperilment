@@ -21,6 +21,6 @@ module ApplicationHelper
   end
 
   def login_path
-    ENV['GOOGLE_CLIENT_SECRET'] ? user_omniauth_authorize_path(:google) : new_user_session_path
+    ENV['GOOGLE_CLIENT_SECRET'] ? user_google_omniauth_authorize_path : new_user_session_path
   end
 end
