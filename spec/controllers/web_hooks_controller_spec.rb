@@ -21,13 +21,13 @@ describe WebHooksController do
 
   describe "GET edit" do
     it "assigns the requested web hook as @web_hook" do
-      get :edit, id: web_hook.to_param
+      get :edit, params: { id: web_hook.to_param }
       expect(assigns(:web_hook)).to eq(web_hook)
     end
   end
 
   describe "POST create" do
-    subject { post :create, request_params }
+    subject { post :create, params: request_params }
 
     context "with valid params" do
       let(:request_params) { { web_hook: { url: 'http://www.example.com/fake_hook', active: true } } }
@@ -93,7 +93,7 @@ describe WebHooksController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(WebHook).to receive(:save).and_return(false)
         allow_any_instance_of(WebHook).to receive(:errors).and_return(double(:errors, empty?: false))
-        put :update, id: web_hook.to_param, web_hook: { url: 'invalid_hook' }
+        put :update, params: { id: web_hook.to_param, web_hook: { url: 'invalid_hook' } }
         expect(assigns(:web_hook)).to eq(web_hook)
       end
 
@@ -101,7 +101,7 @@ describe WebHooksController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(WebHook).to receive(:save).and_return(false)
         allow_any_instance_of(WebHook).to receive(:errors).and_return(double(:errors, empty?: false))
-        put :update, id: web_hook.to_param, web_hook: { url: 'invalid_hook' }
+        put :update, params: { id: web_hook.to_param, web_hook: { url: 'invalid_hook' } }
         expect(response).to render_template("edit")
       end
     end
@@ -110,12 +110,12 @@ describe WebHooksController do
   describe "DELETE destroy" do
     it "destroys the requested web hook" do
       expect {
-        delete :destroy, id: web_hook.to_param
+        delete :destroy, params: { id: web_hook.to_param }
       }.to change(WebHook, :count).by(-1)
     end
 
     it "redirects to the web hooks list" do
-      delete :destroy, id: web_hook.to_param
+      delete :destroy, params: { id: web_hook.to_param }
       expect(response).to redirect_to(web_hooks_url)
     end
   end

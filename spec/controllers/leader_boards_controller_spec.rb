@@ -11,7 +11,7 @@ describe LeaderBoardsController do
 
     context 'html' do
       it 'should assign the results to @results' do
-        get :index, season: season
+        get :index, params: { season: season }
         expect(result).to eq(game_result.user)
         expect(result.total).to eq(300)
         expect(result.first).to eq(1)
@@ -22,7 +22,7 @@ describe LeaderBoardsController do
 
     context 'json' do
       it 'should assign the results to @results' do
-        get :index, season: season, format: :json
+        get :index, params: { season: season, format: :json }
         expect(result).to eq(game_result.user)
       end
     end
@@ -36,7 +36,7 @@ describe LeaderBoardsController do
     context 'with a season' do
       it 'should have the correct year' do
         # Everything before this was a mistake.
-        get :index, season: 1776
+        get :index, params: { season: 1776 }
         expect(assigns(:season).year).to eq(1776)
 
         # but I'm pretty sure imperilment wasn't inventes
@@ -57,7 +57,7 @@ describe LeaderBoardsController do
       let!(:answer) { create :answer, game: game }
       let!(:question) { create :question, answer: answer }
 
-      subject { get :show, season: season }
+      subject { get :show, params: { season: season } }
 
       it 'should assign the game to @game' do
         subject
@@ -71,7 +71,7 @@ describe LeaderBoardsController do
 
       context 'when a game_id is passed' do
         let(:other_game) { create :game }
-        subject { get :show, game_id: other_game, season: season }
+        subject { get :show, params: { game_id: other_game, season: season } }
         it 'should assign the game to @game' do
           subject
           expect(assigns(:game)).to eq(other_game)
@@ -92,7 +92,7 @@ describe LeaderBoardsController do
           create_question last_week_user
         end
 
-        subject { get :show, game_id: game.id, season: season }
+        subject { get :show, params: { game_id: game.id, season: season } }
 
         it 'has last weeks users' do
           subject
@@ -127,18 +127,18 @@ describe LeaderBoardsController do
     let!(:game_result) { create(:game_result, game: game) }
 
     it 'should assign the results to @results' do
-      get :money, season: season
+      get :money, params: { season: season }
       expect(result).to eq(game_result.user)
     end
 
     it 'should respond to html' do
-      get :money, season: season
-      expect(response).to be_success
+      get :money, params: { season: season }
+      expect(response).to have_http_status(:success)
     end
 
     it 'should respond to json' do
-      get :money, season: season, format: :json
-      expect(response).to be_success
+      get :money, params: { season: season, format: :json }
+      expect(response).to have_http_status(:success)
     end
   end
 end

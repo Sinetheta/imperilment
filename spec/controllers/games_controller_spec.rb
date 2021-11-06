@@ -15,7 +15,7 @@ describe GamesController do
 
   describe "GET show" do
     it "assigns the requested game as @game" do
-      get :show, id: game.to_param
+      get :show, params: { id: game.to_param }
       expect(assigns(:game)).to eq(game)
     end
   end
@@ -29,7 +29,7 @@ describe GamesController do
 
   describe "GET edit" do
     it "assigns the requested game as @game" do
-      get :edit, id: game.to_param
+      get :edit, params: { id: game.to_param }
       expect(assigns(:game)).to eq(game)
     end
   end
@@ -38,18 +38,18 @@ describe GamesController do
     describe "with valid params" do
       it "creates a new Game" do
         expect do
-          post :create, default_params
+          post :create
         end.to change(Game, :count).by(1)
       end
 
       it "assigns a newly created game as @game" do
-        post :create, default_params
+        post :create
         expect(assigns(:game)).to be_a(Game)
         expect(assigns(:game)).to be_persisted
       end
 
       it "redirects to the created game" do
-        post :create, default_params
+        post :create
         expect(response).to redirect_to(Game.last)
       end
     end
@@ -59,7 +59,7 @@ describe GamesController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Game).to receive(:save).and_return(false)
         allow_any_instance_of(Game).to receive(:errors).and_return(double(:errors, empty?: false))
-        post :create, default_params
+        post :create
         expect(assigns(:game)).to be_a_new(Game)
       end
 
@@ -67,7 +67,7 @@ describe GamesController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Game).to receive(:save).and_return(false)
         allow_any_instance_of(Game).to receive(:errors).and_return(double(:errors, empty?: false))
-        post :create, default_params
+        post :create
         expect(response).to render_template("new")
       end
     end
@@ -77,16 +77,16 @@ describe GamesController do
     describe "with valid params" do
       it "updates the requested game" do
         expect_any_instance_of(Game).to receive(:update).with("ended_at" => "2012-12-27 15:58:08")
-        put :update, id: game.to_param, game: { "ended_at" => "2012-12-27 15:58:08" }
+        put :update, params: { id: game.to_param, game: { "ended_at" => "2012-12-27 15:58:08" } }
       end
 
       it "assigns the requested game as @game" do
-        put :update, id: game.to_param, game: { "ended_at" => "2012-12-27 15:58:08" }
+        put :update, params: { id: game.to_param, game: { "ended_at" => "2012-12-27 15:58:08" } }
         expect(assigns(:game)).to eq(game)
       end
 
       it "redirects to the game" do
-        put :update, id: game.to_param, game: { "ended_at" => "2012-12-27 15:58:08" }
+        put :update, params: { id: game.to_param, game: { "ended_at" => "2012-12-27 15:58:08" } }
         expect(response).to redirect_to(game)
       end
     end
@@ -96,7 +96,7 @@ describe GamesController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Game).to receive(:save).and_return(false)
         allow_any_instance_of(Game).to receive(:errors).and_return(double(:errors, empty?: false))
-        put :update, id: game.to_param, game: { "ended_at" => "invalid value" }
+        put :update, params: { id: game.to_param, game: { "ended_at" => "invalid value" } }
         expect(assigns(:game)).to eq(game)
       end
 
@@ -104,7 +104,7 @@ describe GamesController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Game).to receive(:save).and_return(false)
         allow_any_instance_of(Game).to receive(:errors).and_return(double(:errors, empty?: false))
-        put :update, id: game.to_param, game: { "ended_at" => "invalid value" }
+        put :update, params: { id: game.to_param, game: { "ended_at" => "invalid value" } }
         expect(response).to render_template("edit")
       end
     end
@@ -113,12 +113,12 @@ describe GamesController do
   describe "DELETE destroy" do
     it "destroys the requested game" do
       expect do
-        delete :destroy, id: game.to_param
+        delete :destroy, params: { id: game.to_param }
       end.to change(Game, :count).by(-1)
     end
 
     it "redirects to the games list" do
-      delete :destroy, id: game.to_param
+      delete :destroy, params: { id: game.to_param }
       expect(response).to redirect_to(games_url)
     end
   end

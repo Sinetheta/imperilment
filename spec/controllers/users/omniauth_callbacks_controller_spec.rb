@@ -11,7 +11,7 @@ describe Users::OmniauthCallbacksController do
     end
 
     it "assigns user to @user" do
-      get :google, email: "test@facebook.com"
+      get :google, params: { email: "test@facebook.com" }
       expect(assigns(:user)).to eq(user)
     end
 

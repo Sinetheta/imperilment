@@ -53,7 +53,7 @@ describe <%= controller_class_name %>Controller do
   describe "GET index" do
     it "assigns all <%= table_name.pluralize %> as @<%= table_name.pluralize %>" do
       <%= file_name %> = <%= class_name %>.create! valid_attributes
-      get :index, default_params, valid_session
+      get :index, params: , valid_session
       assigns(:<%= table_name %>).should eq([<%= file_name %>])
     end
   end
@@ -62,14 +62,14 @@ describe <%= controller_class_name %>Controller do
   describe "GET show" do
     it "assigns the requested <%= ns_file_name %> as @<%= ns_file_name %>" do
       <%= file_name %> = <%= class_name %>.create! valid_attributes
-      get :show, default_params.merge(id: <%= file_name %>.to_param), valid_session
+      get :show, params: default_params.merge(id: <%= file_name %>.to_param), valid_session
       assigns(:<%= ns_file_name %>).should eq(<%= file_name %>)
     end
   end
 
   describe "GET new" do
     it "assigns a new <%= ns_file_name %> as @<%= ns_file_name %>" do
-      get :new, default_params, valid_session
+      get :new, params: , valid_session
       assigns(:<%= ns_file_name %>).should be_a_new(<%= class_name %>)
     end
   end
@@ -77,7 +77,7 @@ describe <%= controller_class_name %>Controller do
   describe "GET edit" do
     it "assigns the requested <%= ns_file_name %> as @<%= ns_file_name %>" do
       <%= file_name %> = <%= class_name %>.create! valid_attributes
-      get :edit, default_params.merge(id: <%= file_name %>.to_param), valid_session
+      get :edit, params: default_params.merge(id: <%= file_name %>.to_param), valid_session
       assigns(:<%= ns_file_name %>).should eq(<%= file_name %>)
     end
   end
@@ -86,18 +86,18 @@ describe <%= controller_class_name %>Controller do
     describe "with valid params" do
       it "creates a new <%= class_name %>" do
         expect {
-          post :create, default_params.merge(<%= ns_file_name %>: valid_attributes), valid_session
+          post :create, params: default_params.merge(<%= ns_file_name %>: valid_attributes), valid_session
         }.to change(<%= class_name %>, :count).by(1)
       end
 
       it "assigns a newly created <%= ns_file_name %> as @<%= ns_file_name %>" do
-        post :create, default_params.merge(<%= ns_file_name %>: valid_attributes), valid_session
+        post :create, params: default_params.merge(<%= ns_file_name %>: valid_attributes), valid_session
         assigns(:<%= ns_file_name %>).should be_a(<%= class_name %>)
         assigns(:<%= ns_file_name %>).should be_persisted
       end
 
       it "redirects to the created <%= ns_file_name %>" do
-        post :create, default_params.merge(<%= ns_file_name %>: valid_attributes), valid_session
+        post :create, params: default_params.merge(<%= ns_file_name %>: valid_attributes), valid_session
         response.should redirect_to(<%= class_name %>.last)
       end
     end
@@ -107,7 +107,7 @@ describe <%= controller_class_name %>Controller do
         # Trigger the behavior that occurs when invalid params are submitted
         <%= class_name %>.any_instance.stub(:save).and_return(false)
         <%= class_name %>.any_instance.stub(:errors).and_return(double(:errors, empty?: false))
-        post :create, default_params.merge(<%= ns_file_name %>: {}), valid_session
+        post :create, params: default_params.merge(<%= ns_file_name %>: {}), valid_session
         assigns(:<%= ns_file_name %>).should be_a_new(<%= class_name %>)
       end
 
@@ -115,7 +115,7 @@ describe <%= controller_class_name %>Controller do
         # Trigger the behavior that occurs when invalid params are submitted
         <%= class_name %>.any_instance.stub(:save).and_return(false)
         <%= class_name %>.any_instance.stub(:errors).and_return(double(:errors, empty?: false))
-        post :create, default_params.merge(<%= ns_file_name %>: {}), valid_session
+        post :create, params: default_params.merge(<%= ns_file_name %>: {}), valid_session
         response.should render_template("new")
       end
     end
@@ -131,18 +131,18 @@ describe <%= controller_class_name %>Controller do
         # in the request, and then :save.
         <%= class_name %>.any_instance.should_receive(:attributes=).with(<%= formatted_hash(example_params_for_update) %>)
         <%= class_name %>.any_instance.should_receive(:save).and_return(false)
-        put :update, default_params.merge(id: <%= file_name %>.to_param, <%= ns_file_name %>: <%= formatted_hash(example_params_for_update) %>), valid_session
+        put :update, params: default_params.merge(id: <%= file_name %>.to_param, <%= ns_file_name %>: <%= formatted_hash(example_params_for_update) %>), valid_session
       end
 
       it "assigns the requested <%= ns_file_name %> as @<%= ns_file_name %>" do
         <%= file_name %> = <%= class_name %>.create! valid_attributes
-        put :update, default_params.merge(id: <%= file_name %>.to_param, <%= ns_file_name %>: valid_attributes), valid_session
+        put :update, params: default_params.merge(id: <%= file_name %>.to_param, <%= ns_file_name %>: valid_attributes), valid_session
         assigns(:<%= ns_file_name %>).should eq(<%= file_name %>)
       end
 
       it "redirects to the <%= ns_file_name %>" do
         <%= file_name %> = <%= class_name %>.create! valid_attributes
-        put :update, default_params.merge(id: <%= file_name %>.to_param, <%= ns_file_name %>: valid_attributes), valid_session
+        put :update, params: default_params.merge(id: <%= file_name %>.to_param, <%= ns_file_name %>: valid_attributes), valid_session
         response.should redirect_to(<%= file_name %>)
       end
     end
@@ -153,7 +153,7 @@ describe <%= controller_class_name %>Controller do
         # Trigger the behavior that occurs when invalid params are submitted
         <%= class_name %>.any_instance.stub(:save).and_return(false)
         <%= class_name %>.any_instance.stub(:errors).and_return(double(:errors, empty?: false))
-        put :update, default_params.merge(id: <%= file_name %>.to_param, <%= ns_file_name %>: <%= formatted_hash(example_invalid_attributes) %>), valid_session
+        put :update, params: default_params.merge(id: <%= file_name %>.to_param, <%= ns_file_name %>: <%= formatted_hash(example_invalid_attributes) %>), valid_session
         assigns(:<%= ns_file_name %>).should eq(<%= file_name %>)
       end
 
@@ -162,7 +162,7 @@ describe <%= controller_class_name %>Controller do
         # Trigger the behavior that occurs when invalid params are submitted
         <%= class_name %>.any_instance.stub(:save).and_return(false)
         <%= class_name %>.any_instance.stub(:errors).and_return(double(:errors, empty?: false))
-        put :update, default_params.merge(id: <%= file_name %>.to_param, <%= ns_file_name %>: <%= formatted_hash(example_invalid_attributes) %>), valid_session
+        put :update, params: default_params.merge(id: <%= file_name %>.to_param, <%= ns_file_name %>: <%= formatted_hash(example_invalid_attributes) %>), valid_session
         response.should render_template("edit")
       end
     end
@@ -172,13 +172,13 @@ describe <%= controller_class_name %>Controller do
     it "destroys the requested <%= ns_file_name %>" do
       <%= file_name %> = <%= class_name %>.create! valid_attributes
       expect {
-        delete :destroy, default_params.merge(id: <%= file_name %>.to_param), valid_session
+        delete :destroy, params: default_params.merge(id: <%= file_name %>.to_param), valid_session
       }.to change(<%= class_name %>, :count).by(-1)
     end
 
     it "redirects to the <%= table_name %> list" do
       <%= file_name %> = <%= class_name %>.create! valid_attributes
-      delete :destroy, default_params.merge(id: <%= file_name %>.to_param), valid_session
+      delete :destroy, params: default_params.merge(id: <%= file_name %>.to_param), valid_session
       response.should redirect_to(<%= index_helper %>_url)
     end
   end
