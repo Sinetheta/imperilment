@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe WebHook::Event::NewAnswer do
-  let(:answer) { FactoryGirl.create :answer, correct_question: 'what is fail?', category_name: 'Rails RSpec' }
+  let(:answer) { FactoryBot.create :answer, correct_question: 'what is fail?', category_name: 'Rails RSpec' }
   let(:event) { WebHook::Event::NewAnswer.new answer }
 
   describe 'serialize' do

@@ -7,7 +7,7 @@ class NoOpHTTPClient
 end
 
 RSpec.describe SlackNotification::NewAnswer, type: :model do
-  let(:answer) { FactoryGirl.create :answer,
+  let(:answer) { FactoryBot.create :answer,
     answer: 'What is fail?',
     category_name: 'Rails RSpec',
     amount: 200
@@ -38,7 +38,7 @@ RSpec.describe SlackNotification::NewAnswer, type: :model do
 
     context "when answer has no amount" do
       let(:answer) do
-        FactoryGirl.create(
+        FactoryBot.create(
           :answer,
           answer: nil,
           category_name: 'Rails RSpec',

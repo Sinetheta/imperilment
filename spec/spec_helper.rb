@@ -19,7 +19,7 @@ require 'rails/application'
 
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
-require 'factory_girl_rails'
+require 'factory_bot_rails'
 require 'capybara/rspec'
 require 'webmock/rspec'
 
@@ -47,7 +47,7 @@ RSpec.configure do |config|
   # Helpers for controllers.
   config.extend ControllerMacros, type: :controller
 
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
   config.include Features::SessionHelpers, type: :feature
 
   # rspec-expectations config goes here. You can use an alternate

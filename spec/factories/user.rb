@@ -1,9 +1,9 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :user do
     sequence(:email) { |x|  "user_#{x}@test.com" }
-    password "password"
+    password { "password" }
 
     factory :admin do
       sequence(:email) { |x|  "admin_#{x}@test.com" }

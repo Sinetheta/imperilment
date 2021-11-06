@@ -1,7 +1,7 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :game do
-    ended_at "2012-12-27 15:58:08"
+    ended_at { 1.week.ago }
   end
 end
