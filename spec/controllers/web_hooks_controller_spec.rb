@@ -70,17 +70,20 @@ describe WebHooksController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested web hook" do
-        expect_any_instance_of(WebHook).to receive(:update).with({ url: 'http://www.example.com/new_hook' })
-        put :update, id: web_hook.to_param, web_hook: { url: 'http://www.example.com/new_hook' }
+        expect{
+          put :update, params: { id: web_hook.to_param, web_hook: { url: 'http://www.example.com/new_hook' } }
+        }.to change{
+          web_hook.reload.url
+        }.from('http://www.example.com/fake_hook').to('http://www.example.com/new_hook')
       end
 
       it "assigns the requested web hook as @web_hook" do
-        put :update, id: web_hook.to_param, web_hook: { url: 'http://www.example.com/new_hook' }
+        put :update, params: { id: web_hook.to_param, web_hook: { url: 'http://www.example.com/new_hook' } }
         expect(assigns(:web_hook)).to eq(web_hook)
       end
 
       it "redirects to the web hook list" do
-        put :update, id: web_hook.to_param, web_hook: { url: 'http://www.example.com/new_hook' }
+        put :update, params: { id: web_hook.to_param, web_hook: { url: 'http://www.example.com/new_hook' } }
         expect(response).to redirect_to(web_hooks_url)
       end
     end
