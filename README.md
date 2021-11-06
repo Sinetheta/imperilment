@@ -9,7 +9,7 @@ It's the triva game where you get the answers, and need to respond with the ques
 ## Requirements
 
 * ruby 3.0.2
-* Some database (sqlite3/mysql/postgresql should all work)
+* Postgres
 * [A day-to-day Jeopardy calendar](http://www.amazon.com/Jeopardy-2015-Day-Day-Calendar/dp/1449451942/)
 
 ## Development
