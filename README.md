@@ -14,9 +14,9 @@ It's the triva game where you get the answers, and need to respond with the ques
 
 ## Development
 
- - `$ bundle install`
- - `$ ./bootstrap.sh`
- - `$ rails server`
+ - `bin/bundle install`
+ - `bin/rake db:setup db:seed development_data`
+ - `bin/rails server`
 
 ### Styles
 
