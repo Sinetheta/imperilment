@@ -14,14 +14,14 @@ describe Admin::UsersController do
 
   describe 'GET show' do
     it 'assigns the requested user to @user' do
-      get :show, id: user.to_param
+      get :show, params: { id: user.to_param }
       expect(assigns(:user)).to eq(user)
     end
   end
 
   describe 'GET edit' do
     it 'assigns the requested user to @user' do
-      get :edit, id: user.to_param
+      get :edit, params: { id: user.to_param }
       expect(assigns(:user)).to eq(user)
     end
   end
@@ -31,14 +31,14 @@ describe Admin::UsersController do
       context 'when "true"' do
         it 'adds the admin role to @user' do
           expect_any_instance_of(User).to receive(:add_role).with(:admin)
-          put :grant_admin, id: user.to_param, admin: 'true'
+          put :grant_admin, params: { id: user.to_param, admin: 'true' }
         end
       end
 
       context 'when "false"' do
         it 'removes the admin role from @user'do
           expect_any_instance_of(User).to receive(:remove_role).with('admin')
-          put :grant_admin, id: user.to_param, admin: 'false'
+          put :grant_admin, params: { id: user.to_param, admin: 'false' }
         end
       end
     end
@@ -48,16 +48,16 @@ describe Admin::UsersController do
     describe "with valid params" do
       it "updates the requested user" do
         expect_any_instance_of(User).to receive(:update).with('first_name' => 'Joe')
-        put :update, id: user.to_param, user: { 'first_name' => 'Joe' }
+        put :update, params: { id: user.to_param, user: { 'first_name' => 'Joe' } }
       end
 
       it "assigns the requested user as @user" do
-        put :update, id: user.to_param, user: { 'first_name' => 'Joe' }
+        put :update, params: { id: user.to_param, user: { 'first_name' => 'Joe' } }
         expect(assigns(:user)).to eq(user)
       end
 
       it "redirects to the user" do
-        put :update, id: user.to_param, user: { 'first_name' => 'Joe' }
+        put :update, params: { id: user.to_param, user: { 'first_name' => 'Joe' } }
         expect(response).to redirect_to([:admin, user])
       end
     end
@@ -67,7 +67,7 @@ describe Admin::UsersController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(User).to receive(:save).and_return(false)
         allow_any_instance_of(User).to receive(:errors).and_return(double(:errors, empty?: false))
-        put :update, id: user.to_param, user: { "email" => "invalid value" }
+        put :update, params: { id: user.to_param, user: { "email" => "invalid value" } }
         expect(assigns(:user)).to eq(user)
       end
 
@@ -75,7 +75,7 @@ describe Admin::UsersController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(User).to receive(:update).and_return(false)
         allow_any_instance_of(User).to receive(:errors).and_return(double(:errors, empty?: false))
-        put :update, id: user.to_param, user: { "email" => "invalid value" }
+        put :update, params: { id: user.to_param, user: { "email" => "invalid value" } }
         expect(response).to render_template("edit")
       end
     end
@@ -84,12 +84,12 @@ describe Admin::UsersController do
   describe 'DELETE destroy ' do
     it "destroys the requested user" do
       expect do
-        delete :destroy, id: user.to_param
+        delete :destroy, params: { id: user.to_param }
       end.to change(User, :count).by(-1)
     end
 
     it "redirects to the user list" do
-      delete :destroy, id: user.to_param
+      delete :destroy, params: { id: user.to_param }
       expect(response).to redirect_to(admin_users_url)
     end
   end

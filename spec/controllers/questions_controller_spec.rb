@@ -39,7 +39,7 @@ describe QuestionsController do
 
       context 'when the user does not have a checked question' do
         it "assigns an empty list to @questions" do
-          get :index, default_params
+          get :index, params: default_params
           expect(assigns(:questions)).to match_array(Question.none)
         end
       end
@@ -52,21 +52,21 @@ describe QuestionsController do
         end
 
         it "assigns an empty list to @questions" do
-          get :index, default_params
+          get :index, params: default_params
           expect(assigns(:questions)).to match_array([question])
         end
       end
     end
 
     it "assigns all questions as @questions" do
-      get :index, default_params
+      get :index, params: default_params
       expect(assigns(:questions)).to match_array([question])
     end
   end
 
   describe "GET show" do
     it "assigns the requested question as @question" do
-      get :show, default_params.merge(id: question.to_param)
+      get :show, params: default_params.merge(id: question.to_param)
       expect(assigns(:question)).to eq(question)
     end
   end
@@ -74,14 +74,14 @@ describe QuestionsController do
   describe "GET new" do
     it "assigns a new question as @question" do
       allow(controller).to receive(:current_user) { build_stubbed :user }
-      get :new, default_params
+      get :new, params: default_params
       expect(assigns(:question)).to be_a_new(Question)
     end
   end
 
   describe "GET edit" do
     it "assigns the requested question as @question" do
-      get :edit, default_params.merge(id: question.to_param)
+      get :edit, params: default_params.merge(id: question.to_param)
       expect(assigns(:question)).to eq(question)
     end
   end
@@ -90,7 +90,7 @@ describe QuestionsController do
     describe "with valid params" do
       let(:web_hook) { create :web_hook }
       let!(:mock) { stub_request(:any, web_hook.uri) }
-      subject { post :create, default_params }
+      subject { post :create, params: default_params }
 
       it "creates a new Question" do
         expect do
@@ -124,7 +124,7 @@ describe QuestionsController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Question).to receive(:save).and_return(false)
         allow_any_instance_of(Question).to receive(:errors).and_return(double(:errors, empty?: false))
-        post :create, default_params
+        post :create, params: default_params
         expect(assigns(:question)).to be_a_new(Question)
       end
 
@@ -132,7 +132,7 @@ describe QuestionsController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Question).to receive(:save).and_return(false)
         allow_any_instance_of(Question).to receive(:errors).and_return(double(:errors, empty?: false))
-        post :create, default_params
+        post :create, params: default_params
         expect(response).to render_template("new")
       end
     end
@@ -142,16 +142,16 @@ describe QuestionsController do
     describe "with valid params" do
       it "updates the requested question" do
         expect_any_instance_of(Question).to receive(:update).with("response" => "")
-        put :update, default_params.merge(id: question.to_param, question: { "response" => "" })
+        put :update, params: default_params.merge(id: question.to_param, question: { "response" => "" })
       end
 
       it "assigns the requested question as @question" do
-        put :update, default_params.merge(id: question.to_param)
+        put :update, params: default_params.merge(id: question.to_param)
         expect(assigns(:question)).to eq(question)
       end
 
       it "redirects to the question" do
-        put :update, default_params.merge(id: question.to_param)
+        put :update, params: default_params.merge(id: question.to_param)
         expect(response).to redirect_to root_path
       end
 
@@ -159,7 +159,7 @@ describe QuestionsController do
         subject { assigns(:question).correct }
         context 'when user is an admin' do
           before do
-            put :update, id: question.to_param, game_id: question.answer.game, answer_id: question.answer, question: { correct: true }
+            put :update, params: { id: question.to_param, game_id: question.answer.game, answer_id: question.answer, question: { correct: true } }
           end
           it { is_expected.to be_truthy }
         end
@@ -167,7 +167,7 @@ describe QuestionsController do
         context 'when user is not an admin' do
           before do
             @ability.cannot :correct, Question
-            put :update, id: question.to_param, game_id: question.answer.game, answer_id: question.answer, question: { correct: true }
+            put :update, params: { id: question.to_param, game_id: question.answer.game, answer_id: question.answer, question: { correct: true } }
           end
           it { is_expected.to be_nil }
         end
@@ -179,7 +179,7 @@ describe QuestionsController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Question).to receive(:save).and_return(false)
         allow_any_instance_of(Question).to receive(:errors).and_return(double(:errors, empty?: false))
-        put :update, default_params.merge(id: question.to_param)
+        put :update, params: default_params.merge(id: question.to_param)
         expect(assigns(:question)).to eq(question)
       end
 
@@ -187,7 +187,7 @@ describe QuestionsController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Question).to receive(:save).and_return(false)
         allow_any_instance_of(Question).to receive(:errors).and_return(double(:errors, empty?: false))
-        put :update, default_params.merge(id: question.to_param)
+        put :update, params: default_params.merge(id: question.to_param)
         expect(response).to render_template("edit")
       end
     end
@@ -196,12 +196,12 @@ describe QuestionsController do
   describe "DELETE destroy" do
     it "destroys the requested question" do
       expect do
-        delete :destroy, default_params.merge(id: question.to_param)
+        delete :destroy, params: default_params.merge(id: question.to_param)
       end.to change(Question, :count).by(-1)
     end
 
     it "redirects to the questions list" do
-      delete :destroy, default_params.merge(id: question.to_param)
+      delete :destroy, params: default_params.merge(id: question.to_param)
       expect(response).to redirect_to [game, answer]
     end
   end
