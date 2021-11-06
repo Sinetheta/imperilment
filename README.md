@@ -1,4 +1,4 @@
-# This is Imperilment!
+# This Is Imperilment! &middot; ![Build Status](https://github.com/Sinetheta/imperilment/actions/workflows/build.yml/badge.svg)
 
 It's the triva game where you get the answers, and need to respond with the questions!
 
