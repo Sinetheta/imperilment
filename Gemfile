@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 ruby '3.0.2'
 
+gem 'pg'
 gem 'rails', '~> 6.1'
 gem 'sprockets', '~> 3.7.2' # compatibility with bootstrap-sass
 
@@ -49,7 +50,6 @@ end
 group :development, :test do
   gem 'pry-rails'
   gem 'ffaker'
-  gem 'sqlite3'
 end
 
 group :test do
@@ -68,6 +68,5 @@ group :test do
 end
 
 group :production do
-  gem 'pg'
   gem 'rails_12factor'
 end
