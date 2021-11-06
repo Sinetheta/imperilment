@@ -27,7 +27,7 @@ RSpec.describe SlackNotification::GameFinalization, type: :model do
     def from_json(str)
       ActiveSupport::JSON.decode(str)
     end
-    subject { from_json(notification.deliver[:payload]) }
+    subject { from_json(notification.deliver.first[:payload]) }
 
     it 'has the correct attachments' do
       expect(subject['attachments']).to eq [{
