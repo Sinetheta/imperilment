@@ -58,7 +58,7 @@ group :test do
   gem 'rspec-rails'
   gem 'rails-controller-testing'
   gem 'rspec-activemodel-mocks'
-  gem 'factory_girl_rails', require: false
+  gem 'factory_bot_rails', require: false
   gem 'simplecov', require: false
   gem 'simplecov-rcov', require: false
   gem 'timecop'

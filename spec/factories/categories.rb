@@ -1,7 +1,7 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :category do
-    name "Rails & RSpec"
+    name { "Rails & RSpec" }
   end
 end

@@ -2,10 +2,10 @@ require 'spec_helper'
 
 describe WebHook::Event::NewQuestion do
   let(:question) do
-    FactoryGirl.build_stubbed :question,
+    FactoryBot.build_stubbed :question,
       response: "a secret",
-      answer: FactoryGirl.create(:answer, answer: "Such clue"),
-      user: FactoryGirl.build(:user, email: "my@email.com")
+      answer: FactoryBot.create(:answer, answer: "Such clue"),
+      user: FactoryBot.build(:user, email: "my@email.com")
   end
   let(:event) { WebHook::Event::NewQuestion.new question }
 

@@ -44,14 +44,26 @@ describe QuestionsController do
         end
       end
 
-      context 'when the user has a checked question' do
+      context 'when the user has an unchecked question for this answer' do
+        before(:each) do
+          question.user = user
+          question.save!
+        end
+
+        it "assigns an empty list to @questions" do
+          get :index, params: default_params
+          expect(assigns(:questions)).to match_array(Question.none)
+        end
+      end
+
+      context 'when the user has a checked question for this answer' do
         before(:each) do
           question.user = user
           question.correct = true
           question.save!
         end
 
-        it "assigns an empty list to @questions" do
+        it "assigns that question to @questions" do
           get :index, params: default_params
           expect(assigns(:questions)).to match_array([question])
         end
@@ -161,7 +173,7 @@ describe QuestionsController do
           before do
             put :update, params: { id: question.to_param, game_id: question.answer.game, answer_id: question.answer, question: { correct: true } }
           end
-          it { is_expected.to be_truthy }
+          it { is_expected.to eq(true) }
         end
 
         context 'when user is not an admin' do
@@ -169,7 +181,7 @@ describe QuestionsController do
             @ability.cannot :correct, Question
             put :update, params: { id: question.to_param, game_id: question.answer.game, answer_id: question.answer, question: { correct: true } }
           end
-          it { is_expected.to be_nil }
+          it { is_expected.to eq(nil) }
         end
       end
     end
