@@ -56,6 +56,7 @@ group :test do
   gem 'capybara'
   gem 'shoulda-matchers'
   gem 'rspec-rails'
+  gem 'rails-controller-testing'
   gem 'rspec-activemodel-mocks'
   gem 'factory_girl_rails', require: false
   gem 'simplecov', require: false

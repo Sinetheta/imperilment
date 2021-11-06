@@ -157,7 +157,7 @@ GEM
     http-accept (1.7.0)
     http-cookie (1.0.4)
       domain_name (~> 0.5)
-    i18n (1.8.10)
+    i18n (1.8.11)
       concurrent-ruby (~> 1.0)
     inline_svg (1.7.2)
       activesupport (>= 3.0)
@@ -243,6 +243,10 @@ GEM
       bundler (>= 1.15.0)
       railties (= 6.1.4.1)
       sprockets-rails (>= 2.0.0)
+    rails-controller-testing (1.0.5)
+      actionpack (>= 5.0.1.rc1)
+      actionview (>= 5.0.1.rc1)
+      activesupport (>= 5.0.1.rc1)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
@@ -390,6 +394,7 @@ DEPENDENCIES
   pry-rails
   rack-mini-profiler
   rails (~> 6.1)
+  rails-controller-testing
   rails_12factor
   redcarpet
   rolify
