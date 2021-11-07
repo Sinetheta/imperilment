@@ -6,7 +6,8 @@ gem 'rails', '~> 6.1'
 gem 'sprockets', '~> 3.7.2' # compatibility with bootstrap-sass
 
 gem 'devise'
-gem "omniauth-google-oauth2"
+gem 'omniauth', '1.9.1' 
+gem 'omniauth-google-oauth2', '0.8.2'
 gem 'rolify'
 gem 'cancancan'
 
