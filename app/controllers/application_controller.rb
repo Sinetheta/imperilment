@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
       message = exception.message
-      format.html { redirect_to login_path }
+      format.html { redirect_to new_user_session_path }
       format.json { render json: { error: 'forbidden', message: message }, status: :forbidden }
       format.xml  { render xml:  { error: 'forbidden', message: message }, status: :forbidden }
     end

@@ -19,8 +19,4 @@ module ApplicationHelper
   def render_markdown(text)
     raw Redcarpet::Markdown.new(Redcarpet::Render::HTML.new).render(text)
   end
-
-  def login_path
-    ENV['GOOGLE_CLIENT_SECRET'] ? user_google_omniauth_authorize_path : new_user_session_path
-  end
 end
