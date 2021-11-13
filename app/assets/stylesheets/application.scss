@@ -38,6 +38,16 @@ $bronzeBackground: #e8a87a;
   color: white;
 }
 
+@mixin bg-striped($color1, $color2) {
+  background: repeating-linear-gradient(
+      45deg,
+      $color1,
+      $color1 10px,
+      $color2 10px,
+      $color2 20px
+    );
+}
+
 @import 'imperilment';
 @import 'web_hook';
 @import 'responsive';

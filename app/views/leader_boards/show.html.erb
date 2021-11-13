@@ -13,7 +13,7 @@
   </thead>
   <tbody>
   <% @results.each do |result| %>
-    <tr class="<%= rank_class(result.position) %>">
+    <tr class="<%= rank_class(result.position) %> <%= result.user == current_user ? 'highlight' : '' %>">
       <td class='score'>
         <% if result.position == 1 %>
           <%= icon 'award' %>

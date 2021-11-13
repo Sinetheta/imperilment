@@ -144,16 +144,32 @@ form {
       margin-right: 16px;
     }
 
-    &.gold > td {
+    &.gold {
       background-color: $goldBackground;
+
+      &.highlight {
+        @include bg-striped($goldBackground, lighten($goldBackground, 10%))
+      }
     }
 
-    &.silver > td {
+    &.silver {
       background-color: $silverBackground;
+
+      &.highlight {
+        @include bg-striped($silverBackground, lighten($silverBackground, 10%))
+      }
     }
 
-    &.bronze > td {
+    &.bronze {
       background-color: $bronzeBackground;
+
+      &.highlight {
+        @include bg-striped($bronzeBackground, lighten($bronzeBackground, 10%))
+      }
+    }
+
+    &.highlight {
+      @include bg-striped(lighten($component-active-bg, 40%), lighten($component-active-bg, 50%))
     }
   }
 }
