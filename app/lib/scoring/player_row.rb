@@ -2,7 +2,7 @@ module Scoring
   # A class to hold the outcome of a game.
   # This is an alternative to the GameResult to allow for more customizable leaderboards.
   class PlayerRow
-    attr_reader :user, :results, :total, :position
+    attr_reader :user, :points, :position
 
     def self.from_result(game_result)
       answers = game_result.game.all_answers
@@ -27,6 +27,10 @@ module Scoring
       @points = points
       @total = total
       @position = position
+    end
+
+    def total
+      @total = @total.present? ? @total : points.sum(&:value)
     end
   end
 end

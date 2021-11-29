@@ -18,7 +18,9 @@ class LeaderBoardsController < ApplicationController
 
   def show
     if @game
-      @results = Scoring::LeaderBoard.from_game(@game)
+      @results = @game.locked? ?
+        Scoring::LeaderBoard.from_game(@game) :
+        Scoring::LeaderBoard.from_my_game(@game, current_user)
       respond_with(@results, include: :user, methods: :results)
     else
       render 'no_games'
