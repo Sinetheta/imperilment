@@ -13,9 +13,9 @@
   </thead>
   <tbody>
   <% @results.each do |result| %>
-    <tr class="<%= rank_class(result.position) %> <%= result.user == current_user ? 'highlight' : '' %>">
+    <tr class="<%= @game.locked? ? rank_class(result.position): '' %> <%= result.user == current_user ? 'highlight' : '' %>">
       <td class='score'>
-        <% if result.position == 1 %>
+        <% if @game.locked? && result.position == 1 %>
           <%= icon 'award' %>
         <% end %>
         <%= "#{t :currency_symbol} #{result.total}" %>
