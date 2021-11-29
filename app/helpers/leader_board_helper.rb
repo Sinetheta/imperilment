@@ -15,7 +15,7 @@ module LeaderBoardHelper
   def breakdown_icon(result)
     case result
     when :unavailable
-      ''
+      "\u3164" # blank space character to prevent layout collapse
     when :unanswered
       icon 'help'
     when :unmarked
