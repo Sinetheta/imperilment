@@ -18,7 +18,9 @@ class LeaderBoardsController < ApplicationController
 
   def show
     if @game
-      @results = inject_last_weeks_users(@game.build_results)
+      @results = @game.locked? ?
+        Scoring::LeaderBoard.from_game(@game) :
+        Scoring::LeaderBoard.from_my_game(@game, current_user)
       respond_with(@results, include: :user, methods: :results)
     else
       render 'no_games'
@@ -27,16 +29,6 @@ class LeaderBoardsController < ApplicationController
 
   protected
 
-  def inject_last_weeks_users(game_results)
-    return game_results unless @game.prev
-
-    game_results + (@game.prev.users.uniq - game_results.map(&:user)).map do |user|
-      GameResult.new(user: user,
-                     game: @game,
-                     total: 0,
-                     position: (game_results.map(&:position).max || 1) + 1)
-    end
-  end
 
   def set_game
     game_scope = Game.includes(answers: :questions)

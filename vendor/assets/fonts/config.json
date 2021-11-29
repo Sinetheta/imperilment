@@ -119,6 +119,12 @@
       "css": "basket",
       "code": 59403,
       "src": "modernpics"
+    },
+    {
+      "uid": "ce3cf091d6ebd004dd0b52d24074e6e3",
+      "css": "help",
+      "code": 61736,
+      "src": "fontawesome"
     }
   ]
 }

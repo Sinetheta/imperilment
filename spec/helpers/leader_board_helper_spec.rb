@@ -26,12 +26,15 @@ describe LeaderBoardHelper do
 
     context 'unavailable' do
       let(:result) { :unavailable }
-      it { is_expected.to be_blank }
+      it { is_expected.not_to be_blank }
+      it 'is a very specific unicode whitespce character' do
+        is_expected.to eq('ㅤ')
+      end
     end
 
     context 'unanswered' do
       let(:result) { :unanswered }
-      it { is_expected.to eq(helper.icon('asterisk')) }
+      it { is_expected.to eq(helper.icon('help')) }
     end
 
     context 'unmarked' do

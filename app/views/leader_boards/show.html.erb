@@ -13,9 +13,9 @@
   </thead>
   <tbody>
   <% @results.each do |result| %>
-    <tr class="<%= rank_class(result.position) %> <%= result.user == current_user ? 'highlight' : '' %>">
+    <tr class="<%= @game.locked? ? rank_class(result.position): '' %> <%= result.user == current_user ? 'highlight' : '' %>">
       <td class='score'>
-        <% if result.position == 1 %>
+        <% if @game.locked? && result.position == 1 %>
           <%= icon 'award' %>
         <% end %>
         <%= "#{t :currency_symbol} #{result.total}" %>
@@ -26,17 +26,19 @@
           <table class='breakdown'>
             <thead>
               <tr>
-                <% result.answers.each do %>
+                <% result.points.each do %>
                   <th></th>
-              <% end %>
+                <% end %>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <% @game.all_answers.zip(result.results).each do |(answer, result_type)| %>
+                <% result.points.each do |point| %>
                   <td>
-                    <% unless result_type == :unavailable %>
-                      <%= link_to breakdown_icon(result_type), game_answer_path(@game, answer) %>
+                    <% if point.status == :unavailable %>
+                      <%= breakdown_icon(point.status) %>
+                    <% else %>
+                      <%= link_to breakdown_icon(point.status), game_answer_path(@game, point.answer) %>
                     <% end %>
                   </td>
                 <% end %>
