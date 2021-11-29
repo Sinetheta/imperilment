@@ -17,7 +17,7 @@ module LeaderBoardHelper
     when :unavailable
       ''
     when :unanswered
-      icon 'asterisk'
+      icon 'help'
     when :unmarked
       icon 'minus'
     when :correct

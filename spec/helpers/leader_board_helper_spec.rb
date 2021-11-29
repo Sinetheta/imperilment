@@ -31,7 +31,7 @@ describe LeaderBoardHelper do
 
     context 'unanswered' do
       let(:result) { :unanswered }
-      it { is_expected.to eq(helper.icon('asterisk')) }
+      it { is_expected.to eq(helper.icon('help')) }
     end
 
     context 'unmarked' do
