@@ -222,6 +222,28 @@ describe Game do
     end
   end
 
+  describe '#next_answer_amount' do
+    subject { game.next_answer_amount }
+
+    context 'with a game that has no answers' do
+      it { is_expected.to eq(200) }
+    end
+
+    context 'with a game that has some answers' do
+      let!(:answer) { create_list :answer, 5, game: game }
+
+      it 'suggests a value without regard for the other question amounts' do
+        is_expected.to eq(2000)
+      end
+    end
+
+    context 'with a game that has 6 or more questions' do
+      let!(:answer) { create_list :answer, 6, game: game }
+
+      it { is_expected.to eq(nil) }
+    end
+  end
+
   describe '#next_answer_start_date' do
     let(:game) { create :game, ended_at: '2021-12-30 00:00:00' }
 

@@ -11,6 +11,8 @@ class Game < ActiveRecord::Base
 
   self.per_page = 10
 
+  QUESTION_VALUES = [200, 600, 1000, 400, 1200, 2000]
+
   def next
     @next ||= Game.order('games.ended_at ASC').where('games.ended_at > ?', ended_at).first
   end
@@ -75,6 +77,10 @@ class Game < ActiveRecord::Base
     end.group_by do |user|
       score(user)
     end
+  end
+
+  def next_answer_amount
+    QUESTION_VALUES[answers.count]
   end
 
   def next_answer_start_date
