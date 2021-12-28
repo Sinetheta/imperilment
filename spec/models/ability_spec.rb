@@ -28,6 +28,22 @@ describe Ability do
       context 'when question is for user' do
         let(:question) { build_stubbed :question, user: user  }
         it { is_expected.to be_able_to :manage, question }
+
+        context 'before we reach the question start_date' do
+          before do
+            question.answer = build_stubbed :answer, start_date: Date.tomorrow
+          end
+
+          it { is_expected.not_to be_able_to :manage, question }
+        end
+
+        context 'after we reach the question start_date' do
+          before do
+            question.answer = build_stubbed :answer, start_date: Date.today
+          end
+
+          it { is_expected.to be_able_to :manage, question }
+        end
       end
 
       context 'when question is not for user' do

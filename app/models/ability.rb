@@ -11,7 +11,12 @@ class Ability
       can :correct, Question
     else
       if user
-        can :manage, Question, user_id: user.id
+        can :manage, Question do |question|
+          if question.user_id
+            next false unless question.user_id == user.id
+          end
+          !question.answer.too_soon?
+        end
         can :final, Answer
         cannot :check, Answer
       end
