@@ -11,7 +11,9 @@ class AnswersController < ApplicationController
   end
 
   def show
-    if @answer.final? && @answer.question_for(current_user).nil?
+    if @answer.too_soon?
+      render :too_soon
+    elsif @answer.final? && @answer.question_for(current_user).nil?
       redirect_to [:final, @game, @answer]
     else
       respond_with @game, @answer

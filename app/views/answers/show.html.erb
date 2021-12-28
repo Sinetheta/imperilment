@@ -31,9 +31,4 @@
   <% end %>
 </div>
 
-<% if can?(:edit, @answer) %>
-  <div class='form-group admin-actions'>
-    <%= link_to t(:edit), [:edit, @game, @answer], class: 'btn btn-default' if can?(:edit, @answer) %>
-    <%= link_to "Check Responses", [@game, @answer, Question], class: 'btn btn-primary btn-lg btn-block' if can?(:check, @answer) %>
-  </div>
-<% end %>
+<%= render 'edit_link' %>

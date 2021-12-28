@@ -97,6 +97,10 @@ en:
       web_hook:
         url: Payload URL
 
+  answers:
+    too_soon:
+      available_in: Available in %{time_until}
+
   date:
     formats:
       short: '%Y-%m-%d'

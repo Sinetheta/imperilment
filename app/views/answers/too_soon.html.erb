@@ -1,0 +1,26 @@
+<%= render 'nav' %>
+<h1 class='answer-date'><%= @answer.start_date %></h1>
+
+<div class='question-container row'>
+  <div class='col-md-4'>
+    <div class="area">
+      <div class='category'><p><%= @answer.category.name %></p></div>
+    </div>
+    <% if @answer.amount %>
+      <div class="area">
+        <div class='dollar-value'><p>$<%= @answer.amount %></p></div>
+      </div>
+    <% end %>
+  </div>
+  <div class='col-md-8'>
+    <div class='area-answer'>
+      <div class='answer'>
+        <p>
+          <%= t('.available_in', time_until: distance_of_time_in_words(Time.current, @answer.start_date)) %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= render 'edit_link' %>
