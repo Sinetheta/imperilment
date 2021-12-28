@@ -1,6 +1,6 @@
 <%= simple_form_for [@game, @answer] do |f| %>
   <%= f.error_notification %>
-  ANSWERs
+
   <%= f.association :category %>
   <%= f.input :correct_question, input_html: {rows: 5} %>
   <%= f.input :answer, input_html: {rows: 5} %>
@@ -8,14 +8,13 @@
   <%= f.input :amount do %>
     <div class='input-group'>
       <span class='input-group-addon'><%= t(:currency_symbol) %></span>
-      <%= f.text_field :amount, data: { new: f.object.new_record? }, class: 'form-control' %>
+      <%= f.text_field :amount, class: 'form-control' %>
     </div>
   <% end %>
   <%= f.input :start_date do %>
     <div class='input-group'>
       <span class='input-group-addon'><%= icon 'calendar' %></span>
-      <% start_date = f.object.new_record? ? Answer.next_free_date : d(f.object.start_date) %>
-      <%= f.text_field :start_date, value: start_date, class: 'form-control datepicker' %>
+      <%= f.text_field :start_date, class: 'form-control datepicker' %>
     </div>
   <% end %>
 

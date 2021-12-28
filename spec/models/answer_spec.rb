@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'timecop'
 
 describe Answer do
   it { is_expected.to validate_presence_of(:game) }
@@ -14,28 +13,6 @@ describe Answer do
   describe '#most_recent' do
     it 'should be the one with the latest start_date before today' do
       expect(Answer.most_recent).to eq(second)
-    end
-  end
-
-  describe '#next_free_date' do
-    let(:date) { Date.new(9999, 1, 4) }
-    subject { Answer.next_free_date }
-
-    context 'when there is atleast one previous answer' do
-      it 'should be equal to the day after the third answer' do
-        is_expected.to eq(date)
-      end
-    end
-
-    context 'when there are no previous answers' do
-      before do
-        Answer.destroy_all
-        Timecop.freeze
-      end
-      after do
-        Timecop.return
-      end
-      it { is_expected.to eq(Date.today) }
     end
   end
 
@@ -61,6 +38,34 @@ describe Answer do
     context "when correct_question is some text" do
       before { first.correct_question = "Question" }
       it { is_expected.to be_truthy }
+    end
+  end
+
+  describe '.too_soon?' do
+    subject { answer.too_soon? }
+
+    around do |e|
+      travel_to(Time.parse('2021-12-28 12:00:00')) do
+        e.run
+      end
+    end
+
+    context 'with an answer that has a start_date which has passed' do
+      let(:answer) { build(:answer, start_date: '2021-12-27') }
+
+      it { is_expected.to eq(false) }
+    end
+
+    context 'with an answer that has a start_date today' do
+      let(:answer) { build(:answer, start_date: '2021-12-28') }
+
+      it { is_expected.to eq(false) }
+    end
+
+    context 'with an answer that has a start_date in the future' do
+      let(:answer) { build(:answer, start_date: '2021-12-29') }
+
+      it { is_expected.to eq(true) }
     end
   end
 end

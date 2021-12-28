@@ -11,7 +11,9 @@ class AnswersController < ApplicationController
   end
 
   def show
-    if @answer.final? && @answer.question_for(current_user).nil?
+    if @answer.too_soon?
+      render :too_soon
+    elsif @answer.final? && @answer.question_for(current_user).nil?
       redirect_to [:final, @game, @answer]
     else
       respond_with @game, @answer
@@ -38,6 +40,8 @@ class AnswersController < ApplicationController
 
   def new
     @answer.category = Category.last
+    @answer.amount = @game.next_answer_amount
+    @answer.start_date = @game.next_answer_start_date
     respond_with @game, @answer
   end
 

@@ -4,7 +4,8 @@
   <%= f.input :ended_at do %>
     <div class='input-group'>
       <span class='input-group-addon'><%= icon 'calendar' %></span>
-      <%= f.text_field :ended_at, value: d(f.object.ended_at), class: 'datepicker form-control' %>
+      <%= f.text_field :ended_at, value: d(f.object.ended_at), class: 'weekpicker form-control' %>
+      <div id="weekpicker-wrapper" class="weekpicker-wrapper"></div>
     </div>
   <% end %>
 

@@ -28,10 +28,28 @@ describe AnswersController do
   end
 
   describe "GET show" do
+    render_views
+
+    context "when it's too soon to answer the question" do
+      let!(:answer) { create :answer, start_date: 5.days.from_now }
+
+      it "renders a countdown page" do
+        get :show, params: default_params.merge(id: answer.to_param)
+        expect(response.body).to match /Available in 4 days/
+      end
+    end
+
     context "when answer has an amount" do
+      let!(:answer) { create :answer, answer: 'this answer text' }
+
       it "assigns the requested answer as @answer" do
         get :show, params: default_params.merge(id: answer.to_param)
         expect(assigns(:answer)).to eq(answer)
+      end
+
+      it "renders the full answer page" do
+        get :show, params: default_params.merge(id: answer.to_param)
+        expect(response.body).to match /this answer text/
       end
     end
 

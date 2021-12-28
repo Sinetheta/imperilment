@@ -12,7 +12,8 @@
     $(document).on 'focus', 'input.datepicker', ->
       $(this).datepicker
         'format': 'yyyy-mm-dd',
-        'autoclose': true
+        'autoclose': true,
+        weekStart: 1, # start week on Monday
 
     $(document).on 'click', 'a[data-correct]', ->
       container = $(this).parents('tr')

@@ -51,6 +51,11 @@ describe LeaderBoardHelper do
       let(:result) { :incorrect }
       it { is_expected.to eq(helper.icon('cancel')) }
     end
+
+    context 'too_soon' do
+      let(:result) { :too_soon }
+      it { is_expected.to eq(helper.icon('hourglass-1')) }
+    end
   end
 
   describe '.status_for' do
@@ -61,8 +66,12 @@ describe LeaderBoardHelper do
       let(:answer) { nil }
       it { is_expected.to eq(:unavailable) }
     end
-    context 'nil question' do
-      let(:answer) { double(:answer, question_for: nil) }
+    context 'nil question and unrevealed anwser' do
+      let(:answer) { double(:answer, question_for: nil, too_soon?: true) }
+      it { is_expected.to eq(:too_soon) }
+    end
+    context 'nil question and revealed answer' do
+      let(:answer) { double(:answer, question_for: nil, too_soon?: false) }
       it { is_expected.to eq(:unanswered) }
     end
     context 'nil question' do
