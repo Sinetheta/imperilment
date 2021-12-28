@@ -234,6 +234,10 @@ table.breakdown {
       & i.icon-minus {
         color: $gray-light;
       }
+
+      & i.icon-hourglass-1 {
+        color: $text-muted;
+      }
     }
   }
 }

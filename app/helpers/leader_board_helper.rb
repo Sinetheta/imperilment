@@ -24,6 +24,8 @@ module LeaderBoardHelper
       icon 'ok'
     when :incorrect
       icon 'cancel'
+    when :too_soon
+      icon 'hourglass-1'
     end
   end
 
@@ -31,7 +33,11 @@ module LeaderBoardHelper
     if !answer
       :unavailable
     elsif !(question = answer.question_for(current_user))
-      :unanswered
+      if answer.too_soon?
+        :too_soon
+      else
+        :unanswered
+      end
     else
       question.status
     end
