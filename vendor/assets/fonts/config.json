@@ -125,6 +125,12 @@
       "css": "help",
       "code": 61736,
       "src": "fontawesome"
+    },
+    {
+      "uid": "8bc4e828380b962c8b5a04ee982f1d71",
+      "css": "hourglass-1",
+      "code": 62033,
+      "src": "fontawesome"
     }
   ]
 }
