@@ -221,4 +221,24 @@ describe Game do
       expect(game.grouped_and_sorted_by_score).to eq(1 => [user])
     end
   end
+
+  describe '#next_answer_start_date' do
+    let(:game) { create :game, ended_at: '2021-12-30 00:00:00' }
+
+    subject { game.next_answer_start_date }
+
+    context 'with a game that has no answers' do
+      it 'is 6 days earlier than the ended_at date' do
+        is_expected.to eq(Date.parse('2021-12-24 00:00:00'))
+      end
+    end
+
+    context 'with a game that has some answers' do
+      let!(:answer) { create_list :answer, 5, game: game }
+
+      it 'fills the week without regard for the answer start_dates' do
+        is_expected.to eq(Date.parse('2021-12-29 00:00:00'))
+      end
+    end
+  end
 end

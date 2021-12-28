@@ -76,4 +76,8 @@ class Game < ActiveRecord::Base
       score(user)
     end
   end
+
+  def next_answer_start_date
+    ended_at - (6 - answers.count).days
+  end
 end

@@ -15,14 +15,6 @@ class Answer < ActiveRecord::Base
     where('start_date <= ?', DateTime.now).order('start_date DESC').first
   end
 
-  def self.next_free_date
-    if last_answer
-      last_answer.start_date.next
-    else
-      Date.today
-    end
-  end
-
   def self.last_answer
     order(:start_date).last
   end

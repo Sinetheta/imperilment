@@ -17,28 +17,6 @@ describe Answer do
     end
   end
 
-  describe '#next_free_date' do
-    let(:date) { Date.new(9999, 1, 4) }
-    subject { Answer.next_free_date }
-
-    context 'when there is atleast one previous answer' do
-      it 'should be equal to the day after the third answer' do
-        is_expected.to eq(date)
-      end
-    end
-
-    context 'when there are no previous answers' do
-      before do
-        Answer.destroy_all
-        Timecop.freeze
-      end
-      after do
-        Timecop.return
-      end
-      it { is_expected.to eq(Date.today) }
-    end
-  end
-
   describe '#last_answer' do
     it 'should return the last answer based on date' do
       expect(Answer.last_answer).to eq(third)
