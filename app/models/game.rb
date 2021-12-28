@@ -1,5 +1,5 @@
 class Game < ActiveRecord::Base
-  has_many :answers
+  has_many :answers, dependent: :destroy
   has_many :users, through: :answers
   has_many :game_results
 
