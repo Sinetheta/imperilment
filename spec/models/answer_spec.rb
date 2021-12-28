@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'timecop'
 
 describe Answer do
   it { is_expected.to validate_presence_of(:game) }

@@ -112,7 +112,7 @@ describe User do
     context "with provided season" do
       let(:season) { Season.new(1.year.ago.year) }
       before do
-        Timecop.freeze(season.date_range.begin) do
+        travel_to(season.date_range.begin) do
           game = create :game, ended_at: Time.now
 
           answer1 = create :answer, game: game

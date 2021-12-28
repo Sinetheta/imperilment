@@ -343,7 +343,6 @@ GEM
     stackprof (0.2.17)
     thor (1.1.0)
     tilt (2.0.10)
-    timecop (0.9.4)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     uglifier (4.2.0)
@@ -415,7 +414,6 @@ DEPENDENCIES
   slack-notifier
   sprockets (~> 3.7.2)
   stackprof
-  timecop
   uglifier
   unicorn-rails
   webmock
