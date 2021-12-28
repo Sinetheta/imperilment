@@ -46,4 +46,8 @@ class Answer < ActiveRecord::Base
   def final?
     !amount
   end
+
+  def too_soon?
+    Date.current < start_date
+  end
 end

@@ -40,4 +40,32 @@ describe Answer do
       it { is_expected.to be_truthy }
     end
   end
+
+  describe '.too_soon?' do
+    subject { answer.too_soon? }
+
+    around do |e|
+      travel_to(Time.parse('2021-12-28 12:00:00')) do
+        e.run
+      end
+    end
+
+    context 'with an answer that has a start_date which has passed' do
+      let(:answer) { build(:answer, start_date: '2021-12-27') }
+
+      it { is_expected.to eq(false) }
+    end
+
+    context 'with an answer that has a start_date today' do
+      let(:answer) { build(:answer, start_date: '2021-12-28') }
+
+      it { is_expected.to eq(false) }
+    end
+
+    context 'with an answer that has a start_date in the future' do
+      let(:answer) { build(:answer, start_date: '2021-12-29') }
+
+      it { is_expected.to eq(true) }
+    end
+  end
 end
