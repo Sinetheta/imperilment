@@ -38,6 +38,7 @@ class AnswersController < ApplicationController
 
   def new
     @answer.category = Category.last
+    @answer.amount = @game.next_answer_amount
     @answer.start_date = @game.next_answer_start_date
     respond_with @game, @answer
   end

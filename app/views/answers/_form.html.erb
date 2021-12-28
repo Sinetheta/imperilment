@@ -8,7 +8,7 @@
   <%= f.input :amount do %>
     <div class='input-group'>
       <span class='input-group-addon'><%= t(:currency_symbol) %></span>
-      <%= f.text_field :amount, data: { new: f.object.new_record? }, class: 'form-control' %>
+      <%= f.text_field :amount, class: 'form-control' %>
     </div>
   <% end %>
   <%= f.input :start_date do %>
