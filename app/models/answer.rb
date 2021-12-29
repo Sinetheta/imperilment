@@ -50,4 +50,13 @@ class Answer < ActiveRecord::Base
   def too_soon?
     Date.current < start_date
   end
+
+  def category_name
+    category&.name
+  end
+
+  def category_name=(name)
+    self.category = Category.where('lower(name) = ?', name.downcase).first
+    self.category ||= Category.new(name: name)
+  end
 end

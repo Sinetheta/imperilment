@@ -76,6 +76,6 @@ class AnswersController < ApplicationController
   end
 
   def answer_params
-    params.require(:answer).permit :amount, :answer, :correct_question, :start_date, :category_id
+    params.require(:answer).permit :amount, :answer, :correct_question, :start_date, :category_name
   end
 end

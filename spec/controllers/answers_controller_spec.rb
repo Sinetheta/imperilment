@@ -9,13 +9,13 @@ describe AnswersController do
     {
       game_id: game.to_param,
       answer: {
-        category_id: category.id,
+        category_name: category.name,
         start_date: answer.start_date + 1.day
       }
     }
   end
 
-  let!(:answer) { create :answer }
+  let!(:answer) { create :answer, category_name: 'old category' }
   let(:category) { answer.category }
 
   let(:game) { answer.game }
@@ -169,6 +169,13 @@ describe AnswersController do
       it "updates the requested answer" do
         expect_any_instance_of(Answer).to receive(:update).with("amount" => '100')
         put :update, params: default_params.merge(id: answer.to_param, answer: { "amount" => '100' })
+      end
+
+      it "creates new categories instead of updating the current answer category" do
+        expect {
+          put :update, params: default_params.merge(id: answer.to_param, answer: { "category_name" => 'new category' })
+        }.to change{ answer.reload.category.name }.from('old category').to('new category')
+        expect(category.name).to eq('old category')
       end
 
       it "assigns the requested answer as @answer" do

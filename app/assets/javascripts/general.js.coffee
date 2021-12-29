@@ -7,7 +7,9 @@
     .removeClass('form-control')
     # but we still need to style "inside" of the generated label+input pair
     .wrapAll('<div />')
-    .select2()
+    .select2(
+      tags: true
+    )
 
     $(document).on 'focus', 'input.datepicker', ->
       $(this).datepicker

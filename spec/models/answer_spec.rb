@@ -22,6 +22,35 @@ describe Answer do
     end
   end
 
+  describe '#category_name' do
+    let(:answer) { build(:answer, category_name: 'category name' ) }
+
+    it 'returns the name of the answer category' do
+      expect(answer.category_name).to eq('category name')
+    end
+  end
+
+  describe '#category_name=' do
+    let(:answer) { create(:answer, category_name: 'category old' ) }
+
+    it 'updates the name of the answer category' do
+      answer.category_name = 'category new'
+      expect(answer.category.name).to eq('category new')
+    end
+
+    it 'does not save the answer category' do
+      answer.category_name = 'category new'
+      answer.reload
+      expect(answer.category.name).to eq('category old')
+    end
+
+    it 'ignores sentence case when searching for possible cateogry name matches' do
+      create(:category, name: 'category new')
+      answer.category_name = 'CaTeGoRy NeW'
+      expect(answer.category.name).to eq('category new')
+    end
+  end
+
   describe '.closed' do
     subject { first.closed? }
 

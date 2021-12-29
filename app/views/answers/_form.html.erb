@@ -1,7 +1,8 @@
 <%= simple_form_for [@game, @answer] do |f| %>
   <%= f.error_notification %>
 
-  <%= f.association :category %>
+  <%= f.collection_select :category_name, Category.all, :name, :name %>
+
   <%= f.input :correct_question, input_html: {rows: 5} %>
   <%= f.input :answer, input_html: {rows: 5} %>
 
