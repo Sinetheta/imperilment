@@ -6,8 +6,8 @@ describe Answer do
   it { is_expected.to validate_presence_of(:start_date) }
   it { is_expected.to validate_uniqueness_of(:start_date) }
 
-  let!(:first) { create :answer, start_date: '2013-01-01 00:00:00' }
-  let!(:second) { create :answer, start_date: '2013-01-02 00:00:00' }
+  let!(:first) { create :answer, start_date: '2012-01-01 00:00:00' }
+  let!(:second) { create :answer, start_date: '2012-01-02 00:00:00' }
   let!(:third) { create :answer, start_date: '9999-01-03 00:00:00' }
 
   describe '#most_recent' do
