@@ -33,6 +33,12 @@ describe AnswersController do
     context "when it's too soon to answer the question" do
       let!(:answer) { create :answer, start_date: 5.days.from_now }
 
+      around do |e|
+        travel_to Time.parse('2022-1-03 12:01:00')  do # anytime past noon
+          e.run
+        end
+      end
+
       it "renders a countdown page" do
         get :show, params: default_params.merge(id: answer.to_param)
         expect(response.body).to match /Available in 4 days/
