@@ -34,7 +34,7 @@ describe AnswersController do
       let!(:answer) { create :answer, start_date: 5.days.from_now }
 
       around do |e|
-        travel_to Time.parse('2022-1-03 12:01:00')  do # anytime past noon
+        travel_to Time.parse('2022-1-03 12:01:00 -08:00')  do # anytime past noon
           e.run
         end
       end
