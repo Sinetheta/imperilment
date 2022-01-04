@@ -9,7 +9,6 @@ class Answer < ActiveRecord::Base
   has_many :users, through: :questions
 
   validates :game, :category, :start_date, presence: true
-  validates :start_date, uniqueness: true
 
   def self.most_recent
     where('start_date <= ?', DateTime.now).order('start_date DESC').first
