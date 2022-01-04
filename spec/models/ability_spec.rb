@@ -39,7 +39,7 @@ describe Ability do
 
         context 'after we reach the question start_date' do
           before do
-            question.answer = build_stubbed :answer, start_date: Date.today
+            question.answer = build_stubbed :answer, start_date: Date.current
           end
 
           it { is_expected.to be_able_to :manage, question }
