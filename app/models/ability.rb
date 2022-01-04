@@ -25,7 +25,7 @@ class Ability
         question.answer.closed?
       end
       can :read, Game
-      can :read, Answer
+      can :show, Answer
     end
   end
 end

@@ -22,7 +22,8 @@ describe Ability do
   context 'when user is not an administrator' do
     it { is_expected.to be_able_to :index, Question }
     it { is_expected.to be_able_to :read, Game }
-    it { is_expected.to be_able_to :read, Answer }
+    it { is_expected.to be_able_to :show, Answer }
+    it { is_expected.not_to be_able_to :index, Answer }
 
     describe 'managing questions' do
       context 'when question is for user' do
