@@ -11,6 +11,8 @@ class Game < ActiveRecord::Base
 
   self.per_page = 10
 
+  QUESTION_COUNT = 7
+
   QUESTION_VALUES = [200, 600, 1000, 400, 1200, 2000]
 
   def next
@@ -45,11 +47,8 @@ class Game < ActiveRecord::Base
   end
 
   def all_answers
-    @all_answers ||= begin
-      as = answers.to_a
-      date_range.map do |date|
-        as.detect { |a| a.start_date == date }
-      end
+    Array.new(QUESTION_COUNT).each_with_index.map do |_nil, i|
+      answers.order(:id)[i]
     end
   end
 

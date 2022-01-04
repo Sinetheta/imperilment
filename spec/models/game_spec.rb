@@ -76,23 +76,34 @@ describe Game do
   describe '#all_answers' do
     context "an unsaved game" do
       let(:game) { Game.new }
-      it "should have no answers" do
-        expect(game.all_answers).to eq []
+      it "should have an array of 7 nil answers" do
+        expect(game.all_answers).to eq [nil] * 7
       end
     end
 
     context "an game without answers" do
       let(:game) { create :game }
-      it "should have no answers" do
-        expect(game.all_answers).to eq []
+      it "should have an array of 7 nil answers" do
+        expect(game.all_answers).to eq [nil] * 7
       end
     end
 
     context "an game with an answer" do
       let(:game) { create :game }
       let!(:answer) { create :answer, game: game, start_date: game.ended_at }
-      it "should have no answers" do
-        expect(game.all_answers).to eq [answer]
+      it "should have a single anwswr padded to a week with nil" do
+        expect(game.all_answers).to eq [answer, nil, nil, nil, nil, nil, nil]
+      end
+    end
+
+    context "an game with multiple answers" do
+      let(:game) { create :game }
+      let!(:first) { create :answer, game: game, start_date: 2.days.from_now }
+      let!(:second) { create :answer, game: game, start_date: 4.days.from_now }
+      let!(:third) { create :answer, game: game, start_date: 3.days.from_now }
+
+      it "returns answers in the order that they are created" do
+        expect(game.all_answers).to eq [first, second, third, nil, nil, nil, nil]
       end
     end
   end
