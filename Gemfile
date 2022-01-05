@@ -2,6 +2,7 @@ source 'http://rubygems.org'
 ruby '3.0.2'
 
 gem 'pg'
+gem 'rack-canonical-host'
 gem 'rails', '~> 6.1'
 gem 'sprockets', '~> 3.7.2' # compatibility with bootstrap-sass
 
