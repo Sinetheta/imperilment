@@ -5,5 +5,6 @@
 //= require bootstrap/collapse
 //= require bootstrap/dropdown
 //= require bootstrap/alert
+//= require bootstrap/tooltip
 //= require bootstrap-datepicker/core
 //= require_tree .

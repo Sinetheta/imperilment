@@ -55,4 +55,6 @@
         container.find('.lock, .unlock').toggleClass('show hide')
         container.toggleClass('info')
       false
+
+    $('[data-toggle="tooltip"]').tooltip()
 ) ($window ? window)
