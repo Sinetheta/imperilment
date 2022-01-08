@@ -46,6 +46,14 @@ class Game < ActiveRecord::Base
     ).sum(:amount)
   end
 
+  def clamp_final_wager!(user)
+    final = answers.find_by(amount: [nil, 0])&.question_for(user)
+    if final&.amount
+      amount = final.amount.clamp(0, max_wager(user))
+      final.update(amount: amount) unless final.amount === amount
+    end
+  end
+
   def started_on
     answers.map(&:start_date).min
   end

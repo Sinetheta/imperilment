@@ -47,6 +47,7 @@ class QuestionsController < ApplicationController
     qp = question_params
     qp[:correct] = nil if qp[:correct] == 'null'
     if @question.update(qp)
+      @question.game.clamp_final_wager!(@question.user)
       flash.notice = t :model_update_successful, model: Question.model_name.human if request.format == :html
     end
     respond_with @game, @answer, @question, location: root_path
