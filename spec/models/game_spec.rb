@@ -73,6 +73,74 @@ describe Game do
     end
   end
 
+  describe '.max_wager' do
+    let!(:unanswered) { create :answer, game: game, amount: 100 }
+    let!(:answered) { create :answer, game: game, amount: 200 }
+    let!(:correct) { create :answer, game: game, amount: 400 }
+    let!(:incorrect) { create :answer, game: game, amount: 800 }
+    let!(:final) { create :answer, game: game, amount: nil }
+
+    before do
+      create :question, user: user, answer: answered, correct: nil
+      create :question, user: user, answer: correct, correct: true
+      create :question, user: user, answer: incorrect, correct: false
+      create :question, user: user, answer: final, correct: true, amount: 555
+    end
+
+    it 'returns the sum of all non-final, not-wrong answer amounts' do
+      expect(game.max_wager(user)).to eq(700)
+    end
+  end
+
+  describe '.clamp_final_wager!' do
+    subject { game.clamp_final_wager!(user) }
+
+    context 'a game without a final answer' do
+      it 'does not explode' do
+        is_expected.to be_nil
+      end
+    end
+
+    context 'a game with a final answer but no user response for it' do
+      before do
+        create :answer, game: game, amount: nil
+      end
+
+      it 'does not explode' do
+        is_expected.to be_nil
+      end
+    end
+
+    context 'a game with a final wager for this user and a max_wager of 500' do
+      let(:final_response) {
+        final_nswer = create :answer, game: game, amount: nil
+        build(:question, user: user, answer: final_nswer, amount: final_wager).tap do |q|
+          q.save(validate: false)
+        end
+      }
+
+      before do
+        allow(game).to receive(:max_wager).and_return 500
+      end
+
+      context 'with final wager of 0' do
+        let(:final_wager) { 0 }
+
+        it 'does not change the final wager' do
+          expect{ subject }.not_to change{ final_response.reload.amount }.from(0)
+        end
+      end
+
+      context 'with final wager that is larger than the max_wager' do
+        let(:final_wager) { 1000 }
+
+        it 'reduces the final wager to the amount allowed' do
+          expect{ subject }.to change{ final_response.reload.amount }.from(1000).to(500)
+        end
+      end
+    end
+  end
+
   describe '#all_answers' do
     context "an unsaved game" do
       let(:game) { Game.new }

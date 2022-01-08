@@ -16,6 +16,7 @@ class AnswersController < ApplicationController
     elsif @answer.final? && @answer.question_for(current_user).nil?
       redirect_to [:final, @game, @answer]
     else
+      @question = @answer.question_for(current_user)
       respond_with @game, @answer
     end
   end

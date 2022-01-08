@@ -167,6 +167,11 @@ describe QuestionsController do
         expect(response).to redirect_to root_path
       end
 
+      it "adjusts the user's final wager if necessary" do
+        expect_any_instance_of(Game).to receive(:clamp_final_wager!).with(question.user)
+        put :update, params: default_params.merge(id: question.to_param)
+      end
+
       describe 'updating correct' do
         subject { assigns(:question).correct }
         context 'when user is an admin' do

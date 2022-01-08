@@ -129,7 +129,7 @@ describe Question do
 
     context 'when the amount is not nil' do
       before(:each) do
-        allow(game).to receive(:score) { 200 }
+        allow(game).to receive(:max_wager) { 200 }
 
         question.amount = amount
       end

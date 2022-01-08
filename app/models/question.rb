@@ -1,6 +1,7 @@
 class Question < ActiveRecord::Base
   belongs_to :user
   belongs_to :answer
+  delegate :game, to: :answer
 
   validate :unchecked_response, :in_range?
   validates :answer_id, uniqueness: { scope: :user_id }
@@ -38,7 +39,7 @@ class Question < ActiveRecord::Base
   end
 
   def in_range?
-    unless amount.nil? || amount.between?(0, answer.game.score(user))
+    unless amount.nil? || amount.between?(0, game.max_wager(user))
       errors.add(:amount, "is not within the acceptable range. Nice try!")
       false
     else
