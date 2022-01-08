@@ -1,0 +1,4 @@
+You may wager up to $<%= max_wager %>
+<% if max_wager > current_score %>
+  <a href="#" data-toggle="tooltip" title="<%= t('.wager_disclaimer', current_score: current_score) %>">*</a>
+<% end %>

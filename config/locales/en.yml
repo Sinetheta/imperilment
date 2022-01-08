@@ -98,6 +98,8 @@ en:
         url: Payload URL
 
   answers:
+    final_wager:
+      wager_disclaimer: You are only guarateed to have $%{current_score} from your currently marked responses.
     too_soon:
       available_in: Available in %{time_until}
 
