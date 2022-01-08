@@ -73,6 +73,25 @@ describe Game do
     end
   end
 
+  describe '.max_wager' do
+    let!(:unanswered) { create :answer, game: game, amount: 100 }
+    let!(:answered) { create :answer, game: game, amount: 200 }
+    let!(:correct) { create :answer, game: game, amount: 400 }
+    let!(:incorrect) { create :answer, game: game, amount: 800 }
+    let!(:final) { create :answer, game: game, amount: nil }
+
+    before do
+      create :question, user: user, answer: answered, correct: nil
+      create :question, user: user, answer: correct, correct: true
+      create :question, user: user, answer: incorrect, correct: false
+      create :question, user: user, answer: final, correct: true, amount: 555
+    end
+
+    it 'returns the sum of all non-final, not-wrong answer amounts' do
+      expect(game.max_wager(user)).to eq(700)
+    end
+  end
+
   describe '#all_answers' do
     context "an unsaved game" do
       let(:game) { Game.new }
