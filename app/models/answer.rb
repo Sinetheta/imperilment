@@ -39,7 +39,7 @@ class Answer < ActiveRecord::Base
   end
 
   def closed?
-    !(correct_question.nil? || correct_question.empty?)
+    correct_question.present?
   end
 
   def final?
