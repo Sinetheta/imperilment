@@ -4,9 +4,8 @@ class Ability
   def initialize(user)
     if user && user.has_role?(:admin)
       can :manage, :all
-      # Cannot check Answer when user hasn't supplied their question
       cannot :check, Answer do |answer|
-        !answer.closed? || !answer.question_for(user)
+        !answer.closed?
       end
       can :correct, Question
     else

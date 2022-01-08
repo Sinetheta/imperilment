@@ -15,7 +15,7 @@ describe Ability do
       let(:answer) { build_stubbed :answer }
       before(:each) { allow(answer).to receive(:question_for) { nil } }
 
-      it { is_expected.not_to be_able_to :check, answer }
+      it { is_expected.to be_able_to :check, answer }
     end
   end
 
