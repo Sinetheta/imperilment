@@ -89,6 +89,10 @@ describe AnswersController do
     end
 
     context "when the user does not have a question" do
+      before do
+        allow(controller).to receive(:current_user) { build_stubbed :user }
+      end
+
       it "assigns @answer" do
         get :final, params: default_params.merge(id: answer.to_param)
         expect(assigns(:answer)).to eq(answer)

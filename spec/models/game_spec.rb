@@ -85,6 +85,7 @@ describe Game do
       create :question, user: user, answer: correct, correct: true
       create :question, user: user, answer: incorrect, correct: false
       create :question, user: user, answer: final, correct: true, amount: 555
+      build :question, answer: incorrect, correct: true # another player's response
     end
 
     it 'returns the sum of all non-final, not-wrong answer amounts' do

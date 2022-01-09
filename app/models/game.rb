@@ -37,13 +37,13 @@ class Game < ActiveRecord::Base
   # The sum of all amounts from non-final, not-wrong questions for a given user.
   # This is the largest possible legal wager if future marking were to reveal no more mistakes.
   def max_wager(user)
-    answers.left_outer_joins(:questions).where(
-      questions: { id: nil }
-    ).or(
-      answers.where(
-        questions: { correct: [true, nil] }
-      )
-    ).sum(:amount)
+    answers_table = Answer.arel_table
+    questions_table = Question.arel_table
+    answers.joins(
+      answers_table.outer_join(questions_table).on(
+        questions_table[:answer_id].eq(answers_table[:id]).and(questions_table[:user_id].eq(user.id))
+      ).join_sources
+    ).where(questions: { correct: [nil, true] }).sum(:amount)
   end
 
   def clamp_final_wager!(user)

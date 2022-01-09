@@ -27,6 +27,7 @@ class AnswersController < ApplicationController
     else
       if params[:wager]
         @question = @answer.questions.new do |q|
+          puts "current_user: #{current_user}"
           q.user = current_user
           q.amount = params[:wager]
         end
