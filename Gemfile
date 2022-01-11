@@ -41,6 +41,8 @@ gem 'dotenv-rails'
 gem 'slack-notifier'
 
 gem 'rack-mini-profiler'
+gem 'sentry-ruby'
+gem 'sentry-rails'
 gem 'stackprof'
 gem 'unicorn-rails'
 gem 'whenever'

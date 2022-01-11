@@ -319,6 +319,16 @@ GEM
       sprockets-rails
       tilt
     select2-rails (4.0.13)
+    sentry-rails (4.9.0)
+      railties (>= 5.0)
+      sentry-ruby-core (~> 4.9.0)
+    sentry-ruby (4.9.0)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      faraday (~> 1.0)
+      sentry-ruby-core (= 4.9.0)
+    sentry-ruby-core (4.9.0)
+      concurrent-ruby
+      faraday
     shoulda-matchers (5.0.0)
       activesupport (>= 5.2.0)
     show_for (0.8.0)
@@ -410,6 +420,8 @@ DEPENDENCIES
   rspec-rails
   sass-rails
   select2-rails
+  sentry-rails
+  sentry-ruby
   shoulda-matchers
   show_for
   simple_form
