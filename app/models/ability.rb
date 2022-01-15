@@ -10,7 +10,7 @@ class Ability
       can :correct, Question
     else
       if user
-        can :manage, Question do |question|
+        can %i[show new create edit update destroy], Question do |question|
           if question.user_id
             next false unless question.user_id == user.id
           end

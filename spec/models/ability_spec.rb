@@ -28,7 +28,7 @@ describe Ability do
     describe 'managing questions' do
       context 'when question is for user' do
         let(:question) { build_stubbed :question, user: user  }
-        it { is_expected.to be_able_to :manage, question }
+        it { is_expected.to be_able_to %i[index show edit update destroy], question }
 
         context 'before we reach the question start_date' do
           before do
@@ -43,7 +43,7 @@ describe Ability do
             question.answer = build_stubbed :answer, start_date: Date.current
           end
 
-          it { is_expected.to be_able_to :manage, question }
+          it { is_expected.to be_able_to %i[index new show edit update destroy], question }
         end
       end
 
