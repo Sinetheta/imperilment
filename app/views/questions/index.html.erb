@@ -35,7 +35,7 @@
                 <% end %>
               </span>
               <span class='pull-right checked  <%= question.checked? ? 'show' : 'hide' %>'>
-                <%= link_to [@game, @answer, question], class: 'btn btn-small btn-info', data: {correct: nil} do %>
+                <%= link_to [@game, @answer, question], class: 'btn btn-small btn-info', data: {correct: 'null'} do %>
                   <%= icon 'ccw' %>
                 <% end %>
               </span>
