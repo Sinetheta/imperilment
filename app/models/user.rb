@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   has_many :questions, dependent: :destroy
 
   def identifier
-    full_name.blank? ? email : full_name
+    display_name.presence || 'Anonymous'
   end
 
   def full_name

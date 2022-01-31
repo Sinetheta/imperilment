@@ -17,17 +17,21 @@ describe User do
   end
 
   describe '.identifier' do
-    let(:user) { create :user, first_name: name, email: email }
-    let(:email) { 'alex.t@imperilment.com' }
+    let(:user) { create :user, display_name: name }
 
     subject { user.identifier }
 
-    context 'when the first_name is blank' do
+    context 'when the display_name is nil' do
       let(:name) { nil }
-      it { is_expected.to eq(email) }
+      it { is_expected.to eq('Anonymous') }
     end
 
-    context 'when the first_name is not blank' do
+    context 'when the display_name is empty' do
+      let(:name) { '' }
+      it { is_expected.to eq('Anonymous') }
+    end
+
+    context 'when the display_name is not blank' do
       let(:name) { 'Alex' }
       it { is_expected.to eq(name) }
     end
