@@ -7,13 +7,9 @@ require File.expand_path('../config/application', __FILE__)
 task development_data: :environment do
   users = (0..10).map do
     display_name = [true, false].sample ? FFaker::Name.name : nil
-    first_name = FFaker::Name.first_name
-    last_name = FFaker::Name.last_name
     User.create!(
-      email: FFaker::Internet.email("#{first_name} #{last_name}"),
+      email: FFaker::Internet.email,
       display_name: display_name,
-      first_name: first_name,
-      last_name:  last_name,
       password: 'asdfg12345'
     )
   end

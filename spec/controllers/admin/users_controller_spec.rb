@@ -50,8 +50,6 @@ describe Admin::UsersController do
         {
           'email' => 'joe@example.com',
           'display_name' => 'Dirté',
-          'first_name' => 'Joe',
-          'last_name' => 'Dirt',
         }
       }
 

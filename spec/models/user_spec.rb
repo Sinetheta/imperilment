@@ -38,14 +38,12 @@ describe User do
   end
 
   describe '#find_for_google_oauth2' do
-    let(:result) { User.find_for_google_oauth2(AccessToken.new("email" => email, "last_name" => name)) }
-    let(:name) { 'Smith' }
-    let(:last_name) { 'Smith' }
+    let(:result) { User.find_for_google_oauth2(AccessToken.new("email" => email)) }
 
     context "when user exists" do
       subject { result }
 
-      let!(:user) { create :user, last_name: last_name }
+      let!(:user) { create :user}
       let(:email) { user.email }
 
       it { is_expected.to eq(user) }
@@ -56,10 +54,7 @@ describe User do
 
       it 'creates a user with the correct attributes' do
         expect { result }.to change { User.count }.by(1)
-        expect(User.last).to have_attributes(
-          email: email,
-          last_name: 'S'
-        )
+        expect(User.last).to have_attributes(email: email)
       end
     end
   end
