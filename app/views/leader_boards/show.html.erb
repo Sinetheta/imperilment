@@ -20,7 +20,10 @@
         <% end %>
         <%= "#{t :currency_symbol} #{result.total}" %>
       </td>
-      <td class='email'><%= result.user.identifier %></td>
+      <td class='email'>
+        <%= result.user.identifier %>
+        <%= render('display_name_hint') if result.user == current_user && result.user.display_name.blank? %>
+        </td>
       <% unless @game.answers.empty? %>
         <td class='hidden-phone'>
           <table class='breakdown'>
@@ -53,4 +56,3 @@
 </table>
 <%= link_to t(:overall_results), overall_leader_board_path, class: 'btn btn-default' %>
 <%= link_to t(:overall_results_by_money), overall_money_leader_board_path, class: 'btn btn-default' %>
-
