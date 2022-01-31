@@ -8,9 +8,9 @@ end
 
 RSpec.describe SlackNotification::GameFinalization, type: :model do
   let(:game) { FactoryBot.create :game, id: 772 }
-  let(:first_place) { FactoryBot.create :user, first_name: 'First', last_name: 'P' }
+  let(:first_place) { FactoryBot.create :user, display_name: 'First P' }
   let(:no_name) {     FactoryBot.create :user, email: 'foo@bar.com' }
-  let(:tied_for_2) {  FactoryBot.create :user, first_name: 'Also', last_name: '2' }
+  let(:tied_for_2) {  FactoryBot.create :user, display_name: 'Also 2' }
   before do
     FactoryBot.create :game_result, game: game, position: 1, total: '4200', user: first_place
     FactoryBot.create :game_result, game: game, position: 2, total: '2500', user: no_name
@@ -34,7 +34,7 @@ RSpec.describe SlackNotification::GameFinalization, type: :model do
         'pretext' => 'Imperilment results are in!',
         'title' => "Last week's winners",
         'title_link' => 'http://test.com/leader_board/772',
-        'text' => ":trophy: $4200 First P\n\n:silver: $2500 foo@bar.com\n\n:silver: $2500 Also 2",
+        'text' => ":trophy: $4200 First P\n\n:silver: $2500 Anonymous\n\n:silver: $2500 Also 2",
         'color' => '#337AB7',
         'fallback' => "Last week's winners are in! http://test.com/leader_board/772"
       }]
