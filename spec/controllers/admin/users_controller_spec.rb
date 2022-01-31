@@ -46,18 +46,27 @@ describe Admin::UsersController do
 
   describe 'PUT update' do
     describe "with valid params" do
+      let(:valid_params) {
+        {
+          'email' => 'joe@example.com',
+          'display_name' => 'Dirté',
+          'first_name' => 'Joe',
+          'last_name' => 'Dirt',
+        }
+      }
+
       it "updates the requested user" do
-        expect_any_instance_of(User).to receive(:update).with('first_name' => 'Joe')
-        put :update, params: { id: user.to_param, user: { 'first_name' => 'Joe' } }
+        expect_any_instance_of(User).to receive(:update).with(valid_params)
+        put :update, params: { id: user.to_param, user: valid_params }
       end
 
       it "assigns the requested user as @user" do
-        put :update, params: { id: user.to_param, user: { 'first_name' => 'Joe' } }
+        put :update, params: { id: user.to_param, user: valid_params }
         expect(assigns(:user)).to eq(user)
       end
 
       it "redirects to the user" do
-        put :update, params: { id: user.to_param, user: { 'first_name' => 'Joe' } }
+        put :update, params: { id: user.to_param, user: valid_params }
         expect(response).to redirect_to([:admin, user])
       end
     end
