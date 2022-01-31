@@ -4,14 +4,14 @@
     <thead>
       <tr>
         <th><%= User.human_attribute_name ( "email" ) %></th>
-        <th><%= User.human_attribute_name ( "full_name" ) %></th>
+        <th><%= User.human_attribute_name ( "display_name" ) %></th>
       </tr>
     </thead>
     <tbody>
       <% @users.each do |user| %>
           <tr class='<%= 'success' if user.has_role? :admin %>'>
           <td><%= user.email %></td>
-          <td><%= user.full_name %></td>
+          <td><%= user.display_name %></td>
           <td>
             <% unless user == current_user %>
               <%= render 'add_role', user: user %>

@@ -60,6 +60,8 @@ en:
   reponse_hidden: Response Hidden
 
   leader_boards:
+    display_name_hint:
+      tooltip: 'Click to enter your display name'
     index:
       info: 'These are the overall results to date for all finished games. The current week is not taken into account.'
     money:

@@ -16,8 +16,12 @@ describe WebHook::Event::NewQuestion do
       expect(subject).to include('Such clue')
     end
 
-    it "contains the user's email" do
-      expect(subject).to include('my@email.com')
+    it "does not contain the user's email" do
+      expect(subject).not_to include('my@email.com')
+    end
+
+    it "contains a display_name for the user" do
+      expect(subject).to include('Anonymous')
     end
 
     it "does not contain the user's response" do

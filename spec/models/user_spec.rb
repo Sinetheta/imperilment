@@ -17,31 +17,33 @@ describe User do
   end
 
   describe '.identifier' do
-    let(:user) { create :user, first_name: name, email: email }
-    let(:email) { 'alex.t@imperilment.com' }
+    let(:user) { create :user, display_name: name }
 
     subject { user.identifier }
 
-    context 'when the first_name is blank' do
+    context 'when the display_name is nil' do
       let(:name) { nil }
-      it { is_expected.to eq(email) }
+      it { is_expected.to eq('Anonymous') }
     end
 
-    context 'when the first_name is not blank' do
+    context 'when the display_name is empty' do
+      let(:name) { '' }
+      it { is_expected.to eq('Anonymous') }
+    end
+
+    context 'when the display_name is not blank' do
       let(:name) { 'Alex' }
       it { is_expected.to eq(name) }
     end
   end
 
   describe '#find_for_google_oauth2' do
-    let(:result) { User.find_for_google_oauth2(AccessToken.new("email" => email, "last_name" => name)) }
-    let(:name) { 'Smith' }
-    let(:last_name) { 'Smith' }
+    let(:result) { User.find_for_google_oauth2(AccessToken.new("email" => email)) }
 
     context "when user exists" do
       subject { result }
 
-      let!(:user) { create :user, last_name: last_name }
+      let!(:user) { create :user}
       let(:email) { user.email }
 
       it { is_expected.to eq(user) }
@@ -52,10 +54,7 @@ describe User do
 
       it 'creates a user with the correct attributes' do
         expect { result }.to change { User.count }.by(1)
-        expect(User.last).to have_attributes(
-          email: email,
-          last_name: 'S'
-        )
+        expect(User.last).to have_attributes(email: email)
       end
     end
   end

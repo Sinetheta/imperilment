@@ -13,7 +13,7 @@ module WebHook::Event
       @question.as_json(only: [:id, :created_at, :updated_at])
         .tap do |h|
           h['answer'] = answer_json
-          h['user'] = respondant_email
+          h['user'] = respondant
         end
     end
 
@@ -22,8 +22,8 @@ module WebHook::Event
       NewAnswer.new(@question.answer).as_json
     end
 
-    def respondant_email
-      @question.user.email
+    def respondant
+      @question.user.identifier
     end
   end
 end
