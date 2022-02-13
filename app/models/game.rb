@@ -15,6 +15,8 @@ class Game < ActiveRecord::Base
 
   QUESTION_VALUES = [200, 600, 1000, 400, 1200, 2000]
 
+  QUESTION_REVEALS_DAY = [0, 0, 1, 1, 2, 3, 4]
+
   validate :ended_at_sunday
 
   def next
@@ -104,8 +106,12 @@ class Game < ActiveRecord::Base
     QUESTION_VALUES[answers.count]
   end
 
+  def next_answer_reveals_day
+    QUESTION_REVEALS_DAY[answers.count]
+  end
+
   def next_answer_start_date
-    ended_at - (6 - answers.count).days
+    ended_at.beginning_of_week.advance(days: next_answer_reveals_day)
   end
 
   private

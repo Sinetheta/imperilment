@@ -338,6 +338,28 @@ describe Game do
     end
   end
 
+  describe '#next_answer_reveals_day' do
+    subject { game.next_answer_reveals_day }
+
+    context 'with a game that has no answers' do
+      it { is_expected.to eq(0) }
+    end
+
+    context 'with a game that has some answers' do
+      let!(:answer) { create_list :answer, 5, game: game }
+
+      it 'suggests an offset for the start_date of the question to come' do
+        is_expected.to eq(3)
+      end
+    end
+
+    context 'with a game that has 7 or more questions' do
+      let!(:answer) { create_list :answer, 7, game: game }
+
+      it { is_expected.to eq(nil) }
+    end
+  end
+
   describe '#next_answer_start_date' do
     let(:game) { create :game, ended_at: '2021-12-26 00:00:00' }
 
@@ -353,7 +375,7 @@ describe Game do
       let!(:answer) { create_list :answer, 5, game: game }
 
       it 'fills the week without regard for the answer start_dates' do
-        is_expected.to eq(Date.parse('2021-12-25 00:00:00'))
+        is_expected.to eq(Date.parse('2021-12-23 00:00:00'))
       end
     end
   end
