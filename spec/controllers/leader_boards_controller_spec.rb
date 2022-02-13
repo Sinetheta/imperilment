@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe LeaderBoardsController do
-  let!(:game) { create :game, locked: true, ended_at: Date.current }
+  let!(:game) { create :game, locked: true, ended_at: Date.current.end_of_week }
   let(:season) { game.ended_at.cwyear }
 
   let(:result) { assigns(:results)[0] }

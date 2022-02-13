@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :game do
-    ended_at { 1.week.ago }
+    ended_at { Date.new.end_of_week }
   end
 end

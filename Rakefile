@@ -14,7 +14,7 @@ task development_data: :environment do
       password: 'asdfg12345'
     ).tap do
       print '.'
-  end
+    end
   end
   puts
 
@@ -22,9 +22,9 @@ task development_data: :environment do
   date = 1.months.ago.beginning_of_week
   puts 'Generating games'
   while date <= Time.current
-    game = Game.create!(created_at: date, ended_at: date + 6.days)
+    game = Game.create!(created_at: date, ended_at: date.end_of_week)
     7.times do |_i|
-      answer = game.answers.create!(category: category, amount: game.next_answer_amount, answer: 'Answer', correct_question: 'Correct Question', start_date: date, created_at: date)
+      answer = game.answers.create!(category: category, amount: game.next_answer_amount, answer: 'Answer', correct_question: 'Correct Question', start_date: game.next_answer_start_date, created_at: date)
       users.each do |user|
         answer.questions.create!(user: user, correct: [true, false, nil].sample) do |q|
           q.amount = 0 if answer.final?

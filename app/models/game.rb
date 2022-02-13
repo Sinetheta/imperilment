@@ -15,6 +15,8 @@ class Game < ActiveRecord::Base
 
   QUESTION_VALUES = [200, 600, 1000, 400, 1200, 2000]
 
+  validate :ended_at_sunday
+
   def next
     @next ||= Game.order('games.ended_at ASC').where('games.ended_at > ?', ended_at).first
   end
@@ -104,5 +106,13 @@ class Game < ActiveRecord::Base
 
   def next_answer_start_date
     ended_at - (6 - answers.count).days
+  end
+
+  private
+
+  def ended_at_sunday
+    if ended_at.present? && ended_at.wday != 0
+      errors.add(:ended_at, 'Must end on a Sunday')
+    end
   end
 end

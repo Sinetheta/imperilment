@@ -76,17 +76,17 @@ describe GamesController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested game" do
-        expect_any_instance_of(Game).to receive(:update).with("ended_at" => "2012-12-27 15:58:08")
-        put :update, params: { id: game.to_param, game: { "ended_at" => "2012-12-27 15:58:08" } }
+        expect_any_instance_of(Game).to receive(:update).with("ended_at" => "2022-02-13 15:58:08")
+        put :update, params: { id: game.to_param, game: { "ended_at" => "2022-02-13 15:58:08" } }
       end
 
       it "assigns the requested game as @game" do
-        put :update, params: { id: game.to_param, game: { "ended_at" => "2012-12-27 15:58:08" } }
+        put :update, params: { id: game.to_param, game: { "ended_at" => "2022-02-13 15:58:08" } }
         expect(assigns(:game)).to eq(game)
       end
 
       it "redirects to the game" do
-        put :update, params: { id: game.to_param, game: { "ended_at" => "2012-12-27 15:58:08" } }
+        put :update, params: { id: game.to_param, game: { "ended_at" => "2022-02-13 15:58:08" } }
         expect(response).to redirect_to(game)
       end
     end

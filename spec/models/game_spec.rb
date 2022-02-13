@@ -9,6 +9,19 @@ describe Game do
     ENV['SLACK_WEBHOOK_URL'] = slack_webhook_url
   end
 
+  describe 'validates ended_at_sunday' do
+    let(:game) { build :game, ended_at: ended_at }
+
+    context 'ended_at is a Sunday' do
+      let(:ended_at) { Date.new.end_of_week }
+
+      it 'does not result in an error' do
+        expect(ended_at.sunday?).to eq(true)
+        expect(game.valid?).to eq(true)
+      end
+    end
+  end
+
   describe '.score' do
     let(:answer) { create :answer, game: game, amount: 400 }
 
@@ -186,16 +199,17 @@ describe Game do
   end
 
   describe '.date_range' do
-    let!(:answer) { create :answer, game: game, start_date: date }
-    let(:date) { Date.parse('1984-09-10') }
+    let!(:answer) { create :answer, game: game, start_date: start_date }
+    let(:start_date) { Date.parse('2022-02-10') } # a Thursday
+    let(:ended_at) { Date.parse('2022-02-13') } # the next Sunday
 
     before(:each) do
-      game.ended_at = date + 1.day
+      game.ended_at = ended_at
       game.save!
     end
 
     subject { game.date_range }
-    it { is_expected.to eq(date..(date + 1.day)) }
+    it { is_expected.to eq(start_date..ended_at) }
   end
 
   describe '.calculate_result!' do
@@ -247,9 +261,9 @@ describe Game do
   end
 
   describe 'next and prev' do
-    let!(:first) { create :game, ended_at: 2.weeks.ago }
-    let!(:middle) { create :game, ended_at: 1.week.ago }
-    let!(:last) { create :game, ended_at: Date.current }
+    let!(:first) { create :game, ended_at: Date.current.end_of_week }
+    let!(:middle) { create :game, ended_at: Date.current.end_of_week + 1.week }
+    let!(:last) { create :game, ended_at: Date.current.end_of_week + 2.weeks }
 
     describe "first game" do
       it "has no previous" do
@@ -325,13 +339,13 @@ describe Game do
   end
 
   describe '#next_answer_start_date' do
-    let(:game) { create :game, ended_at: '2021-12-30 00:00:00' }
+    let(:game) { create :game, ended_at: '2021-12-26 00:00:00' }
 
     subject { game.next_answer_start_date }
 
     context 'with a game that has no answers' do
       it 'is 6 days earlier than the ended_at date' do
-        is_expected.to eq(Date.parse('2021-12-24 00:00:00'))
+        is_expected.to eq(Date.parse('2021-12-20 00:00:00'))
       end
     end
 
@@ -339,7 +353,7 @@ describe Game do
       let!(:answer) { create_list :answer, 5, game: game }
 
       it 'fills the week without regard for the answer start_dates' do
-        is_expected.to eq(Date.parse('2021-12-29 00:00:00'))
+        is_expected.to eq(Date.parse('2021-12-25 00:00:00'))
       end
     end
   end

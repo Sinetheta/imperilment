@@ -112,7 +112,7 @@ describe User do
       let(:season) { Season.new(1.year.ago.year) }
       before do
         travel_to(season.date_range.begin) do
-          game = create :game, ended_at: Time.now
+          game = create :game, ended_at: Time.now.end_of_week
 
           answer1 = create :answer, game: game
           answer2 = create :answer, game: game
