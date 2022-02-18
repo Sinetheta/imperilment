@@ -23,4 +23,5 @@
   </div>
 </div>
 
+<%= render 'question_actions' if can?(:check, @answer) %>
 <%= render 'edit_link' %>
