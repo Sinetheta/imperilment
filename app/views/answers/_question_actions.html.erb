@@ -1,0 +1,9 @@
+<div class='form-group question-actions'>
+  <% if !@question %>
+    <%= link_to "What is ...", [:new, @game, @answer, :question], class: 'btn btn-primary btn-lg btn-block' %>
+  <% elsif !@question.checked? %>
+    <%= link_to "Your Response", [:edit, @game, @answer, @question], class: 'btn btn-primary btn-lg btn-block' %>
+  <% elsif @answer.closed? %>
+    <%= link_to "View Responses", [@game, @answer, Question], class: 'btn btn-primary btn-lg btn-block' %>
+  <% end %>
+</div>
