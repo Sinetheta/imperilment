@@ -4,10 +4,6 @@ class Ability
   def initialize(user)
     if user && user.has_role?(:admin)
       can :manage, :all
-      cannot :check, Answer do |answer|
-        !answer.closed?
-      end
-      can :correct, Question
     else
       if user
         can %i[show new create edit update destroy], Question do |question|

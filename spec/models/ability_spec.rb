@@ -10,13 +10,6 @@ describe Ability do
   context 'when user has admin privileges' do
     before(:each) { allow(user).to receive(:has_role?).with(:admin) { true } }
     it { is_expected.to be_able_to :manage, :all }
-
-    context 'when user has not responded to an answer' do
-      let(:answer) { build_stubbed :answer }
-      before(:each) { allow(answer).to receive(:question_for) { nil } }
-
-      it { is_expected.to be_able_to :check, answer }
-    end
   end
 
   context 'when user is not an administrator' do
