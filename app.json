@@ -21,7 +21,7 @@
     }
   },
   "image": "heroku/ruby",
-  "stack": "heroku-20",
+  "stack": "heroku-22",
   "addons": [
     "heroku-postgresql:hobby-dev"
   ]
